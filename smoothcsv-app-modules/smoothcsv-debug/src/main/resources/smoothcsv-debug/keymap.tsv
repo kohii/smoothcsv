@@ -1,0 +1,4 @@
+body
+	shortcut+shift+f12	debug:enableWatchThread
+	shortcut+f12	debug:printFocusOwner
+	f12	debug:test

@@ -1,0 +1,9 @@
+grid
+	cmd+left	grid:selectFirstColumn
+	cmd+right	grid:selectLastColumn
+	cmd+up	grid:selectFirstRow
+	cmd+down	grid:selectLastRow
+	cmd+shift+left	grid:extendFirstColumn
+	cmd+shift+right	grid:extendLastColumn
+	cmd+shift+up	grid:extendFirstRow
+	cmd+shift+down	grid:extendLastRow

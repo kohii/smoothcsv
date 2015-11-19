@@ -1,0 +1,9 @@
+editor.sizeOfUndoing=35
+editor.autoFitColumnWidthAfterOpeningFile=false
+editor.autoFitColumnWidthWithLimitedRowSize=true
+editor.rowSizeToScanWhenAutoFitting=1000
+editor.limitWidthWhenAutoFitting=true
+editor.maxColumnWidthPerWindowWhenAutoFitting=70
+editor.quoteRuleForCopying=QUOTES_IF_NECESSARY
+editor.pasteRepeatedly=true
+editor.valuepanelHeight=2

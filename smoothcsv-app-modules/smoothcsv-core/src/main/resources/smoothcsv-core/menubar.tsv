@@ -1,0 +1,84 @@
+File
+	New	app:newFile
+	New As...	app:newFileAs
+	Open...	app:openFile
+	Open As...	app:openFileAs
+#	Reopen	app:reopen
+	Save	app:save
+	Save As...	app:saveAs
+	Save All	app:saveAll
+	Close	app:close
+	Close All	app:closeAll
+	-
+	Properties...	csvsheet:showProperties
+
+Edit
+	Undo	grid:undo
+	Redo	grid:redo
+	-
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+	-
+	Copy Using The File Format	grid:copyUsingFileFormat
+	Cut Using The File Format	grid:cutUsingFileFormat
+	Paste Using The File Format	grid:pasteUsingFileFormat
+	-
+	Select All	grid:selectAll
+	Select The Entire Row	grid:selectEntireRow
+	Select The Entire Column	grid:selectEntireColumn
+	-
+	Clear	grid:clear
+	-
+	Go To Line...	grid:goToLine
+	-
+	Fill
+		Fill Left	grid:fillLeft
+		Fill Up	grid:fillUp
+		Fill Right	grid:fillRight
+		Fill Down	grid:fillDown
+	Convert
+		Upper Case	convert:upperCase
+		Lower Case	convert:lowerCase
+		Swap Case	convert:swapCase
+		Title Case	convert:titleCase
+		-
+		Snake Case To Camel Case	convert:snakeCaseToCamelCase
+		Camel Case To Snake Case	convert:camelCaseToSnakeCase
+
+Grid
+	Insert Rows Above	grid:insertRowsAbove
+	Insert Rows Below	grid:insertRowsBelow
+	Delete Rows	grid:deleteRows
+	-
+	Insert Columns Left	grid:insertColumnsLeft
+	Insert Columns Right	grid:insertColumnsRight
+	Delete Columns	grid:deleteColumns
+	-
+	Delete Cell	grid:deleteCell
+	-
+	Sort...	grid:sort
+	Sort Selected Rows...	grid:sortSelectedRows
+	Sort Selected Range...	grid:sortSelectedRange
+
+Find
+	Show Find And Replace Panel...	find:show
+	Find Next	find:next
+	Find Previous	find:prev
+	Replace Next	find:replaceNext
+	Replace Previous	find:replacePrev
+
+View
+	Auto-Fit Column Width	view:autofitColumnWidth
+	Auto-Fit Column Width To Selected Data	view:autofitColumnWidthToSelectedData
+	-
+	Previous Tab	view:previousView
+	Next Tab	view:nextView
+	-
+	Toggle Status Bar	view:toggleStatusBar
+	Toggle Cell Value Panel	view:toggleCellValuePanel
+
+Tools
+	Toggle Command Palette...	app:toggleCommandPalette
+	Toggle Macro Tools	macro:toggleMacroTools
+	SQL Tools...	app:showSqlTools

@@ -1,0 +1,8 @@
+Edit
+	日本語変換
+		半角 → 全角	convert:halfWidthToFullWidth
+		全角 → 半角	convert:fullWidthToHalfWidth
+		ひらがな → カタカナ	convert:hiraganaToKatakana
+		カタカナ → ひらがな	convert:katakanaToHiragana
+		ひらがな・カタカナ → ローマ字	convert:kanaToLatin
+		ローマ字 → カタカナ	convert:latinToKatakana

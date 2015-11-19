@@ -1,0 +1,5 @@
+file.howToDetectProperties=auto
+file.alertOnOpeningHugeFile=true
+file.alertThreshold=50
+file.defaultRowSize=5
+file.defaultColumnSize=5

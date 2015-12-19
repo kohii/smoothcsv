@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -138,23 +138,23 @@ public class CoreEntryPoint extends AbstractModuleEntryPoint {
         Settings settings = SettingManager.getSettings(AppSettingKeys.Editor.$);
         settings.addPropertyChangeListener(AppSettingKeys.Editor.SIZE_OF_UNDOING,
             new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                for (BaseTabView<?> v : SCApplication.components().getTabbedPane().getAllViews()) {
-                  ((CsvSheetView) v).getGridSheetPane().getUndoManager()
-                      .setCapacity(settings.getInteger(AppSettingKeys.Editor.SIZE_OF_UNDOING));
-                }
-              }
-            });
+          @Override
+          public void propertyChange(PropertyChangeEvent evt) {
+            for (BaseTabView<?> v : SCApplication.components().getTabbedPane().getAllViews()) {
+              ((CsvSheetView) v).getGridSheetPane().getUndoManager()
+                  .setCapacity(settings.getInteger(AppSettingKeys.Editor.SIZE_OF_UNDOING));
+            }
+          }
+        });
         InvocationUtils.runAsync(new Runnable() {
           @Override
           public void run() {
-            PreferenceManager.getInstance().addPrefPage(
-                new PrefPage("General", GeneralPrefPanel.class));
-            PreferenceManager.getInstance().addPrefPage(
-                new PrefPage("Editor", EditorPrefPanel.class));
-            PreferenceManager.getInstance().addPrefPage(
-                new PrefPage("Key Bindings", KeyBindingsPrefPanel.class));
+            PreferenceManager.getInstance()
+                .addPrefPage(new PrefPage("General", GeneralPrefPanel.class));
+            PreferenceManager.getInstance()
+                .addPrefPage(new PrefPage("Editor", EditorPrefPanel.class));
+            PreferenceManager.getInstance()
+                .addPrefPage(new PrefPage("Key Bindings", KeyBindingsPrefPanel.class));
 
             // Execute JsonUtils.stringify() so that it can perform faster next time
             try {
@@ -173,12 +173,12 @@ public class CoreEntryPoint extends AbstractModuleEntryPoint {
 
         // set components visible
         Settings coreSettings = SettingManager.getSettings(AppSettingKeys.Core.$);
-        components().getStatusBar().setVisible(
-            coreSettings.getBoolean(AppSettingKeys.Core.STATUSBAR_VISIBLE));
-        components().getToolBar().setVisible(
-            coreSettings.getBoolean(AppSettingKeys.Core.TOOLBAR_VISIBLE));
-        CsvGridSheetCellValuePanel.getInstance().setValuePanelVisible(
-            coreSettings.getBoolean(AppSettingKeys.Core.VALUEPANEL_VISIBLE));
+        components().getStatusBar()
+            .setVisible(coreSettings.getBoolean(AppSettingKeys.Core.STATUSBAR_VISIBLE));
+        components().getToolBar()
+            .setVisible(coreSettings.getBoolean(AppSettingKeys.Core.TOOLBAR_VISIBLE));
+        CsvGridSheetCellValuePanel.getInstance()
+            .setValuePanelVisible(coreSettings.getBoolean(AppSettingKeys.Core.VALUEPANEL_VISIBLE));
 
         // Disable focus traversal
         components().getFrame().setFocusTraversalPolicy(new LayoutFocusTraversalPolicy() {
@@ -191,40 +191,40 @@ public class CoreEntryPoint extends AbstractModuleEntryPoint {
         });
 
         // Register Drag & Drop handler
-        components().getFrame().listeners()
-            .on(FileDroppedEvent.class, new SCListener<FileDroppedEvent>() {
-              @Override
-              public void call(FileDroppedEvent ev) {
-                OpenFileCommand command =
-                    (OpenFileCommand) CommandRepository.instance().getCommand("app:openFile");
-                if (ev.getFile().isFile()) {
-                  command.run(ev.getFile());
-                } else if (ev.getFile().isDirectory()) {
-                  command.chooseAndOpenFile(ev.getFile());
-                }
-              }
-            });
+        components().getFrame().listeners().on(FileDroppedEvent.class,
+            new SCListener<FileDroppedEvent>() {
+          @Override
+          public void call(FileDroppedEvent ev) {
+            OpenFileCommand command =
+                (OpenFileCommand) CommandRepository.instance().getCommand("app:openFile");
+            if (ev.getFile().isFile()) {
+              command.run(ev.getFile());
+            } else if (ev.getFile().isDirectory()) {
+              command.chooseAndOpenFile(ev.getFile());
+            }
+          }
+        });
 
-        components().getTabbedPane().listeners()
-            .on(ViewChangeEvent.class, new SCListener<ViewChangeEvent>() {
-              @Override
-              public void call(ViewChangeEvent ev) {
-                if (ev.getOldView() != null && ev.getOldView() instanceof CsvSheetView) {
-                  CsvSheetView oldView = (CsvSheetView) ev.getOldView();
-                  oldView.getGridSheetPane().getTable().stopCellEditing();
-                }
-                CsvGridSheetCellValuePanel cvp = CsvGridSheetCellValuePanel.getInstance();
-                if (ev.getNewView() != null) {
-                  if (cvp.isValuePanelVisible() && !cvp.isFloating()) {
-                    cvp.setValuePanelVisible(true);
-                  }
-                } else {
-                  if (cvp.isFloating()) {
-                    cvp.toggleFloating();
-                  }
-                }
+        components().getTabbedPane().listeners().on(ViewChangeEvent.class,
+            new SCListener<ViewChangeEvent>() {
+          @Override
+          public void call(ViewChangeEvent ev) {
+            if (ev.getOldView() != null && ev.getOldView() instanceof CsvSheetView) {
+              CsvSheetView oldView = (CsvSheetView) ev.getOldView();
+              oldView.getGridSheetPane().getTable().stopCellEditing();
+            }
+            CsvGridSheetCellValuePanel cvp = CsvGridSheetCellValuePanel.getInstance();
+            if (ev.getNewView() != null) {
+              if (cvp.isValuePanelVisible() && !cvp.isFloating()) {
+                cvp.setValuePanelVisible(true);
               }
-            });
+            } else {
+              if (cvp.isFloating()) {
+                cvp.toggleFloating();
+              }
+            }
+          }
+        });
 
         CsvSheetStatusLabel.instance().install();
       }
@@ -301,61 +301,66 @@ public class CoreEntryPoint extends AbstractModuleEntryPoint {
       repository.register("grid:sortSelectedRows", whenGridIsActive);
       repository.register("grid:sortSelectedRange", whenGridIsActive);
 
-      repository.register("grid:selectLeft", new GridSheetSelectCommand(
-          GridSheetSelectCommand.DECREMENT, 0, false), whenGridIsActive);
-      repository.register("grid:selectRight", new GridSheetSelectCommand(
-          GridSheetSelectCommand.INCREMENT, 0, false), whenGridIsActive);
-      repository.register("grid:selectUp", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.DECREMENT, false), whenGridIsActive);
-      repository.register("grid:selectDown", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.INCREMENT, false), whenGridIsActive);
+      repository.register("grid:selectLeft",
+          new GridSheetSelectCommand(GridSheetSelectCommand.DECREMENT, 0, false), whenGridIsActive);
+      repository.register("grid:selectRight",
+          new GridSheetSelectCommand(GridSheetSelectCommand.INCREMENT, 0, false), whenGridIsActive);
+      repository.register("grid:selectUp",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.DECREMENT, false), whenGridIsActive);
+      repository.register("grid:selectDown",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.INCREMENT, false), whenGridIsActive);
 
-      repository.register("grid:extendLeft", new GridSheetSelectCommand(
-          GridSheetSelectCommand.DECREMENT, 0, true), whenGridIsActive);
-      repository.register("grid:extendRight", new GridSheetSelectCommand(
-          GridSheetSelectCommand.INCREMENT, 0, true), whenGridIsActive);
-      repository.register("grid:extendUp", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.DECREMENT, true), whenGridIsActive);
-      repository.register("grid:extendDown", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.INCREMENT, true), whenGridIsActive);
+      repository.register("grid:extendLeft",
+          new GridSheetSelectCommand(GridSheetSelectCommand.DECREMENT, 0, true), whenGridIsActive);
+      repository.register("grid:extendRight",
+          new GridSheetSelectCommand(GridSheetSelectCommand.INCREMENT, 0, true), whenGridIsActive);
+      repository.register("grid:extendUp",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.DECREMENT, true), whenGridIsActive);
+      repository.register("grid:extendDown",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.INCREMENT, true), whenGridIsActive);
 
-      repository.register("grid:selectFirstColumn", new GridSheetSelectCommand(
-          GridSheetSelectCommand.TO_FIRST, 0, false), whenGridIsActive);
-      repository.register("grid:selectLastColumn", new GridSheetSelectCommand(
-          GridSheetSelectCommand.TO_LAST, 0, false), whenGridIsActive);
-      repository.register("grid:selectFirstRow", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.TO_FIRST, false), whenGridIsActive);
-      repository.register("grid:selectLastRow", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.TO_LAST, false), whenGridIsActive);
-      repository.register("grid:selectFirstCell", new GridSheetSelectCommand(
-          GridSheetSelectCommand.TO_FIRST, GridSheetSelectCommand.TO_FIRST, false),
+      repository.register("grid:selectFirstColumn",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_FIRST, 0, false), whenGridIsActive);
+      repository.register("grid:selectLastColumn",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_LAST, 0, false), whenGridIsActive);
+      repository.register("grid:selectFirstRow",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.TO_FIRST, false), whenGridIsActive);
+      repository.register("grid:selectLastRow",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.TO_LAST, false), whenGridIsActive);
+      repository.register("grid:selectFirstCell",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_FIRST,
+              GridSheetSelectCommand.TO_FIRST, false),
           whenGridIsActive);
       repository.register("grid:selectLastCell", new GridSheetSelectCommand(
           GridSheetSelectCommand.TO_LAST, GridSheetSelectCommand.TO_LAST, false), whenGridIsActive);
 
-      repository.register("grid:extendFirstColumn", new GridSheetSelectCommand(
-          GridSheetSelectCommand.TO_FIRST, 0, true), whenGridIsActive);
-      repository.register("grid:extendLastColumn", new GridSheetSelectCommand(
-          GridSheetSelectCommand.TO_LAST, 0, true), whenGridIsActive);
-      repository.register("grid:extendFirstRow", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.TO_FIRST, true), whenGridIsActive);
-      repository.register("grid:extendLastRow", new GridSheetSelectCommand(0,
-          GridSheetSelectCommand.TO_LAST, true), whenGridIsActive);
-      repository
-          .register("grid:extendFirstCell", new GridSheetSelectCommand(
-              GridSheetSelectCommand.TO_FIRST, GridSheetSelectCommand.TO_FIRST, true),
-              whenGridIsActive);
+      repository.register("grid:extendFirstColumn",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_FIRST, 0, true), whenGridIsActive);
+      repository.register("grid:extendLastColumn",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_LAST, 0, true), whenGridIsActive);
+      repository.register("grid:extendFirstRow",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.TO_FIRST, true), whenGridIsActive);
+      repository.register("grid:extendLastRow",
+          new GridSheetSelectCommand(0, GridSheetSelectCommand.TO_LAST, true), whenGridIsActive);
+      repository.register("grid:extendFirstCell",
+          new GridSheetSelectCommand(GridSheetSelectCommand.TO_FIRST,
+              GridSheetSelectCommand.TO_FIRST, true),
+          whenGridIsActive);
       repository.register("grid:extendLastCell", new GridSheetSelectCommand(
           GridSheetSelectCommand.TO_LAST, GridSheetSelectCommand.TO_LAST, true), whenGridIsActive);
 
-      repository.register("grid:selectNextCellHorizontally", new GridSheetSelectNextCellCommand(
-          GridSheetSelectNextCellCommand.NEXT, 0), whenGridIsActive);
-      repository.register("grid:selectPrevCellHorizontally", new GridSheetSelectNextCellCommand(
-          GridSheetSelectNextCellCommand.PREVIOUS, 0), whenGridIsActive);
-      repository.register("grid:selectNextCellVertically", new GridSheetSelectNextCellCommand(0,
-          GridSheetSelectNextCellCommand.NEXT), whenGridIsActive);
-      repository.register("grid:selectPrevCellVertically", new GridSheetSelectNextCellCommand(0,
-          GridSheetSelectNextCellCommand.PREVIOUS), whenGridIsActive);
+      repository.register("grid:selectNextCellHorizontally",
+          new GridSheetSelectNextCellCommand(GridSheetSelectNextCellCommand.NEXT, 0),
+          whenGridIsActive);
+      repository.register("grid:selectPrevCellHorizontally",
+          new GridSheetSelectNextCellCommand(GridSheetSelectNextCellCommand.PREVIOUS, 0),
+          whenGridIsActive);
+      repository.register("grid:selectNextCellVertically",
+          new GridSheetSelectNextCellCommand(0, GridSheetSelectNextCellCommand.NEXT),
+          whenGridIsActive);
+      repository.register("grid:selectPrevCellVertically",
+          new GridSheetSelectNextCellCommand(0, GridSheetSelectNextCellCommand.PREVIOUS),
+          whenGridIsActive);
 
       repository.register("grid:insertRowsAbove", whenGridIsActive);
       repository.register("grid:insertRowsBelow", whenGridIsActive);
@@ -423,10 +428,12 @@ public class CoreEntryPoint extends AbstractModuleEntryPoint {
     {
       // Macro
       repository.register("macro:toggleMacroTools");
+      repository.register("macro:toggleRecordingMacro");
       repository.register("macro:toggleConsole", AppConditions.WHEN_MACROTOOLS_IS_VISIBLE);
-      repository.register("macroeditor:open", AppConditions.WHEN_MACROEDITOR_IS_VISIBLE);
-      repository.register("macroeditor:save", AppConditions.WHEN_MACROEDITOR_IS_VISIBLE);
-      repository.register("macroeditor:run", AppConditions.WHEN_MACROEDITOR_IS_VISIBLE);
+      repository.register("macro:open");
+      repository.register("macro:save");
+      repository.register("macro:run");
+      repository.register("macro:showEditor");
       repository.register("macrolist:add", AppConditions.WHEN_MACROLIST_IS_VISIBLE);
       repository.register("macrolist:remove", AppConditions.WHEN_MACROLIST_IS_VISIBLE);
       repository.register("macrolist:run", AppConditions.WHEN_MACROLIST_IS_VISIBLE);

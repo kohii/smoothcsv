@@ -29,6 +29,7 @@ import lombok.Getter;
 
 import com.smoothcsv.commons.constants.Direction;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
@@ -69,7 +70,8 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
    * @param gridSheetPane
    * @param gridSheetCellRenderer
    */
-  public CsvGridSheetTable(GridSheetPane gridSheetPane, GridSheetCellRenderer gridSheetCellRenderer) {
+  public CsvGridSheetTable(GridSheetPane gridSheetPane,
+      GridSheetCellRenderer gridSheetCellRenderer) {
     super(gridSheetPane, gridSheetCellRenderer);
 
     enableInputMethods(true);
@@ -142,11 +144,13 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
         if (editorComponent == null) {
           return false;
         }
+        if (MacroRecorder.isRecording()) {
+          MacroRecorder.getInstance().recordCommand("grid:startEdit");
+        }
       }
       // pass the event to the cell editor.
-      if (!e.isConsumed()
-          && (e.getID() == KeyEvent.KEY_TYPED || e.getID() == KeyEvent.KEY_PRESSED
-              && e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+      if (!e.isConsumed() && (e.getID() == KeyEvent.KEY_TYPED
+          || e.getID() == KeyEvent.KEY_PRESSED && e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
         return editorComponent.processKeyBinding(ks, e, WHEN_FOCUSED, pressed);
       }
     }
@@ -290,8 +294,8 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           if (getCellEditor() == null) {
             return null;
           }
-          return getCellEditor().getEditorComponent().getInputMethodRequests()
-              .getLocationOffset(x, y);
+          return getCellEditor().getEditorComponent().getInputMethodRequests().getLocationOffset(x,
+              y);
         }
 
         @Override

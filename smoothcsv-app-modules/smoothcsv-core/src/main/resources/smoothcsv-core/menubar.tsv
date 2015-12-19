@@ -80,5 +80,11 @@ View
 
 Tools
 	Toggle Command Palette...	app:toggleCommandPalette
-	Toggle Macro Tools	macro:toggleMacroTools
 	SQL Tools...	app:showSqlTools
+
+Macro
+	Toggle Macro Tools	macro:toggleMacroTools
+	Toggle Recording Macro	macro:toggleRecordingMacro
+	Run Macro	macro:run
+	Edit Macro	macro:showEditor
+	Save Macro...	macro:save

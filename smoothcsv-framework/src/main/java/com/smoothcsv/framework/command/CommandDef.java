@@ -84,7 +84,7 @@ public class CommandDef {
     return commandId;
   }
 
-  private String createClassName(String commandId) {
+  private static String createClassName(String commandId) {
     StringBuilder buf = new StringBuilder("command.");
     int sepIndex = commandId.indexOf(':');
     buf.append(commandId.substring(0, sepIndex).replace('-', '_'));

@@ -29,7 +29,7 @@ import javax.swing.SwingUtilities;
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCContentPane;
-import com.smoothcsv.framework.component.dialog.ModalDialogBase;
+import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
@@ -158,16 +158,16 @@ public class SmoothComponentSupport {
       if (c instanceof SCContentPane) {
         return !SwingUtils.isModalDialogShowing();
       }
-      if (c instanceof ModalDialogBase) {
-        return c.isVisible() && ((ModalDialogBase) c).getCanBeActive();
+      if (c instanceof DialogBase) {
+        return c.isVisible() && ((DialogBase) c).getCanBeActive();
       }
     } while ((c = c.getParent()) != null);
     return false;
   }
 
   private class EventHandler implements
-  // FocusListener,
-  // ComponentListener,
+      // FocusListener,
+      // ComponentListener,
       HierarchyListener {
 
     // ComponentListener------------------

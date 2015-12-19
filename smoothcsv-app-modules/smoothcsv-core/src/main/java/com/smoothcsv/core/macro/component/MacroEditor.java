@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -52,11 +52,11 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     toolBar.setFloatable(false);
     add(toolBar, BorderLayout.NORTH);
 
-    toolBar.add("macroeditor:open", AwesomeIconConstants.FA_FOLDER_OPEN_O,
+    toolBar.add("macro:open", AwesomeIconConstants.FA_FOLDER_OPEN_O,
         CoreBundle.get("key.open") + "...");
-    toolBar.add("macroeditor:save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save")
+    toolBar.add("macro:save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save")
         + "...");
-    toolBar.add("macroeditor:run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.run"));
+    toolBar.add("macro:run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.run"));
 
     textArea = new RSyntaxTextArea();
     // textArea.setWrapStyleWord(true);

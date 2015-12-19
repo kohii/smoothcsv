@@ -13,18 +13,26 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
-import com.smoothcsv.commons.utils.EnumStringSupport;
+import com.smoothcsv.framework.util.SCBundle;
 
 /**
  *
  * @author kohii
  */
-public enum DialogOperation {
+public class DialogOperation {
 
-  OK, CANCEL, YES, NO;
+  public static final DialogOperation YES = new DialogOperation(SCBundle.get("key.yes"));
+  public static final DialogOperation NO = new DialogOperation(SCBundle.get("key.no"));
+  public static final DialogOperation OK = new DialogOperation(SCBundle.get("key.ok"));
+  public static final DialogOperation CANCEL = new DialogOperation(SCBundle.get("key.cancel"));
 
-  @Override
-  public String toString() {
-    return EnumStringSupport.getString(this);
+  private String text;
+
+  public DialogOperation(String text) {
+    this.text = text;
+  }
+
+  public String getText() {
+    return text;
   }
 }

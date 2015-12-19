@@ -1,11 +1,11 @@
 /*
- * Copyright 2014 kohii.
- * 
+ * Copyright 2015 kohii.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -51,8 +51,8 @@ import com.smoothcsv.swing.icon.AwesomeIconConstants;
 public class MacroToolsPanel extends JPanel implements SmoothComponent {
 
   @Getter
-  private final SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-      "macro-tools");
+  private final SmoothComponentSupport componentSupport =
+      new SmoothComponentSupport(this, "macro-tools");
 
   private SimpleTabbedPane tabbedPane;
 
@@ -79,8 +79,8 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     add(tabbedPane, BorderLayout.CENTER);
 
     JPanel headerPanel = new JPanel();
-    headerPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0,
-        UIConstants.getDefaultBorderColor()));
+    headerPanel.setBorder(
+        BorderFactory.createMatteBorder(1, 0, 1, 0, UIConstants.getDefaultBorderColor()));
     add(headerPanel, BorderLayout.NORTH);
     GridBagLayout gbl_headerPanel = new GridBagLayout();
     gbl_headerPanel.columnWidths = new int[] {0, 0, 0, 0};
@@ -195,5 +195,9 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
 
   public JPanel getSelectedTabComponent() {
     return tabbedPane.getSelectedTabComponent();
+  }
+
+  public void setSelectedTabComponent(JPanel comp) {
+    tabbedPane.showTab(comp);
   }
 }

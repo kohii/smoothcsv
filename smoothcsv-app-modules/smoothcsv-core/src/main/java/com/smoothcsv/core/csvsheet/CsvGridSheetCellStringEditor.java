@@ -18,12 +18,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.KeyStroke;
 
-import lombok.Getter;
-
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
+
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -41,7 +42,8 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
   }
 
   @Override
-  public boolean prepare(GridSheetTable table, Object value, boolean isSelected, int row, int column) {
+  public boolean prepare(GridSheetTable table, Object value, boolean isSelected, int row,
+      int column) {
     boolean b = super.prepare(table, value, isSelected, row, column);
     CsvGridSheetCellValuePanel.getInstance().getUndoManager().discardAllEdits();
     return b;
@@ -58,8 +60,8 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     private boolean quickEdit = false;
 
     @Getter
-    private final SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-        "cell-editor");
+    private final SmoothComponentSupport componentSupport =
+        new SmoothComponentSupport(this, "cell-editor");
 
     /**
      * @param table
@@ -87,6 +89,14 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       } else {
         removePseudoClass("quick-edit");
       }
+    }
+
+    @Override
+    public void replaceSelection(String content) {
+      if (MacroRecorder.isRecording()) {
+        MacroRecorder.getInstance().recordKeyTyping(content);
+      }
+      super.replaceSelection(content);
     }
 
     @Override

@@ -24,8 +24,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import lombok.Getter;
-
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import com.smoothcsv.core.constants.UIConstants;
@@ -33,16 +31,18 @@ import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
 import com.smoothcsv.core.sql.model.SqlTableInfo;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCTabbedPaneUI;
-import com.smoothcsv.framework.component.dialog.ModalDialogBase;
+import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+
+import lombok.Getter;
 
 /**
  * @author kohii
  *
  */
 @SuppressWarnings("serial")
-public class SqlToolsDialog extends ModalDialogBase {
+public class SqlToolsDialog extends DialogBase {
 
   private RSyntaxTextArea textArea;
   private SqlTableList tableListPanel;
@@ -60,7 +60,7 @@ public class SqlToolsDialog extends ModalDialogBase {
     splitPane.setDividerSize(5);
     splitPane.setFocusable(false);
     splitPane.setBorder(null);
-    contentPanel.add(splitPane, BorderLayout.CENTER);
+    getContentPanel().add(splitPane, BorderLayout.CENTER);
 
     JSplitPane leftSplitPane = new JSplitPane();
     leftSplitPane.setDividerSize(5);
@@ -70,8 +70,8 @@ public class SqlToolsDialog extends ModalDialogBase {
     splitPane.setLeftComponent(leftSplitPane);
 
     tableListPanel = new SqlTableList();
-    tableListPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1,
-        UIConstants.getDefaultBorderColor()));
+    tableListPanel.setBorder(
+        BorderFactory.createMatteBorder(0, 0, 1, 1, UIConstants.getDefaultBorderColor()));
     tableListPanel.setSelectionChangeListener((oldTableInfo, newTableInfo) -> {
       adjustTableDetailsPanel(newTableInfo);
     });
@@ -87,8 +87,8 @@ public class SqlToolsDialog extends ModalDialogBase {
       tabbedPane = new JTabbedPane();
       tabbedPane.setFocusable(false);
       tabbedPane.setUI(new SCTabbedPaneUI());
-      tabbedPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1,
-          UIConstants.getDefaultBorderColor()));
+      tabbedPane.setBorder(
+          BorderFactory.createMatteBorder(1, 0, 0, 1, UIConstants.getDefaultBorderColor()));
       tabbedPane.add("Columns", tableColumnsEditorPanel);
       tabbedPane.add("Preview", tablePreviewPanel);
       tabbedPane.addChangeListener(new ChangeListener() {
@@ -102,8 +102,8 @@ public class SqlToolsDialog extends ModalDialogBase {
     }
 
     SqlEditor sqlEditor = new SqlEditor();
-    sqlEditor.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0,
-        UIConstants.getDefaultBorderColor()));
+    sqlEditor.setBorder(
+        BorderFactory.createMatteBorder(0, 1, 0, 0, UIConstants.getDefaultBorderColor()));
     splitPane.setRightComponent(sqlEditor);
 
     setSize(800, 600);
@@ -156,8 +156,8 @@ public class SqlToolsDialog extends ModalDialogBase {
 
   private static class SqlToolsBody extends JPanel implements SmoothComponent {
     @Getter
-    private final SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-        "sql-tools");
+    private final SmoothComponentSupport componentSupport =
+        new SmoothComponentSupport(this, "sql-tools");
 
     public SqlToolsBody() {
       setLayout(new BorderLayout());

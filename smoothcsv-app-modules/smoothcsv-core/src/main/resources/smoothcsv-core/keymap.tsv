@@ -107,9 +107,9 @@ macro-tools
 	escape	macro:toggleConsole
 
 macro-editor
-	shortcut+s	macroeditor:save
-	shortcut+o	macroeditor:open
-	shortcut+enter	macroeditor:run
+	shortcut+s	macroe:save
+	shortcut+o	macroe:open
+	shortcut+enter	macroe:run
 
 macro-list
 	delete	macrolist:remove

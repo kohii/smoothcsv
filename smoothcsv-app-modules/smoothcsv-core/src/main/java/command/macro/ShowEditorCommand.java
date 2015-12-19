@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 kohii.
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,24 +13,25 @@
  */
 package command.macro;
 
-import com.smoothcsv.core.command.VisibleComponentCommandBase;
+import com.smoothcsv.core.component.SmoothCsvComponentManager;
 import com.smoothcsv.core.macro.component.MacroToolsPanel;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
 
 /**
  * @author kohii
  *
  */
-public class ToggleConsoleCommand extends VisibleComponentCommandBase<MacroToolsPanel> {
-
-  /**
-   * @param cssSelector
-   */
-  public ToggleConsoleCommand() {
-    super("macro-tools");
-  }
+public class ShowEditorCommand extends Command {
 
   @Override
-  public void run(MacroToolsPanel component) {
-    component.setConsoleAlwaysVisible(!component.isConsoleAlwaysVisible());
+  protected void run() {
+    SmoothCsvComponentManager componentManager =
+        (SmoothCsvComponentManager) SCApplication.components();
+    if (!componentManager.isMacroToolsVisible()) {
+      new ToggleMacroToolsCommand().run();
+    }
+    MacroToolsPanel macroTools = componentManager.getMacroTools();
+    macroTools.setSelectedTabComponent(macroTools.getMacroEditor());
   }
 }

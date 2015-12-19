@@ -26,7 +26,8 @@ import com.smoothcsv.framework.SCApplication;
  *
  * @author kohii
  */
-public class GenericMessageDialog extends ModalDialogBase {
+@SuppressWarnings("serial")
+public class GenericMessageDialog extends DialogBase {
 
   public static void alert(String message) {
     showDialog(message, DialogOperation.OK);
@@ -69,9 +70,8 @@ public class GenericMessageDialog extends ModalDialogBase {
     messageComponent.setFocusable(false);
     messageComponent.setBackground(null);
     messageComponent.setLineWrap(true);
-    JScrollPane messageScrollPane =
-        new JScrollPane(messageComponent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    JScrollPane messageScrollPane = new JScrollPane(messageComponent,
+        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     messageScrollPane.setBorder(null);
     messageScrollPane.setBackground(null);
     messageScrollPane.getViewport().setBackground(null);

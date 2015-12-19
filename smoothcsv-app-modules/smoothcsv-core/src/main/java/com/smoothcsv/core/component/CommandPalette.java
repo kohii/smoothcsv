@@ -53,6 +53,7 @@ import javax.swing.table.TableColumn;
 import org.apache.commons.lang3.StringUtils;
 
 import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandRepository;
@@ -160,15 +161,14 @@ public class CommandPalette extends JDialog {
     // this column doesn't need to be wide
     keybindingCol.setMaxWidth(110);
 
-    scrollPane =
-        new JScrollPane(commandList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollPane = new JScrollPane(commandList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     scrollPane.setViewportBorder(null);
     scrollPane.setBorder(BorderFactory.createEmptyBorder());
     contentPane.add(scrollPane, BorderLayout.CENTER);
 
-    getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
-        KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
+    getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+        .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
     getRootPane().getActionMap().put("Cancel", new AbstractAction("cancel") {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -241,13 +241,19 @@ public class CommandPalette extends JDialog {
       }
     });
 
-    // addWindowListener(new WindowAdapter() {
-    // @Override
-    // public void windowOpened(WindowEvent e) {
-    // dialogHeaderHeight = calculateDialogHeaderHeight();
-    // filter();
-    // }
-    // });
+    // Enable "app:toggleCommandPalette" command in this component.
+    // TODO There should be any better way to achieve it.
+    String toggleCommandId = "app:toggleCommandPalette";
+    Command toggleCommand = CommandRepository.instance().getCommandOrNull(toggleCommandId);
+    if (toggleCommand != null) {
+      im.put(CommandKeymap.getDefault().findKeyStroke(toggleCommandId), toggleCommandId);
+      am.put(toggleCommandId, new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          CommandRepository.instance().runCommandIfExists(toggleCommandId);
+        }
+      });
+    }
   }
 
   private void runCommand() {
@@ -298,9 +304,8 @@ public class CommandPalette extends JDialog {
     }
 
     JFrame frame = SCApplication.components().getFrame();
-    int h =
-        Math.min(textfield.getPreferredSize().height + commandList.getPreferredSize().height,
-            (int) (frame.getHeight() * 0.8));
+    int h = Math.min(textfield.getPreferredSize().height + commandList.getPreferredSize().height,
+        (int) (frame.getHeight() * 0.8));
     setSize(getWidth(), h + dialogHeaderHeight);
   }
 

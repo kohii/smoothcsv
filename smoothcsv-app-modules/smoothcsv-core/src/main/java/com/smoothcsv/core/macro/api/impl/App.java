@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 kohii.
+ * Copyright 2015 kohii.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -120,6 +120,18 @@ public class App extends APIBase {
   public Range getActiveRange() {
     CsvSheet activeSheet = getActiveSheet();
     return activeSheet == null ? null : activeSheet.getActiveRange();
+  }
+
+  public CellEditor getActiveCellEditor() {
+    CsvSheetView csvSheetView =
+        (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
+    if (csvSheetView == null) {
+      return null;
+    }
+    if (!csvSheetView.getGridSheetPane().isEditing()) {
+      return null;
+    }
+    return new CellEditor(new CsvSheetImpl(csvSheetView.getViewId()));
   }
 
   /**

@@ -26,7 +26,7 @@ import com.smoothcsv.framework.command.Command;
 public class RunCommand extends Command {
 
   @Override
-  protected void run() {
+  public void run() {
     SmoothCsvComponentManager componentManager =
         (SmoothCsvComponentManager) SCApplication.components();
 

@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.framework.condition;
 
-import java.util.List;
-import java.util.function.Consumer;
-
-import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.selector.SelectorFactory;
@@ -25,12 +21,11 @@ import com.smoothcsv.framework.selector.SelectorFactory;
  * @author kohii
  *
  */
-public class ComponentVisibleCondition extends Condition {
+public class AvailableCondition extends Condition {
 
   private final CssSelector selector;
 
-  public ComponentVisibleCondition(String name, String selectorQuery) {
-    super(name);
+  public AvailableCondition(String selectorQuery) {
     this.selector = SelectorFactory.parseQuery(selectorQuery);
   }
 
@@ -50,7 +45,7 @@ public class ComponentVisibleCondition extends Condition {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ComponentVisibleCondition other = (ComponentVisibleCondition) obj;
+    AvailableCondition other = (AvailableCondition) obj;
     if (selector == null) {
       if (other.selector != null)
         return false;
@@ -59,20 +54,13 @@ public class ComponentVisibleCondition extends Condition {
     return true;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.smoothcsv.framework.condition.Condition#attachToEvent()
-   */
   @Override
   protected void activate() {
-    SmoothComponentManager.addVisibleComponentChangeListener(new Consumer<List<SmoothComponent>>() {
-      @Override
-      public void accept(List<SmoothComponent> visibleComps) {
-        setValue(SmoothComponentManager.isComponentVisible(selector));
-      }
-    });
+    SmoothComponentManager.addVisibleComponentChangeListener(e -> revalidate());
+  }
 
-    setValue(SmoothComponentManager.isComponentVisible(selector));
+  @Override
+  protected boolean computeValue() {
+    return SmoothComponentManager.isComponentVisible(selector);
   }
 }

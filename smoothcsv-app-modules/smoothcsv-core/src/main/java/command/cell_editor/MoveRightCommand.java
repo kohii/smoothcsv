@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 kohii.
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,25 +11,19 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.command;
+package command.cell_editor;
 
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
-import com.smoothcsv.framework.command.Command;
+import javax.swing.text.DefaultEditorKit;
+
+import com.smoothcsv.core.celleditor.SCTextAreaActionCommand;
 
 /**
  * @author kohii
  *
  */
-public abstract class ValuePanelCommandBase extends Command {
+public class MoveRightCommand extends SCTextAreaActionCommand {
 
-  @Override
-  public final void run() {
-    CsvGridSheetCellValuePanel valuePanel = CsvGridSheetCellValuePanel.getInstance();
-    if (!valuePanel.isValuePanelVisible()) {
-      abort();
-    }
-    run(valuePanel);
+  public MoveRightCommand() {
+    super(DefaultEditorKit.selectionBackwardAction);
   }
-
-  protected abstract void run(CsvGridSheetCellValuePanel valuePanel);
 }

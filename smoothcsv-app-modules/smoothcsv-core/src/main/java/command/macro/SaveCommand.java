@@ -35,7 +35,7 @@ import com.smoothcsv.framework.exception.AppException;
 public class SaveCommand extends Command {
 
   @Override
-  protected void run() {
+  public void run() {
     BasicFileChooser fileChooser = JsFileChooser.getInstance();
     switch (fileChooser.showSaveDialog()) {
       case JFileChooser.APPROVE_OPTION:

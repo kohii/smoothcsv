@@ -37,7 +37,7 @@ import com.smoothcsv.framework.command.CommandRepository;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
-import com.smoothcsv.framework.modular.AbstractModuleEntryPoint;
+import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.util.DirectoryResolver;
 
@@ -45,7 +45,7 @@ import com.smoothcsv.framework.util.DirectoryResolver;
  *
  * @author kohii
  */
-public class DebugEntryPoint extends AbstractModuleEntryPoint {
+public class DebugEntryPoint extends ModuleEntryPointBase {
 
   static Logger LOG = LoggerFactory.getLogger(DebugEntryPoint.class);
 

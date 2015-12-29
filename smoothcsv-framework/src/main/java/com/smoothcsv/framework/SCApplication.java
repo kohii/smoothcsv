@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -30,7 +30,9 @@ import com.smoothcsv.framework.component.SCFrame;
 import com.smoothcsv.framework.component.support.CommandMapFactory;
 import com.smoothcsv.framework.component.support.DefaultCommandMapFactory;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
-import com.smoothcsv.framework.condition.ConditionPool;
+import com.smoothcsv.framework.condition.AvailableCondition;
+import com.smoothcsv.framework.condition.Conditions;
+import com.smoothcsv.framework.condition.FocusCondition;
 import com.smoothcsv.framework.constants.FrameworkSettingKeys;
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
 import com.smoothcsv.framework.event.EventListenerSupport;
@@ -109,7 +111,11 @@ public abstract class SCApplication {
         // Create CommandMapFactory
         commandMapFactory = createCommandMapFactory();
 
-        // load modules and language setting
+        // Create conditions
+        Conditions.register("available", cssSelector -> new AvailableCondition(cssSelector));
+        Conditions.register("focus", cssSelector -> new FocusCondition(cssSelector));
+
+        // Load modules and language setting
         moduleManager = createModuleManager();
         prepareModuleManifests();
         setupLanguageSetting();
@@ -130,7 +136,7 @@ public abstract class SCApplication {
 
         listeners().invokeListeners(new BeforeOpenWindowEvent());
 
-        ConditionPool.instance().initializeConditions();
+        Conditions.initializeConditions();
 
         // Show GUI
         openWindow();

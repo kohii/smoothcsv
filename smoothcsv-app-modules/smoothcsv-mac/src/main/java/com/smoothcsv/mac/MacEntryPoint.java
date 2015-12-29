@@ -28,7 +28,7 @@ import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRepository;
-import com.smoothcsv.framework.modular.AbstractModuleEntryPoint;
+import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.OpenFileCommand;
 
@@ -36,7 +36,7 @@ import command.app.OpenFileCommand;
  * @author kohii
  *
  */
-public class MacEntryPoint extends AbstractModuleEntryPoint {
+public class MacEntryPoint extends ModuleEntryPointBase {
 
   @Override
   protected void activate() {

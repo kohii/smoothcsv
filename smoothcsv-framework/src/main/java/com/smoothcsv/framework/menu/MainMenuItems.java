@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -23,6 +23,8 @@ import java.util.List;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.csv.reader.DefaultCsvReader;
 import com.smoothcsv.framework.component.SCMenuBar;
+import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.exception.IllegalConfigException;
 import com.smoothcsv.framework.io.CsvSupport;
 
@@ -77,9 +79,8 @@ public class MainMenuItems {
     LinkedList<ParentMenu> menuStack = new LinkedList<>();
     ParentMenu previous = null;
     try (InputStream in2 = in;
-        DefaultCsvReader reader =
-            new DefaultCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
-                CsvSupport.SKIP_EMPTYROW_OPTION)) {
+        DefaultCsvReader reader = new DefaultCsvReader(new InputStreamReader(in, "UTF-8"),
+            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION)) {
       List<String> rowData;
       while ((rowData = reader.readRow()) != null) {
         int newDepth = 0;
@@ -93,14 +94,17 @@ public class MainMenuItems {
         if (caption.isEmpty()) {
           throw new IllegalConfigException(resourceName);
         }
-        String commandId;
+        String commandId = null;
+        Condition visibleWhen = null;
         if (newDepth + 1 < rowData.size()) {
           commandId = rowData.get(newDepth + 1);
           if (commandId.isEmpty()) {
             commandId = null;
           }
-        } else {
-          commandId = null;
+
+          if (newDepth + 2 < rowData.size() && !rowData.get(newDepth + 2).isEmpty()) {
+            visibleWhen = Conditions.getCondition(rowData.get(newDepth + 2));
+          }
         }
 
         int currentDepth = menuStack.size();
@@ -126,13 +130,13 @@ public class MainMenuItems {
             // top level menu
             throw new IllegalConfigException(resourceName);
           }
-          CommandMenuItem menuItem = new CommandMenuItem(caption, commandId);
+          CommandMenuItem menuItem = new CommandMenuItem(caption, commandId, visibleWhen);
           menuStack.getLast().add(menuItem);
         } else {
           if (menuStack.isEmpty()) {
             // top level menu
             ParentMenu topLevelMenu = getTopLevelMenu(caption);
-            if(topLevelMenu == null){
+            if (topLevelMenu == null) {
               topLevelMenu = new ParentMenu(caption);
               add(topLevelMenu);
             }

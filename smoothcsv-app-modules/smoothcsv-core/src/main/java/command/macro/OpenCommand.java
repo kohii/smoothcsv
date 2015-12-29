@@ -35,7 +35,7 @@ import com.smoothcsv.framework.exception.AppException;
 public class OpenCommand extends Command {
 
   @Override
-  protected void run() {
+  public void run() {
     BasicFileChooser fileChooser = JsFileChooser.getInstance();
     switch (fileChooser.showOpenDialog()) {
       case JFileChooser.APPROVE_OPTION:

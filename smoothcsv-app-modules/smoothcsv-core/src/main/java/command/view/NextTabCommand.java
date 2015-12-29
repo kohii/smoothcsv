@@ -21,7 +21,7 @@ import com.smoothcsv.framework.component.SCTabbedPane;
  * @author kohii
  *
  */
-public class PreviousViewCommand extends Command {
+public class NextTabCommand extends Command {
 
   @Override
   public void run() {
@@ -30,9 +30,9 @@ public class PreviousViewCommand extends Command {
     if (count < 2) {
       return;
     }
-    int cur = tabbedPane.getSelectedIndex() - 1;
-    if (cur == -1) {
-      cur = count - 1;
+    int cur = tabbedPane.getSelectedIndex() + 1;
+    if (cur == count) {
+      cur = 0;
     }
     tabbedPane.setSelectedIndex(cur);
   }

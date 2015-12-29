@@ -1,0 +1,125 @@
+app:newFile			
+app:newFileAs			
+app:openFile			
+app:openFileAs			
+app:save	available(csv-sheet)		
+app:saveAs	available(csv-sheet)		
+app:saveAll	available(csv-sheet)		
+app:close	available(csv-sheet)		
+app:closeOthers	available(csv-sheet)		
+app:closeAll	available(csv-sheet)		
+csvsheet:showProperties	available(csv-sheet)		
+app:quit			
+app:about			
+app:toggleCommandPalette			
+app:showSqlTools			
+app:showSettings			
+			
+grid:undo	csv_sheet_can_undo		
+grid:redo	csv_sheet_can_redo		
+grid:copy	!editing_cell		
+grid:cut	!editing_cell		
+grid:paste	!editing_cell		
+grid:copyUsingFileFormat	!editing_cell		
+grid:cutUsingFileFormat	!editing_cell		
+grid:pasteUsingFileFormat	!editing_cell		
+grid:clear	!editing_cell		
+grid:deleteCell	!editing_cell		
+grid:selectAll	!editing_cell		
+grid:selectEntireRow	!editing_cell		
+grid:selectEntireColumn	!editing_cell		
+grid:startEdit	!editing_cell		
+grid:fillDown	!editing_cell		
+grid:fillUp	!editing_cell		
+grid:fillLeft	!editing_cell		
+grid:fillRight	!editing_cell		
+grid:sort	!editing_cell		
+grid:sortSelectedRows	!editing_cell		
+grid:sortSelectedRange	!editing_cell		
+grid:selectLeft	available(csv-sheet)	command.grid.MoveCommand {"direction":"left"}	grid:moveLeft
+grid:selectRight	available(csv-sheet)	command.grid.MoveCommand {"direction":"right"}	grid:moveRight
+grid:selectUp	available(csv-sheet)	command.grid.MoveCommand {"direction":"up"}	grid:moveUp
+grid:selectDown	available(csv-sheet)	command.grid.MoveCommand {"direction":"down"}	grid:moveDowm
+grid:extendLeft	available(csv-sheet)	command.grid.MoveCommand {"direction":"left","extend":true}	
+grid:extendRight	available(csv-sheet)	command.grid.MoveCommand {"direction":"right","extend":true}	
+grid:extendUp	available(csv-sheet)	command.grid.MoveCommand {"direction":"up","extend":true}	
+grid:extendDown	available(csv-sheet)	command.grid.MoveCommand {"direction":"down","extend":true}	
+grid:selectFirstColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcolumn"}	
+grid:selectLastColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcolumn"}	
+grid:selectFirstRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstrow"}	
+grid:selectLastRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastrow"}	
+grid:selectFirstCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcell"}	
+grid:selectLastCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcell"}	
+grid:extendFirstColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcolumn","extend":true}	grid:extendToFirstColumn
+grid:extendLastColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcolumn","extend":true}	grid:extendToLastColumn
+grid:extendFirstRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstrow","extend":true}	grid:extendToFirstRow
+grid:extendLastRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastrow","extend":true}	grid:extendToLastRow
+grid:extendFirstCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcell","extend":true}	grid:extendToFirstCell
+grid:extendLastCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcell","extend":true}	grid:extendToLastCell
+grid:selectPrevCellHorizontally	available(csv-sheet)	command.grid.NextCellCommand {"direction":"left"}	grid:moveRightInActiveRange
+grid:selectNextCellHorizontally	available(csv-sheet)	command.grid.NextCellCommand {"direction":"right"}	grid:moveLeftInActiveRange
+grid:selectPrevCellVertically	available(csv-sheet)	command.grid.NextCellCommand {"direction":"up"}	grid:moveDownInActiveRange
+grid:selectNextCellVertically	available(csv-sheet)	command.grid.NextCellCommand {"direction":"down"}	grid:moveUpInActiveRange
+grid:insertRowsAbove	available(csv-sheet)		
+grid:insertRowsBelow	available(csv-sheet)		
+grid:deleteRows	available(csv-sheet)		
+grid:insertColumnsLeft	available(csv-sheet)		
+grid:insertColumnsRight	available(csv-sheet)		
+grid:deleteColumns	available(csv-sheet)		
+grid:goToLine	available(csv-sheet)		
+grid:stopEdit	editing_cell		
+grid:cancelEdit	editing_cell		
+			
+cell_editor:undo	editing_cell		
+cell_editor:redo	editing_cell		
+cell_editor:insertBreak	editing_cell		
+			
+value_panel:toggleFloating	available(value-panel)		
+value_panel:expand	available(value-panel)		
+value_panel:compress	available(value-panel)		
+value_panel:undo	available(value-panel)		
+value_panel:redo	available(value-panel)		
+value_panel:insertBreak	available(value-panel)		
+			
+convert:upperCase	!editing_cell		
+convert:lowerCase	!editing_cell		
+convert:swapCase	!editing_cell		
+convert:titleCase	!editing_cell		
+convert:snakeCaseToCamelCase	!editing_cell		
+convert:camelCaseToSnakeCase	!editing_cell		
+			
+view:autofitColumnWidth	available(csv-sheet)	grid:autofitColumnWidth	
+view:autofitColumnWidthToSelectedData	available(csv-sheet)	grid:autofitColumnWidthToSelectedCell	
+view:previousView	available(csv-sheet)	view:previousTab	
+view:nextView	available(csv-sheet)	view:nextTab	
+view:toggleStatusBar			
+view:toggleCellValuePanel			
+			
+find:show	available(csv-sheet)		
+find:hide	available(find-panel)		
+find:next	available(find-panel)		
+find:prev	available(find-panel)		
+find:count	available(find-panel)		
+find:replaceNext	available(find-panel)		
+find:replacePrev	available(find-panel)		
+find:replaceAll	available(find-panel)		
+			
+macro:toggleMacroTools			
+macro:toggleRecordingMacro			
+macro:toggleConsole	available(macro-tools)		
+macro:open			
+macro:save			
+macro:run			
+macro:showEditor			
+macrolist:add	available(macro-list)		
+macrolist:remove	available(macro-list)		
+macrolist:run	available(macro-list)		
+			
+#sql:run			
+#sql:open			
+#sql:save			
+#sql:nextSql			
+#sql:previousSql			
+#sql:showSqlHistory			
+#sql:addTable			
+#sql:removeTable			

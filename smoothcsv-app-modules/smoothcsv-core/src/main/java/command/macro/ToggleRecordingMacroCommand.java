@@ -27,7 +27,7 @@ import com.smoothcsv.framework.util.MessageBundles;
 public class ToggleRecordingMacroCommand extends Command {
 
   @Override
-  protected void run() {
+  public void run() {
     SmoothCsvComponentManager componentManager =
         (SmoothCsvComponentManager) SCApplication.components();
 

@@ -25,7 +25,7 @@ import com.smoothcsv.framework.command.Command;
 public class ShowEditorCommand extends Command {
 
   @Override
-  protected void run() {
+  public void run() {
     SmoothCsvComponentManager componentManager =
         (SmoothCsvComponentManager) SCApplication.components();
     if (!componentManager.isMacroToolsVisible()) {

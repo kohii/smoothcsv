@@ -118,14 +118,14 @@ cell-editor
 	pagedown	cell_editor:pageDown
 
 cell-editor:quick-edit
-	left	grid:selectLeft
-	right	grid:selectRight
-	up	grid:selectUp
-	down	grid:selectDown
-	tab	grid:selectNextCellHorizontally
-	shift+tab	grid:selectPrevCellHorizontally
-	enter	grid:selectNextCellVertically
-	shift+enter	grid:selectPrevCellVertically
+	left	grid:moveLeft
+	right	grid:moveRight
+	up	grid:moveUp
+	down	grid:moveDown
+	tab	grid:moveRightInActiveRange
+	shift+tab	grid:moveLeftInActiveRange
+	enter	grid:moveDownInActiveRange
+	shift+enter	grid:moveUpInActiveRange
 
 value-panel
 	escape	grid:cancelEdit

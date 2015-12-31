@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 kohii.
+ * Copyright 2015 kohii
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -49,43 +49,40 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
 
   static Logger LOG = LoggerFactory.getLogger(DebugEntryPoint.class);
 
-  @SuppressWarnings("serial")
   @Override
   public void activate() {
 
     SCApplication app = SCApplication.getApplication();
 
-    app.listeners().on(
-        SCApplication.WindowOpendEvent.class,
-        e -> {
-          LOG.debug("Start Up Time: {}ms", System.currentTimeMillis() - app.getStartTime());
-          try {
-            FileUtils.append(Arrays.asList(String.format("Start Up Time: %dms",
-                System.currentTimeMillis() - app.getStartTime())), new File(DirectoryResolver
-                .instance().getAppDataDirectory(), "startuptimes.log"), "UTF-8");
-          } catch (Exception e1) {
-            e1.printStackTrace();
+    app.listeners().on(SCApplication.WindowOpendEvent.class, e -> {
+      LOG.debug("Start Up Time: {}ms", System.currentTimeMillis() - app.getStartTime());
+      try {
+        FileUtils.append(
+            Arrays.asList(String.format("Start Up Time: %dms",
+                System.currentTimeMillis() - app.getStartTime())),
+            new File(DirectoryResolver.instance().getAppDataDirectory(), "startuptimes.log"),
+            "UTF-8");
+      } catch (Exception e1) {
+        e1.printStackTrace();
+      }
+    });
+
+    app.listeners().on(SCApplication.WindowOpendEvent.class, e -> {
+
+      LOG.debug(
+          "\ncommands:*************************************** \n" + CommandRepository.instance());
+      LOG.debug(
+          "\nkeymaps:**************************************** \n" + CommandKeymap.getDefault());
+
+      for (Entry<CssSelector, List<Keybinding>> entry : CommandKeymap.getDefault().getAll()
+          .entrySet()) {
+        for (Keybinding kb : entry.getValue()) {
+          if (!CommandRepository.instance().isValid(kb.getCommand())) {
+            LOG.error("keymap contains invalid command: {}", kb.getCommand());
           }
-        });
-
-    app.listeners().on(
-        SCApplication.WindowOpendEvent.class,
-        e -> {
-
-          LOG.debug("\ncommands:*************************************** \n"
-              + CommandRepository.instance());
-          LOG.debug("\nkeymaps:**************************************** \n"
-              + CommandKeymap.getDefault());
-
-          for (Entry<CssSelector, List<Keybinding>> entry : CommandKeymap.getDefault().getAll()
-              .entrySet()) {
-            for (Keybinding kb : entry.getValue()) {
-              if (!CommandRepository.instance().isValid(kb.getCommand())) {
-                LOG.error("keymap contains invalid command: {}", kb.getCommand());
-              }
-            }
-          }
-        });
+        }
+      }
+    });
 
     SCFocusManager.addListener(e -> {
       System.out.println("FocusOwnerChanged:" + e.getNewFocusOwner());

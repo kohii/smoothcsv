@@ -134,9 +134,10 @@ public abstract class SCApplication {
         // Prepare menues
         MainMenuItems.instance().loadToMenuBar(componentManager.getMenuBar());
 
-        listeners().invokeListeners(new BeforeOpenWindowEvent());
-
+        // Initialize conditions
         Conditions.initializeConditions();
+
+        listeners().invokeListeners(new BeforeOpenWindowEvent());
 
         // Show GUI
         openWindow();

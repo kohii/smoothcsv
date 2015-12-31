@@ -43,7 +43,7 @@ public class MoveToCommand extends GridSheetSelectCommand {
   }
 
   private static int getDirectionY(Map<String, Object> options) {
-    Object d = options.get("direction");
+    Object d = options.get("to");
     if (d != null) {
       switch (d.toString()) {
         case "firstcell":

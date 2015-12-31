@@ -1,0 +1,189 @@
+app:newFile		
+app:newFileAs		
+app:openFile		
+app:openFileAs		
+app:save	available(csv-sheet)	
+app:saveAs	available(csv-sheet)	
+app:saveAll	available(csv-sheet)	
+app:close	available(csv-sheet)	
+app:closeOthers	available(csv-sheet)	
+app:closeAll	available(csv-sheet)	
+csvsheet:showProperties	available(csv-sheet)	
+app:quit		
+app:about		
+app:toggleCommandPalette		
+app:showSqlTools		
+app:showSettings		
+		
+grid:undo	csv_sheet_can_undo	
+grid:redo	csv_sheet_can_redo	
+grid:copy	!editing_cell	
+grid:cut	!editing_cell	
+grid:paste	!editing_cell	
+grid:copyUsingFileFormat	!editing_cell	
+grid:cutUsingFileFormat	!editing_cell	
+grid:pasteUsingFileFormat	!editing_cell	
+grid:clear	!editing_cell	
+grid:deleteCell	!editing_cell	
+grid:selectAll	!editing_cell	
+grid:selectEntireRow	!editing_cell	
+grid:selectEntireColumn	!editing_cell	
+grid:startEdit	!editing_cell	
+grid:fillDown	!editing_cell	
+grid:fillUp	!editing_cell	
+grid:fillLeft	!editing_cell	
+grid:fillRight	!editing_cell	
+grid:sort	!editing_cell	
+grid:sortSelectedRows	!editing_cell	
+grid:sortSelectedRange	!editing_cell	
+grid:moveLeft	available(csv-sheet)	command.grid.MoveCommand {"direction":"left"}
+grid:moveRight	available(csv-sheet)	command.grid.MoveCommand {"direction":"right"}
+grid:moveUp	available(csv-sheet)	command.grid.MoveCommand {"direction":"up"}
+grid:moveDown	available(csv-sheet)	command.grid.MoveCommand {"direction":"down"}
+grid:selectLeft	available(csv-sheet)	command.grid.MoveCommand {"direction":"left","extend":true}
+grid:selectRight	available(csv-sheet)	command.grid.MoveCommand {"direction":"right","extend":true}
+grid:selectUp	available(csv-sheet)	command.grid.MoveCommand {"direction":"up","extend":true}
+grid:selectDown	available(csv-sheet)	command.grid.MoveCommand {"direction":"down","extend":true}
+grid:moveToFirstColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcolumn"}
+grid:moveToLastColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcolumn"}
+grid:moveToFirstRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstrow"}
+grid:moveToLastRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastrow"}
+grid:moveToFirstCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcell"}
+grid:moveToLastCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcell"}
+grid:selectToFirstColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcolumn","extend":true}
+grid:selectToLastColumn	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcolumn","extend":true}
+grid:selectToFirstRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstrow","extend":true}
+grid:selectToLastRow	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastrow","extend":true}
+grid:selectToFirstCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcell","extend":true}
+grid:selectToLastCell	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcell","extend":true}
+grid:moveRightInActiveRange	available(csv-sheet)	command.grid.NextCellCommand {"direction":"left"}
+grid:moveLeftInActiveRange	available(csv-sheet)	command.grid.NextCellCommand {"direction":"right"}
+grid:moveDownInActiveRange	available(csv-sheet)	command.grid.NextCellCommand {"direction":"up"}
+grid:moveUpInActiveRange	available(csv-sheet)	command.grid.NextCellCommand {"direction":"down"}
+grid:insertRowsAbove	available(csv-sheet)	
+grid:insertRowsBelow	available(csv-sheet)	
+grid:deleteRows	available(csv-sheet)	
+grid:insertColumnsLeft	available(csv-sheet)	
+grid:insertColumnsRight	available(csv-sheet)	
+grid:deleteColumns	available(csv-sheet)	
+grid:goToLine	available(csv-sheet)	
+grid:stopEdit	editing_cell	
+grid:cancelEdit	editing_cell	
+		
+cell_editor:undo	focus(cell-editor)	
+cell_editor:redo	focus(cell-editor)	
+cell_editor:insertBreak	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-break"}
+cell_editor:insertTab	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-tab"}
+cell_editor:moveLeft	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-backward"}
+cell_editor:moveRight	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-forward"}
+cell_editor:moveUp	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
+cell_editor:moveDown	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+cell_editor:selectLeft	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-backward"}
+cell_editor:selectRight	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-forward"}
+cell_editor:selectUp	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-up"}
+cell_editor:selectDown	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-down"}
+cell_editor:moveToBeginningOfLine	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin-line"}
+cell_editor:moveToEndOfLine	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end-line"}
+cell_editor:moveToTop	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin"}
+cell_editor:moveToBottom	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end"}
+cell_editor:moveToPreviousWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-previous-word"}
+cell_editor:moveToNextWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-next-word"}
+cell_editor:selectToBeginningOfLine	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin-line"}
+cell_editor:selectToEndOfLine	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end-line"}
+cell_editor:selectToTop	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin"}
+cell_editor:selectToBottom	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end"}
+cell_editor:selectToPreviousWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-previous-word"}
+cell_editor:selectToNextWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-next-word"}
+cell_editor:selectAll	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"select-all"}
+cell_editor:unselect	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"unselect"}
+cell_editor:deletePrevious	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous"}
+cell_editor:deleteNext	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next"}
+cell_editor:deletePreviousWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous-word"}
+cell_editor:deleteNextWord	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next-word"}
+cell_editor:cut	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"cut-to-clipboard"}
+cell_editor:copy	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"copy-to-clipboard"}
+cell_editor:paste	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"paste-from-clipboard"}
+cell_editor:pageUp	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
+cell_editor:pageDown	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+		
+value_panel:toggleFloating	available(value-panel)	
+value_panel:expand	available(value-panel)	
+value_panel:compress	available(value-panel)	
+value_panel:undo	available(value-panel)	
+value_panel:redo	available(value-panel)	
+value_panel:insertBreak	focus(value-panel)	command.value_panel.ActionCommand {"action":"insert-break"}
+value_panel:insertTab	focus(value-panel)	command.value_panel.ActionCommand {"action":"insert-tab"}
+value_panel:moveLeft	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-backward"}
+value_panel:moveRight	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-forward"}
+value_panel:moveUp	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
+value_panel:moveDown	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+value_panel:selectLeft	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-backward"}
+value_panel:selectRight	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-forward"}
+value_panel:selectUp	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-up"}
+value_panel:selectDown	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-down"}
+value_panel:moveToBeginningOfLine	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin-line"}
+value_panel:moveToEndOfLine	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-end-line"}
+value_panel:moveToTop	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin"}
+value_panel:moveToBottom	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-end"}
+value_panel:moveToPreviousWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-previous-word"}
+value_panel:moveToNextWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-next-word"}
+value_panel:selectToBeginningOfLine	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin-line"}
+value_panel:selectToEndOfLine	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-end-line"}
+value_panel:selectToTop	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin"}
+value_panel:selectToBottom	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-end"}
+value_panel:selectToPreviousWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-previous-word"}
+value_panel:selectToNextWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-next-word"}
+value_panel:selectAll	focus(value-panel)	command.value_panel.ActionCommand {"action":"select-all"}
+value_panel:unselect	focus(value-panel)	command.value_panel.ActionCommand {"action":"unselect"}
+value_panel:deletePrevious	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous"}
+value_panel:deleteNext	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-next"}
+value_panel:deletePreviousWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous-word"}
+value_panel:deleteNextWord	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-next-word"}
+value_panel:cut	focus(value-panel)	command.value_panel.ActionCommand {"action":"cut-to-clipboard"}
+value_panel:copy	focus(value-panel)	command.value_panel.ActionCommand {"action":"copy-to-clipboard"}
+value_panel:paste	focus(value-panel)	command.value_panel.ActionCommand {"action":"paste-from-clipboard"}
+value_panel:pageUp	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
+value_panel:pageDown	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+		
+convert:upperCase	!editing_cell	
+convert:lowerCase	!editing_cell	
+convert:swapCase	!editing_cell	
+convert:titleCase	!editing_cell	
+convert:snakeCaseToCamelCase	!editing_cell	
+convert:camelCaseToSnakeCase	!editing_cell	
+		
+view:autofitColumnWidth	available(csv-sheet)	grid:autofitColumnWidth
+view:autofitColumnWidthToSelectedData	available(csv-sheet)	grid:autofitColumnWidthToSelectedCell
+view:previousTab	available(csv-sheet)	
+view:nextTab	available(csv-sheet)	
+view:toggleStatusBar		
+view:toggleCellValuePanel		
+		
+find:show	available(csv-sheet)	
+find:hide	available(find-panel)	
+find:next	available(find-panel)	
+find:previous	available(find-panel)	
+find:count	available(find-panel)	
+find:replaceNext	available(find-panel)	
+find:replacePrevious	available(find-panel)	
+find:replaceAll	available(find-panel)	
+		
+macro:toggleMacroTools		
+macro:toggleRecordingMacro		
+macro:toggleConsole	available(macro-tools)	
+macro:open	!recording_macro	
+macro:save	!recording_macro	
+macro:run	!recording_macro	
+macro:showEditor		
+macrolist:add	available(macro-list)	
+macrolist:remove	available(macro-list)	
+macrolist:run	available(macro-list)	
+		
+#sql:run		
+#sql:open		
+#sql:save		
+#sql:nextSql		
+#sql:previousSql		
+#sql:showSqlHistory		
+#sql:addTable		
+#sql:removeTable		

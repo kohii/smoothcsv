@@ -1,5 +1,5 @@
 editor.sizeOfUndoing=35
-editor.autoFitColumnWidthAfterOpeningFile=false
+editor.autoFitColumnWidthAfterOpeningFile=true
 editor.autoFitColumnWidthWithLimitedRowSize=true
 editor.rowSizeToScanWhenAutoFitting=1000
 editor.limitWidthWhenAutoFitting=true

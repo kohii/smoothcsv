@@ -11,19 +11,16 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.value_panel;
+package command.find;
 
-import com.smoothcsv.core.command.ValuePanelCommandBase;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 
 /**
  * @author kohii
  *
  */
-public class InsertBreakCommand extends ValuePanelCommandBase {
+public class PreviousCommand extends NextCommand {
 
-  @Override
-  protected void run(CsvGridSheetCellValuePanel valuePanel) {
-    valuePanel.getTextArea().insertBreak();
+  public PreviousCommand() {
+    reverse = true;
   }
 }

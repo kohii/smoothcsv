@@ -40,11 +40,11 @@ import com.smoothcsv.framework.util.SCBundle;
  */
 public class ModuleEntryPointBase implements ModuleEntryPoint {
 
-  private static final String RESOURCE_NAME_KEYMAP = "keymap";
-  private static final String RESOURCE_NAME_MAIN_MENU = "menubar";
-  private static final String RESOURCE_NAME_CONTEXT_MENU = "context-menu";
-  private static final String RESOURCE_NAME_TOOL_BAR = "toolbar";
-  private static final String RESOURCE_NAME_COMMANDS = "commands.sc";
+  private static final String RESOURCE_NAME_KEYMAP = "smoothcsv-keymap";
+  private static final String RESOURCE_NAME_MAIN_MENU = "smoothcsv-menubar";
+  private static final String RESOURCE_NAME_CONTEXT_MENU = "smoothcsv-contextmenu";
+  private static final String RESOURCE_NAME_TOOL_BAR = "smoothcsv-toolbar";
+  private static final String RESOURCE_NAME_COMMANDS = "smoothcsv-command";
   private static final String SETTINGFILE_POSTFIX = ".tsv";
 
   private ModuleManifest manifest;
@@ -102,6 +102,7 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
+        System.out.println(rowData[0] +'\t'+rowData[1] +'\t'+ rowData[2]);
         if (StringUtils.isNotEmpty(rowData[0])) {
           repository.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
         }

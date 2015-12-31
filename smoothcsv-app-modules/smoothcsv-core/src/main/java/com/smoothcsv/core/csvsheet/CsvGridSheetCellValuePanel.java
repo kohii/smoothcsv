@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -36,8 +36,7 @@ import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
-import lombok.Getter;
-
+import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.constants.AppSettingKeys;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.util.CoreBundle;
@@ -46,14 +45,14 @@ import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.SCContentPane;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.menu.CommandMenuItem;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
-import com.smoothcsv.swing.components.LineBreakableTextField;
 import com.smoothcsv.swing.icon.AwesomeIcon;
+
 import command.grid.StartEditCommand;
 import command.grid.StopEditCommand;
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -82,11 +81,10 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   private CsvGridSheetCellValuePanel() {
     setLayout(new BorderLayout());
     setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, UIConstants.getDefaultBorderColor()));
-    JScrollPane scrollPane =
-        new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    scrollPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0,
-        UIConstants.getDefaultBorderColor()));
+    JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollPane.setBorder(
+        BorderFactory.createMatteBorder(0, 1, 0, 0, UIConstants.getDefaultBorderColor()));
 
     textArea = new ValuePanelTextArea(this);
     textArea.setBorder(null);
@@ -127,15 +125,13 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
 
     JPopupMenu popupMenu = new JPopupMenu();
 
-    CommandMenuItem menuItemExpand =
-        new CommandMenuItem(CoreBundle.get("key.expand"), "value_panel:expand",
-            AwesomeIcon.create(AwesomeIcon.FA_EXPAND));
+    CommandMenuItem menuItemExpand = new CommandMenuItem(CoreBundle.get("key.expand"),
+        "value_panel:expand", AwesomeIcon.create(AwesomeIcon.FA_EXPAND));
     menuItemExpand.setContextMenu(true);
     popupMenu.add(menuItemExpand);
 
-    CommandMenuItem menuItemCompress =
-        new CommandMenuItem(CoreBundle.get("key.compress"), "value_panel:compress",
-            AwesomeIcon.create(AwesomeIcon.FA_COMPRESS));
+    CommandMenuItem menuItemCompress = new CommandMenuItem(CoreBundle.get("key.compress"),
+        "value_panel:compress", AwesomeIcon.create(AwesomeIcon.FA_COMPRESS));
     menuItemCompress.setContextMenu(true);
     popupMenu.add(menuItemCompress);
 
@@ -279,20 +275,13 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   @Override
   public void focusLost(FocusEvent e) {}
 
-  public static class ValuePanelTextArea extends LineBreakableTextField implements SmoothComponent {
+  public static class ValuePanelTextArea extends SCTextArea implements SmoothComponent {
 
     @Getter
     private final CsvGridSheetCellValuePanel valuePanel;
 
-    @Getter
-    private SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-        "value-panel");
-
-    /**
-     * @param enableActionPerformed
-     */
     public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel) {
-      super(false);
+      super("value-panel");
       this.valuePanel = valuePanel;
     }
 

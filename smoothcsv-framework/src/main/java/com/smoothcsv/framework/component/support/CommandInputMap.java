@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -17,6 +17,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,13 +45,21 @@ public class CommandInputMap extends InputMap {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see javax.swing.InputMap#get(javax.swing.KeyStroke)
    */
   @Override
   public Object get(KeyStroke keyStroke) {
     if (keyStroke.getKeyEventType() != KeyEvent.KEY_PRESSED) {
-      return super.get(keyStroke);
+      Object retValue = super.get(keyStroke);
+      if (retValue != null) {
+        return retValue;
+      }
+      if (keyStroke.getKeyEventType() == KeyEvent.KEY_TYPED
+          && keyStroke.getKeyChar() != KeyEvent.CHAR_UNDEFINED
+          && component instanceof JTextComponent) {
+        return DefaultEditorKit.defaultKeyTypedAction;
+      }
     }
     CommandKeymap keymap = CommandKeymap.getDefault();
     String commandId = keymap.findCommand(keyStroke, component);

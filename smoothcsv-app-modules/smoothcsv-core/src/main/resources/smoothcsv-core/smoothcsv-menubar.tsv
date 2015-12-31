@@ -64,16 +64,16 @@ Grid
 Find
 	Show Find And Replace Panel...	find:show
 	Find Next	find:next
-	Find Previous	find:prev
+	Find Previous	find:previous
 	Replace Next	find:replaceNext
-	Replace Previous	find:replacePrev
+	Replace Previous	find:replacePrevious
 
 View
 	Auto-Fit Column Width	view:autofitColumnWidth
 	Auto-Fit Column Width To Selected Data	view:autofitColumnWidthToSelectedData
 	-
-	Previous Tab	view:previousView
-	Next Tab	view:nextView
+	Previous Tab	view:previousTab
+	Next Tab	view:nextTab
 	-
 	Toggle Status Bar	view:toggleStatusBar
 	Toggle Cell Value Panel	view:toggleCellValuePanel

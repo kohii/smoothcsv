@@ -1,0 +1,197 @@
+body
+	shortcut+n	app:newFile
+	shortcut+shift+n	app:newFileAs
+	shortcut+o	app:openFile
+	shortcut+shift+o	app:openFileAs
+	shortcut+s	app:save
+	shortcut+shift+s	app:saveAs
+	alt+shift+s	app:saveAll
+	shortcut+w	app:close
+	shortcut+shift+w	app:closeAll
+	alt+enter	csvsheet:showProperties
+	shortcut+shift+p	app:toggleCommandPalette
+	shortcut+shift+f	view:autofitColumnWidth
+	alt+shift+f	view:autofitColumnWidthToSelectedData
+	ctrl+tab	view:nextTab
+	ctrl+shift+tab	view:previousTab
+
+csv-sheet
+	shortcut+f	find:show
+	shortcut+rightbracket	value_panel:expand
+	shortcut+leftbracket	value_panel:compress
+
+grid
+	f2	grid:startEdit
+	escape	grid:cancelEdit
+	shortcut+a	grid:selectAll
+	shortcut+shift+space	grid:selectAll
+	shift+space	grid:selectEntireRow
+	shortcut+space	grid:selectEntireColumn
+	left	grid:moveLeft
+	right	grid:moveRight
+	up	grid:moveUp
+	down	grid:moveDown
+	shift+left	grid:selectLeft
+	shift+right	grid:selectRight
+	shift+up	grid:selectUp
+	shift+down	grid:selectDown
+	home	grid:moveToFirstColumn
+	end	grid:moveToLastColumn
+	shortcut+home	grid:moveToFirstCell
+	shortcut+end	grid:moveToLastCell
+	shift+home	grid:selectToFirstColumn
+	shift+end	grid:selectToLastColumn
+	shortcut+shift+home	grid:selectToFirstCell
+	shortcut+shift+end	grid:selectToLastCell
+	tab	grid:moveRightInActiveRange
+	shift+tab	grid:moveLeftInActiveRange
+	enter	grid:moveDownInActiveRange
+	shift+enter	grid:moveUpInActiveRange
+	shortcut+l	grid:fillLeft
+	shortcut+r	grid:fillRight
+	shortcut+u	grid:fillUp
+	shortcut+d	grid:fillDown
+	shortcut+i	grid:insertRowsAbove
+	shortcut+shift+i	grid:insertColumnsLeft
+	shortcut+k	grid:deleteRows
+	shortcut+shift+k	grid:deleteColumns
+	ctrl+g	grid:goToLine
+
+grid:not(:editing)
+	shortcut+z	grid:undo
+	shortcut+y	grid:redo
+	shortcut+c	grid:copy
+	shortcut+x	grid:cut
+	shortcut+v	grid:paste
+	shortcut+shift+c	grid:copyUsingFileFormat
+	shortcut+shift+x	grid:cutUsingFileFormat
+	shortcut+shift+v	grid:pasteUsingFileFormat
+	delete	grid:clear
+	shortcut+delete	grid:deleteCell
+
+cell-editor
+	escape	grid:cancelEdit
+	enter	grid:stopEdit
+	shortcut+z	cell_editor:undo
+	shortcut+y	cell_editor:redo
+	alt+enter	cell_editor:insertBreak
+	shift+enter	cell_editor:insertBreak
+	alt+tab	cell_editor:insertTab
+	left	cell_editor:moveLeft
+	ctrl+b	cell_editor:moveLeft
+	right	cell_editor:moveRight
+	ctrl+f	cell_editor:moveRight
+	up	cell_editor:moveUp
+	down	cell_editor:moveDown
+	ctrl+p	cell_editor:moveUp
+	ctrl+n	cell_editor:moveDown
+	shift+left	cell_editor:selectLeft
+	shift+right	cell_editor:selectRight
+	shift+up	cell_editor:selectUp
+	shift+down	cell_editor:selectDown
+	shortcut+left	cell_editor:moveToBeginningOfLine
+	ctrl+a	cell_editor:moveToBeginningOfLine
+	shortcut+right	cell_editor:moveToEndOfLine
+	ctrl+e	cell_editor:moveToEndOfLine
+	shortcut+up	cell_editor:moveToTop
+	shortcut+down	cell_editor:moveToBottom
+	alt+left	cell_editor:moveToPreviousWord
+	alt+right	cell_editor:moveToNextWord
+	shortcut+shift+left	cell_editor:selectToBeginningOfLine
+	shortcut+shift+right	cell_editor:selectToEndOfLine
+	shortcut+shift+up	cell_editor:selectToTop
+	shortcut+shift+down	cell_editor:selectToBottom
+	alt+shift+left	cell_editor:selectToPreviousWord
+	alt+shift+right	cell_editor:selectToNextWord
+	shortcut+a	cell_editor:selectAll
+	shortcut+backslash	cell_editor:unselect
+	backspace	cell_editor:deletePrevious
+	ctrl+h	cell_editor:deletePrevious
+	delete	cell_editor:deleteNext
+	ctrl+d	cell_editor:deleteNext
+	alt+backspace	cell_editor:deletePreviousWord
+	alt+delete	cell_editor:deleteNextWord
+	shortcut+x	cell_editor:cut
+	shortcut+c	cell_editor:copy
+	shortcut+v	cell_editor:paste
+	pageup	cell_editor:pageUp
+	pagedown	cell_editor:pageDown
+
+cell-editor:quick-edit
+	left	grid:selectLeft
+	right	grid:selectRight
+	up	grid:selectUp
+	down	grid:selectDown
+	tab	grid:selectNextCellHorizontally
+	shift+tab	grid:selectPrevCellHorizontally
+	enter	grid:selectNextCellVertically
+	shift+enter	grid:selectPrevCellVertically
+
+value-panel
+	escape	grid:cancelEdit
+	enter	grid:stopEdit
+	shortcut+rightbracket	value_panel:expand
+	shortcut+leftbracket	value_panel:compress
+	shortcut+z	value_panel:undo
+	shortcut+y	value_panel:redo
+	alt+enter	value_panel:insertBreak
+	shift+enter	value_panel:insertBreak
+	alt+tab	value_panel:insertTab
+	left	value_panel:moveLeft
+	ctrl+b	value_panel:moveLeft
+	right	value_panel:moveRight
+	ctrl+f	value_panel:moveRight
+	up	value_panel:moveUp
+	down	value_panel:moveDown
+	ctrl+p	value_panel:moveUp
+	ctrl+n	value_panel:moveDown
+	shift+left	value_panel:selectLeft
+	shift+right	value_panel:selectRight
+	shift+up	value_panel:selectUp
+	shift+down	value_panel:selectDown
+	shortcut+left	value_panel:moveToBeginningOfLine
+	ctrl+a	value_panel:moveToBeginningOfLine
+	shortcut+right	value_panel:moveToEndOfLine
+	ctrl+e	value_panel:moveToEndOfLine
+	shortcut+up	value_panel:moveToTop
+	shortcut+down	value_panel:moveToBottom
+	alt+left	value_panel:moveToPreviousWord
+	alt+right	value_panel:moveToNextWord
+	shortcut+shift+left	value_panel:selectToBeginningOfLine
+	shortcut+shift+right	value_panel:selectToEndOfLine
+	shortcut+shift+up	value_panel:selectToTop
+	shortcut+shift+down	value_panel:selectToBottom
+	alt+shift+left	value_panel:selectToPreviousWord
+	alt+shift+right	value_panel:selectToNextWord
+	shortcut+a	value_panel:selectAll
+	shortcut+backslash	value_panel:unselect
+	backspace	value_panel:deletePrevious
+	ctrl+h	value_panel:deletePrevious
+	delete	value_panel:deleteNext
+	ctrl+d	value_panel:deleteNext
+	alt+backspace	value_panel:deletePreviousWord
+	alt+delete	value_panel:deleteNextWord
+	shortcut+x	value_panel:cut
+	shortcut+c	value_panel:copy
+	shortcut+v	value_panel:paste
+	pageup	value_panel:pageUp
+	pagedown	value_panel:pageDown
+
+find-panel
+	escape	find:hide
+	enter	find:next
+
+macro-tools
+	escape	macro:toggleConsole
+
+macro-editor
+	shortcut+s	macroe:save
+	shortcut+o	macroe:open
+	shortcut+enter	macroe:run
+
+macro-list
+	delete	macrolist:remove
+	shortcut+enter	macrolist:run
+
+sql-editor
+	shortcut+enter	sql:run

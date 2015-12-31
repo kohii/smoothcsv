@@ -12,12 +12,12 @@ import javax.swing.JTextField;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.swing.components.RegulatedTextField;
 
-public class NumberInputDialog extends ModalDialogBase {
+public class NumberInputDialog extends DialogBase {
 
   private static final long serialVersionUID = -5662546861883880815L;
 
-  private static NumberInputDialog defaultInstance = new NumberInputDialog(SCApplication
-      .components().getFrame(), SCApplication.getApplication().getName(), "");
+  private static NumberInputDialog defaultInstance = new NumberInputDialog(
+      SCApplication.components().getFrame(), SCApplication.getApplication().getName(), "");
 
   public static NumberInputDialog getInstance() {
     return defaultInstance;
@@ -67,21 +67,21 @@ public class NumberInputDialog extends ModalDialogBase {
     gridBagLayout.rowHeights = new int[] {0, 0, 0};
     gridBagLayout.columnWeights = new double[] {1.0, Double.MIN_VALUE};
     gridBagLayout.rowWeights = new double[] {0.0, 0.0, Double.MIN_VALUE};
-    contentPanel.setLayout(gridBagLayout);
+    getContentPanel().setLayout(gridBagLayout);
 
     msgLabel = new JLabel(msg);
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
     gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
     gbc_lblNewLabel.gridx = 0;
     gbc_lblNewLabel.gridy = 0;
-    contentPanel.add(msgLabel, gbc_lblNewLabel);
+    getContentPanel().add(msgLabel, gbc_lblNewLabel);
 
     textField = new RegulatedTextField(RegulatedTextField.Type.NUMERIC, 6);
     GridBagConstraints gbc_textField = new GridBagConstraints();
     gbc_textField.fill = GridBagConstraints.HORIZONTAL;
     gbc_textField.gridx = 0;
     gbc_textField.gridy = 1;
-    contentPanel.add(textField, gbc_textField);
+    getContentPanel().add(textField, gbc_textField);
     textField.setColumns(8);
     pack();
   }
@@ -93,17 +93,12 @@ public class NumberInputDialog extends ModalDialogBase {
   @Override
   protected boolean processOperation(DialogOperation operation) {
     if (operation == DialogOperation.OK) {
-      try {
-        this.result = Integer.parseInt(textField.getText());
-      } catch (NumberFormatException e) {
-
-      }
+      this.result = Integer.parseInt(textField.getText());
     }
-    return super.processOperation(selectedOperation);
+    return super.processOperation(operation);
   }
 
   public Integer getResult() {
     return result;
   }
-
 }

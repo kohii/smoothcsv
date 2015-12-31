@@ -24,6 +24,7 @@ import java.util.SortedMap;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -33,14 +34,15 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
-import com.smoothcsv.framework.component.dialog.ModalDialogBase;
 
 /**
  *
  * @author kohii
  */
-public class AvailableCharsetDialog extends ModalDialogBase {
+@SuppressWarnings("serial")
+public class AvailableCharsetDialog extends DialogBase {
 
   private JTable table;
 
@@ -64,6 +66,7 @@ public class AvailableCharsetDialog extends ModalDialogBase {
   }
 
   private void setUp() {
+    JPanel contentPanel = getContentPanel();
     setBounds(100, 100, 600, 400);
     contentPanel.setLayout(new BorderLayout(0, 0));
     {
@@ -91,8 +94,8 @@ public class AvailableCharsetDialog extends ModalDialogBase {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         // table.getTableHeader().getDefaultRenderer().setHorizontalAlignment(SwingConstants.LEFT);
         table.getTableHeader().setReorderingAllowed(false);
-        table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {
-            CoreBundle.get("key.encoding"), CoreBundle.get("key.alias")}) {
+        table.setModel(new DefaultTableModel(new Object[][] {},
+            new String[] {CoreBundle.get("key.encoding"), CoreBundle.get("key.alias")}) {
           @Override
           public boolean isCellEditable(int row, int column) {
             return false;
@@ -138,10 +141,9 @@ public class AvailableCharsetDialog extends ModalDialogBase {
   public void sizeWidthToFitData(int vc) {
     TableColumn tc = table.getColumnModel().getColumn(vc);
 
-    int max =
-        table.getTableHeader().getDefaultRenderer()
-            .getTableCellRendererComponent(table, tc.getHeaderValue(), false, false, 0, vc)
-            .getPreferredSize().width;
+    int max = table.getTableHeader().getDefaultRenderer()
+        .getTableCellRendererComponent(table, tc.getHeaderValue(), false, false, 0, vc)
+        .getPreferredSize().width;
 
     int vrows = table.getRowCount();
     for (int i = 0; i < vrows; i++) {

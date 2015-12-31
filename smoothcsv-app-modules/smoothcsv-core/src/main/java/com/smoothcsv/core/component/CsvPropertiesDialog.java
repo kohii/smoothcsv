@@ -28,8 +28,8 @@ import javax.swing.JPanel;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
-import com.smoothcsv.framework.component.dialog.ModalDialogBase;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.RegulatedTextField;
@@ -39,7 +39,7 @@ import com.smoothcsv.swing.components.RegulatedTextField;
  *
  */
 @SuppressWarnings("serial")
-public class CsvPropertiesDialog extends ModalDialogBase {
+public class CsvPropertiesDialog extends DialogBase {
 
   private final boolean autoDeterminedOptionEnabled;
   private final boolean readMode;

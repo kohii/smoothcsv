@@ -28,26 +28,21 @@ public class ShowPropertiesCommand extends Command {
 
   @Override
   public void run() {
-    CsvSheetView view =
-        (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
+    CsvSheetView view = (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
     if (view != null) {
       view.getGridSheetPane().getTable().stopCellEditing();
     }
     CsvSheetViewInfo viewInfo = view.getViewInfo();
-    CsvPropertiesDialog propDialog =
-        new CsvPropertiesDialog(SCApplication.components().getFrame(), "Properties", false, false,
-            false);
+    CsvPropertiesDialog propDialog = new CsvPropertiesDialog(SCApplication.components().getFrame(),
+        "Properties", false, false, false);
     propDialog.setCsvProperties(viewInfo.getCsvMeta());
     DialogOperation opt = propDialog.showDialog();
-    switch (opt) {
-      case OK:
-        viewInfo.setCsvMeta(propDialog.getCsvMeta());
-        break;
-      case CANCEL:
-        // do nothing
-        break;
-      default:
-        throw new IllegalStateException(opt.toString());
+    if (opt == DialogOperation.OK) {
+      viewInfo.setCsvMeta(propDialog.getCsvMeta());
+    } else if (opt == DialogOperation.CANCEL) {
+      // do nothing
+    } else {
+      throw new IllegalStateException(opt.toString());
     }
   }
 }

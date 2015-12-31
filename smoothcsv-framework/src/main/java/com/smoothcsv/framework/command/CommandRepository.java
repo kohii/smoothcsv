@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -48,7 +48,7 @@ public final class CommandRepository {
   }
 
   public void register(String id, Command command, Condition enableWhen) {
-    commandDefs.put(id, new CommandDef(id, command, enableWhen));
+    commandDefs.put(id, new CommandDef(id, enableWhen, command));
   }
 
   public void register(String id, Condition enableWhen) {
@@ -59,8 +59,8 @@ public final class CommandRepository {
     commandDefs.put(id, new CommandDef(id, null));
   }
 
-  public void register(CommandDef commandDef) {
-    commandDefs.put(commandDef.getCommandId(), commandDef);
+  public void register(String id, Condition enableWhen, String ref) {
+    commandDefs.put(id, new CommandDef(id, enableWhen, ref));
   }
 
   public boolean runCommand(String id) {

@@ -47,12 +47,7 @@ public class MacroRuntime {
     // try {
     List<URI> paths;
     try {
-      paths = Arrays.asList(
-      // new URI("smoothcsv://resources/macro"), new URI("file://path/to/modules"),
-      // new File(
-      // "/Users/kohei2/kohei/dev/github/smoothcsv/smoothcsv-app-modules/smoothcsv-core/src/main/resources/macro")
-      // .toURI()
-          this.getClass().getResource("/macro/app.js").toURI());
+      paths = Arrays.asList(this.getClass().getResource("/macro/app.js").toURI());
     } catch (URISyntaxException e) {
       throw new UnexpectedException(e);
     }
@@ -70,6 +65,10 @@ public class MacroRuntime {
     // some script manually, then just do:
     require.install(globalScope);
     globalScope.defineProperty("global", globalScope, ScriptableObject.READONLY);
+    loadScriptToGlobalVariable("App", "app");
+    loadScriptToGlobalVariable("Clipboard", "clipboard");
+    loadScriptToGlobalVariable("Command", "command");
+    loadScriptToGlobalVariable("Window", "window");
     loadScriptToGlobalVariable("console", "lib/console");
     // } catch (URISyntaxException e) {
     // throw new UnexpectedException(e);

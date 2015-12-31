@@ -18,7 +18,7 @@ import com.smoothcsv.core.macro.api.impl.CsvProperties;
 
 /**
  *
- * @author kohei
+ * @author kohii
  */
 public interface CsvSheet {
 

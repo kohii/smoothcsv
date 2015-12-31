@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -29,7 +29,7 @@ import javax.swing.SwingUtilities;
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCContentPane;
-import com.smoothcsv.framework.component.dialog.ModalDialogBase;
+import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
@@ -121,14 +121,13 @@ public class SmoothComponentSupport {
 
     {
       CommandInputMap commandInputMap = commandMapFactory.createInputMap(component);
-      commandInputMap.setParent(jComponent.getInputMap(JComponent.WHEN_FOCUSED));
       jComponent.setInputMap(JComponent.WHEN_FOCUSED, commandInputMap);
     }
 
-    CommandInputMap commandInputMap = commandMapFactory.createInputMap(component);
-    commandInputMap
-        .setParent(jComponent.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
-    jComponent.setInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, commandInputMap);
+    {
+      CommandInputMap commandInputMap = commandMapFactory.createInputMap(component);
+      jComponent.setInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, commandInputMap);
+    }
 
     CommandActionMap commandActionMap = commandMapFactory.createActionMap(component);
     commandActionMap.setParent(jComponent.getActionMap());
@@ -158,16 +157,16 @@ public class SmoothComponentSupport {
       if (c instanceof SCContentPane) {
         return !SwingUtils.isModalDialogShowing();
       }
-      if (c instanceof ModalDialogBase) {
-        return c.isVisible() && ((ModalDialogBase) c).getCanBeActive();
+      if (c instanceof DialogBase) {
+        return c.isVisible() && ((DialogBase) c).getCanBeActive();
       }
     } while ((c = c.getParent()) != null);
     return false;
   }
 
   private class EventHandler implements
-  // FocusListener,
-  // ComponentListener,
+      // FocusListener,
+      // ComponentListener,
       HierarchyListener {
 
     // ComponentListener------------------

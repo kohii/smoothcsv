@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -30,14 +30,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import com.smoothcsv.framework.event.EventListenerSupport;
 import com.smoothcsv.framework.event.EventListenerSupportImpl;
 import com.smoothcsv.framework.event.SCEvent;
 import com.smoothcsv.swing.components.AwesomeIconButton;
 import com.smoothcsv.swing.icon.AwesomeIcon;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -143,16 +143,25 @@ public class SimpleTabbedPane extends JPanel {
     revalidate();
     repaint();
     comp.requestFocusInWindow();
-    listeners.invokeListeners(new TabChangeEvent(oldActiveTab == null ? null : oldActiveTab
-        .getComp(), comp));
+    listeners.invokeListeners(
+        new TabChangeEvent(oldActiveTab == null ? null : oldActiveTab.getComp(), comp));
   }
 
-  public EventListenerSupport listeners() {
-    return listeners;
+  public void showTab(JPanel comp) {
+    for (int i = 0; i < tabList.size(); i++) {
+      if (tabList.get(i).getComp() == comp) {
+        showTab(i);
+        return;
+      }
+    }
   }
 
   private void showTab(Tab tab) {
     showTab(tabList.indexOf(tab));
+  }
+
+  public EventListenerSupport listeners() {
+    return listeners;
   }
 
   public JPanel getSelectedTabComponent() {

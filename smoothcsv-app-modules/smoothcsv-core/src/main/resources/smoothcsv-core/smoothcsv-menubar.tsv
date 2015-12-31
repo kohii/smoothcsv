@@ -1,0 +1,91 @@
+File
+	New	app:new-file
+	New As...	app:new-file-as
+	Open...	app:open-file
+	Open As...	app:open-file-as
+#	Reopen	app:reopen
+	Save	app:save
+	Save As...	app:save-as
+	Save All	app:save-all
+	Close	app:close
+	Close All	app:close-all
+	-
+	Properties...	csvsheet:show-properties
+
+Edit
+	Undo	grid:undo
+	Redo	grid:redo
+	-
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+	-
+	Copy Using The File Format	grid:copy-using-file-format
+	Cut Using The File Format	grid:cut-using-file-format
+	Paste Using The File Format	grid:paste-using-file-format
+	-
+	Select All	grid:select-all
+	Select The Entire Row	grid:select-entire-row
+	Select The Entire Column	grid:select-entire-column
+	-
+	Clear	grid:clear
+	-
+	Go To Line...	grid:go-to-line
+	-
+	Fill
+		Fill Left	grid:fill-left
+		Fill Up	grid:fill-up
+		Fill Right	grid:fill-right
+		Fill Down	grid:fill-down
+	Convert
+		Upper Case	convert:upper-case
+		Lower Case	convert:lower-case
+		Swap Case	convert:swap-case
+		Title Case	convert:title-case
+		-
+		Snake Case To Camel Case	convert:snake-case-to-camel-case
+		Camel Case To Snake Case	convert:camel-case-to-snake-case
+
+Grid
+	Insert Rows Above	grid:insert-rows-above
+	Insert Rows Below	grid:insert-rows-below
+	Delete Rows	grid:delete-rows
+	-
+	Insert Columns Left	grid:insert-columns-left
+	Insert Columns Right	grid:insert-columns-right
+	Delete Columns	grid:delete-columns
+	-
+	Delete Cell	grid:delete-cell
+	-
+	Sort...	grid:sort
+	Sort Selected Rows...	grid:sort-selected-rows
+	Sort Selected Range...	grid:sort-selected-range
+
+Find
+	Show Find And Replace Panel...	find:show
+	Find Next	find:next
+	Find Previous	find:previous
+	Replace Next	find:replace-next
+	Replace Previous	find:replace-previous
+
+View
+	Auto-Fit Column Width	grid:autofit-column-width
+	Auto-Fit Column Width To Selected Data	grid:autofit-column-width-to-selected-cell
+	-
+	Previous Tab	view:previous-tab
+	Next Tab	view:next-tab
+	-
+	Toggle Status Bar	view:toggle-status-bar
+	Toggle Cell Value Panel	view:toggle-cell-value-panel
+
+Tools
+	Toggle Command Palette...	app:toggle-command-palette
+	SQL Tools...	app:show-sql-tools
+
+Macro
+	Toggle Macro Tools	macro:toggle-macro-tools
+	Start Record Macro	macro:toggle-recording-macro	!recording_macro
+	Stop Recording Macro	macro:toggle-recording-macro	recording_macro
+	Run Macro	macro:run
+	Edit Macro	macro:show-editor
+	Save Macro...	macro:save

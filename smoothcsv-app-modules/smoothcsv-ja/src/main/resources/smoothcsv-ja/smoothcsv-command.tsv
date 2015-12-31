@@ -1,0 +1,6 @@
+convert:full-width-to-half-width	!editing_cell	
+convert:half-width-to-full-width	!editing_cell	
+convert:hiragana-to-katakana	!editing_cell	
+convert:katakana-to-hiragana	!editing_cell	
+convert:kana-to-latin	!editing_cell	
+convert:latin-to-katakana	!editing_cell	

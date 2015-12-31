@@ -11,30 +11,30 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.macroeditor;
+package command.view;
 
-import com.smoothcsv.core.command.VisibleComponentCommandBase;
-import com.smoothcsv.core.macro.Macro;
-import com.smoothcsv.core.macro.SCAppMacroRuntime;
-import com.smoothcsv.core.macro.component.MacroEditor;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
  * @author kohii
  *
  */
-public class RunCommand extends VisibleComponentCommandBase<MacroEditor> {
-
-  public RunCommand() {
-    super("macro-editor");
-  }
+public class NextTabCommand extends Command {
 
   @Override
-  public void run(MacroEditor macroEditor) {
-    String text = macroEditor.getTextArea().getText();
-    if (text.isEmpty()) {
-      abort();
+  public void run() {
+    SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();
+    int count = tabbedPane.getTabCount();
+    if (count < 2) {
+      return;
     }
-    Macro macro = new Macro(text);
-    SCAppMacroRuntime.getMacroRuntime().execute(macro);
+    int cur = tabbedPane.getSelectedIndex() + 1;
+    if (cur == count) {
+      cur = 0;
+    }
+    tabbedPane.setSelectedIndex(cur);
   }
+
 }

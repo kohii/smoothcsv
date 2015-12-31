@@ -11,27 +11,16 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.cell_editor;
+package command.find;
 
-import com.smoothcsv.core.command.VisibleComponentCommandBase;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor;
 
 /**
  * @author kohii
  *
  */
-public class InsertBreakCommand extends
-    VisibleComponentCommandBase<CsvGridSheetCellStringEditor.CsvGridEditorComponent> {
+public class PreviousCommand extends NextCommand {
 
-  /**
-   * @param cssSelector
-   */
-  public InsertBreakCommand() {
-    super("cell-editor");
-  }
-
-  @Override
-  public void run(CsvGridSheetCellStringEditor.CsvGridEditorComponent component) {
-    component.insertBreak();
+  public PreviousCommand() {
+    reverse = true;
   }
 }

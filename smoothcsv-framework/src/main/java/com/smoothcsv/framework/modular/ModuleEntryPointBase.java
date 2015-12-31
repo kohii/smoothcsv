@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -24,6 +24,7 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.SCApplication.AfterCreateGuiEvent;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.io.ArrayCsvReader;
 import com.smoothcsv.framework.io.CsvSupport;
@@ -37,19 +38,20 @@ import com.smoothcsv.framework.util.SCBundle;
  * @author kohii
  *
  */
-public class AbstractModuleEntryPoint implements ModuleEntryPoint {
+public class ModuleEntryPointBase implements ModuleEntryPoint {
 
-  private static final String RESOURCE_NAME_KEYMAP = "keymap";
-  private static final String RESOURCE_NAME_MAIN_MENU = "menubar";
-  private static final String RESOURCE_NAME_CONTEXT_MENU = "context-menu";
-  private static final String RESOURCE_NAME_TOOL_BAR = "toolbar";
+  private static final String RESOURCE_NAME_KEYMAP = "smoothcsv-keymap";
+  private static final String RESOURCE_NAME_MAIN_MENU = "smoothcsv-menubar";
+  private static final String RESOURCE_NAME_CONTEXT_MENU = "smoothcsv-contextmenu";
+  private static final String RESOURCE_NAME_TOOL_BAR = "smoothcsv-toolbar";
+  private static final String RESOURCE_NAME_COMMANDS = "smoothcsv-command";
   private static final String SETTINGFILE_POSTFIX = ".tsv";
 
   private ModuleManifest manifest;
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.smoothcsv.framework.modular.ModuleEntryPoint#activate()
    */
   @Override
@@ -59,12 +61,13 @@ public class AbstractModuleEntryPoint implements ModuleEntryPoint {
 
     activate();
 
+    loadConditions();
     loadBundles();
     loadCommands(CommandRepository.instance());
     loadKeymap(CommandKeymap.getDefault());
 
-    SCApplication.getApplication().listeners()
-        .on(SCApplication.AfterCreateGuiEvent.class, new SCListener<AfterCreateGuiEvent>() {
+    SCApplication.getApplication().listeners().on(SCApplication.AfterCreateGuiEvent.class,
+        new SCListener<AfterCreateGuiEvent>() {
           @Override
           public void call(AfterCreateGuiEvent e) {
             loadMainMenus(MainMenuItems.instance());
@@ -83,10 +86,31 @@ public class AbstractModuleEntryPoint implements ModuleEntryPoint {
     MessageBundles.register(manifest.getName() + ".message");
   }
 
+  protected void loadConditions() {}
+
+
   /**
    * @param repository
    */
-  protected void loadCommands(CommandRepository repository) {}
+  protected void loadCommands(CommandRepository repository) {
+    InputStream in = getResourceAsStream(RESOURCE_NAME_COMMANDS, SETTINGFILE_POSTFIX, manifest);
+    if (in == null) {
+      return;
+    }
+    try (InputStream _in = in;
+        ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
+            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
+      String[] rowData;
+      while ((rowData = reader.readRow()) != null) {
+        System.out.println(rowData[0] +'\t'+rowData[1] +'\t'+ rowData[2]);
+        if (StringUtils.isNotEmpty(rowData[0])) {
+          repository.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
+        }
+      }
+    } catch (IOException e) {
+      throw new UnexpectedException(e);
+    }
+  }
 
   protected void loadKeymap(CommandKeymap keymap) {
     InputStream in = getResourceAsStream(RESOURCE_NAME_KEYMAP, SETTINGFILE_POSTFIX, manifest);
@@ -94,9 +118,8 @@ public class AbstractModuleEntryPoint implements ModuleEntryPoint {
       return;
     }
     try (InputStream _in = in;
-        ArrayCsvReader reader =
-            new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
-                CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
+        ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
+            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String prevContext = null;
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
@@ -143,9 +166,8 @@ public class AbstractModuleEntryPoint implements ModuleEntryPoint {
 
   private InputStream getResourceAsStream(String name, String postfix, ModuleManifest manifest) {
     String resourceName = '/' + manifest.getName() + '/' + name;
-    InputStream is =
-        this.getClass().getResourceAsStream(
-            resourceName + "_" + Locale.getDefault().getLanguage() + postfix);
+    InputStream is = this.getClass()
+        .getResourceAsStream(resourceName + "_" + Locale.getDefault().getLanguage() + postfix);
     if (is == null) {
       is = this.getClass().getResourceAsStream(resourceName + postfix);
     }

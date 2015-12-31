@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -37,7 +37,7 @@ import com.smoothcsv.framework.command.CommandRepository;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
-import com.smoothcsv.framework.modular.AbstractModuleEntryPoint;
+import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.util.DirectoryResolver;
 
@@ -45,7 +45,7 @@ import com.smoothcsv.framework.util.DirectoryResolver;
  *
  * @author kohii
  */
-public class DebugEntryPoint extends AbstractModuleEntryPoint {
+public class DebugEntryPoint extends ModuleEntryPointBase {
 
   static Logger LOG = LoggerFactory.getLogger(DebugEntryPoint.class);
 
@@ -104,12 +104,12 @@ public class DebugEntryPoint extends AbstractModuleEntryPoint {
 
   @Override
   protected void loadCommands(CommandRepository commands) {
-    commands.register("debug:enableWatchThrea", new EnableWatchThreadCommand());
-    commands.register("debug:printFocusOwner", new PrintFocusOwnerCommand());
-    commands.register("debug:printKeymap", new PrintKeymapCommand());
-    commands.register("debug:printComponents", new PrintComponentTreeCommand());
-    commands.register("debug:printMenuComponents", new PrintMenuComponentTreeCommand());
-    commands.register("debug:printGridData", new PrintGridDataCommand());
-    commands.register("debug:printConditions", new PrintConditionsCommand());
+    commands.register("debug:enable-watch-thread", new EnableWatchThreadCommand());
+    commands.register("debug:print-focus-owner", new PrintFocusOwnerCommand());
+    commands.register("debug:print-keymap", new PrintKeymapCommand());
+    commands.register("debug:print-components", new PrintComponentTreeCommand());
+    commands.register("debug:print-menu-components", new PrintMenuComponentTreeCommand());
+    commands.register("debug:print-grid-data", new PrintGridDataCommand());
+    commands.register("debug:print-conditions", new PrintConditionsCommand());
   }
 }

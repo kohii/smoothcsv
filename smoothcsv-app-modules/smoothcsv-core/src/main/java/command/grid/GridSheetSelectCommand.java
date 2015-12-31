@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package command.grid;
 
@@ -24,10 +24,6 @@ public class GridSheetSelectCommand extends GridCommand {
   protected final boolean extend;
 
   public GridSheetSelectCommand(int dx, int dy, boolean extend) {
-
-    // make sure one is zero, but not both
-    assert (dx == 0 || dy == 0) && !(dx == 0 && dy == 0);
-
     this.dx = dx;
     this.dy = dy;
     this.extend = extend;
@@ -35,7 +31,7 @@ public class GridSheetSelectCommand extends GridCommand {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.smoothcsv.core.command.GridSheetCommandAction#run(com.smoothcsv.core.component.csvgridsheet
    * .CsvGridSheetPane)

@@ -1,0 +1,197 @@
+body
+	shortcut+n	app:new-file
+	shortcut+shift+n	app:new-file-as
+	shortcut+o	app:open-file
+	shortcut+shift+o	app:open-file-as
+	shortcut+s	app:save
+	shortcut+shift+s	app:save-as
+	alt+shift+s	app:save-all
+	shortcut+w	app:close
+	shortcut+shift+w	app:close-all
+	alt+enter	csvsheet:show-properties
+	shortcut+shift+p	app:toggle-command-palette
+	shortcut+shift+f	grid:autofit-column-width
+	alt+shift+f	grid:autofit-column-width-to-selected-cell
+	ctrl+tab	view:next-tab
+	ctrl+shift+tab	view:previous-tab
+
+csv-sheet
+	shortcut+f	find:show
+	shortcut+rightbracket	value-panel:expand
+	shortcut+leftbracket	value-panel:compress
+
+grid
+	f2	grid:start-edit
+	escape	grid:cancel-edit
+	shortcut+a	grid:select-all
+	shortcut+shift+space	grid:select-all
+	shift+space	grid:select-entire-row
+	shortcut+space	grid:select-entire-column
+	left	grid:move-left
+	right	grid:move-right
+	up	grid:move-up
+	down	grid:move-down
+	shift+left	grid:select-left
+	shift+right	grid:select-right
+	shift+up	grid:select-up
+	shift+down	grid:select-down
+	home	grid:move-to-first-column
+	end	grid:move-to-last-column
+	shortcut+home	grid:move-to-first-cell
+	shortcut+end	grid:move-to-last-cell
+	shift+home	grid:select-to-first-column
+	shift+end	grid:select-to-last-column
+	shortcut+shift+home	grid:select-to-first-cell
+	shortcut+shift+end	grid:select-to-last-cell
+	tab	grid:move-right-in-active-range
+	shift+tab	grid:move-left-in-active-range
+	enter	grid:move-down-in-active-range
+	shift+enter	grid:move-up-in-active-range
+	shortcut+l	grid:fill-left
+	shortcut+r	grid:fill-right
+	shortcut+u	grid:fill-up
+	shortcut+d	grid:fill-down
+	shortcut+i	grid:insert-rows-above
+	shortcut+shift+i	grid:insert-columns-left
+	shortcut+k	grid:delete-rows
+	shortcut+shift+k	grid:delete-columns
+	ctrl+g	grid:go-to-line
+
+grid:not(:editing)
+	shortcut+z	grid:undo
+	shortcut+y	grid:redo
+	shortcut+c	grid:copy
+	shortcut+x	grid:cut
+	shortcut+v	grid:paste
+	shortcut+shift+c	grid:copy-using-file-format
+	shortcut+shift+x	grid:cut-using-file-format
+	shortcut+shift+v	grid:paste-using-file-format
+	delete	grid:clear
+	shortcut+delete	grid:delete-cell
+
+cell-editor
+	escape	grid:cancel-edit
+	enter	grid:stop-edit
+	shortcut+z	cell-editor:undo
+	shortcut+y	cell-editor:redo
+	alt+enter	cell-editor:insert-break
+	shift+enter	cell-editor:insert-break
+	alt+tab	cell-editor:insert-tab
+	left	cell-editor:move-left
+	ctrl+b	cell-editor:move-left
+	right	cell-editor:move-right
+	ctrl+f	cell-editor:move-right
+	up	cell-editor:move-up
+	down	cell-editor:move-down
+	ctrl+p	cell-editor:move-up
+	ctrl+n	cell-editor:move-down
+	shift+left	cell-editor:select-left
+	shift+right	cell-editor:select-right
+	shift+up	cell-editor:select-up
+	shift+down	cell-editor:select-down
+	shortcut+left	cell-editor:move-to-beginning-of-line
+	ctrl+a	cell-editor:move-to-beginning-of-line
+	shortcut+right	cell-editor:move-to-end-of-line
+	ctrl+e	cell-editor:move-to-end-of-line
+	shortcut+up	cell-editor:move-to-top
+	shortcut+down	cell-editor:move-to-bottom
+	alt+left	cell-editor:move-to-previous-word
+	alt+right	cell-editor:move-to-next-word
+	shortcut+shift+left	cell-editor:select-to-beginning-of-line
+	shortcut+shift+right	cell-editor:select-to-end-of-line
+	shortcut+shift+up	cell-editor:select-to-top
+	shortcut+shift+down	cell-editor:select-to-bottom
+	alt+shift+left	cell-editor:select-to-previous-word
+	alt+shift+right	cell-editor:select-to-next-word
+	shortcut+a	cell-editor:select-all
+	shortcut+backslash	cell-editor:unselect
+	backspace	cell-editor:delete-previous
+	ctrl+h	cell-editor:delete-previous
+	delete	cell-editor:delete-next
+	ctrl+d	cell-editor:delete-next
+	alt+backspace	cell-editor:delete-previous-word
+	alt+delete	cell-editor:delete-next-word
+	shortcut+x	cell-editor:cut
+	shortcut+c	cell-editor:copy
+	shortcut+v	cell-editor:paste
+	pageup	cell-editor:page-up
+	pagedown	cell-editor:page-down
+
+cell-editor:quick-edit
+	left	grid:move-left
+	right	grid:move-right
+	up	grid:move-up
+	down	grid:move-down
+	tab	grid:move-right-in-active-range
+	shift+tab	grid:move-left-in-active-range
+	enter	grid:move-down-in-active-range
+	shift+enter	grid:move-up-in-active-range
+
+value-panel
+	escape	grid:cancel-edit
+	enter	grid:stop-edit
+	shortcut+rightbracket	value-panel:expand
+	shortcut+leftbracket	value-panel:compress
+	shortcut+z	value-panel:undo
+	shortcut+y	value-panel:redo
+	alt+enter	value-panel:insert-break
+	shift+enter	value-panel:insert-break
+	alt+tab	value-panel:insert-tab
+	left	value-panel:move-left
+	ctrl+b	value-panel:move-left
+	right	value-panel:move-right
+	ctrl+f	value-panel:move-right
+	up	value-panel:move-up
+	down	value-panel:move-down
+	ctrl+p	value-panel:move-up
+	ctrl+n	value-panel:move-down
+	shift+left	value-panel:select-left
+	shift+right	value-panel:select-right
+	shift+up	value-panel:select-up
+	shift+down	value-panel:select-down
+	shortcut+left	value-panel:move-to-beginning-of-line
+	ctrl+a	value-panel:move-to-beginning-of-line
+	shortcut+right	value-panel:move-to-end-of-line
+	ctrl+e	value-panel:move-to-end-of-line
+	shortcut+up	value-panel:move-to-top
+	shortcut+down	value-panel:move-to-bottom
+	alt+left	value-panel:move-to-previous-word
+	alt+right	value-panel:move-to-next-word
+	shortcut+shift+left	value-panel:select-to-beginning-of-line
+	shortcut+shift+right	value-panel:select-to-end-of-line
+	shortcut+shift+up	value-panel:select-to-top
+	shortcut+shift+down	value-panel:select-to-bottom
+	alt+shift+left	value-panel:select-to-previous-word
+	alt+shift+right	value-panel:select-to-next-word
+	shortcut+a	value-panel:select-all
+	shortcut+backslash	value-panel:unselect
+	backspace	value-panel:delete-previous
+	ctrl+h	value-panel:delete-previous
+	delete	value-panel:delete-next
+	ctrl+d	value-panel:delete-next
+	alt+backspace	value-panel:delete-previous-word
+	alt+delete	value-panel:delete-next-word
+	shortcut+x	value-panel:cut
+	shortcut+c	value-panel:copy
+	shortcut+v	value-panel:paste
+	pageup	value-panel:page-up
+	pagedown	value-panel:page-down
+
+find-panel
+	escape	find:hide
+	enter	find:next
+
+macro-tools
+	escape	macro:toggle-console
+
+macro-editor
+	shortcut+s	macroe:save
+	shortcut+o	macroe:open
+	shortcut+enter	macroe:run
+
+macro-list
+	delete	macrolist:remove
+	shortcut+enter	macrolist:run
+
+sql-editor
+	shortcut+enter	sql:run

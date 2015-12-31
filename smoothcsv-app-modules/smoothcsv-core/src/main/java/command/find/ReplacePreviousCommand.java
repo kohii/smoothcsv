@@ -18,9 +18,9 @@ package command.find;
  * @author kohii
  *
  */
-public class ReplacePrevCommand extends ReplaceNextCommand {
+public class ReplacePreviousCommand extends ReplaceNextCommand {
 
-  public ReplacePrevCommand() {
+  public ReplacePreviousCommand() {
     reverse = true;
   }
 }

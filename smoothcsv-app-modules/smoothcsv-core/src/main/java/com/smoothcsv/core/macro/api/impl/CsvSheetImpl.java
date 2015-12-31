@@ -28,9 +28,9 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import command.app.CloseCommand;
 import command.app.SaveAsCommand;
 import command.app.SaveCommand;
+import command.grid.AutofitColumnWidthCommand;
 import command.grid.RedoCommand;
 import command.grid.UndoCommand;
-import command.view.AutofitColumnWidthCommand;
 
 /**
  * @author kohii

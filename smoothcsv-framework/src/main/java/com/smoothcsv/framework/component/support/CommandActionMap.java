@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -53,7 +53,7 @@ public class CommandActionMap extends ActionMap {
           }
         }
         if (!actualIds.isEmpty()) {
-          return new CommandWrapperAction(actualIds.toArray(new String[actualIds.size()]));
+          return createActionFromCommand(actualIds.toArray(new String[actualIds.size()]));
         } else {
           return null;
         }
@@ -64,7 +64,7 @@ public class CommandActionMap extends ActionMap {
           boolean isEnabled = CommandRepository.instance().isEnabled(id);
           LOG.debug("Command handler found. id:{}, enabled:{}", id, isEnabled);
           if (isEnabled) {
-            return new CommandWrapperAction(new String[] {id});
+            return createActionFromCommand(new String[] {id});
           }
         } else {
           LOG.warn("Command doesn't exists. id:{}", id);
@@ -74,9 +74,13 @@ public class CommandActionMap extends ActionMap {
     return super.get(key);
   }
 
-  static class CommandWrapperAction implements Action {
+  protected Action createActionFromCommand(String[] commandId) {
+    return new CommandWrapperAction(commandId);
+  }
 
-    final String[] commandIds;
+  protected static class CommandWrapperAction implements Action {
+
+    protected final String[] commandIds;
 
     public CommandWrapperAction(String[] commandId) {
       this.commandIds = commandId;
@@ -121,9 +125,13 @@ public class CommandActionMap extends ActionMap {
     public void actionPerformed(ActionEvent e) {
       for (String id : commandIds) {
         if (CommandRepository.instance().isEnabled(id)) {
-          CommandRepository.instance().runCommand(id);
+          executeCommand(id);
         }
       }
+    }
+
+    protected void executeCommand(String commandId) {
+      CommandRepository.instance().runCommand(commandId);
     }
   }
 }

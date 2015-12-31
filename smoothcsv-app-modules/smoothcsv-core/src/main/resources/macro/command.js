@@ -1,1 +1,1 @@
-module.exports = require('lib/javaapi')('Command');
+module.exports = require('lib/javaapi').getApiInstance('Command');

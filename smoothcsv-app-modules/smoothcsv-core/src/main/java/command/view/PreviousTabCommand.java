@@ -11,31 +11,30 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.framework.condition;
+package command.view;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
- *
  * @author kohii
+ *
  */
-public abstract class PushableCondition extends Condition {
+public class PreviousTabCommand extends Command {
 
-  /**
-   * @param name
-   */
-  public PushableCondition(String name) {
-    super(name);
+  @Override
+  public void run() {
+    SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();
+    int count = tabbedPane.getTabCount();
+    if (count < 2) {
+      return;
+    }
+    int cur = tabbedPane.getSelectedIndex() - 1;
+    if (cur == -1) {
+      cur = count - 1;
+    }
+    tabbedPane.setSelectedIndex(cur);
   }
 
-  /**
-   * Revalidate the value.
-   * 
-   * @return true if the value changed.
-   */
-  public final void revalidate() {
-    boolean newValue = test();
-    setValue(newValue);
-  }
-
-  public abstract boolean test();
 }

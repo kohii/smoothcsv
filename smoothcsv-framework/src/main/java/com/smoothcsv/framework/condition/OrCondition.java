@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -25,8 +25,7 @@ public class OrCondition extends Condition {
 
   private final Condition condition1;
 
-  public OrCondition(String name, Condition condition0, Condition condition1) {
-    super(name);
+  public OrCondition(Condition condition0, Condition condition1) {
     this.condition0 = condition0;
     this.condition1 = condition1;
 
@@ -34,7 +33,7 @@ public class OrCondition extends Condition {
         new Consumer<Condition.ConditionValueChangeEvent>() {
           @Override
           public void accept(ConditionValueChangeEvent t) {
-            setValue(condition0.getValue() || condition1.getValue());
+            revalidate();
           }
         };
 
@@ -63,14 +62,13 @@ public class OrCondition extends Condition {
     return hash;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.smoothcsv.framework.condition.Condition#activate()
-   */
   @Override
   protected void activate() {
     // do nothing
   }
 
+  @Override
+  protected boolean computeValue() {
+    return condition0.getValue() || condition1.getValue();
+  }
 }

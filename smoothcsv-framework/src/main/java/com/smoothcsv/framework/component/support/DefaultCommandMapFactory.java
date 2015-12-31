@@ -26,6 +26,6 @@ public class DefaultCommandMapFactory implements CommandMapFactory {
 
   @Override
   public CommandActionMap createActionMap(SmoothComponent component) {
-    return null;
+    return new CommandActionMap();
   }
 }

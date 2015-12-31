@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -29,23 +29,11 @@ public abstract class Condition {
     public boolean newValue;
   }
 
-  private final String name;
-
   private boolean notifyEnabled = false;
 
   private boolean value = false;
 
   private final List<Consumer<ConditionValueChangeEvent>> listeners = new ArrayList<>();
-
-  /**
-   * @param name
-   */
-  public Condition(String name) {
-    this.name = name;
-    if (name != null) {
-      ConditionPool.instance().register(this);
-    }
-  }
 
   public final void addValueChangedListener(Consumer<ConditionValueChangeEvent> l) {
     listeners.add(l);
@@ -58,17 +46,10 @@ public abstract class Condition {
   protected void initialize() {
     activate();
     notifyEnabled = true;
-    notifyListeners();
+    revalidate();
   }
 
   protected abstract void activate();
-
-  protected final void setValue(boolean value) {
-    if (this.value != value) {
-      this.value = value;
-      notifyListeners();
-    }
-  }
 
   protected final void notifyListeners() {
     if (!notifyEnabled) {
@@ -81,14 +62,20 @@ public abstract class Condition {
     }
   }
 
+  protected abstract boolean computeValue();
+
+  protected final void revalidate() {
+    setValue(computeValue());
+  }
+
   public final boolean getValue() {
     return value;
   }
 
-  /**
-   * @return the name
-   */
-  public String getName() {
-    return name;
+  protected final void setValue(boolean value) {
+    if (this.value != value) {
+      this.value = value;
+      notifyListeners();
+    }
   }
 }

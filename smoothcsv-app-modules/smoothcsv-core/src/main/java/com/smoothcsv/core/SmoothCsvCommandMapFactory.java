@@ -19,6 +19,7 @@ import java.io.File;
 
 import javax.swing.Action;
 
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.Macro;
 import com.smoothcsv.core.macro.SCAppMacroRuntime;
 import com.smoothcsv.framework.component.support.CommandActionMap;
@@ -42,16 +43,28 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
     public Action get(Object key) {
       if (key instanceof String) {
         String keyString = (String) key;
-        if (keyString.startsWith("macro ")) {
-          return new MacroAction(keyString.substring("macro ".length()).trim());
+        if (keyString.startsWith("macro:run ")) {
+          return new MacroAction(keyString.substring("macro:run ".length()).trim());
         }
       }
       return super.get(key);
     }
+
+    @Override
+    protected Action createActionFromCommand(String[] commandId) {
+      return new CommandWrapperAction(commandId) {
+        @Override
+        protected void executeCommand(String commandId) {
+          super.executeCommand(commandId);
+          if (MacroRecorder.isRecording()) {
+            MacroRecorder.getInstance().recordCommand(commandId);
+          }
+        }
+      };
+    }
   }
 
-
-  static class MacroAction implements Action {
+  private static class MacroAction implements Action {
 
     final String path;
 
@@ -93,6 +106,9 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
     public void actionPerformed(ActionEvent e) {
       File macroFile = new File(path);
       SCAppMacroRuntime.getMacroRuntime().execute(new Macro(macroFile));
+      if (MacroRecorder.isRecording()) {
+        MacroRecorder.getInstance().recordMacroExecution(path);
+      }
     }
   }
 }

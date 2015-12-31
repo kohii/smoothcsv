@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.smoothcsv.framework.menu;
 
@@ -12,14 +12,14 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import lombok.Setter;
-
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandRepository;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
+
+import lombok.Setter;
 
 /**
  * @author kohii
@@ -34,14 +34,19 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
   private boolean contextMenu = false;
 
   public CommandMenuItem(String caption, String commandId) {
-    this(caption, commandId, null);
+    this(caption, commandId, (Condition) null);
+  }
+
+  public CommandMenuItem(String caption, String commandId, Condition visibleWhen) {
+    this(caption, commandId, visibleWhen, null, true);
   }
 
   public CommandMenuItem(String caption, String commandId, Icon icon) {
-    this(caption, commandId, icon, true);
+    this(caption, commandId, null, icon, true);
   }
 
-  public CommandMenuItem(String caption, String commandId, Icon icon, boolean watchEnabledCondition) {
+  public CommandMenuItem(String caption, String commandId, Condition visibleWhen, Icon icon,
+      boolean watchEnabledCondition) {
     this.caption = caption;
     this.commandId = commandId;
     setText(caption);
@@ -49,6 +54,16 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
       setIcon(icon);
     }
     addActionListener(this);
+
+    if (visibleWhen != null) {
+      visibleWhen.addValueChangedListener(new Consumer<Condition.ConditionValueChangeEvent>() {
+        @Override
+        public void accept(ConditionValueChangeEvent event) {
+          setVisible(event.newValue);
+        }
+      });
+      setVisible(visibleWhen.getValue());
+    }
 
     CommandDef def = CommandRepository.instance().getDef(commandId);
     Condition enableCondition = def.getEnableWhen();
@@ -69,7 +84,7 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see javax.swing.AbstractButton#setText(java.lang.String)
    */
   @Override
@@ -112,7 +127,7 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
    */
   @Override

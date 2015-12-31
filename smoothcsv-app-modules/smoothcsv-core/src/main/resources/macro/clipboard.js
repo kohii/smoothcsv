@@ -1,1 +1,1 @@
-module.exports = require('lib/javaapi')('Clipboard');
+module.exports = require('lib/javaapi').getApiInstance('Clipboard');

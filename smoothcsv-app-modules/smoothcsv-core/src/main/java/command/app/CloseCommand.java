@@ -48,17 +48,14 @@ public class CloseCommand extends Command {
 
       DialogOperation option =
           MessageDialogs.confirm2("ISCA0002", csvSheetView.getViewInfo().getShortTitle());
-      switch (option) {
-        case YES:
-          new SaveCommand().execute();
-          break;
-        case NO:
-          // do nothing
-          break;
-        case CANCEL:
-          throw new CancellationException();
-        default:
-          throw new UnexpectedException();
+      if (option == DialogOperation.YES) {
+        new SaveCommand().execute();
+      } else if (option == DialogOperation.NO) {
+        // do nothing
+      } else if (option == DialogOperation.CANCEL) {
+        throw new CancellationException();
+      } else {
+        throw new UnexpectedException();
       }
     }
     SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();

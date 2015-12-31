@@ -1,29 +1,43 @@
 /*
- * Copyright 2014 kohii.
- * 
+ * Copyright 2015 kohii.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.value_panel;
+package com.smoothcsv.core.celleditor;
 
-import com.smoothcsv.core.command.ValuePanelCommandBase;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
+import java.awt.Component;
+
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.component.support.SCFocusManager;
 
 /**
  * @author kohii
  *
  */
-public class InsertBreakCommand extends ValuePanelCommandBase {
+public abstract class SCTextAreaCommand extends Command {
 
   @Override
-  protected void run(CsvGridSheetCellValuePanel valuePanel) {
-    valuePanel.getTextArea().insertBreak();
+  protected void run() {
+    Component fo = SCFocusManager.getFocusOwner();
+    if (fo == null || !(fo instanceof SCTextArea)) {
+      abort();
+    }
+
+    SCTextArea editor = (SCTextArea) fo;
+    run(editor);
+  }
+
+  public abstract void run(SCTextArea editor);
+
+  protected void invokeAction(String key) {
+    
   }
 }

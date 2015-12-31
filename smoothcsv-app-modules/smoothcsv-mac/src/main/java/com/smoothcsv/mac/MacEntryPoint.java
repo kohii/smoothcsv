@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -28,15 +28,16 @@ import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRepository;
-import com.smoothcsv.framework.modular.AbstractModuleEntryPoint;
+import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
+
 import command.app.OpenFileCommand;
 
 /**
  * @author kohii
  *
  */
-public class MacEntryPoint extends AbstractModuleEntryPoint {
+public class MacEntryPoint extends ModuleEntryPointBase {
 
   @Override
   protected void activate() {
@@ -56,8 +57,7 @@ public class MacEntryPoint extends AbstractModuleEntryPoint {
     app.setOpenFileHandler(new OpenFilesHandler() {
       @Override
       public void openFiles(OpenFilesEvent e) {
-        OpenFileCommand command =
-            (OpenFileCommand) CommandRepository.instance().getCommand("app:openFile");
+        OpenFileCommand command = new OpenFileCommand();
         for (File f : e.getFiles()) {
           if (f.isFile()) {
             command.run(f);
@@ -79,7 +79,7 @@ public class MacEntryPoint extends AbstractModuleEntryPoint {
     app.setPreferencesHandler(new PreferencesHandler() {
       @Override
       public void handlePreferences(PreferencesEvent e) {
-        CommandRepository.instance().runCommand("app:showSettings");
+        CommandRepository.instance().runCommand("app:show-settings");
       }
     });
 

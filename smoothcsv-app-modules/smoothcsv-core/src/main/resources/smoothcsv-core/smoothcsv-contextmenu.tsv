@@ -1,0 +1,41 @@
+grid
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+	-
+	Copy Using The File Format	grid:copy-using-file-format
+	Cut Using The File Format	grid:cut-using-file-format
+	Paste Using The File Format	grid:paste-using-file-format
+	-
+	Clear	grid:clear
+	Delete Cell	grid:delete-cell
+	-
+	Select All	grid:select-all
+
+grid-rowheader
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+	-
+	Insert Rows Above	grid:insert-rows-above
+	Insert Rows Below	grid:insert-rows-below
+	Delete Rows	grid:delete-rows
+
+grid-columnheader
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+	-
+	Insert Columns Left	grid:insert-columns-left
+	Insert Columns Right	grid:insert-columns-right
+	Delete Columns	grid:delete-columns
+
+grid-cornerheader
+	Copy	grid:copy
+	Cut	grid:cut
+	Paste	grid:paste
+
+tab
+	Close	app:close
+	Close Others	app:close-others
+	Close All	app:close-all

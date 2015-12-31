@@ -95,7 +95,7 @@ public abstract class DialogBase extends JDialog {
 
     for (int i = 0; i < actions.length; i++) {
       DialogOperationAction dialogOperationAction = actions[i];
-      JButton button = dialogOperationAction.getButton();
+      JButton button = new JButton(dialogOperationAction);
       buttonPane.add(button);
       if (i == 0) {
         setDefaultButton(button);
@@ -112,8 +112,8 @@ public abstract class DialogBase extends JDialog {
     for (int i = 0; i < actions.length; i++) {
       DialogOperationAction dialogOperationAction = actions[i];
       if (dialogOperationAction.operation == DialogOperation.CANCEL) {
-        getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
-            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
+        getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+            .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
         getRootPane().getActionMap().put("Cancel", dialogOperationAction);
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -209,12 +209,10 @@ public abstract class DialogBase extends JDialog {
   protected class DialogOperationAction extends AbstractAction {
 
     private final DialogOperation operation;
-    private final JButton button;
 
     public DialogOperationAction(DialogOperation operation) {
-      putValue(NAME, operation.toString());
+      putValue(NAME, operation.getText());
       this.operation = operation;
-      this.button = new JButton(this);
     }
 
     @Override
@@ -231,10 +229,6 @@ public abstract class DialogBase extends JDialog {
 
     public DialogOperation getOperation() {
       return operation;
-    }
-
-    public JButton getButton() {
-      return button;
     }
   }
 }

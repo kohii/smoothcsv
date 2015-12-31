@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.view;
+package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.constants.AppSettingKeys;

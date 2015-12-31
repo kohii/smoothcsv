@@ -3,32 +3,32 @@ grid
 	Cut	grid:cut
 	Paste	grid:paste
 	-
-	Copy Using The File Format	grid:copyUsingFileFormat
-	Cut Using The File Format	grid:cutUsingFileFormat
-	Paste Using The File Format	grid:pasteUsingFileFormat
+	Copy Using The File Format	grid:copy-using-file-format
+	Cut Using The File Format	grid:cut-using-file-format
+	Paste Using The File Format	grid:paste-using-file-format
 	-
 	Clear	grid:clear
-	Delete Cell	grid:deleteCell
+	Delete Cell	grid:delete-cell
 	-
-	Select All	grid:selectAll
+	Select All	grid:select-all
 
 grid-rowheader
 	Copy	grid:copy
 	Cut	grid:cut
 	Paste	grid:paste
 	-
-	Insert Rows Above	grid:insertRowsAbove
-	Insert Rows Below	grid:insertRowsBelow
-	Delete Rows	grid:deleteRows
+	Insert Rows Above	grid:insert-rows-above
+	Insert Rows Below	grid:insert-rows-below
+	Delete Rows	grid:delete-rows
 
 grid-columnheader
 	Copy	grid:copy
 	Cut	grid:cut
 	Paste	grid:paste
 	-
-	Insert Columns Left	grid:insertColumnsLeft
-	Insert Columns Right	grid:insertColumnsRight
-	Delete Columns	grid:deleteColumns
+	Insert Columns Left	grid:insert-columns-left
+	Insert Columns Right	grid:insert-columns-right
+	Delete Columns	grid:delete-columns
 
 grid-cornerheader
 	Copy	grid:copy
@@ -37,5 +37,5 @@ grid-cornerheader
 
 tab
 	Close	app:close
-	Close Others	app:closeOthers
-	Close All	app:closeAll
+	Close Others	app:close-others
+	Close All	app:close-all

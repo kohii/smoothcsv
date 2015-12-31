@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.smoothcsv.core.csvsheet;
 
@@ -145,7 +145,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           return false;
         }
         if (MacroRecorder.isRecording()) {
-          MacroRecorder.getInstance().recordCommand("grid:startEdit");
+          MacroRecorder.getInstance().recordCommand("grid:start-edit");
         }
       }
       // pass the event to the cell editor.

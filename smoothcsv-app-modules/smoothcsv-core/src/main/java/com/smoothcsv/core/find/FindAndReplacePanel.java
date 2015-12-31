@@ -260,7 +260,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     replaceTextField.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("find:replaceNext");
+        CommandRepository.instance().runCommand("find:replace-next");
       }
     });
     JTextComponent replaceTextComp =
@@ -279,7 +279,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplacePrev.setToolTipText(CoreBundle.get("key.replacePrev"));
     btnReplacePrev.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("find:replacePrevious");
+        CommandRepository.instance().runCommand("find:replace-previous");
       }
     });
     GridBagConstraints gbc_btnReplace = new GridBagConstraints();
@@ -293,7 +293,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplaceNext.setToolTipText(CoreBundle.get("key.replaceNext"));
     btnReplaceNext.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("find:replaceNext");
+        CommandRepository.instance().runCommand("find:replace-next");
       }
     });
     GridBagConstraints gbc_btnReplaceAll = new GridBagConstraints();
@@ -306,7 +306,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplaceAll.setFocusable(false);
     btnReplaceAll.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("find:replaceAll");
+        CommandRepository.instance().runCommand("find:replace-all");
       }
     });
     GridBagConstraints gbcBtnReplace = new GridBagConstraints();

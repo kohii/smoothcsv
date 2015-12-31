@@ -195,8 +195,7 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
             new SCListener<FileDroppedEvent>() {
           @Override
           public void call(FileDroppedEvent ev) {
-            OpenFileCommand command =
-                (OpenFileCommand) CommandRepository.instance().getCommand("app:openFile");
+            OpenFileCommand command = new OpenFileCommand();
             if (ev.getFile().isFile()) {
               command.run(ev.getFile());
             } else if (ev.getFile().isDirectory()) {

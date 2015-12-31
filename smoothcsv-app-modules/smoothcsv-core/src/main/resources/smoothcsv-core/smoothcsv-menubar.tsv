@@ -1,16 +1,16 @@
 File
-	New	app:newFile
-	New As...	app:newFileAs
-	Open...	app:openFile
-	Open As...	app:openFileAs
+	New	app:new-file
+	New As...	app:new-file-as
+	Open...	app:open-file
+	Open As...	app:open-file-as
 #	Reopen	app:reopen
 	Save	app:save
-	Save As...	app:saveAs
-	Save All	app:saveAll
+	Save As...	app:save-as
+	Save All	app:save-all
 	Close	app:close
-	Close All	app:closeAll
+	Close All	app:close-all
 	-
-	Properties...	csvsheet:showProperties
+	Properties...	csvsheet:show-properties
 
 Edit
 	Undo	grid:undo
@@ -20,72 +20,72 @@ Edit
 	Cut	grid:cut
 	Paste	grid:paste
 	-
-	Copy Using The File Format	grid:copyUsingFileFormat
-	Cut Using The File Format	grid:cutUsingFileFormat
-	Paste Using The File Format	grid:pasteUsingFileFormat
+	Copy Using The File Format	grid:copy-using-file-format
+	Cut Using The File Format	grid:cut-using-file-format
+	Paste Using The File Format	grid:paste-using-file-format
 	-
-	Select All	grid:selectAll
-	Select The Entire Row	grid:selectEntireRow
-	Select The Entire Column	grid:selectEntireColumn
+	Select All	grid:select-all
+	Select The Entire Row	grid:select-entire-row
+	Select The Entire Column	grid:select-entire-column
 	-
 	Clear	grid:clear
 	-
-	Go To Line...	grid:goToLine
+	Go To Line...	grid:go-to-line
 	-
 	Fill
-		Fill Left	grid:fillLeft
-		Fill Up	grid:fillUp
-		Fill Right	grid:fillRight
-		Fill Down	grid:fillDown
+		Fill Left	grid:fill-left
+		Fill Up	grid:fill-up
+		Fill Right	grid:fill-right
+		Fill Down	grid:fill-down
 	Convert
-		Upper Case	convert:upperCase
-		Lower Case	convert:lowerCase
-		Swap Case	convert:swapCase
-		Title Case	convert:titleCase
+		Upper Case	convert:upper-case
+		Lower Case	convert:lower-case
+		Swap Case	convert:swap-case
+		Title Case	convert:title-case
 		-
-		Snake Case To Camel Case	convert:snakeCaseToCamelCase
-		Camel Case To Snake Case	convert:camelCaseToSnakeCase
+		Snake Case To Camel Case	convert:snake-case-to-camel-case
+		Camel Case To Snake Case	convert:camel-case-to-snake-case
 
 Grid
-	Insert Rows Above	grid:insertRowsAbove
-	Insert Rows Below	grid:insertRowsBelow
-	Delete Rows	grid:deleteRows
+	Insert Rows Above	grid:insert-rows-above
+	Insert Rows Below	grid:insert-rows-below
+	Delete Rows	grid:delete-rows
 	-
-	Insert Columns Left	grid:insertColumnsLeft
-	Insert Columns Right	grid:insertColumnsRight
-	Delete Columns	grid:deleteColumns
+	Insert Columns Left	grid:insert-columns-left
+	Insert Columns Right	grid:insert-columns-right
+	Delete Columns	grid:delete-columns
 	-
-	Delete Cell	grid:deleteCell
+	Delete Cell	grid:delete-cell
 	-
 	Sort...	grid:sort
-	Sort Selected Rows...	grid:sortSelectedRows
-	Sort Selected Range...	grid:sortSelectedRange
+	Sort Selected Rows...	grid:sort-selected-rows
+	Sort Selected Range...	grid:sort-selected-range
 
 Find
 	Show Find And Replace Panel...	find:show
 	Find Next	find:next
 	Find Previous	find:previous
-	Replace Next	find:replaceNext
-	Replace Previous	find:replacePrevious
+	Replace Next	find:replace-next
+	Replace Previous	find:replace-previous
 
 View
-	Auto-Fit Column Width	view:autofitColumnWidth
-	Auto-Fit Column Width To Selected Data	view:autofitColumnWidthToSelectedData
+	Auto-Fit Column Width	grid:autofit-column-width
+	Auto-Fit Column Width To Selected Data	grid:autofit-column-width-to-selected-cell
 	-
-	Previous Tab	view:previousTab
-	Next Tab	view:nextTab
+	Previous Tab	view:previous-tab
+	Next Tab	view:next-tab
 	-
-	Toggle Status Bar	view:toggleStatusBar
-	Toggle Cell Value Panel	view:toggleCellValuePanel
+	Toggle Status Bar	view:toggle-status-bar
+	Toggle Cell Value Panel	view:toggle-cell-value-panel
 
 Tools
-	Toggle Command Palette...	app:toggleCommandPalette
-	SQL Tools...	app:showSqlTools
+	Toggle Command Palette...	app:toggle-command-palette
+	SQL Tools...	app:show-sql-tools
 
 Macro
-	Toggle Macro Tools	macro:toggleMacroTools
-	Start Record Macro	macro:toggleRecordingMacro	!recording_macro
-	Stop Recording Macro	macro:toggleRecordingMacro	recording_macro
+	Toggle Macro Tools	macro:toggle-macro-tools
+	Start Record Macro	macro:toggle-recording-macro	!recording_macro
+	Stop Recording Macro	macro:toggle-recording-macro	recording_macro
 	Run Macro	macro:run
-	Edit Macro	macro:showEditor
+	Edit Macro	macro:show-editor
 	Save Macro...	macro:save

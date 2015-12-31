@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.smoothcsv.core.csvsheet;
 
@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.constants.AppSettingKeys;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
@@ -82,9 +83,8 @@ public class CsvGridSheetPane extends GridSheetPane {
 
     this.csvSheetView = csvSheetView;
 
-    undoManager =
-        new GridSheetUndoManager(this,
-            SettingManager.getInteger(AppSettingKeys.Editor.SIZE_OF_UNDOING));
+    undoManager = new GridSheetUndoManager(this,
+        SettingManager.getInteger(AppSettingKeys.Editor.SIZE_OF_UNDOING));
 
     GridSheetScrollPane scrollPane = getScrollPane();
     // Color viewportBorderColor = getColorProvider().getRuleLineColor();
@@ -231,6 +231,7 @@ public class CsvGridSheetPane extends GridSheetPane {
 
   @Override
   public void setValueAt(Object aValue, int row, int column) {
+    aValue = ObjectUtils.toString(aValue);
     Object oldVal = getValueAt(row, column);
     if (oldVal != null) {
       super.setValueAt(aValue, row, column);

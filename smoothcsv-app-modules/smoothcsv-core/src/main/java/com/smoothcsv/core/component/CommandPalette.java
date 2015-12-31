@@ -107,14 +107,11 @@ public class CommandPalette extends JDialog {
             sb.append(Character.toUpperCase(commandId.charAt(0)));
             for (int i = 1; i < commandId.length(); i++) {
               char c = commandId.charAt(i);
-              if (Character.isUpperCase(c)) {
-                sb.append(' ');
-                sb.append(c);
-              } else if (c == ':') {
+              if (c == ':') {
                 sb.append(c);
                 sb.append(' ');
                 sb.append(Character.toUpperCase(commandId.charAt(++i)));
-              } else if (c == '_') {
+              } else if (c == '-') {
                 sb.append(' ');
                 sb.append(Character.toUpperCase(commandId.charAt(++i)));
               } else {
@@ -244,9 +241,9 @@ public class CommandPalette extends JDialog {
       }
     });
 
-    // Enable "app:toggleCommandPalette" command in this component.
+    // Enable "app:toggle-command-palette" command in this component.
     // TODO There should be any better way to achieve it.
-    String toggleCommandId = "app:toggleCommandPalette";
+    String toggleCommandId = "app:toggle-command-palette";
     Command toggleCommand = CommandRepository.instance().getCommandOrNull(toggleCommandId);
     if (toggleCommand != null) {
       im.put(CommandKeymap.getDefault().findKeyStroke(toggleCommandId), toggleCommandId);

@@ -104,12 +104,12 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
 
   @Override
   protected void loadCommands(CommandRepository commands) {
-    commands.register("debug:enableWatchThread", new EnableWatchThreadCommand());
-    commands.register("debug:printFocusOwner", new PrintFocusOwnerCommand());
-    commands.register("debug:printKeymap", new PrintKeymapCommand());
-    commands.register("debug:printComponents", new PrintComponentTreeCommand());
-    commands.register("debug:printMenuComponents", new PrintMenuComponentTreeCommand());
-    commands.register("debug:printGridData", new PrintGridDataCommand());
-    commands.register("debug:printConditions", new PrintConditionsCommand());
+    commands.register("debug:enable-watch-thread", new EnableWatchThreadCommand());
+    commands.register("debug:print-focus-owner", new PrintFocusOwnerCommand());
+    commands.register("debug:print-keymap", new PrintKeymapCommand());
+    commands.register("debug:print-components", new PrintComponentTreeCommand());
+    commands.register("debug:print-menu-components", new PrintMenuComponentTreeCommand());
+    commands.register("debug:print-grid-data", new PrintGridDataCommand());
+    commands.register("debug:print-conditions", new PrintConditionsCommand());
   }
 }

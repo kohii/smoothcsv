@@ -1,6 +1,0 @@
-convert:fullWidthToHalfWidth	!editing_cell
-convert:halfWidthToFullWidth	!editing_cell
-convert:hiraganaToKatakana	!editing_cell
-convert:katakanaToHiragana	!editing_cell
-convert:kanaToLatin	!editing_cell
-convert:latinToKatakana	!editing_cell

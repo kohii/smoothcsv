@@ -90,8 +90,7 @@ public class CommandDef {
           }
         }
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-          | IOException | NoSuchMethodException | SecurityException | IllegalArgumentException
-          | InvocationTargetException e) {
+          | IOException | NoSuchMethodException | InvocationTargetException | RuntimeException e) {
         throw new UnexpectedException(e);
       }
     }
@@ -129,7 +128,7 @@ public class CommandDef {
     int sepIndex = commandId.indexOf(':');
     buf.append(commandId.substring(0, sepIndex).replace('-', '_'));
     buf.append('.');
-    buf.append(StringUtils.capitalize(commandId.substring(sepIndex + 1)));
+    buf.append(StringUtils.camelize(commandId.substring(sepIndex + 1), '-'));
     buf.append("Command");
     return buf.toString();
   }

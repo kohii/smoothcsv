@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 kohii.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -22,8 +22,10 @@ import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.ScriptRuntime;
 
+import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.macro.api.CellVisitor;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.core.macro.api.Range;
 import com.smoothcsv.core.sort.BlanksOption;
@@ -32,6 +34,7 @@ import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.core.sort.ValueType;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 import com.smoothcsv.swing.gridsheet.model.CellRect;
+
 import command.grid.PasteCommand;
 import command.grid.PasteCommand.PasteRange;
 
@@ -236,6 +239,20 @@ public class RangeImpl extends APIBase implements Range {
     return this;
   }
 
+  @Override
+  public void forEach(CellVisitor callback) {
+    RangeImpl cell = new RangeImpl(parent, 1, 1, 1, 1);
+    forEachCell(new ICellConsumer() {
+      @Override
+      public boolean accept(int row, int column) {
+        cell.row = row;
+        cell.column = column;
+        Object retVal = callback.call(cell, ObjectUtils.toString(cell.getValue()), row, column);
+        return retVal != null && retVal == Boolean.FALSE ? false : true;
+      }
+    });
+  }
+
   private List<SortCriteria> parseSortSpec(Object sortSpecObj) {
     if (sortSpecObj instanceof NativeObject) {
       NativeObject o = (NativeObject) sortSpecObj;
@@ -321,7 +338,6 @@ public class RangeImpl extends APIBase implements Range {
       }
     }
   }
-
 
   // private boolean containsRowAt(int row) {
   // return getRow() <= row && row <= getLastRow();

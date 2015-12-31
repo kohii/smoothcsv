@@ -3,32 +3,32 @@ grid
 	切り取り	grid:cut
 	貼り付け	grid:paste
 	-
-	ファイルの書式でコピー	grid:copyUsingFileFormat
-	ファイルの書式で切り取り	grid:cutUsingFileFormat
-	ファイルの書式で貼り付け	grid:pasteUsingFileFormat
+	ファイルの書式でコピー	grid:copy-using-file-format
+	ファイルの書式で切り取り	grid:cut-using-file-format
+	ファイルの書式で貼り付け	grid:paste-using-file-format
 	-
 	クリア	grid:clear
-	セルを除去	grid:deleteCell
+	セルを除去	grid:delete-cell
 	-
-	すべて選択	grid:selectAll
+	すべて選択	grid:select-all
 
 grid-rowheader
 	コピー	grid:copy
 	切り取り	grid:cut
 	貼り付け	grid:paste
 	-
-	上に行を挿入	grid:insertRowsAbove
-	下に行を挿入	grid:insertRowsBelow
-	行を削除	grid:deleteRows
+	上に行を挿入	grid:insert-rows-above
+	下に行を挿入	grid:insert-rows-below
+	行を削除	grid:delete-rows
 
 grid-columnheader
 	コピー	grid:copy
 	切り取り	grid:cut
 	貼り付け	grid:paste
 	-
-	左に列を挿入	grid:insertColumnsLeft
-	右に列を挿入	grid:insertColumnsRight
-	列を削除	grid:deleteColumns
+	左に列を挿入	grid:insert-columns-left
+	右に列を挿入	grid:insert-columns-right
+	列を削除	grid:delete-columns
 
 grid-cornerheader
 	コピー	grid:copy
@@ -37,5 +37,5 @@ grid-cornerheader
 
 tab
 	閉じる	app:close
-	他のタブを閉じる	app:closeOthers
-	すべて閉じる	app:closeAll
+	他のタブを閉じる	app:close-others
+	すべて閉じる	app:close-all

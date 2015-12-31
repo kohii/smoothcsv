@@ -126,17 +126,17 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
     JPopupMenu popupMenu = new JPopupMenu();
 
     CommandMenuItem menuItemExpand = new CommandMenuItem(CoreBundle.get("key.expand"),
-        "value_panel:expand", AwesomeIcon.create(AwesomeIcon.FA_EXPAND));
+        "value-panel:expand", AwesomeIcon.create(AwesomeIcon.FA_EXPAND));
     menuItemExpand.setContextMenu(true);
     popupMenu.add(menuItemExpand);
 
     CommandMenuItem menuItemCompress = new CommandMenuItem(CoreBundle.get("key.compress"),
-        "value_panel:compress", AwesomeIcon.create(AwesomeIcon.FA_COMPRESS));
+        "value-panel:compress", AwesomeIcon.create(AwesomeIcon.FA_COMPRESS));
     menuItemCompress.setContextMenu(true);
     popupMenu.add(menuItemCompress);
 
     CommandMenuItem menuItemToggleFloating =
-        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value_panel:toggleFloating");
+        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value-panel:toggle-floating");
     menuItemToggleFloating.setContextMenu(true);
     popupMenu.add(menuItemToggleFloating);
 
@@ -168,8 +168,8 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
 
     toolBar.add(dropDownButton);
 
-    // toolBar.add("value_panel:expand", AwesomeIcon.FA_EXPAND, "Expand");
-    // toolBar.add("value_panel:compress", AwesomeIcon.FA_COMPRESS, "Compress");
+    // toolBar.add("value-panel:expand", AwesomeIcon.FA_EXPAND, "Expand");
+    // toolBar.add("value-panel:compress", AwesomeIcon.FA_COMPRESS, "Compress");
 
     return toolBar;
   }

@@ -28,7 +28,6 @@ grid:delete-cell	!editing_cell
 grid:select-all	!editing_cell	
 grid:select-entire-row	!editing_cell	
 grid:select-entire-column	!editing_cell	
-grid:start-edit	!editing_cell	
 grid:fill-down	!editing_cell	
 grid:fill-up	!editing_cell	
 grid:fill-left	!editing_cell	
@@ -67,6 +66,7 @@ grid:insert-columns-left	available(csv-sheet)
 grid:insert-columns-right	available(csv-sheet)	
 grid:delete-columns	available(csv-sheet)	
 grid:go-to-line	available(csv-sheet)	
+grid:start-edit	available(csv-sheet)	
 grid:stop-edit	editing_cell	
 grid:cancel-edit	editing_cell	
 grid:autofit-column-width	available(csv-sheet)	

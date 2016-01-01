@@ -204,10 +204,10 @@ public interface Range {
   Range sort(Object sortSpecObj);
 
   /**
+   * Executes a provided function for each cell in the range
    *
    * @param callback
    * @param orientation
-   * @return the range, for chaining
    */
   void forEach(CellVisitor callback);
 }

@@ -71,7 +71,7 @@ grid:not(:editing)
 
 cell-editor
 	escape	grid:cancel-edit
-	enter	grid:stop-edit
+	enter	grid:move-down-in-active-range
 	shortcut+z	cell-editor:undo
 	shortcut+y	cell-editor:redo
 	alt+enter	cell-editor:insert-break
@@ -122,10 +122,6 @@ cell-editor:quick-edit
 	right	grid:move-right
 	up	grid:move-up
 	down	grid:move-down
-	tab	grid:move-right-in-active-range
-	shift+tab	grid:move-left-in-active-range
-	enter	grid:move-down-in-active-range
-	shift+enter	grid:move-up-in-active-range
 
 value-panel
 	escape	grid:cancel-edit

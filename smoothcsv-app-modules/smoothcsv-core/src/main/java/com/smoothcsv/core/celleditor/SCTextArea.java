@@ -17,7 +17,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.Action;
 import javax.swing.ActionMap;
-import javax.swing.InputMap;
 
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
@@ -47,11 +46,6 @@ public class SCTextArea extends ExTextArea implements SmoothComponent {
     this.originalAm = getActionMap();
     this.componentSupport = new SmoothComponentSupport(this, componentTypeName);
   }
-
-  // @Override
-  // public String getUIClassID() {
-  // return uiClassID;
-  // }
 
   public void invokeOriginalAction(String key) {
     ActionEvent e = new ActionEvent(this, 0, key);

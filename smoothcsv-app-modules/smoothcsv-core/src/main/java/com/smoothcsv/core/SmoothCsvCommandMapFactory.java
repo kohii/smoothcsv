@@ -51,8 +51,8 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
     }
 
     @Override
-    protected Action createActionFromCommand(String[] commandId) {
-      return new CommandWrapperAction(commandId) {
+    protected Action createActionFromCommand(String[] commandIds) {
+      return new CommandWrapperAction(commandIds) {
         @Override
         protected void executeCommand(String commandId) {
           super.executeCommand(commandId);

@@ -56,7 +56,7 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.util.KeyStrokeUtils;
 import com.smoothcsv.swing.action.SimpleAction;
 import com.smoothcsv.swing.table.ExTable;
@@ -244,13 +244,13 @@ public class CommandPalette extends JDialog {
     // Enable "app:toggle-command-palette" command in this component.
     // TODO There should be any better way to achieve it.
     String toggleCommandId = "app:toggle-command-palette";
-    Command toggleCommand = CommandRepository.instance().getCommandOrNull(toggleCommandId);
+    Command toggleCommand = CommandRegistry.instance().getCommandOrNull(toggleCommandId);
     if (toggleCommand != null) {
       im.put(CommandKeymap.getDefault().findKeyStroke(toggleCommandId), toggleCommandId);
       am.put(toggleCommandId, new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          CommandRepository.instance().runCommandIfExists(toggleCommandId);
+          CommandRegistry.instance().runCommandIfExists(toggleCommandId);
         }
       });
     }
@@ -271,7 +271,7 @@ public class CommandPalette extends JDialog {
           SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-              CommandRepository.instance().runCommand(commandDef.getCommandId());
+              CommandRegistry.instance().runCommand(commandDef.getCommandId());
             }
           });
         }
@@ -314,7 +314,7 @@ public class CommandPalette extends JDialog {
     if (b) {
       textfield.setText("");
 
-      List<CommandDef> items = CommandRepository.instance().getEnabledCommands();
+      List<CommandDef> items = CommandRegistry.instance().getEnabledCommands();
       commandListModel.setData(items);
 
       JFrame frame = SCApplication.components().getFrame();
@@ -346,7 +346,7 @@ public class CommandPalette extends JDialog {
     private List<CommandDef> filteredItem;
 
     public CommandPaletteListModel() {
-      allItems = CommandRepository.instance().getEnabledCommands();
+      allItems = CommandRegistry.instance().getEnabledCommands();
       filteredItem = allItems;
     }
 

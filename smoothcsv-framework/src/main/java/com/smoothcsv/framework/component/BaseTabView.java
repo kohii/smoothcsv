@@ -31,13 +31,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import lombok.Getter;
-
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.component.view.ViewInfo;
-import com.smoothcsv.framework.error.ErrorHandlerFactory;
+
+import lombok.Getter;
 
 public abstract class BaseTabView<T extends ViewInfo> extends JPanel implements SmoothComponent {
 
@@ -129,11 +128,7 @@ public abstract class BaseTabView<T extends ViewInfo> extends JPanel implements 
       closeButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          try {
-            onCloseIconClicked();
-          } catch (Throwable t) {
-            ErrorHandlerFactory.getErrorHandler().handle(t);
-          }
+          onCloseIconClicked();
         }
       });
       add(tabTitle, BorderLayout.CENTER);

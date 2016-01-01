@@ -46,7 +46,6 @@ import com.smoothcsv.framework.SCApplication.BeforeOpenWindowEvent;
 import com.smoothcsv.framework.SCApplication.ShutdownEvent;
 import com.smoothcsv.framework.SCApplication.StartupEvent;
 import com.smoothcsv.framework.SCApplication.WindowOpendEvent;
-import com.smoothcsv.framework.command.CommandRepository;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.SCFrame;
 import com.smoothcsv.framework.component.SCFrame.FileDroppedEvent;

@@ -30,6 +30,6 @@ public class CommandActionListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    CommandRepository.instance().runCommand(commandId);
+    CommandRegistry.instance().runCommand(commandId);
   }
 }

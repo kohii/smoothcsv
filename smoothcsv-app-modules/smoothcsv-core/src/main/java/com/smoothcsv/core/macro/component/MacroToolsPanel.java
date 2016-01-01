@@ -33,7 +33,7 @@ import com.smoothcsv.core.macro.ConsoleInputHandler;
 import com.smoothcsv.core.macro.component.SimpleTabbedPane.TabChangeEvent;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.command.CommandActionListener;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.event.SCListener;
@@ -99,7 +99,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     toggleConsoleAlwaysVisibleBtn = new AwesomeIconToggleButton(AwesomeIconConstants.FA_TERMINAL);
     toggleConsoleAlwaysVisibleBtn.setToolTipText(CoreBundle.get("key.macro.toggleConsole"));
     toggleConsoleAlwaysVisibleBtn
-        .addActionListener(new CommandActionListener("macro:toggleConsole"));
+        .addActionListener(new CommandActionListener("macro:toggle-console"));
     GridBagConstraints gbc_cosoleBtn = new GridBagConstraints();
     gbc_cosoleBtn.insets = new Insets(0, 5, 0, 15);
     gbc_cosoleBtn.anchor = GridBagConstraints.EAST;
@@ -114,7 +114,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     btnClose.setBorder(null);
     btnClose.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("macro:toggleMacroTools");
+        CommandRegistry.instance().runCommand("macro:toggle-macro-tools");
       }
     });
     GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -42,7 +43,6 @@ import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.modular.ModuleManager;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
 import com.smoothcsv.framework.setting.SettingManager;
-import com.smoothcsv.framework.util.InvocationUtils;
 
 
 /**
@@ -89,10 +89,8 @@ public abstract class SCApplication {
   }
 
   public final void launch(String[] args) {
-    InvocationUtils.run(() -> {
-      start();
-      handleArgs(args);
-    });
+    start();
+    handleArgs(args);
   }
 
   public void start() {
@@ -103,7 +101,7 @@ public abstract class SCApplication {
       }
     });
 
-    InvocationUtils.invokeLater(new Runnable() {
+    SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
         SmoothComponentManager.startAdjustingComponents();

@@ -11,38 +11,33 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.debug.command;
+package command.debug;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.util.Set;
 
-import javax.swing.JPanel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.condition.Conditions;
 
 /**
- * @author kohii
  *
+ * @author kohii
  */
-public class PrintComponentTreeCommand extends Command {
+public class PrintConditionsCommand extends Command {
+
+  static Logger LOG = LoggerFactory.getLogger(PrintConditionsCommand.class);
 
   @Override
   public void run() {
-    Container comp = (JPanel) SCApplication.components().getFrame().getContentPane();
-    print(comp, 0);
-  }
+    Set<String> conditions = Conditions.getConditionNames();
+    StringBuilder sb = new StringBuilder();
+    for (String s: conditions) {
+      sb.append(s);
+      sb.append("\n");
+    }
+    LOG.debug(sb.toString());
 
-  void print(Component comp, int depth) {
-    for (int i = 0; i < depth; i++) {
-      System.out.print("  ");
-    }
-    System.out.println(comp);
-    if (comp instanceof Container) {
-      Component[] children = ((Container) comp).getComponents();
-      for (Component component : children) {
-        print(component, depth + 1);
-      }
-    }
   }
 }

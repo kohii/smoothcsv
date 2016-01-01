@@ -15,7 +15,7 @@ package com.smoothcsv.core.macro.api.impl;
 
 import lombok.Getter;
 
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 
 /**
  * @author kohii
@@ -29,6 +29,6 @@ public class Command extends APIBase {
   private Command() {}
 
   public boolean run(String id) {
-    return CommandRepository.instance().runCommand(id);
+    return CommandRegistry.instance().runCommand(id);
   }
 }

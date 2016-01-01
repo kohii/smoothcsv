@@ -11,33 +11,19 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.debug.command;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package command.debug;
 
 import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.command.CommandRegistry;
 
 /**
- *
  * @author kohii
+ *
  */
-public class EnableWatchThreadCommand extends Command  {
-
-  static Logger LOG = LoggerFactory.getLogger(EnableWatchThreadCommand.class);
-
-  Thread thread;
-
+public class PrintCommandsCommand extends Command{
+  
   @Override
   public void run() {
-    if (thread == null) {
-      start();
-    } else {
-      thread.interrupt();
-    }
-  }
-
-  void start() {
-    
+    System.out.println(CommandRegistry.instance());
   }
 }

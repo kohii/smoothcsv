@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smoothcsv.commons.utils.StringUtils;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 
 /**
  * @author kohii
@@ -44,8 +44,8 @@ public class CommandActionMap extends ActionMap {
         String[] ids = StringUtils.split(keyString, ',');
         ArrayList<String> actualIds = new ArrayList<>(ids.length);
         for (String id : ids) {
-          if (CommandRepository.instance().contains(id)) {
-            boolean isEnabled = CommandRepository.instance().isEnabled(id);
+          if (CommandRegistry.instance().contains(id)) {
+            boolean isEnabled = CommandRegistry.instance().isEnabled(id);
             LOG.debug("Command handler found. id:{}, enabled:{}", id, isEnabled);
             actualIds.add(id);
           } else {
@@ -60,8 +60,8 @@ public class CommandActionMap extends ActionMap {
       } else {
         // single command
         String id = keyString;
-        if (CommandRepository.instance().contains(id)) {
-          boolean isEnabled = CommandRepository.instance().isEnabled(id);
+        if (CommandRegistry.instance().contains(id)) {
+          boolean isEnabled = CommandRegistry.instance().isEnabled(id);
           LOG.debug("Command handler found. id:{}, enabled:{}", id, isEnabled);
           if (isEnabled) {
             return createActionFromCommand(new String[] {id});
@@ -104,7 +104,7 @@ public class CommandActionMap extends ActionMap {
     @Override
     public boolean isEnabled() {
       for (String id : commandIds) {
-        if (CommandRepository.instance().isEnabled(id)) {
+        if (CommandRegistry.instance().isEnabled(id)) {
           return true;
         }
       }
@@ -124,14 +124,14 @@ public class CommandActionMap extends ActionMap {
     @Override
     public void actionPerformed(ActionEvent e) {
       for (String id : commandIds) {
-        if (CommandRepository.instance().isEnabled(id)) {
+        if (CommandRegistry.instance().isEnabled(id)) {
           executeCommand(id);
         }
       }
     }
 
     protected void executeCommand(String commandId) {
-      CommandRepository.instance().runCommand(commandId);
+      CommandRegistry.instance().runCommand(commandId);
     }
   }
 }

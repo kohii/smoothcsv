@@ -25,7 +25,7 @@ import javax.swing.SwingUtilities;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 
@@ -75,7 +75,7 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
       setVisible(visibleWhen.getValue());
     }
 
-    CommandDef def = CommandRepository.instance().getDef(commandId);
+    CommandDef def = CommandRegistry.instance().getDef(commandId);
     Condition enableCondition = def.getEnableWhen();
 
     if (enableCondition != null) {
@@ -145,7 +145,7 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
     SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
-        CommandRepository.instance().runCommand(getCommandId());
+        CommandRegistry.instance().runCommand(getCommandId());
       }
     });
   }

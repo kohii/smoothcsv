@@ -28,7 +28,7 @@ import javax.swing.border.Border;
 
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 
@@ -43,7 +43,7 @@ public class SCToolBar extends JToolBar {
   }
 
   public CommandDef add(String commandId, Icon icon, String caption) {
-    CommandDef commandDef = CommandRepository.instance().getDef(commandId);
+    CommandDef commandDef = CommandRegistry.instance().getDef(commandId);
     super.add(new ToolBarAction(commandDef, icon, caption));
     return commandDef;
   }
@@ -104,7 +104,7 @@ public class SCToolBar extends JToolBar {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-      CommandRepository.instance().runCommand(commandId);
+      CommandRegistry.instance().runCommand(commandId);
     }
   }
 

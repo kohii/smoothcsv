@@ -23,7 +23,7 @@ import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.SCApplication.AfterCreateGuiEvent;
 import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.io.ArrayCsvReader;
@@ -63,7 +63,7 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
 
     loadConditions();
     loadBundles();
-    loadCommands(CommandRepository.instance());
+    loadCommands(CommandRegistry.instance());
     loadKeymap(CommandKeymap.getDefault());
 
     SCApplication.getApplication().listeners().on(SCApplication.AfterCreateGuiEvent.class,
@@ -90,9 +90,9 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
 
 
   /**
-   * @param repository
+   * @param registry
    */
-  protected void loadCommands(CommandRepository repository) {
+  protected void loadCommands(CommandRegistry registry) {
     InputStream in = getResourceAsStream(RESOURCE_NAME_COMMANDS, SETTINGFILE_POSTFIX, manifest);
     if (in == null) {
       return;
@@ -104,7 +104,7 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
       while ((rowData = reader.readRow()) != null) {
         System.out.println(rowData[0] +'\t'+rowData[1] +'\t'+ rowData[2]);
         if (StringUtils.isNotEmpty(rowData[0])) {
-          repository.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
+          registry.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
         }
       }
     } catch (IOException e) {

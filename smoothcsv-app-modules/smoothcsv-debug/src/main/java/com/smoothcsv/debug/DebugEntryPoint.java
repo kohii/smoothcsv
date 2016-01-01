@@ -23,17 +23,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smoothcsv.commons.utils.FileUtils;
-import com.smoothcsv.debug.command.EnableWatchThreadCommand;
-import com.smoothcsv.debug.command.PrintComponentTreeCommand;
-import com.smoothcsv.debug.command.PrintConditionsCommand;
-import com.smoothcsv.debug.command.PrintFocusOwnerCommand;
-import com.smoothcsv.debug.command.PrintGridDataCommand;
-import com.smoothcsv.debug.command.PrintKeymapCommand;
-import com.smoothcsv.debug.command.PrintMenuComponentTreeCommand;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandKeymap.Keybinding;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
@@ -70,14 +63,14 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
     app.listeners().on(SCApplication.WindowOpendEvent.class, e -> {
 
       LOG.debug(
-          "\ncommands:*************************************** \n" + CommandRepository.instance());
+          "\ncommands:*************************************** \n" + CommandRegistry.instance());
       LOG.debug(
           "\nkeymaps:**************************************** \n" + CommandKeymap.getDefault());
 
       for (Entry<CssSelector, List<Keybinding>> entry : CommandKeymap.getDefault().getAll()
           .entrySet()) {
         for (Keybinding kb : entry.getValue()) {
-          if (!CommandRepository.instance().isValid(kb.getCommand())) {
+          if (!CommandRegistry.instance().isValid(kb.getCommand())) {
             LOG.error("keymap contains invalid command: {}", kb.getCommand());
           }
         }
@@ -97,16 +90,5 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
         // }
       }
     });
-  }
-
-  @Override
-  protected void loadCommands(CommandRepository commands) {
-    commands.register("debug:enable-watch-thread", new EnableWatchThreadCommand());
-    commands.register("debug:print-focus-owner", new PrintFocusOwnerCommand());
-    commands.register("debug:print-keymap", new PrintKeymapCommand());
-    commands.register("debug:print-components", new PrintComponentTreeCommand());
-    commands.register("debug:print-menu-components", new PrintMenuComponentTreeCommand());
-    commands.register("debug:print-grid-data", new PrintGridDataCommand());
-    commands.register("debug:print-conditions", new PrintConditionsCommand());
   }
 }

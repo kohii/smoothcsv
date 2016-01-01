@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.smoothcsv.csv.NewlineCharacter;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.ManualCondition;
 
 import command.app.ToggleCommandPaletteCommand;
@@ -73,7 +73,7 @@ public class MacroRecorder {
   }
 
   public void recordCommand(String command) {
-    if (CommandRepository.instance()
+    if (CommandRegistry.instance()
         .getCommandOrNull(command) instanceof ToggleCommandPaletteCommand) {
       return;
     }

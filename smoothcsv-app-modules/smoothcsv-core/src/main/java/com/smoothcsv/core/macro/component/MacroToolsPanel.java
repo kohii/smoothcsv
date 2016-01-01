@@ -33,7 +33,7 @@ import com.smoothcsv.core.macro.ConsoleInputHandler;
 import com.smoothcsv.core.macro.component.SimpleTabbedPane.TabChangeEvent;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.command.CommandActionListener;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.event.SCListener;
@@ -114,7 +114,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     btnClose.setBorder(null);
     btnClose.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRepository.instance().runCommand("macro:toggleMacroTools");
+        CommandRegistry.instance().runCommand("macro:toggleMacroTools");
       }
     });
     GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

@@ -27,7 +27,7 @@ import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.command.CommandRepository;
+import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 
@@ -49,7 +49,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
     app.setAboutHandler(new AboutHandler() {
       @Override
       public void handleAbout(AboutEvent e) {
-        CommandRepository.instance().runCommand("app:about");
+        CommandRegistry.instance().runCommand("app:about");
       }
     });
 
@@ -79,7 +79,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
     app.setPreferencesHandler(new PreferencesHandler() {
       @Override
       public void handlePreferences(PreferencesEvent e) {
-        CommandRepository.instance().runCommand("app:show-settings");
+        CommandRegistry.instance().runCommand("app:show-settings");
       }
     });
 

@@ -30,15 +30,15 @@ import com.smoothcsv.framework.exception.CommandNotFoundException;
  * @author kohii
  *
  */
-public final class CommandRepository {
+public final class CommandRegistry {
 
-  private static CommandRepository commandRepository = new CommandRepository();
+  private static CommandRegistry commandRegistry = new CommandRegistry();
 
   /**
    * @return the instance
    */
-  public static CommandRepository instance() {
-    return commandRepository;
+  public static CommandRegistry instance() {
+    return commandRegistry;
   }
 
   private final Map<String, CommandDef> commandDefs = new HashMap<>(300);
@@ -88,7 +88,6 @@ public final class CommandRepository {
     }
     return false;
   }
-
 
   public boolean runCommandIfExists(String id) {
     if (!contains(id)) {

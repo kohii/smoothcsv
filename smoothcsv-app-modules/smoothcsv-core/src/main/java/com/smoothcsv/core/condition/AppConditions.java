@@ -21,7 +21,6 @@ import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.SCTabbedPane;
-import com.smoothcsv.framework.condition.AvailableCondition;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.event.SCListener;
@@ -165,7 +164,11 @@ public class AppConditions {
       }
     });
 
-    Conditions.register("editing_cell", new AvailableCondition("cell-editor"));
+    Condition whenEditingCell = Conditions.getCondition("available(cell-editor)");
+    Conditions.register("editing_cell", whenEditingCell);
+
+    Condition whenNotEditingCell = Conditions.getCondition("available(csv-sheet)&&!editing_cell");
+    Conditions.register("not_editing_cell", whenNotEditingCell);
 
     Conditions.register("recording_macro", MacroRecorder.RECORDING);
   }

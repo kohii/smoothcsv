@@ -17,24 +17,24 @@ app:show-settings
 		
 grid:undo	csv_sheet_can_undo	
 grid:redo	csv_sheet_can_redo	
-grid:copy	available(csv-sheet)&&!editing_cell	
-grid:cut	available(csv-sheet)&&!editing_cell	
-grid:paste	available(csv-sheet)&&!editing_cell	
-grid:copy-using-file-format	available(csv-sheet)&&!editing_cell	
-grid:cut-using-file-format	available(csv-sheet)&&!editing_cell	
-grid:paste-using-file-format	available(csv-sheet)&&!editing_cell	
-grid:clear	available(csv-sheet)&&!editing_cell	
-grid:delete-cell	available(csv-sheet)&&!editing_cell	
-grid:select-all	available(csv-sheet)&&!editing_cell	
-grid:select-entire-row	available(csv-sheet)&&!editing_cell	
-grid:select-entire-column	available(csv-sheet)&&!editing_cell	
-grid:fill-down	available(csv-sheet)&&!editing_cell	
-grid:fill-up	available(csv-sheet)&&!editing_cell	
-grid:fill-left	available(csv-sheet)&&!editing_cell	
-grid:fill-right	available(csv-sheet)&&!editing_cell	
-grid:sort	available(csv-sheet)&&!editing_cell	
-grid:sort-selected-rows	available(csv-sheet)&&!editing_cell	
-grid:sort-selected-range	available(csv-sheet)&&!editing_cell	
+grid:copy	not_editing_cell	
+grid:cut	not_editing_cell	
+grid:paste	not_editing_cell	
+grid:copy-using-file-format	not_editing_cell	
+grid:cut-using-file-format	not_editing_cell	
+grid:paste-using-file-format	not_editing_cell	
+grid:clear	not_editing_cell	
+grid:delete-cell	not_editing_cell	
+grid:select-all	not_editing_cell	
+grid:select-entire-row	not_editing_cell	
+grid:select-entire-column	not_editing_cell	
+grid:fill-down	not_editing_cell	
+grid:fill-up	not_editing_cell	
+grid:fill-left	not_editing_cell	
+grid:fill-right	not_editing_cell	
+grid:sort	not_editing_cell	
+grid:sort-selected-rows	not_editing_cell	
+grid:sort-selected-range	not_editing_cell	
 grid:move-left	available(csv-sheet)	command.grid.MoveCommand {"direction":"left"}
 grid:move-right	available(csv-sheet)	command.grid.MoveCommand {"direction":"right"}
 grid:move-up	available(csv-sheet)	command.grid.MoveCommand {"direction":"up"}
@@ -147,12 +147,12 @@ value-panel:paste	focus(value-panel)	command.value_panel.ActionCommand {"action"
 value-panel:page-up	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
 value-panel:page-down	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
 		
-convert:upper-case	available(csv-sheet)&&!editing_cell	
-convert:lower-case	available(csv-sheet)&&!editing_cell	
-convert:swap-case	available(csv-sheet)&&!editing_cell	
-convert:title-case	available(csv-sheet)&&!editing_cell	
-convert:snake-case-to-camel-case	available(csv-sheet)&&!editing_cell	
-convert:camel-case-to-snake-case	available(csv-sheet)&&!editing_cell	
+convert:upper-case	not_editing_cell	
+convert:lower-case	not_editing_cell	
+convert:swap-case	not_editing_cell	
+convert:title-case	not_editing_cell	
+convert:snake-case-to-camel-case	not_editing_cell	
+convert:camel-case-to-snake-case	not_editing_cell	
 		
 view:previous-tab	available(csv-sheet)	
 view:next-tab	available(csv-sheet)	

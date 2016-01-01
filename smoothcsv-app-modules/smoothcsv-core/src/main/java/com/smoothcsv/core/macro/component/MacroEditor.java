@@ -14,22 +14,27 @@
 package com.smoothcsv.core.macro.component;
 
 import java.awt.BorderLayout;
+import java.util.function.Consumer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import lombok.Getter;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
+
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -39,8 +44,8 @@ import com.smoothcsv.swing.icon.AwesomeIconConstants;
 public class MacroEditor extends JPanel implements SmoothComponent {
 
   @Getter
-  private final SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-      "macro-editor");
+  private final SmoothComponentSupport componentSupport =
+      new SmoothComponentSupport(this, "macro-editor");
   @Getter
   private RSyntaxTextArea textArea;
 
@@ -54,9 +59,24 @@ public class MacroEditor extends JPanel implements SmoothComponent {
 
     toolBar.add("macro:open", AwesomeIconConstants.FA_FOLDER_OPEN_O,
         CoreBundle.get("key.open") + "...");
-    toolBar.add("macro:save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save")
-        + "...");
+    toolBar.add("macro:save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save") + "...");
+    toolBar.addSeparator();
+    JButton startRecordButton = toolBar.add("macro:toggle-recording-macro",
+        AwesomeIconConstants.FA_CIRCLE, CoreBundle.get("key.startRecordMacro"));
+    JButton stopRecordButton = toolBar.add("macro:toggle-recording-macro",
+        AwesomeIconConstants.FA_STOP, CoreBundle.get("key.stopRecordMacro"));
+    stopRecordButton.setVisible(false);
+    toolBar.addSeparator();
     toolBar.add("macro:run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.run"));
+
+    MacroRecorder.RECORDING
+        .addValueChangedListener(new Consumer<Condition.ConditionValueChangeEvent>() {
+          @Override
+          public void accept(ConditionValueChangeEvent t) {
+            startRecordButton.setVisible(!t.newValue);
+            stopRecordButton.setVisible(t.newValue);
+          }
+        });
 
     textArea = new RSyntaxTextArea();
     // textArea.setWrapStyleWord(true);
@@ -66,8 +86,8 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     // textArea.setCodeFoldingEnabled(true);
 
     RTextScrollPane scrollPane = new RTextScrollPane(textArea);
-    scrollPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,
-        UIConstants.getDefaultBorderColor()));
+    scrollPane.setBorder(
+        BorderFactory.createMatteBorder(1, 0, 0, 0, UIConstants.getDefaultBorderColor()));
     add(scrollPane, BorderLayout.CENTER);
   }
 

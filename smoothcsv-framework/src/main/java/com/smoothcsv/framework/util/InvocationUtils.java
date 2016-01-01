@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.framework.util;
 
-import javax.swing.SwingUtilities;
-
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
 
 /**
@@ -29,16 +27,6 @@ public class InvocationUtils {
     } catch (Throwable t) {
       ErrorHandlerFactory.getErrorHandler().handle(t);
     }
-  }
-
-  public static void invokeLater(Runnable runnable) {
-    SwingUtilities.invokeLater(() -> {
-      try {
-        runnable.run();
-      } catch (Throwable t) {
-        ErrorHandlerFactory.getErrorHandler().handle(t);
-      }
-    });
   }
 
   public static void runAsync(Runnable runnable) {

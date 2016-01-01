@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.ManualCondition;
 
@@ -72,13 +73,13 @@ public class MacroRecorder {
     keyTyped.append(s);
   }
 
-  public void recordCommand(String command) {
-    if (CommandRegistry.instance()
-        .getCommandOrNull(command) instanceof ToggleCommandPaletteCommand) {
+  public void recordCommand(String commandId) {
+    Command command = CommandRegistry.instance().getCommandOrNull(commandId);
+    if (command == null || command instanceof ToggleCommandPaletteCommand) {
       return;
     }
     completeKeyTyping();
-    lines.add("Command.run('" + command + "');");
+    lines.add("Command.run('" + commandId + "');");
   }
 
   public void recordMacroExecution(String pathname) {

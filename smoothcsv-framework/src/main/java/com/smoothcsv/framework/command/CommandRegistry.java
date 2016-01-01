@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.condition.Condition;
-import com.smoothcsv.framework.error.ErrorHandlerFactory;
 import com.smoothcsv.framework.exception.CommandNotFoundException;
 
 /**
@@ -43,20 +42,8 @@ public final class CommandRegistry {
 
   private final Map<String, CommandDef> commandDefs = new HashMap<>(300);
 
-  public void register(String id, Command command) {
-    register(id, command, null);
-  }
-
-  public void register(String id, Command command, Condition enableWhen) {
+  public void register(String id, Condition enableWhen, Command command) {
     commandDefs.put(id, new CommandDef(id, enableWhen, command));
-  }
-
-  public void register(String id, Condition enableWhen) {
-    commandDefs.put(id, new CommandDef(id, enableWhen));
-  }
-
-  public void register(String id) {
-    commandDefs.put(id, new CommandDef(id, null));
   }
 
   public void register(String id, Condition enableWhen, String ref) {
@@ -64,27 +51,19 @@ public final class CommandRegistry {
   }
 
   public boolean runCommand(String id) {
-    try {
-      CommandDef def = getDef(id);
-      if (def.isEnabled()) {
-        def.getCommand().execute();
-        return true;
-      }
-    } catch (RuntimeException e) {
-      ErrorHandlerFactory.getErrorHandler().handle(e);
+    CommandDef def = getDef(id);
+    if (def.isEnabled()) {
+      def.getCommand().execute();
+      return true;
     }
     return false;
   }
 
   public boolean runCommand(String id, Object... arguments) {
-    try {
-      CommandDef def = getDef(id);
-      if (def.isEnabled()) {
-        def.getCommand().execute(arguments);
-        return true;
-      }
-    } catch (RuntimeException e) {
-      ErrorHandlerFactory.getErrorHandler().handle(e);
+    CommandDef def = getDef(id);
+    if (def.isEnabled()) {
+      def.getCommand().execute(arguments);
+      return true;
     }
     return false;
   }
@@ -93,14 +72,10 @@ public final class CommandRegistry {
     if (!contains(id)) {
       return false;
     }
-    try {
-      CommandDef def = getDef(id);
-      if (def.isEnabled()) {
-        def.getCommand().execute();
-        return true;
-      }
-    } catch (RuntimeException e) {
-      ErrorHandlerFactory.getErrorHandler().handle(e);
+    CommandDef def = getDef(id);
+    if (def.isEnabled()) {
+      def.getCommand().execute();
+      return true;
     }
     return false;
   }
@@ -123,11 +98,6 @@ public final class CommandRegistry {
       return true;
     }
     return false;
-  }
-
-  public Command getCommand(String commandId) {
-    CommandDef def = getDef(commandId);
-    return def.isEnabled() ? def.getCommand() : null;
   }
 
   public Command getCommandOrNull(String commandId) {

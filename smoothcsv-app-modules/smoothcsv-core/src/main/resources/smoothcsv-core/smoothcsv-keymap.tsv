@@ -58,6 +58,34 @@ grid
 	shortcut+k	grid:delete-rows
 	shortcut+shift+k	grid:delete-columns
 	ctrl+g	grid:go-to-line
+	pageup	grid:page-up
+	pagedown	grid:page-down
+	shift+pageup	grid:select-page-up
+	shift+pagedown	grid:select-page-down
+
+@mac grid
+	cmd+left	grid:move-to-first-column
+	cmd+right	grid:move-to-last-column
+	cmd+up	grid:move-to-first-row
+	cmd+down	grid:move-to-last-row
+	alt+left	grid:move-to-left-edge-of-data-region
+	alt+right	grid:move-to-right-edge-of-data-region
+	alt+up	grid:move-to-top-edge-of-data-region
+	alt+down	grid:move-to-bottom-edge-of-data-region
+	alt+shift+left	grid:select-to-left-edge-of-data-region
+	alt+shift+right	grid:select-to-right-edge-of-data-region
+	alt+shift+up	grid:select-to-top-edge-of-data-region
+	alt+shift+down	grid:select-to-bottom-edge-of-data-region
+
+@win grid
+	ctrl+left	grid:move-to-left-edge-of-data-region
+	ctrl+right	grid:move-to-right-edge-of-data-region
+	ctrl+up	grid:move-to-top-edge-of-data-region
+	ctrl+down	grid:move-to-bottom-edge-of-data-region
+	ctrl+shift+left	grid:select-to-left-edge-of-data-region
+	ctrl+shift+right	grid:select-to-right-edge-of-data-region
+	ctrl+shift+up	grid:select-to-top-edge-of-data-region
+	ctrl+shift+down	grid:select-to-bottom-edge-of-data-region
 
 grid:not(:editing)
 	shortcut+z	grid:undo
@@ -80,44 +108,62 @@ cell-editor
 	shift+enter	cell-editor:insert-break
 	alt+tab	cell-editor:insert-tab
 	left	cell-editor:move-left
-	ctrl+b	cell-editor:move-left
 	right	cell-editor:move-right
-	ctrl+f	cell-editor:move-right
 	up	cell-editor:move-up
 	down	cell-editor:move-down
-	ctrl+p	cell-editor:move-up
-	ctrl+n	cell-editor:move-down
 	shift+left	cell-editor:select-left
 	shift+right	cell-editor:select-right
 	shift+up	cell-editor:select-up
 	shift+down	cell-editor:select-down
-	shortcut+left	cell-editor:move-to-beginning-of-line
-	ctrl+a	cell-editor:move-to-beginning-of-line
-	shortcut+right	cell-editor:move-to-end-of-line
-	ctrl+e	cell-editor:move-to-end-of-line
-	shortcut+up	cell-editor:move-to-top
-	shortcut+down	cell-editor:move-to-bottom
-	alt+left	cell-editor:move-to-previous-word
-	alt+right	cell-editor:move-to-next-word
-	shortcut+shift+left	cell-editor:select-to-beginning-of-line
-	shortcut+shift+right	cell-editor:select-to-end-of-line
-	shortcut+shift+up	cell-editor:select-to-top
-	shortcut+shift+down	cell-editor:select-to-bottom
-	alt+shift+left	cell-editor:select-to-previous-word
-	alt+shift+right	cell-editor:select-to-next-word
 	shortcut+a	cell-editor:select-all
 	shortcut+backslash	cell-editor:unselect
 	backspace	cell-editor:delete-previous
-	ctrl+h	cell-editor:delete-previous
 	delete	cell-editor:delete-next
-	ctrl+d	cell-editor:delete-next
-	alt+backspace	cell-editor:delete-previous-word
-	alt+delete	cell-editor:delete-next-word
 	shortcut+x	cell-editor:cut
 	shortcut+c	cell-editor:copy
 	shortcut+v	cell-editor:paste
 	pageup	cell-editor:page-up
 	pagedown	cell-editor:page-down
+
+@mac cell-editor
+	ctrl+b	cell-editor:move-left
+	ctrl+f	cell-editor:move-right
+	ctrl+p	cell-editor:move-up
+	ctrl+n	cell-editor:move-down
+	ctrl+shift+b	cell-editor:select-left
+	ctrl+shift+f	cell-editor:select-right
+	ctrl+shift+p	cell-editor:select-up
+	ctrl+shift+n	cell-editor:select-down
+	ctrl+a	cell-editor:move-to-beginning-of-line
+	ctrl+e	cell-editor:move-to-end-of-line
+	ctrl+h	cell-editor:delete-previous
+	ctrl+d	cell-editor:delete-next
+	cmd+left	cell-editor:move-to-beginning-of-line
+	cmd+right	cell-editor:move-to-end-of-line
+	cmd+up	cell-editor:move-to-top
+	cmd+down	cell-editor:move-to-bottom
+	cmd+shift+left	cell-editor:select-to-beginning-of-line
+	cmd+shift+right	cell-editor:select-to-end-of-line
+	cmd+shift+up	cell-editor:select-to-top
+	cmd+shift+down	cell-editor:select-to-bottom
+	alt+left	cell-editor:move-to-previous-word
+	alt+right	cell-editor:move-to-next-word
+	alt+shift+left	cell-editor:select-to-previous-word
+	alt+shift+right	cell-editor:select-to-next-word
+	alt+backspace	cell-editor:delete-previous-word
+	alt+delete	cell-editor:delete-next-word
+
+@win cell-editor
+	home	cell-editor:move-to-beginning-of-line
+	end	cell-editor:move-to-end-of-line
+	ctrl+home	cell-editor:move-to-top
+	ctrl+end	cell-editor:move-to-bottom
+	ctrl+left	cell-editor:move-to-previous-word
+	ctrl+right	cell-editor:move-to-next-word
+	ctrl+shift+left	cell-editor:select-to-previous-word
+	ctrl+shift+right	cell-editor:select-to-next-word
+	ctrl+backspace	cell-editor:delete-previous-word
+	ctrl+delete	cell-editor:delete-next-word
 
 cell-editor:quick-edit
 	left	grid:move-left
@@ -136,44 +182,62 @@ value-panel
 	shift+enter	value-panel:insert-break
 	alt+tab	value-panel:insert-tab
 	left	value-panel:move-left
-	ctrl+b	value-panel:move-left
 	right	value-panel:move-right
-	ctrl+f	value-panel:move-right
 	up	value-panel:move-up
 	down	value-panel:move-down
-	ctrl+p	value-panel:move-up
-	ctrl+n	value-panel:move-down
 	shift+left	value-panel:select-left
 	shift+right	value-panel:select-right
 	shift+up	value-panel:select-up
 	shift+down	value-panel:select-down
-	shortcut+left	value-panel:move-to-beginning-of-line
-	ctrl+a	value-panel:move-to-beginning-of-line
-	shortcut+right	value-panel:move-to-end-of-line
-	ctrl+e	value-panel:move-to-end-of-line
-	shortcut+up	value-panel:move-to-top
-	shortcut+down	value-panel:move-to-bottom
-	alt+left	value-panel:move-to-previous-word
-	alt+right	value-panel:move-to-next-word
-	shortcut+shift+left	value-panel:select-to-beginning-of-line
-	shortcut+shift+right	value-panel:select-to-end-of-line
-	shortcut+shift+up	value-panel:select-to-top
-	shortcut+shift+down	value-panel:select-to-bottom
-	alt+shift+left	value-panel:select-to-previous-word
-	alt+shift+right	value-panel:select-to-next-word
 	shortcut+a	value-panel:select-all
 	shortcut+backslash	value-panel:unselect
 	backspace	value-panel:delete-previous
-	ctrl+h	value-panel:delete-previous
 	delete	value-panel:delete-next
-	ctrl+d	value-panel:delete-next
-	alt+backspace	value-panel:delete-previous-word
-	alt+delete	value-panel:delete-next-word
 	shortcut+x	value-panel:cut
 	shortcut+c	value-panel:copy
 	shortcut+v	value-panel:paste
 	pageup	value-panel:page-up
 	pagedown	value-panel:page-down
+
+@mac value-panel
+	ctrl+b	value-panel:move-left
+	ctrl+f	value-panel:move-right
+	ctrl+p	value-panel:move-up
+	ctrl+n	value-panel:move-down
+	ctrl+shift+b	value-panel:select-left
+	ctrl+shift+f	value-panel:select-right
+	ctrl+shift+p	value-panel:select-up
+	ctrl+shift+n	value-panel:select-down
+	ctrl+a	value-panel:move-to-beginning-of-line
+	ctrl+e	value-panel:move-to-end-of-line
+	ctrl+h	value-panel:delete-previous
+	ctrl+d	value-panel:delete-next
+	cmd+left	value-panel:move-to-beginning-of-line
+	cmd+right	value-panel:move-to-end-of-line
+	cmd+up	value-panel:move-to-top
+	cmd+down	value-panel:move-to-bottom
+	cmd+shift+left	value-panel:select-to-beginning-of-line
+	cmd+shift+right	value-panel:select-to-end-of-line
+	cmd+shift+up	value-panel:select-to-top
+	cmd+shift+down	value-panel:select-to-bottom
+	alt+left	value-panel:move-to-previous-word
+	alt+right	value-panel:move-to-next-word
+	alt+shift+left	value-panel:select-to-previous-word
+	alt+shift+right	value-panel:select-to-next-word
+	alt+backspace	value-panel:delete-previous-word
+	alt+delete	value-panel:delete-next-word
+
+@win value-panel
+	home	value-panel:move-to-beginning-of-line
+	end	value-panel:move-to-end-of-line
+	ctrl+home	value-panel:move-to-top
+	ctrl+end	value-panel:move-to-bottom
+	ctrl+left	value-panel:move-to-previous-word
+	ctrl+right	value-panel:move-to-next-word
+	ctrl+shift+left	value-panel:select-to-previous-word
+	ctrl+shift+right	value-panel:select-to-next-word
+	ctrl+backspace	value-panel:delete-previous-word
+	ctrl+delete	value-panel:delete-next-word
 
 find-panel
 	escape	find:hide

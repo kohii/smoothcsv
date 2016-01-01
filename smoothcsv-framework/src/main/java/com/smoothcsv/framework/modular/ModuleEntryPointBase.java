@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.SCApplication.AfterCreateGuiEvent;
 import com.smoothcsv.framework.command.CommandKeymap;
@@ -31,6 +32,8 @@ import com.smoothcsv.framework.io.CsvSupport;
 import com.smoothcsv.framework.menu.ContextMenuManager;
 import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.menu.ToolBarItems;
+import com.smoothcsv.framework.selector.CssSelector;
+import com.smoothcsv.framework.selector.SelectorFactory;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.framework.util.SCBundle;
 
@@ -102,7 +105,7 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
-        System.out.println(rowData[0] +'\t'+rowData[1] +'\t'+ rowData[2]);
+        System.out.println(rowData[0] + '\t' + rowData[1] + '\t' + rowData[2]);
         if (StringUtils.isNotEmpty(rowData[0])) {
           registry.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
         }
@@ -120,18 +123,35 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
     try (InputStream _in = in;
         ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
-      String prevContext = null;
+      CssSelector prevContext = null;
       String[] rowData;
+      boolean ignore = false;
       while ((rowData = reader.readRow()) != null) {
         String context = rowData[0];
         String keyText = rowData[1];
         String commandId = rowData[2];
 
         if (!StringUtils.isEmpty(context)) {
-          prevContext = context;
+          ignore = false;
+          if (context.charAt(0) == '@') {
+            if (context.startsWith("@mac ")) {
+              if (Env.getOS() == Env.OS_MAC) {
+                context = context.substring("@mac ".length()).trim();
+              } else {
+                ignore = true;
+              }
+            } else if (context.startsWith("@win ")) {
+              if (Env.getOS() == Env.OS_WINDOWS) {
+                context = context.substring("@win ".length()).trim();
+              } else {
+                ignore = true;
+              }
+            }
+          }
+          prevContext = ignore ? null : SelectorFactory.parseQuery(context);
         }
 
-        if (!StringUtils.isEmpty(keyText) && !StringUtils.isEmpty(commandId)) {
+        if (!StringUtils.isEmpty(keyText) && !StringUtils.isEmpty(commandId) && !ignore) {
           keymap.add(keyText, commandId, prevContext);
         }
       }

@@ -13,6 +13,8 @@
  */
 package command.grid;
 
+import java.util.Map;
+
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -23,7 +25,7 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
  * @author kohii
  *
  */
-public class GridSheetSelectEdgeCommand extends GridCommand {
+public class MoveToDataEdgeCommand extends GridCommand {
 
   public static final int PREVIOUS = -1;
   public static final int NEXT = +1;
@@ -32,13 +34,47 @@ public class GridSheetSelectEdgeCommand extends GridCommand {
   protected final int dy;
   protected final boolean extend;
 
-  public GridSheetSelectEdgeCommand(String commandId, int dx, int dy, boolean extend) {
+  public MoveToDataEdgeCommand(Map<String, Object> options) {
+    this(getDirectionX(options), getDirectionY(options), getExtend(options));
+  }
 
-    assert (-1 <= dx && dx <= 1 && -1 <= dy && dy <= 1);
+  private static int getDirectionX(Map<String, Object> options) {
+    Object d = options.get("direction");
+    if (d != null) {
+      if (d.equals("left")) {
+        return -1;
+      } else if (d.equals("right")) {
+        return +1;
+      }
+    }
+    return 0;
+  }
 
-    // make sure one is zero, but not both
-    assert (dx == 0 || dy == 0) && !(dx == 0 && dy == 0);
+  private static int getDirectionY(Map<String, Object> options) {
+    Object d = options.get("direction");
+    if (d != null) {
+      if (d.equals("up")) {
+        return -1;
+      } else if (d.equals("down")) {
+        return +1;
+      }
+    }
+    return 0;
+  }
 
+  private static boolean getExtend(Map<String, Object> options) {
+    Object e = options.get("extend");
+    if (e != null) {
+      if (e instanceof Boolean) {
+        return (boolean) e;
+      } else {
+        return Boolean.valueOf(e.toString());
+      }
+    }
+    return false;
+  }
+
+  private MoveToDataEdgeCommand(int dx, int dy, boolean extend) {
     this.dx = dx;
     this.dy = dy;
     this.extend = extend;
@@ -46,7 +82,7 @@ public class GridSheetSelectEdgeCommand extends GridCommand {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.smoothcsv.core.command.GridSheetCommandAction#run(com.smoothcsv.core.component.csvgridsheet
    * .CsvGridSheetPane)
@@ -64,8 +100,8 @@ public class GridSheetSelectEdgeCommand extends GridCommand {
     changeSelection(gridSheetPane, sm, dx, dy, extend, anchorRow, anchorColumn);
   }
 
-  protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm,
-      int dx, int dy, boolean extend, int anchorRow, int anchorColumn) {
+  protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm, int dx,
+      int dy, boolean extend, int anchorRow, int anchorColumn) {
     GridSheetTable table = gridSheetPane.getTable();
 
     if (dy != 0) {

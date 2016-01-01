@@ -21,13 +21,12 @@ import java.util.Map.Entry;
 
 import javax.swing.KeyStroke;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.selector.CssSelector;
-import com.smoothcsv.framework.selector.SelectorFactory;
 import com.smoothcsv.framework.util.KeyStrokeUtils;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author kohii
@@ -55,10 +54,6 @@ public class CommandKeymap {
   }
 
   private final Map<CssSelector, List<Keybinding>> keymaps = new HashMap<>();
-
-  public void add(String key, String commandId, String context) {
-    add(key, commandId, context == null ? null : SelectorFactory.parseQuery(context));
-  }
 
   public void add(String key, String commandId, CssSelector context) {
     Keybinding kb = new Keybinding(KeyStrokeUtils.parse(key), commandId);
@@ -128,7 +123,7 @@ public class CommandKeymap {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#toString()
    */
   @Override

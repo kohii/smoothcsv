@@ -15,6 +15,7 @@ package command.grid;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.Map;
 
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
@@ -24,23 +25,59 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
  * @author kohii
  *
  */
-public class GridSheetScrollSelectCommand extends GridSheetSelectCommand {
+public class MoveByPageCommand extends GridSheetSelectCommand {
 
   public static final int SCROLL_DOWN = -1;
   public static final int SCROLL_UP = +1;
 
-  public GridSheetScrollSelectCommand(String commandId, int dx, int dy, boolean extend) {
+
+  public MoveByPageCommand(Map<String, Object> options) {
+    this(getDirectionX(options), getDirectionY(options), getExtend(options));
+  }
+
+  private static int getDirectionX(Map<String, Object> options) {
+    Object d = options.get("direction");
+    if (d != null) {
+      if (d.equals("left")) {
+        return -1;
+      } else if (d.equals("right")) {
+        return +1;
+      }
+    }
+    return 0;
+  }
+
+  private static int getDirectionY(Map<String, Object> options) {
+    Object d = options.get("direction");
+    if (d != null) {
+      if (d.equals("up")) {
+        return -1;
+      } else if (d.equals("down")) {
+        return +1;
+      }
+    }
+    return 0;
+  }
+
+  private static boolean getExtend(Map<String, Object> options) {
+    Object e = options.get("extend");
+    if (e != null) {
+      if (e instanceof Boolean) {
+        return (boolean) e;
+      } else {
+        return Boolean.valueOf(e.toString());
+      }
+    }
+    return false;
+  }
+
+  private MoveByPageCommand(int dx, int dy, boolean extend) {
     super(dx, dy, extend);
-
-    assert (-1 <= dx && dx <= 1 && -1 <= dy && dy <= 1);
-
-    // make sure one is zero, but not both
-    assert (dx == 0 || dy == 0) && !(dx == 0 && dy == 0);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.smoothcsv.core.command.gridsheet.GridSheetSelectCommand#changeSelection(com.smoothcsv.core
    * .component.csvgridsheet.CsvGridSheetPane,
@@ -48,11 +85,11 @@ public class GridSheetScrollSelectCommand extends GridSheetSelectCommand {
    * int)
    */
   @Override
-  protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm,
-      int dx, int dy, boolean extend, int anchorRow, int anchorColumn) {
+  protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm, int dx,
+      int dy, boolean extend, int anchorRow, int anchorColumn) {
     GridSheetTable table = gridSheetPane.getTable();
 
-    Dimension delta = table.getParent().getSize();
+    Dimension delta = table.getParent().getParent().getSize();
 
     if (dy != 0) { // vertically
       Rectangle r = table.getCellRect(anchorRow, 0, true);
@@ -83,9 +120,8 @@ public class GridSheetScrollSelectCommand extends GridSheetSelectCommand {
       if (newColumn == -1) {
         boolean ltr = table.getComponentOrientation().isLeftToRight();
 
-        newColumn =
-            dx > 0 ? (ltr ? gridSheetPane.getColumnCount() : 0) : (ltr ? 0 : gridSheetPane
-                .getColumnCount());
+        newColumn = dx > 0 ? (ltr ? gridSheetPane.getColumnCount() : 0)
+            : (ltr ? 0 : gridSheetPane.getColumnCount());
 
       }
       dx = newColumn - anchorColumn;

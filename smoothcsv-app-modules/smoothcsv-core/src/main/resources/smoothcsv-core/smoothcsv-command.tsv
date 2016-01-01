@@ -59,6 +59,18 @@ grid:move-left-in-active-range	available(csv-sheet)	command.grid.NextCellCommand
 grid:move-right-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"right"}
 grid:move-up-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"up"}
 grid:move-down-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"down"}
+grid:page-up	available(csv-sheet)	command.grid.MoveByPageCommand {"direction":"up"}
+grid:page-down	available(csv-sheet)	command.grid.MoveByPageCommand {"direction":"down"}
+grid:select-page-up	available(csv-sheet)	command.grid.MoveByPageCommand {"direction":"up","extend":true}
+grid:select-page-down	available(csv-sheet)	command.grid.MoveByPageCommand {"direction":"down","extend":true}
+grid:move-to-left-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"left"}
+grid:move-to-right-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"right"}
+grid:move-to-top-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"up"}
+grid:move-to-bottom-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"down"}
+grid:select-to-left-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"left","extend":true}
+grid:select-to-right-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"right","extend":true}
+grid:select-to-top-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"up","extend":true}
+grid:select-to-bottom-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"down","extend":true}
 grid:insert-rows-above	available(csv-sheet)	
 grid:insert-rows-below	available(csv-sheet)	
 grid:delete-rows	available(csv-sheet)	

@@ -80,7 +80,7 @@ View
 
 Tools
 	Toggle Command Palette...	app:toggle-command-palette
-	SQL Tools...	app:show-sql-tools
+#	SQL Tools...	app:show-sql-tools
 
 Macro
 	Toggle Macro Tools	macro:toggle-macro-tools

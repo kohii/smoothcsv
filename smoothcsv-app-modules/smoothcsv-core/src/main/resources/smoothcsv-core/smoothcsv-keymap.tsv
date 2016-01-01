@@ -14,6 +14,8 @@ body
 	alt+shift+f	grid:autofit-column-width-to-selected-cell
 	ctrl+tab	view:next-tab
 	ctrl+shift+tab	view:previous-tab
+	ctrl+q	macro:toggle-recording-macro
+	ctrl+shift+q	macro:run
 
 csv-sheet
 	shortcut+f	find:show
@@ -183,7 +185,6 @@ macro-tools
 macro-editor
 	shortcut+s	macro:save
 	shortcut+o	macro:open
-	shortcut+enter	macro:run
 
 macro-list
 	delete	macrolist:remove

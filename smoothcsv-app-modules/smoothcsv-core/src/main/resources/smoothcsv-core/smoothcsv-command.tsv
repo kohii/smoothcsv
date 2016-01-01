@@ -56,10 +56,10 @@ grid:select-to-first-row	available(csv-sheet)	command.grid.MoveToCommand {"to":"
 grid:select-to-last-row	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastrow","extend":true}
 grid:select-to-first-cell	available(csv-sheet)	command.grid.MoveToCommand {"to":"firstcell","extend":true}
 grid:select-to-last-cell	available(csv-sheet)	command.grid.MoveToCommand {"to":"lastcell","extend":true}
-grid:move-right-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"left"}
-grid:move-left-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"right"}
-grid:move-down-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"up"}
-grid:move-up-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"down"}
+grid:move-left-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"left"}
+grid:move-right-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"right"}
+grid:move-up-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"up"}
+grid:move-down-in-active-range	available(csv-sheet)	command.grid.NextCellCommand {"direction":"down"}
 grid:insert-rows-above	available(csv-sheet)	
 grid:insert-rows-below	available(csv-sheet)	
 grid:delete-rows	available(csv-sheet)	

@@ -85,7 +85,7 @@ public class SqlTablePreviewPanel extends AbstractSqlTableDetailsPanel {
       CsvGridSheetModel model =
           ((SqlCsvSheetTableInfo) tableInfo).getCsvSheet().getGridSheetPane().getModel();
       List<List> dataList = model.getDataList(0, 5);
-      previewGrid.getModel().setDataList(dataList);
+      ((GridSheetModel) previewGrid.getModel()).setDataList(dataList);
     }
   }
 
@@ -171,10 +171,12 @@ public class SqlTablePreviewPanel extends AbstractSqlTableDetailsPanel {
     public void setValueIsAdjusting(boolean adjusting) {}
 
     @Override
-    public void addSelectionInterval(int rowAnchor, int columnAnchor, int rowLead, int columnLead) {}
+    public void addSelectionInterval(int rowAnchor, int columnAnchor, int rowLead,
+        int columnLead) {}
 
     @Override
-    public void setSelectionInterval(int rowAnchor, int columnAnchor, int rowLead, int columnLead) {}
+    public void setSelectionInterval(int rowAnchor, int columnAnchor, int rowLead,
+        int columnLead) {}
 
     @Override
     public void setSelectionIntervalNoChangeAnchor(int minRowIndex, int minColumnIndex,

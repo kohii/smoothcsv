@@ -19,8 +19,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-import lombok.Setter;
-
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.edits.ChangeValueEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteCellEdit;
@@ -34,8 +32,8 @@ import com.smoothcsv.core.csvsheet.edits.PartialSortEdit;
 import com.smoothcsv.core.csvsheet.edits.SortEdit;
 import com.smoothcsv.core.csvsheet.edits.SpecifiedRowsSortEdit;
 import com.smoothcsv.core.sort.CsvSorter;
-import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.core.sort.CsvSorter.SortResult;
+import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.gridsheet.event.GridSheetDataEvent;
 import com.smoothcsv.swing.gridsheet.event.GridSheetStructureEvent;
@@ -43,6 +41,8 @@ import com.smoothcsv.swing.gridsheet.model.CellRect;
 import com.smoothcsv.swing.gridsheet.model.GridSheetColumn;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetRow;
+
+import lombok.Setter;
 
 /**
  * @author kohii
@@ -82,8 +82,8 @@ public class CsvGridSheetModel extends GridSheetModel {
         List rowData = getRowDataAt(j);
         if (val != null) {
           rowData.set(index + i, val);
-//        } else {
-//          rowData.subList(index + i, rowData.size()).clear();
+          // } else {
+          // rowData.subList(index + i, rowData.size()).clear();
         }
       }
     }
@@ -221,8 +221,8 @@ public class CsvGridSheetModel extends GridSheetModel {
       targetDataList.add(dataList.get(r));
     }
     SortResult sortResult = CsvSorter.sort(criterias, targetDataList, true);
-    undableEditListener.accept(new SpecifiedRowsSortEdit(criterias, sortResult.getOrder(),
-        targetRows));
+    undableEditListener
+        .accept(new SpecifiedRowsSortEdit(criterias, sortResult.getOrder(), targetRows));
     for (int i = 0; i < targetRows.length; i++) {
       int r = targetRows[i];
       dataList.set(r, sortResult.getSortedData().get(i));

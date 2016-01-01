@@ -272,7 +272,7 @@ public class CsvGridSheetPane extends GridSheetPane {
   }
 
   public int getColumnCountAt(int rowIndex) {
-    int size = model.getColumnCountAt(convertRowIndexToModel(rowIndex));
+    int size = getModel().getColumnCountAt(convertRowIndexToModel(rowIndex));
     if (areAllColumnsVisivle()) {
       return size;
     }

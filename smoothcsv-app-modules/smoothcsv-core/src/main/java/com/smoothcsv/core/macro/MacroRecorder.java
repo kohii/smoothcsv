@@ -75,7 +75,7 @@ public class MacroRecorder {
 
   public void recordCommand(String commandId) {
     Command command = CommandRegistry.instance().getCommandOrNull(commandId);
-    if (command == null || command instanceof ToggleCommandPaletteCommand) {
+    if (command != null && command instanceof ToggleCommandPaletteCommand) {
       return;
     }
     completeKeyTyping();
@@ -90,7 +90,7 @@ public class MacroRecorder {
 
   private void completeKeyTyping() {
     if (keyTyped.length() != 0) {
-      lines.add("App.getActiveCellEditor().type('"
+      lines.add("App.getActiveCellEditor(true).type('"
           + StringEscapeUtils.escapeEcmaScript(keyTyped.toString()) + "');");
       keyTyped.setLength(0);
     }

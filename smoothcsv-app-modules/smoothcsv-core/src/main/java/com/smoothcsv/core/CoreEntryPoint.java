@@ -29,7 +29,6 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
 import com.smoothcsv.commons.utils.JsonUtils;
-import com.smoothcsv.core.celleditor.SCTextAreaUI;
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.AppSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
@@ -123,7 +122,6 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         uiDefaults.put("CsvGridSheetTableUI", CsvGridSheetTableUI.class.getName());
         uiDefaults.put("CsvGridSheetColumnHeaderUI", CsvGridSheetColumnHeaderUI.class.getName());
         uiDefaults.put("SCTabbedPaneUI", SCTabbedPaneUI.class.getName());
-        uiDefaults.put("SCTextAreaUI", SCTextAreaUI.class.getName());
         ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setDismissDelay(100000);
         toolTipManager.setInitialDelay(200);

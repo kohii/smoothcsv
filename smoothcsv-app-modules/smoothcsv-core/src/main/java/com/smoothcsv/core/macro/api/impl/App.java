@@ -40,7 +40,7 @@ public class App extends APIBase {
 
   /**
    * Returns the name of this application.
-   * 
+   *
    * @return the name of this application
    */
   public String getName() {
@@ -49,7 +49,7 @@ public class App extends APIBase {
 
   /**
    * Returns the version name of this application.
-   * 
+   *
    * @return the version name
    */
   public String getVersion() {
@@ -65,7 +65,7 @@ public class App extends APIBase {
 
   /**
    * Creates a new csvsheet with the specified number of rows and columns and properties.
-   * 
+   *
    * @param rows the number of rows for the csvsheet
    * @param columns the number of columns for the csvsheet
    * @param properties the properties
@@ -76,7 +76,7 @@ public class App extends APIBase {
 
   /**
    * Opens the csvsheet that corresponds to the given file path with the default properties.
-   * 
+   *
    * @param pathname the file path to open
    */
   public void open(String pathname) {
@@ -85,7 +85,7 @@ public class App extends APIBase {
 
   /**
    * Opens the csvsheet that corresponds to the given file path with the specified properties.
-   * 
+   *
    * @param pathname the file path to open
    * @param properties the properties
    */
@@ -95,7 +95,7 @@ public class App extends APIBase {
 
   /**
    * Gets the active csvsheet. Returns null if there is no sheet.
-   * 
+   *
    * @return the active {@link CsvSheet} object
    */
   public CsvSheet getActiveSheet() {
@@ -114,7 +114,7 @@ public class App extends APIBase {
   /**
    * Returns the range of cells that is currently considered active. This generally means the range
    * that a user has selected in the active sheet.
-   * 
+   *
    * @return the active range
    */
   public Range getActiveRange() {
@@ -122,21 +122,41 @@ public class App extends APIBase {
     return activeSheet == null ? null : activeSheet.getActiveRange();
   }
 
+  /**
+   * Returns the active {@link CellEditor} or null if there is no active CellEditor.
+   *
+   * @return the active {@link CellEditor}
+   */
   public CellEditor getActiveCellEditor() {
+    return getActiveCellEditor(false);
+  }
+
+  /**
+   * Returns the active {@link CellEditor}.
+   *
+   * @param startEdit <code>true</code> to start editing if there is no active CellEditor.;
+   *        <code>false</code> to return null if there is no active CellEditor.
+   * @return the active {@link CellEditor}
+   */
+  public CellEditor getActiveCellEditor(boolean startEdit) {
     CsvSheetView csvSheetView =
         (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
     if (csvSheetView == null) {
       return null;
     }
     if (!csvSheetView.getGridSheetPane().isEditing()) {
-      return null;
+      if (startEdit) {
+        csvSheetView.getGridSheetPane().getTable().startEdit();
+      } else {
+        return null;
+      }
     }
     return new CellEditor(new CsvSheetImpl(csvSheetView.getViewId()));
   }
 
   /**
    * Gets all the sheets in this application.
-   * 
+   *
    * @return an array of all the sheets in the application
    */
   public CsvSheet[] getSheets() {

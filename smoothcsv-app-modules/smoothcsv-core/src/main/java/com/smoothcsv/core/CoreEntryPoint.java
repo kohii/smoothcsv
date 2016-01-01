@@ -41,6 +41,7 @@ import com.smoothcsv.core.preference.GeneralPrefPanel;
 import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.SCApplication.AfterCreateGuiEvent;
+import com.smoothcsv.framework.SCApplication.AfterOpenWindowEvent;
 import com.smoothcsv.framework.SCApplication.BeforeOpenWindowEvent;
 import com.smoothcsv.framework.SCApplication.ShutdownEvent;
 import com.smoothcsv.framework.SCApplication.StartupEvent;
@@ -223,6 +224,16 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         });
 
         CsvSheetStatusLabel.instance().install();
+      }
+    });
+
+    app.listeners().on(AfterOpenWindowEvent.class, new SCListener<AfterOpenWindowEvent>() {
+      @Override
+      public void call(AfterOpenWindowEvent event) {
+        BaseTabView<?> view = components().getTabbedPane().getSelectedView();
+        if (view != null) {
+          view.requestFocusInWindow();
+        }
       }
     });
   }

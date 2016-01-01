@@ -181,13 +181,13 @@ macro-tools
 	escape	macro:toggle-console
 
 macro-editor
-	shortcut+s	macroe:save
-	shortcut+o	macroe:open
-	shortcut+enter	macroe:run
+	shortcut+s	macro:save
+	shortcut+o	macro:open
+	shortcut+enter	macro:run
 
 macro-list
 	delete	macrolist:remove
 	shortcut+enter	macrolist:run
 
-sql-editor
-	shortcut+enter	sql:run
+#sql-editor
+#	shortcut+enter	sql:run

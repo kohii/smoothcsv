@@ -139,6 +139,8 @@ public abstract class SCApplication {
 
         // Show GUI
         openWindow();
+
+        listeners().invokeListeners(new AfterOpenWindowEvent());
       }
     });
   }
@@ -259,4 +261,6 @@ public abstract class SCApplication {
   public static class BeforeOpenWindowEvent implements SCEvent {
   }
 
+  public static class AfterOpenWindowEvent implements SCEvent {
+  }
 }

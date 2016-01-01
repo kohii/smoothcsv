@@ -69,6 +69,8 @@ grid:delete-columns	available(csv-sheet)
 grid:go-to-line	available(csv-sheet)	
 grid:stop-edit	editing_cell	
 grid:cancel-edit	editing_cell	
+grid:autofit-column-width	available(csv-sheet)	
+grid:autofit-column-width-to-selected-cell	available(csv-sheet)	
 		
 cell-editor:undo	focus(cell-editor)	
 cell-editor:redo	focus(cell-editor)	
@@ -152,9 +154,6 @@ convert:title-case	!editing_cell
 convert:snake-case-to-camel-case	!editing_cell	
 convert:camel-case-to-snake-case	!editing_cell	
 		
-grid:autofit-column-width	available(csv-sheet)
-grid:autofit-column-width-to-selected-cell	available(csv-sheet)
-
 view:previous-tab	available(csv-sheet)	
 view:next-tab	available(csv-sheet)	
 view:toggle-status-bar		

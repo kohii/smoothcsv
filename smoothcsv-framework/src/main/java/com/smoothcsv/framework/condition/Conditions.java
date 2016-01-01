@@ -19,6 +19,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 
 /**
@@ -84,6 +86,36 @@ public class Conditions {
 
     Condition condition = conditionMap.get(name);
     if (condition != null) {
+      return condition;
+    }
+
+    // TODO SmoothCSV's condition system currently doesn't support query which has both of && and ||
+    if (name.indexOf("&&") >= 0) {
+      String[] conditionNames = StringUtils.split(name, "&&");
+      Condition[] conditions = new Condition[conditionNames.length];
+      for (int i = 0; i < conditionNames.length; i++) {
+        conditions[i] = getCondition(conditionNames[i].trim());
+      }
+      if (conditions.length != 2) {
+        throw new UnexpectedException(
+            "SmoothCSV's condition system currently only supports two combined conditions");
+      }
+      condition = new AndCondition(conditions[0], conditions[1]);
+      conditionMap.put(name, condition);
+      return condition;
+    }
+    if (name.indexOf("||") >= 0) {
+      String[] conditionNames = StringUtils.split(name, "||");
+      Condition[] conditions = new Condition[conditionNames.length];
+      for (int i = 0; i < conditionNames.length; i++) {
+        conditions[i] = getCondition(conditionNames[i].trim());
+      }
+      if (conditions.length != 2) {
+        throw new UnexpectedException(
+            "SmoothCSV's condition system currently only supports two combined conditions");
+      }
+      condition = new OrCondition(conditions[0], conditions[1]);
+      conditionMap.put(name, condition);
       return condition;
     }
 

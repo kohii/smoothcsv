@@ -13,6 +13,7 @@
  */
 package com.smoothcsv.framework.component;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,7 @@ import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.border.Border;
@@ -42,13 +44,12 @@ public class SCToolBar extends JToolBar {
     setFloatable(false);
   }
 
-  public CommandDef add(String commandId, Icon icon, String caption) {
+  public JButton add(String commandId, Icon icon, String caption) {
     CommandDef commandDef = CommandRegistry.instance().getDef(commandId);
-    super.add(new ToolBarAction(commandDef, icon, caption));
-    return commandDef;
+    return super.add(new ToolBarAction(commandDef, icon, caption));
   }
 
-  public CommandDef add(String commandId, char iconCode, String caption) {
+  public JButton add(String commandId, char iconCode, String caption) {
     return add(commandId, AwesomeIcon.create(iconCode), caption);
   }
 
@@ -69,8 +70,9 @@ public class SCToolBar extends JToolBar {
       btn.setBorder(buttonBorder);
       if (btn.getIcon() instanceof AwesomeIcon) {
         AwesomeIcon icon = (AwesomeIcon) btn.getIcon();
-        btn.setRolloverIcon(AwesomeIcon.create(icon.getCode(), icon.getSize(), icon.getColor()
-            .brighter()));
+        btn.setRolloverIcon(
+            AwesomeIcon.create(icon.getCode(), icon.getSize(), icon.getColor().brighter()));
+        btn.setDisabledIcon(AwesomeIcon.create(icon.getCode(), icon.getSize(), Color.LIGHT_GRAY));
       }
     }
     super.addImpl(comp, constraints, index);
@@ -99,7 +101,7 @@ public class SCToolBar extends JToolBar {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
     @Override

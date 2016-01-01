@@ -35,8 +35,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.event.ChangeEvent;
 
-import lombok.Getter;
-
 import com.smoothcsv.commons.constants.Direction;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
 import com.smoothcsv.core.macro.MacroRecorder;
@@ -47,10 +45,10 @@ import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
-import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 
 import command.grid.FillSeriesCommand;
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -129,6 +127,11 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
   }
 
   @Override
+  public CsvGridSheetPane getGridSheetPane() {
+    return (CsvGridSheetPane) super.getGridSheetPane();
+  }
+
+  @Override
   protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
 
     if (super.processKeyBinding(ks, e, condition, pressed)) {
@@ -204,10 +207,10 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
 
   @Override
   protected Object getCellValueAt(int row, int column) {
-    GridSheetPane gridSheetPane = getGridSheetPane();
+    CsvGridSheetPane gridSheetPane = getGridSheetPane();
     int modelRowIndex = gridSheetPane.convertRowIndexToModel(row);
     int modelColumnIndex = gridSheetPane.convertRowIndexToModel(column);
-    GridSheetModel model = gridSheetPane.getModel();
+    CsvGridSheetModel model = gridSheetPane.getModel();
     Object value = model.getValueAt(modelRowIndex, modelColumnIndex);
     if (value != null) {
       return value;

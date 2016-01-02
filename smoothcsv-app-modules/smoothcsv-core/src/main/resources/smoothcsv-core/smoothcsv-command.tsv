@@ -84,6 +84,7 @@ grid:stop-edit	editing_cell
 grid:cancel-edit	editing_cell	
 grid:autofit-column-width	available(csv-sheet)	
 grid:autofit-column-width-to-selected-cell	available(csv-sheet)	
+grid:toggle-use-first-row-as-header	available(csv-sheet)	
 grid:focus	available(csv-sheet)	
 		
 cell-editor:undo	available(cell-editor)	

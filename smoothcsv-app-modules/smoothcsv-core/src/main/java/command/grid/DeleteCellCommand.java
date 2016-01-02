@@ -16,7 +16,7 @@ package command.grid;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 /**
@@ -29,7 +29,7 @@ public class DeleteCellCommand extends GridCommand {
   public void run(CsvGridSheetPane gridSheetPane) {
     gridSheetPane.getTable().stopCellEditing();
 
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       CsvGridSheetModel model = (CsvGridSheetModel) gridSheetPane.getModel();
       DefaultGridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
       selectionModel.forEachSelectedRows((rowIndex) -> {

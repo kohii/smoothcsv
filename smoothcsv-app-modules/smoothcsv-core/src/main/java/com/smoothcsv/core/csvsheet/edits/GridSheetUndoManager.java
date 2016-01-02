@@ -64,8 +64,7 @@ public class GridSheetUndoManager {
   @Setter
   private boolean collecting = true;
 
-  @Getter
-  private boolean transactionStarted = false;
+  private int transactionStackCount = 0;
 
   private ArrayList<GridSheetUndableEdit> edits;
 
@@ -85,7 +84,7 @@ public class GridSheetUndoManager {
       return;
     }
 
-    if (transactionStarted) {
+    if (transactionStackCount != 0) {
       edits.add(edit);
       return;
     }
@@ -146,32 +145,27 @@ public class GridSheetUndoManager {
   }
 
   public boolean canUndo() {
-    return collecting && !transactionStarted && !undoStack.isEmpty()
+    return collecting && transactionStackCount == 0 && !undoStack.isEmpty()
         && undoStack.getFirst() != START_POINT;
   }
 
   public boolean canRedo() {
-    return collecting && !transactionStarted && !redoStack.isEmpty();
+    return collecting && transactionStackCount == 0 && !redoStack.isEmpty();
   }
 
-  public void startTransaction() {
-    if (transactionStarted) {
-      throw new IllegalStateException("Transaction already started.");
-    }
+  void startTransaction() {
     edits = new ArrayList<>();
-    transactionStarted = true;
+    transactionStackCount++;
   }
 
-  public void stopTransaction() {
-    if (!transactionStarted) {
+  void stopTransaction() {
+    if (transactionStackCount <= 0) {
       throw new IllegalStateException();
     }
-    transactionStarted = false;
-
+    transactionStackCount--;
     GridSheetSelectionSnapshot selection = gridSheetPane.getSelectionModel().exportSelection();
-    GridSheetEditContainer editContainer =
-        new MultiGridSheetEditContainer(selection, edits.toArray(new GridSheetUndableEdit[edits
-            .size()]));
+    GridSheetEditContainer editContainer = new MultiGridSheetEditContainer(selection,
+        edits.toArray(new GridSheetUndableEdit[edits.size()]));
 
     undoStack.addFirst(editContainer);
     redoStack.clear();
@@ -181,11 +175,11 @@ public class GridSheetUndoManager {
     edits = null;
   }
 
-  public void stopTransactionWithoutCollecting() {
-    if (!transactionStarted) {
+  void stopTransactionWithoutCollecting() {
+    if (transactionStackCount <= 0) {
       throw new IllegalStateException();
     }
-    transactionStarted = false;
+    transactionStackCount--;
     edits = null;
   }
 

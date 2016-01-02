@@ -14,7 +14,7 @@
 package com.smoothcsv.core.command;
 
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 
 /**
@@ -25,7 +25,7 @@ public abstract class ConvertCommandBase extends GridCommand {
 
   @Override
   public final void run(CsvGridSheetPane gridSheetPane) {
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       gridSheetPane.getSelectionModel().forEachSelectedCell(new CellConsumer() {
         @Override
         public void accept(int row, int column) {

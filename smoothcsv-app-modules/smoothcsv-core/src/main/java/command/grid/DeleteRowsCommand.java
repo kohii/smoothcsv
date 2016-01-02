@@ -18,7 +18,7 @@ import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 /**
@@ -36,7 +36,7 @@ public class DeleteRowsCommand extends GridCommand {
 
     gridSheetPane.stopCellEditingIfEditing();
 
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
 
       CsvGridSheetModel model = gridSheetPane.getModel();
 

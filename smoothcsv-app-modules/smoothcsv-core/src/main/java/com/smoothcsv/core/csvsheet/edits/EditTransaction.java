@@ -19,14 +19,14 @@ import java.io.Closeable;
  * @author kohii
  *
  */
-public class Transaction implements Closeable {
+public class EditTransaction implements Closeable {
 
   private GridSheetUndoManager undoManager;
   private boolean done = false;
 
-  public Transaction(GridSheetUndoManager undoManager) {
+  public EditTransaction(GridSheetUndoManager undoManager) {
     this.undoManager = undoManager;
-    undoManager.startTransaction();;
+    undoManager.startTransaction();
   }
 
   @Override

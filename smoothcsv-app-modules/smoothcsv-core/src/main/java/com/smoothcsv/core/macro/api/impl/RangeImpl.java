@@ -24,7 +24,7 @@ import org.mozilla.javascript.ScriptRuntime;
 
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.macro.api.CellVisitor;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.core.macro.api.Range;
@@ -67,7 +67,7 @@ public class RangeImpl extends APIBase implements Range {
   @Override
   public Range clear() {
     CsvGridSheetPane gridSheetPane = getGridSheet();
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       forEachCell(new ICellConsumer() {
         @Override
         public boolean accept(int row, int column) {
@@ -220,7 +220,7 @@ public class RangeImpl extends APIBase implements Range {
   @Override
   public Range setValues(Object[][] values) {
     CsvGridSheetPane gridSheet = getGridSheet();
-    try (Transaction tran = gridSheet.transaction()) {
+    try (EditTransaction tran = gridSheet.transaction()) {
       forEachCell(new ICellConsumer() {
         @Override
         public boolean accept(int r, int c) {

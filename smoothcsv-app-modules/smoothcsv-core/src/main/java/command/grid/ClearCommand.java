@@ -15,7 +15,7 @@ package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 
 /**
  * @author kohii
@@ -25,7 +25,7 @@ public class ClearCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       gridSheetPane.getSelectionModel().forEachSelectedCell((row, column) -> {
         gridSheetPane.setValueAt("", row, column);
       });

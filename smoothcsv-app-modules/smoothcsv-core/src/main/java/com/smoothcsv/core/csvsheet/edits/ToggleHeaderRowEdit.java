@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,33 +11,23 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.celleditor;
+package com.smoothcsv.core.csvsheet.edits;
 
-import java.awt.Component;
-
-import com.smoothcsv.framework.command.Command;
-import com.smoothcsv.framework.component.support.SCFocusManager;
+import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 
 /**
  * @author kohii
  *
  */
-public abstract class SCTextAreaCommand extends Command {
+public class ToggleHeaderRowEdit implements GridSheetUndableEdit {
 
   @Override
-  protected void run() {
-    Component fo = SCFocusManager.getFocusOwner();
-    if (fo == null || !(fo instanceof SCTextArea)) {
-      abort();
-    }
-
-    SCTextArea editor = (SCTextArea) fo;
-    run(editor);
+  public void undo(CsvGridSheetModel model) {
+    model.setUseFirstRowAsHeader(!model.useFirstRowAsHeader());
   }
 
-  public abstract void run(SCTextArea editor);
-
-  protected void invokeAction(String key) {
-    
+  @Override
+  public void redo(CsvGridSheetModel model) {
+    model.setUseFirstRowAsHeader(!model.useFirstRowAsHeader());
   }
 }

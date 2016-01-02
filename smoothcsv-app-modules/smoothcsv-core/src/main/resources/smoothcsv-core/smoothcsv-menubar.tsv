@@ -60,6 +60,8 @@ Grid
 	Sort...	grid:sort
 	Sort Selected Rows...	grid:sort-selected-rows
 	Sort Selected Range...	grid:sort-selected-range
+	-
+	Toggle Use First Row As Header	grid:toggle-use-first-row-as-header
 
 Find
 	Show Find And Replace Panel...	find:show

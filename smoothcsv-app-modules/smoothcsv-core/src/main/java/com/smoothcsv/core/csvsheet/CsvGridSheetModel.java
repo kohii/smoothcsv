@@ -31,6 +31,7 @@ import com.smoothcsv.core.csvsheet.edits.InsertCellEdit;
 import com.smoothcsv.core.csvsheet.edits.PartialSortEdit;
 import com.smoothcsv.core.csvsheet.edits.SortEdit;
 import com.smoothcsv.core.csvsheet.edits.SpecifiedRowsSortEdit;
+import com.smoothcsv.core.csvsheet.edits.ToggleHeaderRowEdit;
 import com.smoothcsv.core.sort.CsvSorter;
 import com.smoothcsv.core.sort.CsvSorter.SortResult;
 import com.smoothcsv.core.sort.SortCriteria;
@@ -52,6 +53,10 @@ public class CsvGridSheetModel extends GridSheetModel {
 
   @Setter
   private Consumer<GridSheetUndableEdit> undableEditListener;
+
+  private boolean useFirstRowAsHeader = false;
+
+  private boolean collectingEditDisabled = false;
 
   /**
    * @param dataList
@@ -118,14 +123,14 @@ public class CsvGridSheetModel extends GridSheetModel {
     List truncateRange = rowData.subList(from, to + 1);
     Object[] truncatedData = truncateRange.toArray();
     truncateRange.clear();
-    undableEditListener.accept(new DeleteCellEdit(rowIndex, from, truncatedData));
+    collectEdit(new DeleteCellEdit(rowIndex, from, truncatedData));
     fireDataUpdated(rowIndex, from, rowIndex, getColumnCount(), false);
   }
 
   public void insertCell(int rowIndex, int columnIndex, Object[] data) {
     List rowData = getRowDataAt(rowIndex);
     rowData.addAll(columnIndex, Arrays.asList(data));
-    undableEditListener.accept(new InsertCellEdit(rowIndex, columnIndex, data));
+    collectEdit(new InsertCellEdit(rowIndex, columnIndex, data));
     fireDataUpdated(rowIndex, columnIndex, rowIndex, getColumnCount(), false);
   }
 
@@ -133,14 +138,14 @@ public class CsvGridSheetModel extends GridSheetModel {
   public void setValueAt(Object aValue, int row, int column) {
     Object oldValue = getValueAt(row, column);
     if (!equals(aValue, oldValue)) {
-      undableEditListener.accept(new ChangeValueEdit(oldValue, aValue, row, column));
+      collectEdit(new ChangeValueEdit(oldValue, aValue, row, column));
     }
     super.setValueAt(aValue, row, column);
   }
 
   @Override
   protected void fireColumnsInserted(int index, GridSheetColumn[] columnsInserted) {
-    undableEditListener.accept(new InserColumnsEdit(index, columnsInserted.length));
+    collectEdit(new InserColumnsEdit(index, columnsInserted.length));
     super.fireColumnsInserted(index, columnsInserted);
   }
 
@@ -150,13 +155,13 @@ public class CsvGridSheetModel extends GridSheetModel {
     for (int i = 0; i < columnsRemoved.length; i++) {
       data[i] = getColumnDataAt(index + i);
     }
-    undableEditListener.accept(new DeleteColumnsEdit(index, data));
+    collectEdit(new DeleteColumnsEdit(index, data));
     super.fireColumnsDeleted(index, columnsRemoved);
   }
 
   @Override
   protected void fireRowsInserted(int index, GridSheetRow[] rowsInserted) {
-    undableEditListener.accept(new InserRowsEdit(index, rowsInserted.length));
+    collectEdit(new InserRowsEdit(index, rowsInserted.length));
     super.fireRowsInserted(index, rowsInserted);
   }
 
@@ -166,7 +171,7 @@ public class CsvGridSheetModel extends GridSheetModel {
     for (int i = 0; i < rowsRemoved.length; i++) {
       data[i] = getRowDataAt(index + i).toArray();
     }
-    undableEditListener.accept(new DeleteRowsEdit(index, data));
+    collectEdit(new DeleteRowsEdit(index, data));
     super.fireRowsDeleted(index, rowsRemoved);
   }
 
@@ -209,7 +214,7 @@ public class CsvGridSheetModel extends GridSheetModel {
   // for sort
   public void sort(List<SortCriteria> criterias) {
     SortResult sortResult = CsvSorter.sort(criterias, dataList, true);
-    undableEditListener.accept(new SortEdit(criterias, sortResult.getOrder()));
+    collectEdit(new SortEdit(criterias, sortResult.getOrder()));
     this.dataList = sortResult.getSortedData();
     fireStructureChanged(GridSheetStructureEvent.SORT_ROWS);
   }
@@ -245,7 +250,7 @@ public class CsvGridSheetModel extends GridSheetModel {
       targetDataList.add(rowData);
     }
     SortResult sortResult = CsvSorter.sort(criterias, targetDataList, false);
-    undableEditListener.accept(new PartialSortEdit(criterias, sortResult.getOrder(), targetCells));
+    collectEdit(new PartialSortEdit(criterias, sortResult.getOrder(), targetCells));
     for (int i = 0; i < targetCells.getNumRows(); i++) {
       List rowData = getRowDataAt(i + targetCells.getRow());
       List sortedRowData = sortResult.getSortedData().get(i);
@@ -264,6 +269,65 @@ public class CsvGridSheetModel extends GridSheetModel {
       ret.add(Collections.unmodifiableList(dataList.get(r)));
     }
     return Collections.unmodifiableList(ret);
+  }
+
+  @Override
+  public String getColumnName(int column) {
+    if (useFirstRowAsHeader) {
+      return getColumn(column).getName();
+    }
+    return super.getColumnName(column);
+  }
+
+  public boolean useFirstRowAsHeader() {
+    return useFirstRowAsHeader;
+  }
+
+  public void setUseFirstRowAsHeader(boolean b) {
+    if (useFirstRowAsHeader == b) {
+      return;
+    }
+
+    collectingEditDisabled = true;
+    try {
+      if (b) {
+        List firstRow = getRowDataAt(0);
+        int columnCount = getColumnCount();
+        for (int c = 0; c < columnCount; c++) {
+          GridSheetColumn col = getColumn(c);
+          if (c < firstRow.size()) {
+            col.setName(ObjectUtils.toString(firstRow.get(c)));
+          }
+        }
+        deleteRow(0);
+      } else {
+        int columnCount = getColumnCount();
+        List firstRow = new ArrayList<>(columnCount);
+        for (int c = 0; c < columnCount; c++) {
+          GridSheetColumn col = getColumn(c);
+          String val = col.getName();
+          col.setName(null);
+          if (val == null) {
+            break;
+          }
+          firstRow.add(val);
+        }
+        Object[] firstRowData = firstRow.toArray();
+        insertRow(0, new Object[][] {firstRowData});
+      }
+    } finally {
+      collectingEditDisabled = false;
+    }
+
+    collectEdit(new ToggleHeaderRowEdit());
+    useFirstRowAsHeader = b;
+  }
+
+  private void collectEdit(GridSheetUndableEdit undableEdit) {
+    if (collectingEditDisabled) {
+      return;
+    }
+    undableEditListener.accept(undableEdit);
   }
 
   private static final boolean equals(Object o0, Object o1) {

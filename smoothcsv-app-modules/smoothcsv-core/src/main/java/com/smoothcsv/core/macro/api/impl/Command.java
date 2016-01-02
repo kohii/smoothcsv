@@ -29,6 +29,8 @@ public class Command extends APIBase {
   private Command() {}
 
   public boolean run(String id) {
-    return CommandRegistry.instance().runCommand(id);
+    boolean b = CommandRegistry.instance().runCommand(id);
+    System.out.println(id + " -> " + b);
+    return b;
   }
 }

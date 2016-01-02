@@ -13,22 +13,28 @@
  */
 package command.grid;
 
+import javax.swing.JComponent;
+
+import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 
 /**
  * @author kohii
  *
  */
-public class CutCommand extends CopyCommand {
+public class StartQuickEditCommand extends GridCommand {
 
   @Override
-  public void run(CsvGridSheetPane gridSheetPane) {
-    super.run(gridSheetPane);
-    try (EditTransaction tran = gridSheetPane.transaction()) {
-      gridSheetPane.getSelectionModel().forEachSelectedCell((row, column) -> {
-        gridSheetPane.setValueAt("", row, column);
-      });
+  public void run(CsvGridSheetPane gridSheet) {
+    int anchorRow = gridSheet.getSelectionModel().getRowAnchorIndex();
+    int anchorColumn = gridSheet.getSelectionModel().getColumnAnchorIndex();
+
+    if (anchorRow != -1 && anchorColumn != -1 && !gridSheet.isEditing()) {
+      gridSheet.getTable().editQuickly();
+    }
+    if (gridSheet.isEditing()) {
+      JComponent editorComp = gridSheet.getTable().getCellEditor().getEditorComponent();
+      editorComp.requestFocusInWindow();
     }
   }
 }

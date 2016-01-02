@@ -97,5 +97,41 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     protected void processInputMethodEvent(InputMethodEvent e) {
       super.processInputMethodEvent(e);
     }
+
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#requestFocus()
+     */
+    @Override
+    public void requestFocus() {
+      // TODO Auto-generated method stub
+      super.requestFocus();
+    }
+
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#requestFocus(boolean)
+     */
+    @Override
+    public boolean requestFocus(boolean temporary) {
+      // TODO Auto-generated method stub
+      return super.requestFocus(temporary);
+    }
+
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#requestFocusInWindow(boolean)
+     */
+    @Override
+    protected boolean requestFocusInWindow(boolean temporary) {
+      // TODO Auto-generated method stub
+      return super.requestFocusInWindow(temporary);
+    }
+
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#requestFocusInWindow()
+     */
+    @Override
+    public boolean requestFocusInWindow() {
+      // TODO Auto-generated method stub
+      return super.requestFocusInWindow();
+    }
   }
 }

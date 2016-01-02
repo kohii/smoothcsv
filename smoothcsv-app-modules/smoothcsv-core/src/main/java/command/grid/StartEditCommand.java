@@ -48,7 +48,9 @@ public class StartEditCommand extends GridCommand {
       if (editorComp instanceof GridTableTextField) {
         ((CsvGridEditorComponent) editorComp).setQuickEdit(false);
       }
-      editorComp.requestFocusInWindow();
+      if (editorCompGrabsFocus) {
+        editorComp.requestFocusInWindow();
+      }
     }
   }
 }

@@ -18,15 +18,12 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
 import com.smoothcsv.core.find.FindAndReplaceMatcher;
 import com.smoothcsv.core.find.FindAndReplaceParams;
 import com.smoothcsv.framework.SCApplication;
@@ -45,6 +42,9 @@ import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetHeaderRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetColorProvider;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author kohii
@@ -247,18 +247,12 @@ public class CsvGridSheetPane extends GridSheetPane {
       super.setValueAt(aValue, row, column);
       return;
     }
-    GridSheetUndoManager um = getUndoManager();
     CsvGridSheetModel model = (CsvGridSheetModel) getModel();
     String[] data = new String[column - model.getColumnCountAt(row) + 1];
     Arrays.fill(data, "");
-    if (um.isTransactionStarted()) {
+    try (EditTransaction tran = transaction()) {
       model.insertCell(row, model.getColumnCountAt(row), data);
       super.setValueAt(aValue, row, column);
-    } else {
-      try (Transaction tran = transaction()) {
-        model.insertCell(row, model.getColumnCountAt(row), data);
-        super.setValueAt(aValue, row, column);
-      }
     }
   }
 
@@ -301,8 +295,8 @@ public class CsvGridSheetPane extends GridSheetPane {
     }
   }
 
-  public Transaction transaction() {
-    return new Transaction(getUndoManager());
+  public EditTransaction transaction() {
+    return new EditTransaction(getUndoManager());
   }
 
   @Override

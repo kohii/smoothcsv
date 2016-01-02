@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,22 +13,20 @@
  */
 package command.grid;
 
+import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 
 /**
  * @author kohii
  *
  */
-public class CutCommand extends CopyCommand {
+public class FocusCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    super.run(gridSheetPane);
-    try (EditTransaction tran = gridSheetPane.transaction()) {
-      gridSheetPane.getSelectionModel().forEachSelectedCell((row, column) -> {
-        gridSheetPane.setValueAt("", row, column);
-      });
+    if (gridSheetPane.isEditing()) {
+      gridSheetPane.stopCellEditingIfEditing();
     }
+    gridSheetPane.requestFocus();
   }
 }

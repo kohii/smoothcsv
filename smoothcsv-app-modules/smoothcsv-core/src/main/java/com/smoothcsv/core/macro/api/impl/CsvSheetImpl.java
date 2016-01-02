@@ -18,7 +18,7 @@ import java.io.File;
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.core.macro.api.Range;
 import com.smoothcsv.framework.SCApplication;
@@ -191,7 +191,7 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
   @Override
   public CsvSheet deleteRows(int rowPosition, int howMany) {
     CsvGridSheetPane gridSheetPane = getGridSheet();
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       GridSheetModel model = gridSheetPane.getModel();
       model.deleteRow(rowPosition - 1, howMany);
       gridSheetPane.getSelectionModel().clearHeaderSelection();
@@ -240,7 +240,7 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
   @Override
   public CsvSheet deleteColumns(int columnPosition, int howMany) {
     CsvGridSheetPane gridSheetPane = getGridSheet();
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       GridSheetModel model = gridSheetPane.getModel();
       model.deleteColumn(columnPosition - 1, howMany);
       gridSheetPane.getSelectionModel().clearHeaderSelection();

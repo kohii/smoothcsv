@@ -25,7 +25,7 @@ import com.smoothcsv.core.constants.AppSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvReader;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
@@ -88,7 +88,7 @@ public class PasteCommand extends GridCommand {
     int rowSize = gridSheetPane.getRowCount();
     int columnSize = gridSheetPane.getColumnCount();
 
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
 
       int currentRow = leftTopRow;
       int pastedRowCount = 0;

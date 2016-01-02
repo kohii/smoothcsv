@@ -16,7 +16,7 @@ package command.find;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.find.FindAndReplaceMatcher;
 import com.smoothcsv.core.find.FindAndReplacePanel;
 import com.smoothcsv.core.find.FindAndReplaceParams;
@@ -64,7 +64,7 @@ public class ReplaceAllCommand extends GridCommand {
         new CellIterator(gridSheetPane, params.isInSelection()
             && params.isInSelectionCheckboxEnabled(), true, false, params.getOrientation(), true);
 
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
 
       do {
         int row = itr.getRow();

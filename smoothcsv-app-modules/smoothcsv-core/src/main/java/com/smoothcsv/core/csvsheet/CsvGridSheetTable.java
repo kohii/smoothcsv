@@ -158,7 +158,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           return false;
         }
         if (MacroRecorder.isRecording()) {
-          MacroRecorder.getInstance().recordCommand("grid:start-edit");
+          MacroRecorder.getInstance().recordCommand("grid:start-quick-edit");
         }
       }
       // pass the event to the cell editor.
@@ -256,11 +256,14 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
     // Try to install the editor
     CsvGridEditorComponent editorComponent = editQuickly();
     if (editorComponent != null) {
+      if (MacroRecorder.isRecording()) {
+        MacroRecorder.getInstance().recordCommand("grid:start-quick-edit");
+      }
       editorComponent.processInputMethodEvent(e);
     }
   }
 
-  private CsvGridEditorComponent editQuickly() {
+  public CsvGridEditorComponent editQuickly() {
     GridSheetPane gridSheetPane = getGridSheetPane();
     int anchorRow = gridSheetPane.getSelectionModel().getRowAnchorIndex();
     int anchorColumn = gridSheetPane.getSelectionModel().getColumnAnchorIndex();

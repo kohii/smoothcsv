@@ -17,7 +17,7 @@ import com.smoothcsv.commons.functions.IntRangeConsumer;
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.csvsheet.edits.Transaction;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
 /**
@@ -36,7 +36,7 @@ public class InsertColumnsLeftCommand extends GridCommand {
 
     GridSheetModel model = gridSheetPane.getModel();
 
-    try (Transaction tran = gridSheetPane.transaction()) {
+    try (EditTransaction tran = gridSheetPane.transaction()) {
       if (selectedColumnIndices == null) {
         selectedColumnIndices = gridSheetPane.getSelectionModel().getSelectedColumns();
       }

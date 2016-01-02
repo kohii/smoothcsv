@@ -68,6 +68,7 @@ public class SCToolBar extends JToolBar {
     if (comp instanceof AbstractButton) {
       AbstractButton btn = ((AbstractButton) comp);
       btn.setBorder(buttonBorder);
+      btn.setFocusable(false);
       if (btn.getIcon() instanceof AwesomeIcon) {
         AwesomeIcon icon = (AwesomeIcon) btn.getIcon();
         btn.setRolloverIcon(

@@ -16,41 +16,25 @@ package command.grid;
 import javax.swing.JComponent;
 
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor.GridTableTextField;
 
 /**
  * @author kohii
  *
  */
-public class StartEditCommand extends GridCommand {
+public class StartQuickEditCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheet) {
-    run(gridSheet, true);
-  }
+    int anchorRow = gridSheet.getSelectionModel().getRowAnchorIndex();
+    int anchorColumn = gridSheet.getSelectionModel().getColumnAnchorIndex();
 
-  public void run(CsvGridSheetPane gridSheet, boolean editorCompGrabsFocus) {
-    if (!gridSheet.isEditing()) {
-      int anchorRow = gridSheet.getSelectionModel().getRowAnchorIndex();
-      int anchorColumn = gridSheet.getSelectionModel().getColumnAnchorIndex();
-
-      if (anchorRow != -1 && anchorColumn != -1 && !gridSheet.isEditing()) {
-        if (!gridSheet.getTable().editCellAt(anchorRow, anchorColumn, null, editorCompGrabsFocus)) {
-          return;
-        }
-      }
+    if (anchorRow != -1 && anchorColumn != -1 && !gridSheet.isEditing()) {
+      gridSheet.getTable().editQuickly();
     }
-
     if (gridSheet.isEditing()) {
       JComponent editorComp = gridSheet.getTable().getCellEditor().getEditorComponent();
-      if (editorComp instanceof GridTableTextField) {
-        ((CsvGridEditorComponent) editorComp).setQuickEdit(false);
-      }
-      if (editorCompGrabsFocus) {
-        editorComp.requestFocusInWindow();
-      }
+      editorComp.requestFocusInWindow();
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,26 +11,22 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package command.grid;
 
-import lombok.Getter;
-
-import com.smoothcsv.framework.command.CommandRegistry;
+import com.smoothcsv.core.command.GridCommand;
+import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 /**
  * @author kohii
  *
  */
-public class Command extends APIBase {
+public class FocusCommand extends GridCommand {
 
-  @Getter
-  private static final Command instance = new Command();
-
-  private Command() {}
-
-  public boolean run(String id) {
-    boolean b = CommandRegistry.instance().runCommand(id);
-    System.out.println(id + " -> " + b);
-    return b;
+  @Override
+  public void run(CsvGridSheetPane gridSheetPane) {
+    if (gridSheetPane.isEditing()) {
+      gridSheetPane.stopCellEditingIfEditing();
+    }
+    gridSheetPane.requestFocus();
   }
 }

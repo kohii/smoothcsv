@@ -17,6 +17,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import org.slf4j.Logger;
@@ -30,6 +31,9 @@ import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
+import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
+import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.util.DirectoryResolver;
@@ -77,8 +81,21 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
       }
     });
 
+    app.listeners().on(SCApplication.AfterOpenWindowEvent.class, e -> {
+      Set<String> conditionNames = Conditions.getConditionNames();
+      for (String conditionName : conditionNames) {
+        Conditions.getCondition(conditionName)
+            .addValueChangedListener(new Consumer<Condition.ConditionValueChangeEvent>() {
+          @Override
+          public void accept(ConditionValueChangeEvent t) {
+            System.out.println("ConditionChanged: " + conditionName + " -> " + t.newValue);
+          }
+        });
+      }
+    });
+
     SCFocusManager.addListener(e -> {
-      System.out.println("FocusOwnerChanged:" + e.getNewFocusOwner());
+      System.out.println("FocusOwnerChanged: " + e.getNewFocusOwner());
     });
 
     SmoothComponentManager.addVisibleComponentChangeListener(new Consumer<List<SmoothComponent>>() {

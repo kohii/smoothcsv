@@ -79,85 +79,89 @@ grid:insert-columns-right	available(csv-sheet)
 grid:delete-columns	available(csv-sheet)	
 grid:go-to-line	available(csv-sheet)	
 grid:start-edit	available(csv-sheet)	
+grid:start-quick-edit	not_editing_cell	
 grid:stop-edit	editing_cell	
 grid:cancel-edit	editing_cell	
 grid:autofit-column-width	available(csv-sheet)	
 grid:autofit-column-width-to-selected-cell	available(csv-sheet)	
+grid:focus	available(csv-sheet)	
 		
-cell-editor:undo	focus(cell-editor)	
-cell-editor:redo	focus(cell-editor)	
-cell-editor:insert-break	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-break"}
-cell-editor:insert-tab	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-tab"}
-cell-editor:move-left	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-backward"}
-cell-editor:move-right	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-forward"}
-cell-editor:move-up	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
-cell-editor:move-down	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
-cell-editor:select-left	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-backward"}
-cell-editor:select-right	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-forward"}
-cell-editor:select-up	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-up"}
-cell-editor:select-down	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-down"}
-cell-editor:move-to-beginning-of-line	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin-line"}
-cell-editor:move-to-end-of-line	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end-line"}
-cell-editor:move-to-top	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin"}
-cell-editor:move-to-bottom	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end"}
-cell-editor:move-to-previous-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-previous-word"}
-cell-editor:move-to-next-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-next-word"}
-cell-editor:select-to-beginning-of-line	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin-line"}
-cell-editor:select-to-end-of-line	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end-line"}
-cell-editor:select-to-top	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin"}
-cell-editor:select-to-bottom	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end"}
-cell-editor:select-to-previous-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-previous-word"}
-cell-editor:select-to-next-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-next-word"}
-cell-editor:select-all	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"select-all"}
-cell-editor:unselect	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"unselect"}
-cell-editor:delete-previous	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous"}
-cell-editor:delete-next	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next"}
-cell-editor:delete-previous-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous-word"}
-cell-editor:delete-next-word	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next-word"}
-cell-editor:cut	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"cut-to-clipboard"}
-cell-editor:copy	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"copy-to-clipboard"}
-cell-editor:paste	focus(cell-editor)	command.cell_editor.ActionCommand {"action":"paste-from-clipboard"}
-cell-editor:page-up	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
-cell-editor:page-down	focus(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+cell-editor:undo	available(cell-editor)	
+cell-editor:redo	available(cell-editor)	
+cell-editor:insert-break	available(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-break"}
+cell-editor:insert-tab	available(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-tab"}
+cell-editor:move-left	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-backward"}
+cell-editor:move-right	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-forward"}
+cell-editor:move-up	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
+cell-editor:move-down	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+cell-editor:select-left	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-backward"}
+cell-editor:select-right	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-forward"}
+cell-editor:select-up	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-up"}
+cell-editor:select-down	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-down"}
+cell-editor:move-to-beginning-of-line	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin-line"}
+cell-editor:move-to-end-of-line	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end-line"}
+cell-editor:move-to-top	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-begin"}
+cell-editor:move-to-bottom	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-end"}
+cell-editor:move-to-previous-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-previous-word"}
+cell-editor:move-to-next-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-next-word"}
+cell-editor:select-to-beginning-of-line	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin-line"}
+cell-editor:select-to-end-of-line	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end-line"}
+cell-editor:select-to-top	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-begin"}
+cell-editor:select-to-bottom	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-end"}
+cell-editor:select-to-previous-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-previous-word"}
+cell-editor:select-to-next-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-next-word"}
+cell-editor:select-all	available(cell-editor)	command.cell_editor.ActionCommand {"action":"select-all"}
+cell-editor:unselect	available(cell-editor)	command.cell_editor.ActionCommand {"action":"unselect"}
+cell-editor:delete-previous	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous"}
+cell-editor:delete-next	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next"}
+cell-editor:delete-previous-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous-word"}
+cell-editor:delete-next-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next-word"}
+cell-editor:cut	available(cell-editor)	command.cell_editor.ActionCommand {"action":"cut-to-clipboard"}
+cell-editor:copy	available(cell-editor)	command.cell_editor.ActionCommand {"action":"copy-to-clipboard"}
+cell-editor:paste	available(cell-editor)	command.cell_editor.ActionCommand {"action":"paste-from-clipboard"}
+cell-editor:page-up	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
+cell-editor:page-down	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+cell-editor:focus	available(cell-editor)	
 		
 value-panel:toggle-floating	available(value-panel)	
 value-panel:expand	available(value-panel)	
 value-panel:compress	available(value-panel)	
 value-panel:undo	available(value-panel)	
 value-panel:redo	available(value-panel)	
-value-panel:insert-break	focus(value-panel)	command.value_panel.ActionCommand {"action":"insert-break"}
-value-panel:insert-tab	focus(value-panel)	command.value_panel.ActionCommand {"action":"insert-tab"}
-value-panel:move-left	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-backward"}
-value-panel:move-right	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-forward"}
-value-panel:move-up	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
-value-panel:move-down	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
-value-panel:select-left	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-backward"}
-value-panel:select-right	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-forward"}
-value-panel:select-up	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-up"}
-value-panel:select-down	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-down"}
-value-panel:move-to-beginning-of-line	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin-line"}
-value-panel:move-to-end-of-line	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-end-line"}
-value-panel:move-to-top	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin"}
-value-panel:move-to-bottom	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-end"}
-value-panel:move-to-previous-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-previous-word"}
-value-panel:move-to-next-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"caret-next-word"}
-value-panel:select-to-beginning-of-line	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin-line"}
-value-panel:select-to-end-of-line	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-end-line"}
-value-panel:select-to-top	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin"}
-value-panel:select-to-bottom	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-end"}
-value-panel:select-to-previous-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-previous-word"}
-value-panel:select-to-next-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"selection-next-word"}
-value-panel:select-all	focus(value-panel)	command.value_panel.ActionCommand {"action":"select-all"}
-value-panel:unselect	focus(value-panel)	command.value_panel.ActionCommand {"action":"unselect"}
-value-panel:delete-previous	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous"}
-value-panel:delete-next	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-next"}
-value-panel:delete-previous-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous-word"}
-value-panel:delete-next-word	focus(value-panel)	command.value_panel.ActionCommand {"action":"delete-next-word"}
-value-panel:cut	focus(value-panel)	command.value_panel.ActionCommand {"action":"cut-to-clipboard"}
-value-panel:copy	focus(value-panel)	command.value_panel.ActionCommand {"action":"copy-to-clipboard"}
-value-panel:paste	focus(value-panel)	command.value_panel.ActionCommand {"action":"paste-from-clipboard"}
-value-panel:page-up	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
-value-panel:page-down	focus(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+value-panel:insert-break	available(value-panel)	command.value_panel.ActionCommand {"action":"insert-break"}
+value-panel:insert-tab	available(value-panel)	command.value_panel.ActionCommand {"action":"insert-tab"}
+value-panel:move-left	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-backward"}
+value-panel:move-right	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-forward"}
+value-panel:move-up	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
+value-panel:move-down	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+value-panel:select-left	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-backward"}
+value-panel:select-right	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-forward"}
+value-panel:select-up	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-up"}
+value-panel:select-down	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-down"}
+value-panel:move-to-beginning-of-line	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin-line"}
+value-panel:move-to-end-of-line	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-end-line"}
+value-panel:move-to-top	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-begin"}
+value-panel:move-to-bottom	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-end"}
+value-panel:move-to-previous-word	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-previous-word"}
+value-panel:move-to-next-word	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-next-word"}
+value-panel:select-to-beginning-of-line	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin-line"}
+value-panel:select-to-end-of-line	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-end-line"}
+value-panel:select-to-top	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-begin"}
+value-panel:select-to-bottom	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-end"}
+value-panel:select-to-previous-word	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-previous-word"}
+value-panel:select-to-next-word	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-next-word"}
+value-panel:select-all	available(value-panel)	command.value_panel.ActionCommand {"action":"select-all"}
+value-panel:unselect	available(value-panel)	command.value_panel.ActionCommand {"action":"unselect"}
+value-panel:delete-previous	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous"}
+value-panel:delete-next	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-next"}
+value-panel:delete-previous-word	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous-word"}
+value-panel:delete-next-word	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-next-word"}
+value-panel:cut	available(value-panel)	command.value_panel.ActionCommand {"action":"cut-to-clipboard"}
+value-panel:copy	available(value-panel)	command.value_panel.ActionCommand {"action":"copy-to-clipboard"}
+value-panel:paste	available(value-panel)	command.value_panel.ActionCommand {"action":"paste-from-clipboard"}
+value-panel:page-up	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
+value-panel:page-down	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
+value-panel:focus	available(value-panel)	
 		
 convert:upper-case	not_editing_cell	
 convert:lower-case	not_editing_cell	

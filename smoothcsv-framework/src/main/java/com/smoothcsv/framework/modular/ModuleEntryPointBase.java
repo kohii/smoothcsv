@@ -105,7 +105,6 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
-        System.out.println(rowData[0] + '\t' + rowData[1] + '\t' + rowData[2]);
         if (StringUtils.isNotEmpty(rowData[0])) {
           registry.register(rowData[0], Conditions.getCondition(rowData[1]), rowData[2]);
         }

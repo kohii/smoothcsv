@@ -16,6 +16,7 @@ package com.smoothcsv.framework.component;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -116,6 +117,8 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
 
     setFocusable(true);
 
+    setMinimumSize(new Dimension(50, 50));
+
     addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
@@ -135,10 +138,10 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
         } else {
           SCTabbedPane.this.setFocusable(false);
           newView.requestFocusInWindow();
-          newView.getViewInfo().getPropertyChangeSupport()
-              .addPropertyChangeListener("fullTitle", titleChangeListener);
-          newView.getViewInfo().getPropertyChangeSupport()
-              .firePropertyChange("fullTitle", null, newView.getViewInfo().getFullTitle());
+          newView.getViewInfo().getPropertyChangeSupport().addPropertyChangeListener("fullTitle",
+              titleChangeListener);
+          newView.getViewInfo().getPropertyChangeSupport().firePropertyChange("fullTitle", null,
+              newView.getViewInfo().getFullTitle());
           newView.onTabActivated();
         }
 
@@ -287,8 +290,8 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
       public void dropActionChanged(DragSourceDragEvent e) {}
     };
     final Transferable t = new Transferable() {
-      private final DataFlavor FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType,
-          TABDRAG_PRESENTABLE_NAME);
+      private final DataFlavor FLAVOR =
+          new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, TABDRAG_PRESENTABLE_NAME);
 
       @Override
       public Object getTransferData(DataFlavor flavor) {
@@ -328,8 +331,8 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
       }
     };
     new DropTarget(glassPane, DnDConstants.ACTION_COPY_OR_MOVE, new CDropTargetListener(), true);
-    new DragSource()
-        .createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, dgl);
+    new DragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE,
+        dgl);
     // DragSource.getDefaultDragSource().createDefaultDragGestureRecognizer(this,
     // DnDConstants.ACTION_COPY_OR_MOVE, dgl);
   }

@@ -13,7 +13,6 @@
  */
 package com.smoothcsv.framework.component;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.FocusAdapter;

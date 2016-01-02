@@ -18,6 +18,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
@@ -35,7 +36,8 @@ public class MacroToolsWrapperPanel extends JPanel {
     splitPane.setDividerSize(5);
     splitPane.setFocusable(false);
     splitPane.setBorder(null);
-    splitPane.setResizeWeight(0.6);
+    splitPane.setResizeWeight(1.0);
+    splitPane.setDividerLocation((int) (SCApplication.components().getFrame().getHeight() * 0.6));
     add(splitPane, BorderLayout.CENTER);
   }
 }

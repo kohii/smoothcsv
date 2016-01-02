@@ -15,6 +15,7 @@ package com.smoothcsv.core.macro.component;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -55,6 +56,7 @@ public class SimpleTabbedPane extends JPanel {
 
   public SimpleTabbedPane() {
     setLayout(new BorderLayout(0, 0));
+    setMinimumSize(new Dimension(50, 50));
 
     tabLabelsPanel = new JPanel();
     FlowLayout flowLayout = (FlowLayout) tabLabelsPanel.getLayout();

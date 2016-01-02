@@ -14,6 +14,7 @@
 package com.smoothcsv.core.macro.component;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -71,9 +72,13 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
 
   private JToggleButton toggleConsoleAlwaysVisibleBtn;
 
+  private double dividerLoc = 0.5;
+
   public MacroToolsPanel() {
     setLayout(new BorderLayout(0, 0));
     setBorder(null);
+
+    setMinimumSize(new Dimension(50, 50));
 
     tabbedPane = new SimpleTabbedPane();
     add(tabbedPane, BorderLayout.CENTER);
@@ -172,11 +177,16 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
       remove(tabbedPane);
       splitPane = new ExSplitPane();
       splitPane.setBackground(UIConstants.getDefaultBorderColor());
-      splitPane.setResizeWeight(0.5);
+      splitPane.setResizeWeight(1.0);
+      splitPane.setDividerLocation(
+          (int) (dividerLoc * (double) (getWidth() - splitPane.getDividerSize())));
       splitPane.setLeftComponent(tabbedPane);
       splitPane.setRightComponent(consolePanel);
       add(splitPane, BorderLayout.CENTER);
     } else {
+      dividerLoc = (double) splitPane.getDividerLocation()
+          / (double) (splitPane.getWidth() - splitPane.getDividerSize());
+      dividerLoc = Math.max(0.1, Math.min(0.9, dividerLoc));
       splitPane.removeAll();
       remove(splitPane);
       splitPane = null;

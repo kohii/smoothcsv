@@ -54,8 +54,8 @@ import lombok.Getter;
 public class MacroConsolePanel extends JPanel implements ActionListener, SmoothComponent {
 
   @Getter
-  private SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
-      "macro-console");
+  private SmoothComponentSupport componentSupport =
+      new SmoothComponentSupport(this, "macro-console");
 
   private LineBreakableTextField inputTextArea;
   private JTextArea consoleTextArea;
@@ -71,6 +71,7 @@ public class MacroConsolePanel extends JPanel implements ActionListener, SmoothC
     setBorder(null);
     setBackground(Color.WHITE);
     setLayout(new BorderLayout(0, 0));
+    setMinimumSize(new Dimension(20, 20));
 
     Border border =
         BorderFactory.createMatteBorder(1, 0, 0, 0, UIConstants.getDefaultBorderColor());
@@ -138,8 +139,8 @@ public class MacroConsolePanel extends JPanel implements ActionListener, SmoothC
       }
     });
     inputTextArea.addActionListener(this);
-    inputTextArea.getInputMap()
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "restore-prev-input");
+    inputTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
+        "restore-prev-input");
     inputTextArea.getActionMap().put("restore-prev-input", new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent e) {

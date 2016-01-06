@@ -45,8 +45,8 @@ public class DirectoryResolver {
         instance = new DirectoryResolver() {
           @Override
           protected String createAppDataDirectory() {
-            LOG.debug("user.home={}" + System.getProperty("user.home"));
-            LOG.debug("user.dir={}" + System.getProperty("user.dir"));
+            LOG.debug("user.home={}", System.getProperty("user.home"));
+            LOG.debug("user.dir={}", System.getProperty("user.dir"));
             return System.getProperty("user.home") + FILE_SEPARATOR + "SmoothCSV_DEV"
                 + FILE_SEPARATOR;
           }

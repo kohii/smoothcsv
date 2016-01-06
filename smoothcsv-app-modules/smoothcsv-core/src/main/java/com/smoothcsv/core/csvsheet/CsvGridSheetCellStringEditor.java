@@ -41,9 +41,8 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
   @Override
   public boolean prepare(GridSheetTable table, Object value, boolean isSelected, int row,
       int column) {
-    boolean b = super.prepare(table, value, isSelected, row, column);
     CsvGridSheetCellValuePanel.getInstance().getUndoManager().discardAllEdits();
-    return b;
+    return true;
   }
 
   @Override
@@ -98,7 +97,9 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       super.processInputMethodEvent(e);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see javax.swing.JComponent#requestFocus()
      */
     @Override
@@ -107,7 +108,9 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       super.requestFocus();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see javax.swing.JComponent#requestFocus(boolean)
      */
     @Override
@@ -116,7 +119,9 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       return super.requestFocus(temporary);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see javax.swing.JComponent#requestFocusInWindow(boolean)
      */
     @Override
@@ -125,7 +130,9 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       return super.requestFocusInWindow(temporary);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     *
      * @see javax.swing.JComponent#requestFocusInWindow()
      */
     @Override

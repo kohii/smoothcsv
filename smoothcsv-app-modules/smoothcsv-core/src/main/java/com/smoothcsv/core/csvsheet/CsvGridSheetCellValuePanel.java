@@ -176,7 +176,6 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
 
   public void showCellValue(String text) {
     textArea.setText(text);
-    textArea.setCaretPosition(0);
   }
 
   public void toggleFloating() {
@@ -283,16 +282,6 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
     public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel) {
       super("value-panel");
       this.valuePanel = valuePanel;
-    }
-
-    @Override
-    public void requestFocus() {
-      super.requestFocus();
-    }
-
-    @Override
-    public boolean requestFocusInWindow() {
-      return super.requestFocusInWindow();
     }
   }
 }

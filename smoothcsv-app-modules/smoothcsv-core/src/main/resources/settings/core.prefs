@@ -6,9 +6,10 @@ statusbarVisible=true
 toolbarVisible=false
 valuepanelVisible=true
 defaultFontSize=13
-statusBarFontSize=12
-gridFontSize=13
-valuePanelFontSize=13
+defaultFontName=
+statusBarFontSize=
+gridFontSize=
+valuePanelFontSize=
 cellPaddingTop=1
 cellPaddingBottom=1
 

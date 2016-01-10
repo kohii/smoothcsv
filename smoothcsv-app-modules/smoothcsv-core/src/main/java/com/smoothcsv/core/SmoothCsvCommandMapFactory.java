@@ -19,8 +19,8 @@ import java.io.File;
 
 import javax.swing.Action;
 
-import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.Macro;
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.SCAppMacroRuntime;
 import com.smoothcsv.framework.component.support.CommandActionMap;
 import com.smoothcsv.framework.component.support.DefaultCommandMapFactory;

@@ -30,9 +30,9 @@ import javax.swing.JPanel;
 
 import com.smoothcsv.commons.utils.HtmlUtils;
 import com.smoothcsv.core.component.CsvPropertiesDialog;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
@@ -41,7 +41,6 @@ import com.smoothcsv.framework.preference.PrefTextField;
 import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.framework.preference.PrefUtils;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.components.ExLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
@@ -102,11 +101,12 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_2.gridy = 3;
     add(rdbtnNewRadioButton_2, gbc_rdbtnNewRadioButton_2);
 
-    new PrefButtonGroup<String>(CoreSettingKeys.Core.HOW_TO_DETECT_PROPERTIES, rdbtnNewRadioButton,
-        rdbtnNewRadioButton_1, rdbtnNewRadioButton_2);
+    new PrefButtonGroup<String>(CoreSettings.getInstance(),
+        CoreSettings.HOW_TO_DETECT_PROPERTIES, rdbtnNewRadioButton, rdbtnNewRadioButton_1,
+        rdbtnNewRadioButton_2);
 
-    PrefCheckBox chckbxNewCheckBox = new PrefCheckBox(
-        CoreSettingKeys.Core.ALERT_ON_OPENING_HUGE_FILE, "Alert before opening a huge file");
+    PrefCheckBox chckbxNewCheckBox = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.ALERT_ON_OPENING_HUGE_FILE, "Alert before opening a huge file");
     GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
     gbc_chckbxNewCheckBox.insets = new Insets(10, 0, 0, 0);
     gbc_chckbxNewCheckBox.gridwidth = 2;
@@ -115,8 +115,8 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_chckbxNewCheckBox.gridy = 4;
     add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
 
-    PrefTextField txtAlertThresholdFileSize =
-        new PrefTextField(CoreSettingKeys.Core.ALERT_THRESHOLD, PrefTextField.Type.NUMERIC, 6);
+    PrefTextField txtAlertThresholdFileSize = new PrefTextField(CoreSettings.getInstance(),
+        CoreSettings.ALERT_THRESHOLD, PrefTextField.Type.NUMERIC, 6);
     txtAlertThresholdFileSize.addValidator(PrefTextValidator.MORE_THAN_ZERO);
     ExLabel lblNewLabel_1 =
         new ExLabel("When the size is more than {} MB", txtAlertThresholdFileSize);
@@ -182,9 +182,9 @@ public class FileEditorPrefPanel extends JPanel {
         CsvPropertiesDialog dialog = new CsvPropertiesDialog(SCApplication.components().getFrame(),
             "Properties", false, false, true);
 
-        Settings settings = SettingManager.getCoreSettings();
-        String r = settings.get(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, "5");
-        String c = settings.get(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, "5");
+        Settings settings = CoreSettings.getInstance();
+        String r = settings.get(CoreSettings.DEFAULT_ROW_SIZE);
+        String c = settings.get(CoreSettings.DEFAULT_COLUMN_SIZE);
         dialog.setGirdSize(Integer.parseInt(r), Integer.parseInt(c));
         dialog.setCsvProperties(CsvSheetSupport.getDefaultCsvMeta());
         dialog.pack();
@@ -194,10 +194,10 @@ public class FileEditorPrefPanel extends JPanel {
           int column = dialog.getColumnCount();
           CsvMeta csvMeta = dialog.getCsvMeta();
           CsvSheetSupport.setDefaultCsvMeta(csvMeta);
-          Settings fileSettings = SettingManager.getCoreSettings();
+          Settings fileSettings = CoreSettings.getInstance();
           Map<String, Object> map = new HashMap<>();
-          map.put(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, row);
-          map.put(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, column);
+          map.put(CoreSettings.DEFAULT_ROW_SIZE, row);
+          map.put(CoreSettings.DEFAULT_COLUMN_SIZE, column);
           fileSettings.saveAll(map);
 
           displayDefaultProperties();
@@ -207,9 +207,9 @@ public class FileEditorPrefPanel extends JPanel {
   }
 
   private void displayDefaultProperties() {
-    Settings settings = SettingManager.getCoreSettings();
-    String r = settings.get(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, "5");
-    String c = settings.get(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, "5");
+    Settings settings = CoreSettings.getInstance();
+    String r = settings.get(CoreSettings.DEFAULT_ROW_SIZE);
+    String c = settings.get(CoreSettings.DEFAULT_COLUMN_SIZE);
     String s = CsvSheetSupport.getDefaultCsvMeta().toDisplayString(Integer.parseInt(r),
         Integer.parseInt(c));
     defaultPropLabel.setText("<html>" + HtmlUtils.escapeHtml(s) + "</html>");

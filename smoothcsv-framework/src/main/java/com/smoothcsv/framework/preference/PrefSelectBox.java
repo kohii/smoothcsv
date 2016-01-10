@@ -28,7 +28,7 @@ import javax.swing.JList;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.BeanUtils;
-import com.smoothcsv.framework.setting.SettingManager;
+import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii
@@ -44,8 +44,8 @@ public class PrefSelectBox<E> extends JComboBox<E> {
   private Method valueFieldGetter;
 
   @SuppressWarnings("unchecked")
-  public PrefSelectBox(String prefKey, Collection<E> items, String valueFieldName,
-      String displayFieldName) {
+  public PrefSelectBox(Settings settings, String prefKey, Collection<E> items,
+      String valueFieldName, String displayFieldName) {
     super((E[]) items.stream().toArray());
     this.prefKey = prefKey;
     this.valueFieldName = valueFieldName;
@@ -60,26 +60,17 @@ public class PrefSelectBox<E> extends JComboBox<E> {
           Object item = e.getItem();
           try {
             Object val = getValueFieldGetter(item.getClass()).invoke(item);
-            SettingManager.save(prefKey, val);
-          } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
+            settings.save(prefKey, val);
+          } catch (IllegalAccessException | IllegalArgumentException
+              | InvocationTargetException e1) {
             throw new UnexpectedException(e1);
           }
         }
       }
     });
 
-    setValueFromPref();
-  }
-
-  private Method getValueFieldGetter(Class<?> clazz) {
-    if (valueFieldGetter == null) {
-      valueFieldGetter = BeanUtils.getGetter(clazz, valueFieldName);
-    }
-    return valueFieldGetter;
-  }
-
-  private void setValueFromPref() {
-    String value = SettingManager.get(prefKey);
+    // Load value
+    String value = settings.get(prefKey);
     ComboBoxModel<E> model = getModel();
     try {
       for (int i = 0; i < model.getSize(); i++) {
@@ -93,6 +84,13 @@ public class PrefSelectBox<E> extends JComboBox<E> {
     } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
       throw new UnexpectedException(e);
     }
+  }
+
+  private Method getValueFieldGetter(Class<?> clazz) {
+    if (valueFieldGetter == null) {
+      valueFieldGetter = BeanUtils.getGetter(clazz, valueFieldName);
+    }
+    return valueFieldGetter;
   }
 
   private class Renderer extends DefaultListCellRenderer {

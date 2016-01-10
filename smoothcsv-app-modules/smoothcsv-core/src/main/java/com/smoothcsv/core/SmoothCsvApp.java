@@ -18,14 +18,13 @@ import java.util.List;
 import java.util.Locale;
 
 import com.smoothcsv.core.component.SmoothCsvComponentManager;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.handler.SmoothCsvErrorHandler;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.support.CommandMapFactory;
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
 import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
-import com.smoothcsv.framework.setting.SettingManager;
 
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
@@ -76,7 +75,7 @@ public class SmoothCsvApp extends SCApplication {
   @Override
   protected void setupLanguageSetting() {
     List<Language> langs = getModuleManager().getAvailableLanguages();
-    String langSetting = SettingManager.get(CoreSettingKeys.Core.LANGUAGE);
+    String langSetting = CoreSettings.getInstance().get(CoreSettings.LANGUAGE);
     String languageToUse = null;
     for (Language lang : langs) {
       if (lang.getId().equals(langSetting)) {
@@ -85,7 +84,7 @@ public class SmoothCsvApp extends SCApplication {
     }
     if (languageToUse == null) {
       languageToUse = Language.EN.getId();
-      SettingManager.save(CoreSettingKeys.Core.LANGUAGE, languageToUse);
+      CoreSettings.getInstance().save(CoreSettings.LANGUAGE, languageToUse);
     }
     Locale.setDefault(new Locale(languageToUse));
   }

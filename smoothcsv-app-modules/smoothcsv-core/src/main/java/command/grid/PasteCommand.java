@@ -21,13 +21,12 @@ import java.util.List;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvReader;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
@@ -40,6 +39,7 @@ import com.smoothcsv.swing.utils.ClipboardUtils;
 public class PasteCommand extends GridCommand {
 
   private static CsvMeta singleTsvMeta = new CsvMeta();
+
   static {
     singleTsvMeta.setDelimiter('\t');
     singleTsvMeta.setEscape('\0');
@@ -120,7 +120,7 @@ public class PasteCommand extends GridCommand {
       }
 
       if (values.size() == 1 && values.get(0).size() == 1
-          && SettingManager.getBoolean(CoreSettingKeys.Core.PASTE_REPEATEDLY)) {
+          && CoreSettings.getInstance().getBoolean(CoreSettings.PASTE_REPEATEDLY)) {
         Object dataToPaste = values.get(0).get(0);
         range.forEach(new CellConsumer() {
           @Override
@@ -131,8 +131,8 @@ public class PasteCommand extends GridCommand {
       } else if (!doNotChangeSelection) {
         GridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
         selectionModel.clearHeaderSelection();
-        selectionModel.setSelectionIntervalNoChangeAnchor(leftTopRow, leftTopColumn, leftTopRow
-            + +pastedRowCount - 1, leftTopColumn + pastedColumnCount - 1);
+        selectionModel.setSelectionIntervalNoChangeAnchor(leftTopRow, leftTopColumn,
+            leftTopRow + +pastedRowCount - 1, leftTopColumn + pastedColumnCount - 1);
       }
     }
   }

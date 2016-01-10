@@ -14,13 +14,12 @@
 package command.app;
 
 import com.smoothcsv.core.component.CsvPropertiesDialog;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.SCBundle;
 
@@ -36,10 +35,10 @@ public class NewFileAsCommand extends Command {
         new CsvPropertiesDialog(SCApplication.components().getFrame(), "Open", false, false, true);
     dialog.setMessage(SCBundle.get("key.newFileAs.message"));
 
-    Settings settings = SettingManager.getCoreSettings();
-    String r = settings.get(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, "5");
-    String c = settings.get(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, "5");
-    dialog.setGirdSize(Integer.parseInt(r), Integer.parseInt(c));
+    Settings settings = CoreSettings.getInstance();
+    Integer r = settings.getInteger(CoreSettings.DEFAULT_ROW_SIZE);
+    Integer c = settings.getInteger(CoreSettings.DEFAULT_COLUMN_SIZE);
+    dialog.setGirdSize(r, c);
     dialog.setCsvProperties(CsvSheetSupport.getDefaultCsvMeta());
 
     dialog.pack();

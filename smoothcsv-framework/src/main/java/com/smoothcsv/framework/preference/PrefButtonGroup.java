@@ -15,7 +15,7 @@ package com.smoothcsv.framework.preference;
 
 import java.util.Objects;
 
-import com.smoothcsv.framework.setting.SettingManager;
+import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 
@@ -27,10 +27,10 @@ import com.smoothcsv.swing.components.ExRadioButton;
 public class PrefButtonGroup<V> extends ExButtonGroup<V> {
 
   @SuppressWarnings("unchecked")
-  public PrefButtonGroup(String prefKey, ExRadioButton<V>... radioButtons) {
+  public PrefButtonGroup(Settings settings, String prefKey, ExRadioButton<V>... radioButtons) {
     super(radioButtons);
 
-    String v = SettingManager.get(prefKey);
+    String v = settings.get(prefKey);
     for (ExRadioButton<V> rb : radioButtons) {
       if (Objects.equals(rb.getValue().toString(), v)) {
         rb.setSelected(true);
@@ -38,6 +38,6 @@ public class PrefButtonGroup<V> extends ExButtonGroup<V> {
       }
     }
 
-    addSelectionListener(rb -> SettingManager.save(prefKey, rb.getValue()));
+    addSelectionListener(rb -> settings.save(prefKey, rb.getValue()));
   }
 }

@@ -20,14 +20,13 @@ import java.util.function.Consumer;
 
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.find.FindAndReplaceMatcher;
 import com.smoothcsv.core.find.FindAndReplaceParams;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.swing.gridsheet.AbstractGridSheetHeaderComponent;
 import com.smoothcsv.swing.gridsheet.GridSheetColumnHeader;
 import com.smoothcsv.swing.gridsheet.GridSheetCornerHeader;
@@ -94,7 +93,7 @@ public class CsvGridSheetPane extends GridSheetPane {
     this.csvSheetView = csvSheetView;
 
     undoManager = new GridSheetUndoManager(this,
-        SettingManager.getInteger(CoreSettingKeys.Core.SIZE_OF_UNDOING));
+        CoreSettings.getInstance().getInteger(CoreSettings.SIZE_OF_UNDOING));
 
     GridSheetScrollPane scrollPane = getScrollPane();
     // Color viewportBorderColor = getColorProvider().getRuleLineColor();

@@ -14,10 +14,9 @@
 package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
@@ -32,13 +31,13 @@ public class AutofitColumnWidthToSelectedCellCommand extends GridCommand {
   public void run(CsvGridSheetPane gridSheetPane) {
     gridSheetPane.getTable().stopCellEditing();
 
-    Settings editorSettings = SettingManager.getCoreSettings();
+    Settings editorSettings = CoreSettings.getInstance();
 
     int maxWidth;
-    if (editorSettings.getBoolean(CoreSettingKeys.Core.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
+    if (editorSettings.getBoolean(CoreSettings.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
       int percentage =
           editorSettings
-              .getInteger(CoreSettingKeys.Core.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
+              .getInteger(CoreSettings.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
       maxWidth = SCApplication.components().getFrame().getWidth() * percentage / 100;
     } else {
       maxWidth = Integer.MAX_VALUE;
@@ -46,9 +45,9 @@ public class AutofitColumnWidthToSelectedCellCommand extends GridCommand {
 
     int rowNumsToScan;
     if (editorSettings
-        .getBoolean(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
+        .getBoolean(CoreSettings.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
       rowNumsToScan =
-          editorSettings.getInteger(CoreSettingKeys.Core.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
+          editorSettings.getInteger(CoreSettings.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
     } else {
       rowNumsToScan = Integer.MAX_VALUE;
     }

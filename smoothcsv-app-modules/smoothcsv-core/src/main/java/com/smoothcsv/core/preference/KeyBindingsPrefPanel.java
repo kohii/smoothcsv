@@ -22,9 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.smoothcsv.framework.command.CommandKeymap;
@@ -35,6 +32,9 @@ import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
 import com.smoothcsv.swing.table.ExTableRowFilter;
 import com.smoothcsv.swing.utils.SwingUtils;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author kohii

@@ -38,6 +38,7 @@ import com.smoothcsv.framework.event.EventListenerSupportImpl;
 import com.smoothcsv.framework.event.SCEvent;
 import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.modular.ModuleManager;
+import com.smoothcsv.framework.setting.Session;
 
 
 /**
@@ -149,6 +150,7 @@ public abstract class SCApplication {
   public boolean exit() {
     try {
       listeners().invokeListeners(new ShutdownEvent());
+      Session.getSession().flush();
       System.exit(0);
       return true;
     } catch (Throwable t) {

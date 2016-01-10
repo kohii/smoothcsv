@@ -42,8 +42,8 @@ import com.smoothcsv.commons.utils.StringUtils;
 public class SCProperties {
   private static final Logger LOG = LoggerFactory.getLogger(Settings.class);
 
-  public static final String CHARSET = "UTF-8";
-  public static final String NULL_VALUE = "<NULL>";
+  protected static final String CHARSET = "UTF-8";
+  protected static final String NULL_VALUE = "<NULL>";
 
   private final File file;
 

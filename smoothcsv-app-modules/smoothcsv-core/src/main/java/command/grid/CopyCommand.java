@@ -20,13 +20,12 @@ import java.util.List;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.csv.writer.CsvWriterOptions;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.utils.ClipboardUtils;
 
@@ -37,6 +36,7 @@ import com.smoothcsv.swing.utils.ClipboardUtils;
 public class CopyCommand extends GridCommand {
 
   private static CsvMeta singleTsvMeta = new CsvMeta();
+
   static {
     singleTsvMeta.setDelimiter('\t');
     singleTsvMeta.setEscape('\0');
@@ -45,8 +45,8 @@ public class CopyCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    CsvQuoteApplyRule quoteRule =
-        CsvQuoteApplyRule.valueOf(SettingManager.get(CoreSettingKeys.Core.QUOTE_RULE_FOR_COPYING));
+    CsvQuoteApplyRule quoteRule = CsvQuoteApplyRule
+        .valueOf(CoreSettings.getInstance().get(CoreSettings.QUOTE_RULE_FOR_COPYING));
     singleTsvMeta.setQuoteOption(quoteRule);
     String text = copy(gridSheetPane, singleTsvMeta);
     ClipboardUtils.writeText(text);

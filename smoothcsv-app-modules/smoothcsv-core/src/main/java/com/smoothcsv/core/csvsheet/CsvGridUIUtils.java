@@ -18,9 +18,9 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-import sun.swing.SwingUtilities2;
-
 import com.smoothcsv.csv.NewlineCharacter;
+
+import sun.swing.SwingUtilities2;
 
 /**
  * @author kohii

@@ -20,7 +20,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.smoothcsv.core.constants.CoreSettingKeys;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
 import com.smoothcsv.framework.preference.PrefTextValidator;
@@ -52,9 +52,9 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_lblAutofitColumnWidth.gridy = 0;
     add(lblAutofitColumnWidth, gbc_lblAutofitColumnWidth);
 
-    PrefCheckBox chckbxAutofitColumnWidth =
-        new PrefCheckBox(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE,
-            "Auto-fit column width after opening a file");
+    PrefCheckBox chckbxAutofitColumnWidth = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE,
+        "Auto-fit column width after opening a file");
     GridBagConstraints gbc_chckbxAutofitColumnWidth = new GridBagConstraints();
     gbc_chckbxAutofitColumnWidth.insets = new Insets(0, 0, 5, 0);
     gbc_chckbxAutofitColumnWidth.anchor = GridBagConstraints.WEST;
@@ -63,9 +63,9 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_chckbxAutofitColumnWidth.gridy = 1;
     add(chckbxAutofitColumnWidth, gbc_chckbxAutofitColumnWidth);
 
-    PrefCheckBox chckbxNewCheckBox_1 =
-        new PrefCheckBox(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE,
-            "Limit the number of rows to scan");
+    PrefCheckBox chckbxNewCheckBox_1 = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE,
+        "Limit the number of rows to scan");
     GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
     gbc_chckbxNewCheckBox_1.anchor = GridBagConstraints.WEST;
     gbc_chckbxNewCheckBox_1.gridwidth = 3;
@@ -73,8 +73,8 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_chckbxNewCheckBox_1.gridy = 2;
     add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
 
-    PrefTextField txtRowsToScan = new PrefTextField(
-        CoreSettingKeys.Core.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING, PrefTextField.Type.NUMERIC, 8);
+    PrefTextField txtRowsToScan = new PrefTextField(CoreSettings.getInstance(),
+        CoreSettings.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING, PrefTextField.Type.NUMERIC, 8);
     txtRowsToScan.addValidator(PrefTextValidator.MORE_THAN_ZERO);
     ExLabel lblNewLabel =
         new ExLabel("Scan the first {} rows to auto-fit column width", txtRowsToScan);
@@ -85,8 +85,8 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_lblNewLabel.gridy = 3;
     add(lblNewLabel, gbc_lblNewLabel);
 
-    PrefCheckBox chckbxSetTheMaximum = new PrefCheckBox(
-        CoreSettingKeys.Core.LIMIT_WIDTH_WHEN_AUTO_FITTING, "Set the maximum column width");
+    PrefCheckBox chckbxSetTheMaximum = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.LIMIT_WIDTH_WHEN_AUTO_FITTING, "Set the maximum column width");
     GridBagConstraints gbc_chckbxSetTheMaximum = new GridBagConstraints();
     gbc_chckbxSetTheMaximum.gridwidth = 3;
     gbc_chckbxSetTheMaximum.anchor = GridBagConstraints.WEST;
@@ -94,9 +94,9 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_chckbxSetTheMaximum.gridy = 4;
     add(chckbxSetTheMaximum, gbc_chckbxSetTheMaximum);
 
-    PrefTextField txtColWidth =
-        new PrefTextField(CoreSettingKeys.Core.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING,
-            PrefTextField.Type.NUMERIC, 3);
+    PrefTextField txtColWidth = new PrefTextField(CoreSettings.getInstance(),
+        CoreSettings.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING,
+        PrefTextField.Type.NUMERIC, 3);
     txtColWidth.addValidator(PrefTextValidator.MORE_THAN_ZERO);
     ExLabel lblNewLabel_1 =
         new ExLabel("Each column width should be less than {} % of the window width", txtColWidth);

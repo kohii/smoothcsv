@@ -11,12 +11,9 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.framework.session;
+package com.smoothcsv.core.util;
 
-import java.io.File;
-
-import com.smoothcsv.framework.setting.SCProperties;
-import com.smoothcsv.framework.util.DirectoryResolver;
+import com.smoothcsv.framework.setting.Settings;
 
 import lombok.Getter;
 
@@ -24,12 +21,15 @@ import lombok.Getter;
  * @author kohii
  *
  */
-public class Session extends SCProperties {
+public class CsvPropertySettings extends Settings {
+  public static final String ENCODING_OPTIONS = "csvprop.encodingOptions";
+  public static final String DELIMITER_CHAR_OPTIONS = "csvprop.delimiterCharOptions";
+  public static final String QUOTE_CHAR_OPTIONS = "csvprop.quoteCharOptions";
 
   @Getter
-  private static Session session = new Session();
+  private static CsvPropertySettings instance = new CsvPropertySettings();
 
-  private Session() {
-    super(new File(DirectoryResolver.instance().getSessionDirectory(), "session.prefs"));
+  private CsvPropertySettings() {
+    super("csvprop");
   }
 }

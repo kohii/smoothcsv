@@ -18,7 +18,7 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JCheckBox;
 
-import com.smoothcsv.framework.setting.SettingManager;
+import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii
@@ -27,16 +27,16 @@ import com.smoothcsv.framework.setting.SettingManager;
 @SuppressWarnings("serial")
 public class PrefCheckBox extends JCheckBox {
 
-  public PrefCheckBox(String prefKey, String text) {
+  public PrefCheckBox(Settings settings, String prefKey, String text) {
     super(text);
 
-    String value = SettingManager.get(prefKey);
+    String value = settings.get(prefKey);
     setSelected(Boolean.valueOf(value));
 
     addItemListener(new ItemListener() {
       @Override
       public void itemStateChanged(ItemEvent e) {
-        SettingManager.save(prefKey, isSelected());
+        settings.save(prefKey, isSelected());
       }
     });
   }

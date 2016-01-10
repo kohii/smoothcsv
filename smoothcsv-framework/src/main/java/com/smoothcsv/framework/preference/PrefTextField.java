@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.smoothcsv.framework.setting.SettingManager;
+import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.components.RegulatedTextField;
 
 /**
@@ -36,7 +36,7 @@ public class PrefTextField extends RegulatedTextField {
 
   private List<PrefTextValidator> validators = new ArrayList<>();
 
-  public PrefTextField(String prefKey, Type type, int length) {
+  public PrefTextField(Settings settings, String prefKey, Type type, int length) {
     super(type, length);
 
     addFocusListener(new FocusListener() {
@@ -55,7 +55,7 @@ public class PrefTextField extends RegulatedTextField {
             setText(text);
           }
         }
-        SettingManager.save(prefKey, text);
+        settings.save(prefKey, text);
       }
 
       @Override
@@ -71,7 +71,7 @@ public class PrefTextField extends RegulatedTextField {
       }
     });
 
-    String value = SettingManager.get(prefKey);
+    String value = settings.get(prefKey);
     setText(value);
   }
 

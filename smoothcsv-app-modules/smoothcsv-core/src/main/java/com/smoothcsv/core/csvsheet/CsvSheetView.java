@@ -26,8 +26,6 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 
-import lombok.Getter;
-
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.find.FindAndReplacePanel;
@@ -38,6 +36,7 @@ import com.smoothcsv.swing.gridsheet.event.GridSheetFocusListener;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 import command.app.CloseCommand;
+import lombok.Getter;
 
 /**
  *

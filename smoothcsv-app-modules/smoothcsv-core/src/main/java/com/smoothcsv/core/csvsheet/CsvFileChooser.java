@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.constants.CoreSessionKeys;
 import com.smoothcsv.framework.component.dialog.BasicFileChooser;
-import com.smoothcsv.framework.session.Session;
+import com.smoothcsv.framework.setting.Session;
 
 public class CsvFileChooser extends BasicFileChooser {
 

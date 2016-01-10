@@ -20,7 +20,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.smoothcsv.core.constants.CoreSettingKeys;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
 import com.smoothcsv.framework.preference.PrefCheckBox;
@@ -86,8 +86,9 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_4.gridy = 3;
     add(rdbtnNewRadioButton_4, gbc_rdbtnNewRadioButton_4);
 
-    new PrefButtonGroup<CsvQuoteApplyRule>(CoreSettingKeys.Core.QUOTE_RULE_FOR_COPYING, radioButton,
-        rdbtnNewRadioButton_3, rdbtnNewRadioButton_4);
+    new PrefButtonGroup<CsvQuoteApplyRule>(CoreSettings.getInstance(),
+        CoreSettings.QUOTE_RULE_FOR_COPYING, radioButton, rdbtnNewRadioButton_3,
+        rdbtnNewRadioButton_4);
 
     JLabel lblPaste = new PrefTitleLabel("Paste");
     GridBagConstraints gbc_lblPaste = new GridBagConstraints();
@@ -98,8 +99,9 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblPaste.gridy = 5;
     add(lblPaste, gbc_lblPaste);
 
-    PrefCheckBox rdbtnNewRadioButton_5 = new PrefCheckBox(CoreSettingKeys.Core.PASTE_REPEATEDLY,
-        "Fill selected cells with the same data when pasting single data");
+    PrefCheckBox rdbtnNewRadioButton_5 =
+        new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.PASTE_REPEATEDLY,
+            "Fill selected cells with the same data when pasting single data");
     GridBagConstraints gbc_rdbtnNewRadioButton_5 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_5.insets = new Insets(0, 0, 5, 0);
     gbc_rdbtnNewRadioButton_5.anchor = GridBagConstraints.WEST;
@@ -126,8 +128,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblTheMaximumNumber.gridy = 9;
     add(lblTheMaximumNumber, gbc_lblTheMaximumNumber);
 
-    textField =
-        new PrefTextField(CoreSettingKeys.Core.SIZE_OF_UNDOING, PrefTextField.Type.NUMERIC, 2);
+    textField = new PrefTextField(CoreSettings.getInstance(), CoreSettings.SIZE_OF_UNDOING,
+        PrefTextField.Type.NUMERIC, 2);
     textField.addValidator(PrefTextValidator.NOT_NULL);
     GridBagConstraints gbc_textField = new GridBagConstraints();
     gbc_textField.insets = new Insets(0, 0, 5, 0);

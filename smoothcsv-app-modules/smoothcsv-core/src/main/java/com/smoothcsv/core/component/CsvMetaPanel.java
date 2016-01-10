@@ -32,16 +32,15 @@ import javax.swing.JList;
 
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CharsetUtils;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.AvailableCharsetDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.core.util.CsvPropertySettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.exception.AppException;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 
@@ -439,7 +438,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
 
   private Object[] createEncodingItems() {
     String[] encodings =
-        SettingManager.get(CoreSettingKeys.CsvProperties.ENCODING_OPTIONS).split(",");
+        CsvPropertySettings.getInstance().get(CsvPropertySettings.ENCODING_OPTIONS).split(",");
     List<String> strItems = ArrayUtils.toArrayList(encodings);
 
     List<Object> items =
@@ -453,7 +452,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private Object[] createQuoteCharItems() {
-    List quotes = toCharList(SettingManager.get(CoreSettingKeys.CsvProperties.QUOTE_CHAR_OPTIONS));
+    List quotes =
+        toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.QUOTE_CHAR_OPTIONS));
 
     if (!quotes.contains('\0')) {
       quotes.add('\0');
@@ -467,8 +467,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private Object[] createDelimiterCharItems() {
-    List delimiter =
-        toCharList(SettingManager.get(CoreSettingKeys.CsvProperties.DELIMITER_CHAR_OPTIONS));
+    List delimiter = toCharList(
+        CsvPropertySettings.getInstance().get(CsvPropertySettings.DELIMITER_CHAR_OPTIONS));
 
     delimiter.add(OTHERS);
     if (autoDeterminedOptionEnabled) {

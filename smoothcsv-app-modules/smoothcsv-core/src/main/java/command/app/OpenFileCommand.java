@@ -30,13 +30,13 @@ import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.commons.utils.CharsetUtils.CharsetInfo;
 import com.smoothcsv.core.component.ReadCsvPropertiesDialog;
-import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvFileChooser;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.detector.CsvPropertiesDetectorImpl;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
@@ -47,7 +47,6 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.exception.AppException;
-import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 
 import command.grid.AutofitColumnWidthCommand;
@@ -78,7 +77,8 @@ public class OpenFileCommand extends Command {
   }
 
   public void run(File file) {
-    String howToDetectProperties = SettingManager.get(CoreSettingKeys.Core.HOW_TO_DETECT_PROPERTIES);
+    String howToDetectProperties =
+        CoreSettings.getInstance().get(CoreSettings.HOW_TO_DETECT_PROPERTIES);
     run(file, howToDetectProperties);
   }
 
@@ -96,10 +96,10 @@ public class OpenFileCommand extends Command {
       }
     }
 
-    Settings settings = SettingManager.getCoreSettings();
-    if (settings.getBoolean(CoreSettingKeys.Core.ALERT_ON_OPENING_HUGE_FILE)) {
+    Settings settings = CoreSettings.getInstance();
+    if (settings.getBoolean(CoreSettings.ALERT_ON_OPENING_HUGE_FILE)) {
       int fileSize = (int) (file.length() / 1024 / 1024);
-      int threshold = settings.getInteger(CoreSettingKeys.Core.ALERT_THRESHOLD);
+      int threshold = settings.getInteger(CoreSettings.ALERT_THRESHOLD);
       if (threshold <= fileSize) {
         boolean ok = MessageDialogs.confirm("ISCA0003", fileSize);
         if (!ok) {
@@ -192,7 +192,8 @@ public class OpenFileCommand extends Command {
     } finally {
       SmoothComponentManager.stopAdjustingComponents();
     }
-    if (SettingManager.getBoolean(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE)) {
+    if (CoreSettings.getInstance()
+        .getBoolean(CoreSettings.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE)) {
       new AutofitColumnWidthCommand().execute();
     }
   }

@@ -32,7 +32,7 @@ public class DirectoryResolver {
 
   private static final char FILE_SEPARATOR = File.separatorChar;
   private static final String SETTING_DIRECTORY_NAME = "setting";
-  private static final String HISTORY_DIRECTORY_NAME = "history";
+  private static final String SESSION_DIRECTORY_NAME = "session";
   private static final String TEMPORARY_DIRECTORY_NAME = "tmp";
   private static final String MODULE_DIRECTORY_NAME = "modules";
   private static final String MACRO_DIRECTORY_NAME = "macro";
@@ -52,7 +52,7 @@ public class DirectoryResolver {
           }
         };
         LOG.debug("setting directory: {}", instance.getSettingDirectory());
-        LOG.debug("history directory: {}", instance.getHistoryDirectory());
+        LOG.debug("session directory: {}", instance.getSessionDirectory());
         LOG.debug("temporary directory: {}", instance.getTemporaryDirectory());
       } else {
         instance = new DirectoryResolver();
@@ -63,7 +63,7 @@ public class DirectoryResolver {
 
   private File settingDirectory;
 
-  private File historyDirectory;
+  private File sessionDirectory;
 
   private File appDataDirectory;
 
@@ -100,12 +100,12 @@ public class DirectoryResolver {
     return temporaryDirectory;
   }
 
-  public File getHistoryDirectory() {
-    if (historyDirectory == null) {
-      historyDirectory = new File(getAppDataDirectory(), HISTORY_DIRECTORY_NAME);
-      FileUtils.ensureDirectoryExists(historyDirectory);
+  public File getSessionDirectory() {
+    if (sessionDirectory == null) {
+      sessionDirectory = new File(getAppDataDirectory(), SESSION_DIRECTORY_NAME);
+      FileUtils.ensureDirectoryExists(sessionDirectory);
     }
-    return historyDirectory;
+    return sessionDirectory;
   }
 
   public File getModuleJarDirectory() {

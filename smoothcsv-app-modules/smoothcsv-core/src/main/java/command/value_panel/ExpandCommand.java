@@ -14,7 +14,7 @@
 package command.value_panel;
 
 import com.smoothcsv.core.command.ValuePanelCommandBase;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
@@ -27,13 +27,13 @@ public class ExpandCommand extends ValuePanelCommandBase {
 
   @Override
   protected void run(CsvGridSheetCellValuePanel valuePanel) {
-    Settings setting = SettingManager.getSettings(AppSettingKeys.Editor.$);
-    int h = setting.getInteger(AppSettingKeys.Editor.VALUEPANEL_HEIGHT);
+    Settings setting = SettingManager.getCoreSettings();
+    int h = setting.getInteger(CoreSettingKeys.Core.VALUEPANEL_HEIGHT);
     h++;
     if (h > 12) {
       abort();
     }
-    setting.save(AppSettingKeys.Editor.VALUEPANEL_HEIGHT, h);
+    setting.save(CoreSettingKeys.Core.VALUEPANEL_HEIGHT, h);
     valuePanel.reloadPanelHeight();
   }
 }

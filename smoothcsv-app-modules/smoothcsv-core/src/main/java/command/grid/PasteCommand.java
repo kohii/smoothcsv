@@ -21,7 +21,7 @@ import java.util.List;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvReader;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -120,7 +120,7 @@ public class PasteCommand extends GridCommand {
       }
 
       if (values.size() == 1 && values.get(0).size() == 1
-          && SettingManager.getBoolean(AppSettingKeys.Editor.PASTE_REPEATEDLY)) {
+          && SettingManager.getBoolean(CoreSettingKeys.Core.PASTE_REPEATEDLY)) {
         Object dataToPaste = values.get(0).get(0);
         range.forEach(new CellConsumer() {
           @Override

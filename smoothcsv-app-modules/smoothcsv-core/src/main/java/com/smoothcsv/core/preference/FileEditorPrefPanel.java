@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 
 import com.smoothcsv.commons.utils.HtmlUtils;
 import com.smoothcsv.core.component.CsvPropertiesDialog;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.framework.SCApplication;
@@ -102,11 +102,11 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_2.gridy = 3;
     add(rdbtnNewRadioButton_2, gbc_rdbtnNewRadioButton_2);
 
-    new PrefButtonGroup<String>("file.howToDetectProperties", rdbtnNewRadioButton,
+    new PrefButtonGroup<String>(CoreSettingKeys.Core.HOW_TO_DETECT_PROPERTIES, rdbtnNewRadioButton,
         rdbtnNewRadioButton_1, rdbtnNewRadioButton_2);
 
-    PrefCheckBox chckbxNewCheckBox =
-        new PrefCheckBox("file.alertOnOpeningHugeFile", "Alert before opening a huge file");
+    PrefCheckBox chckbxNewCheckBox = new PrefCheckBox(
+        CoreSettingKeys.Core.ALERT_ON_OPENING_HUGE_FILE, "Alert before opening a huge file");
     GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
     gbc_chckbxNewCheckBox.insets = new Insets(10, 0, 0, 0);
     gbc_chckbxNewCheckBox.gridwidth = 2;
@@ -116,7 +116,7 @@ public class FileEditorPrefPanel extends JPanel {
     add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
 
     PrefTextField txtAlertThresholdFileSize =
-        new PrefTextField("file.alertThreshold", PrefTextField.Type.NUMERIC, 6);
+        new PrefTextField(CoreSettingKeys.Core.ALERT_THRESHOLD, PrefTextField.Type.NUMERIC, 6);
     txtAlertThresholdFileSize.addValidator(PrefTextValidator.MORE_THAN_ZERO);
     ExLabel lblNewLabel_1 =
         new ExLabel("When the size is more than {} MB", txtAlertThresholdFileSize);
@@ -179,13 +179,12 @@ public class FileEditorPrefPanel extends JPanel {
     btnEdit.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        CsvPropertiesDialog dialog =
-            new CsvPropertiesDialog(SCApplication.components().getFrame(), "Properties", false,
-                false, true);
+        CsvPropertiesDialog dialog = new CsvPropertiesDialog(SCApplication.components().getFrame(),
+            "Properties", false, false, true);
 
-        Settings settings = SettingManager.getSettings(AppSettingKeys.File.$);
-        String r = settings.get(AppSettingKeys.File.DEFAULT_ROW_SIZE, "5");
-        String c = settings.get(AppSettingKeys.File.DEFAULT_COLUMN_SIZE, "5");
+        Settings settings = SettingManager.getCoreSettings();
+        String r = settings.get(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, "5");
+        String c = settings.get(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, "5");
         dialog.setGirdSize(Integer.parseInt(r), Integer.parseInt(c));
         dialog.setCsvProperties(CsvSheetSupport.getDefaultCsvMeta());
         dialog.pack();
@@ -195,10 +194,10 @@ public class FileEditorPrefPanel extends JPanel {
           int column = dialog.getColumnCount();
           CsvMeta csvMeta = dialog.getCsvMeta();
           CsvSheetSupport.setDefaultCsvMeta(csvMeta);
-          Settings fileSettings = SettingManager.getSettings(AppSettingKeys.File.$);
+          Settings fileSettings = SettingManager.getCoreSettings();
           Map<String, Object> map = new HashMap<>();
-          map.put(AppSettingKeys.File.DEFAULT_ROW_SIZE, row);
-          map.put(AppSettingKeys.File.DEFAULT_COLUMN_SIZE, column);
+          map.put(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, row);
+          map.put(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, column);
           fileSettings.saveAll(map);
 
           displayDefaultProperties();
@@ -208,12 +207,11 @@ public class FileEditorPrefPanel extends JPanel {
   }
 
   private void displayDefaultProperties() {
-    Settings settings = SettingManager.getSettings(AppSettingKeys.File.$);
-    String r = settings.get(AppSettingKeys.File.DEFAULT_ROW_SIZE, "5");
-    String c = settings.get(AppSettingKeys.File.DEFAULT_COLUMN_SIZE, "5");
-    String s =
-        CsvSheetSupport.getDefaultCsvMeta().toDisplayString(Integer.parseInt(r),
-            Integer.parseInt(c));
+    Settings settings = SettingManager.getCoreSettings();
+    String r = settings.get(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, "5");
+    String c = settings.get(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, "5");
+    String s = CsvSheetSupport.getDefaultCsvMeta().toDisplayString(Integer.parseInt(r),
+        Integer.parseInt(c));
     defaultPropLabel.setText("<html>" + HtmlUtils.escapeHtml(s) + "</html>");
   }
 }

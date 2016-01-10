@@ -20,9 +20,9 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.smoothcsv.commons.utils.StringUtils;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSessionKeys;
 import com.smoothcsv.framework.component.dialog.BasicFileChooser;
-import com.smoothcsv.framework.setting.SettingManager;
+import com.smoothcsv.framework.session.Session;
 import com.smoothcsv.framework.util.DirectoryResolver;
 
 public class JsFileChooser extends BasicFileChooser {
@@ -44,11 +44,11 @@ public class JsFileChooser extends BasicFileChooser {
         @Override
         public Boolean apply(File t) {
           String lastUsedDir = instance.getCurrentDirectory().getAbsolutePath();
-          SettingManager.save(AppSettingKeys.Session.LAST_USED_DIRECTORY_JS, lastUsedDir);
+          Session.getSession().save(CoreSessionKeys.LAST_USED_DIRECTORY_JS, lastUsedDir);
           return true;
         }
       });
-      String initDir = SettingManager.get(AppSettingKeys.Session.LAST_USED_DIRECTORY_JS);
+      String initDir = Session.getSession().get(CoreSessionKeys.LAST_USED_DIRECTORY_JS, null);
       File file;
       if (StringUtils.isEmpty(initDir)) {
         file = DirectoryResolver.instance().getMacroFileDirectory();

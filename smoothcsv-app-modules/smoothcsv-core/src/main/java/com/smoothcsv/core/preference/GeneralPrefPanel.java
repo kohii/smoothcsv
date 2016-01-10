@@ -21,8 +21,8 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.constants.FrameworkSettingKeys;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
 import com.smoothcsv.framework.preference.PrefSelectBox;
 
@@ -54,7 +54,7 @@ public class GeneralPrefPanel extends JPanel {
     List<Language> langs =
         SCApplication.getApplication().getModuleManager().getAvailableLanguages();
     PrefSelectBox<Language> comboBox =
-        new PrefSelectBox<>(FrameworkSettingKeys.LANGUAGE, langs, "id", "name");
+        new PrefSelectBox<>(CoreSettingKeys.Core.LANGUAGE, langs, "id", "name");
     GridBagConstraints gbc_comboBox = new GridBagConstraints();
     gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
     gbc_comboBox.gridx = 1;

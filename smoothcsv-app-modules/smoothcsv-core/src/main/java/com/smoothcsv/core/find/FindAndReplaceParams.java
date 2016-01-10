@@ -16,13 +16,12 @@ package com.smoothcsv.core.find;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.smoothcsv.commons.constants.Orientation;
+import com.smoothcsv.core.constants.CoreSessionKeys;
+import com.smoothcsv.framework.session.Session;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import com.smoothcsv.commons.constants.Orientation;
-import com.smoothcsv.core.constants.AppSettingKeys;
-import com.smoothcsv.framework.setting.SettingManager;
-import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii
@@ -66,17 +65,16 @@ public class FindAndReplaceParams {
 
   private Regex regex;
 
-  private final Settings settings;
-
   private FindAndReplaceParams() {
-    settings = SettingManager.getSettings(AppSettingKeys.Find.$);
+    Session settings = Session.getSession();
 
-    caseSensitive = settings.getBoolean(AppSettingKeys.Find.CASE_SENSITIVE);
-    useRegex = settings.getBoolean(AppSettingKeys.Find.USE_REGEX);
-    matchWholeCell = settings.getBoolean(AppSettingKeys.Find.MATCH_WHOLE_CELL);
-    inSelection = settings.getBoolean(AppSettingKeys.Find.IN_SELECTION);
-    orientation = Orientation.valueOf(settings.get(AppSettingKeys.Find.DIRECTION));
-    preserveCase = settings.getBoolean(AppSettingKeys.Find.PRESERVE_CASE);
+    caseSensitive = settings.getBoolean(CoreSessionKeys.CASE_SENSITIVE, false);
+    useRegex = settings.getBoolean(CoreSessionKeys.USE_REGEX, false);
+    matchWholeCell = settings.getBoolean(CoreSessionKeys.MATCH_WHOLE_CELL, false);
+    inSelection = settings.getBoolean(CoreSessionKeys.IN_SELECTION, false);
+    orientation =
+        Orientation.valueOf(settings.get(CoreSessionKeys.DIRECTION, Orientation.HORIZONTAL.name()));
+    preserveCase = settings.getBoolean(CoreSessionKeys.PRESERVE_CASE, false);
   }
 
   public void setFindWhat(String findWhat) {
@@ -85,35 +83,35 @@ public class FindAndReplaceParams {
   }
 
   public void setCaseSensitive(boolean caseSensitive) {
-    settings.save(AppSettingKeys.Find.CASE_SENSITIVE, caseSensitive);
+    Session.getSession().save(CoreSessionKeys.CASE_SENSITIVE, caseSensitive);
     this.caseSensitive = caseSensitive;
     fireConditionChange();
   }
 
   public void setUseRegex(boolean useRegex) {
-    settings.save(AppSettingKeys.Find.USE_REGEX, useRegex);
+    Session.getSession().save(CoreSessionKeys.USE_REGEX, useRegex);
     this.useRegex = useRegex;
     fireConditionChange();
   }
 
   public void setMatchWholeCell(boolean matchWholeCell) {
-    settings.save(AppSettingKeys.Find.MATCH_WHOLE_CELL, matchWholeCell);
+    Session.getSession().save(CoreSessionKeys.MATCH_WHOLE_CELL, matchWholeCell);
     this.matchWholeCell = matchWholeCell;
     fireConditionChange();
   }
 
   public void setInSelection(boolean inSelection) {
-    settings.save(AppSettingKeys.Find.IN_SELECTION, inSelection);
+    Session.getSession().save(CoreSessionKeys.IN_SELECTION, inSelection);
     this.inSelection = inSelection;
   }
 
   public void setDirection(Orientation direction) {
-    settings.save(AppSettingKeys.Find.DIRECTION, direction);
+    Session.getSession().save(CoreSessionKeys.DIRECTION, direction);
     this.orientation = direction;
   }
 
   public void setPreserveCase(boolean preserveCase) {
-    settings.save(AppSettingKeys.Find.PRESERVE_CASE, preserveCase);
+    Session.getSession().save(CoreSessionKeys.PRESERVE_CASE, preserveCase);
     this.preserveCase = preserveCase;
   }
 

@@ -40,10 +40,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
 
-import lombok.Getter;
-
 import com.smoothcsv.commons.constants.Orientation;
-import com.smoothcsv.core.constants.AppSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.SCApplication;
@@ -51,8 +48,6 @@ import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.framework.setting.SettingManager;
-import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.components.History;
 import com.smoothcsv.swing.components.HistoryTextBox;
@@ -62,6 +57,8 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import com.smoothcsv.swing.utils.SwingUtils;
+
+import lombok.Getter;
 
 /**
  * @author kohii
@@ -94,13 +91,9 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
 
   private JComboBox<Orientation> orientationCmb;
 
-  private final Settings settings;
-
   private CsvSheetView selectedView;
 
   private FindAndReplacePanel() {
-
-    settings = SettingManager.getSettings(AppSettingKeys.Find.$);
 
     setFocusCycleRoot(true);
 
@@ -136,7 +129,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     gbc_lblFind.gridy = 0;
     add(lblFind, gbc_lblFind);
 
-    File historyDir = DirectoryResolver.instance().getHistoryDirectory();
+    File historyDir = DirectoryResolver.instance().getSessionDirectory();
     History findHistory = new History(new File(historyDir, "find.history"), true);
     findWhatTextField = new HistoryTextBox(findHistory);
     findWhatTextField.disableEnterPressedKeyBinding();

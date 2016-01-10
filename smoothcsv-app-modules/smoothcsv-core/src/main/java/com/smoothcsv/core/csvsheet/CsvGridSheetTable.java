@@ -31,7 +31,6 @@ import java.util.HashMap;
 
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.event.ChangeEvent;
 
@@ -189,17 +188,6 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
       if (editorGrabsFocus) {
         editorComp.requestFocusInWindow();
       }
-      // editorComp.selectAll();
-      SwingUtilities.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          int caretPos = editorComp.getCaretPosition();
-          if (caretPos < 0) {
-            caretPos = 0;
-          }
-          editorComp.setCaretPosition(caretPos);
-        }
-      });
       editorComp.setQuickEdit(false);
     }
     return ret;

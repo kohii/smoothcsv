@@ -24,6 +24,10 @@ public class SettingManager {
 
   private static final Map<String, Settings> CACHE = new HashMap<>();
 
+  public static Settings getCoreSettings() {
+    return getSettings("core");
+  }
+
   public static Settings getSettings(String name) {
     Settings settings = CACHE.get(name);
     if (settings == null) {
@@ -56,7 +60,7 @@ public class SettingManager {
   private static String getSettingsNamePart(String key) {
     int index = key.indexOf('.');
     if (index < 0) {
-      throw new IllegalArgumentException(key);
+      return "core";
     }
     return key.substring(0, index);
   }

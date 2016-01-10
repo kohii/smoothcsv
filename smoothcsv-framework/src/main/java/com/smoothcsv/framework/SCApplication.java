@@ -16,8 +16,6 @@ package com.smoothcsv.framework;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -34,15 +32,12 @@ import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.condition.AvailableCondition;
 import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.condition.FocusCondition;
-import com.smoothcsv.framework.constants.FrameworkSettingKeys;
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
 import com.smoothcsv.framework.event.EventListenerSupport;
 import com.smoothcsv.framework.event.EventListenerSupportImpl;
 import com.smoothcsv.framework.event.SCEvent;
 import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.modular.ModuleManager;
-import com.smoothcsv.framework.modular.ModuleManifest.Language;
-import com.smoothcsv.framework.setting.SettingManager;
 
 
 /**
@@ -149,21 +144,7 @@ public abstract class SCApplication {
     moduleManager.readModuleManifestsFromClasspath();
   }
 
-  private void setupLanguageSetting() {
-    List<Language> langs = moduleManager.getAvailableLanguages();
-    String langSetting = SettingManager.get(FrameworkSettingKeys.LANGUAGE);
-    String languageToUse = null;
-    for (Language lang : langs) {
-      if (lang.getId().equals(langSetting)) {
-        languageToUse = langSetting;
-      }
-    }
-    if (languageToUse == null) {
-      languageToUse = Language.EN.getId();
-      SettingManager.save(FrameworkSettingKeys.LANGUAGE, languageToUse);
-    }
-    Locale.setDefault(new Locale(languageToUse));
-  }
+  protected void setupLanguageSetting() {}
 
   public boolean exit() {
     try {

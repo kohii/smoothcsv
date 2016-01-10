@@ -13,7 +13,7 @@
  */
 package command.view;
 
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.setting.SettingManager;
@@ -27,10 +27,10 @@ public class ToggleCellValuePanelCommand extends Command {
 
   @Override
   public void run() {
-    Settings settings = SettingManager.getSettings(AppSettingKeys.Core.$);
-    boolean oldVal = settings.getBoolean(AppSettingKeys.Core.VALUEPANEL_VISIBLE);
+    Settings settings = SettingManager.getCoreSettings();
+    boolean oldVal = settings.getBoolean(CoreSettingKeys.Core.VALUEPANEL_VISIBLE);
     boolean newVal = !oldVal;
-    settings.save(AppSettingKeys.Core.VALUEPANEL_VISIBLE, newVal);
+    settings.save(CoreSettingKeys.Core.VALUEPANEL_VISIBLE, newVal);
     CsvGridSheetCellValuePanel.getInstance().setValuePanelVisible(newVal);
   }
 }

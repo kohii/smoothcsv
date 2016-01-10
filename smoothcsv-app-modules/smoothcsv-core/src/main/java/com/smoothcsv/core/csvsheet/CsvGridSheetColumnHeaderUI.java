@@ -16,7 +16,7 @@ package com.smoothcsv.core.csvsheet;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
@@ -36,23 +36,20 @@ public class CsvGridSheetColumnHeaderUI extends GridSheetColumnHeaderUI {
 
   @Override
   protected void autoFitColumnWidth(GridSheetPane gridSheetPane, int columnIndex) {
-    Settings editorSettings = SettingManager.getSettings(AppSettingKeys.Editor.$);
+    Settings settings = SettingManager.getCoreSettings();
 
     int maxWidth;
-    if (editorSettings.getBoolean(AppSettingKeys.Editor.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
+    if (settings.getBoolean(CoreSettingKeys.Core.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
       int percentage =
-          editorSettings
-              .getInteger(AppSettingKeys.Editor.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
+          settings.getInteger(CoreSettingKeys.Core.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
       maxWidth = SCApplication.components().getFrame().getWidth() * percentage / 100;
     } else {
       maxWidth = Integer.MAX_VALUE;
     }
 
     int rowNumsToScan;
-    if (editorSettings
-        .getBoolean(AppSettingKeys.Editor.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
-      rowNumsToScan =
-          editorSettings.getInteger(AppSettingKeys.Editor.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
+    if (settings.getBoolean(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
+      rowNumsToScan = settings.getInteger(CoreSettingKeys.Core.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
     } else {
       rowNumsToScan = Integer.MAX_VALUE;
     }

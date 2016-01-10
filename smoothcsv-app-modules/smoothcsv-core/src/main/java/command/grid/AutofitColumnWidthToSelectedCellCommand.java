@@ -14,14 +14,13 @@
 package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
-import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
 /**
  * @author kohii
@@ -33,13 +32,13 @@ public class AutofitColumnWidthToSelectedCellCommand extends GridCommand {
   public void run(CsvGridSheetPane gridSheetPane) {
     gridSheetPane.getTable().stopCellEditing();
 
-    Settings editorSettings = SettingManager.getSettings(AppSettingKeys.Editor.$);
+    Settings editorSettings = SettingManager.getCoreSettings();
 
     int maxWidth;
-    if (editorSettings.getBoolean(AppSettingKeys.Editor.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
+    if (editorSettings.getBoolean(CoreSettingKeys.Core.LIMIT_WIDTH_WHEN_AUTO_FITTING)) {
       int percentage =
           editorSettings
-              .getInteger(AppSettingKeys.Editor.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
+              .getInteger(CoreSettingKeys.Core.MAX_COLUMN_WIDTH_PER_WINDOW_WHEN_AUTO_FITTING);
       maxWidth = SCApplication.components().getFrame().getWidth() * percentage / 100;
     } else {
       maxWidth = Integer.MAX_VALUE;
@@ -47,9 +46,9 @@ public class AutofitColumnWidthToSelectedCellCommand extends GridCommand {
 
     int rowNumsToScan;
     if (editorSettings
-        .getBoolean(AppSettingKeys.Editor.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
+        .getBoolean(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE)) {
       rowNumsToScan =
-          editorSettings.getInteger(AppSettingKeys.Editor.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
+          editorSettings.getInteger(CoreSettingKeys.Core.ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING);
     } else {
       rowNumsToScan = Integer.MAX_VALUE;
     }

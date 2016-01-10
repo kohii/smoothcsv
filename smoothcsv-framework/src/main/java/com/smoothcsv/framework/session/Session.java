@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,31 +11,25 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.framework.setting;
+package com.smoothcsv.framework.session;
+
+import java.io.File;
+
+import com.smoothcsv.framework.setting.SCProperties;
+import com.smoothcsv.framework.util.DirectoryResolver;
+
+import lombok.Getter;
 
 /**
- *
  * @author kohii
+ *
  */
-public class SettingsMeta {
+public class Session extends SCProperties {
 
-  private final String name;
-  private final boolean saveImmediately;
+  @Getter
+  private static Session session = new Session();
 
-  public SettingsMeta(String name, boolean saveImmediately) {
-    this.name = name;
-    this.saveImmediately = saveImmediately;
-  }
-
-  public SettingsMeta(String name) {
-    this(name, false);
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public boolean isSaveImmediately() {
-    return saveImmediately;
+  private Session() {
+    super(new File(DirectoryResolver.instance().getSessionDirectory(), "session.prefs"));
   }
 }

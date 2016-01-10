@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,27 +13,22 @@
  */
 package com.smoothcsv.core.constants;
 
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.JPanel;
-
-import lombok.Getter;
-
 /**
  * @author kohii
  *
  */
-public class UIConstants {
+public interface CoreSessionKeys {
+  String WINDOW_WIDTH = "core.windowWidth";
+  String WINDOW_HEIGHT = "core.windowHeight";
+  String WINDOW_X = "core.windowX";
+  String WINDOW_Y = "core.windowY";
+  String LAST_USED_DIRECTORY = "core.lastUsedDirectory";
+  String LAST_USED_DIRECTORY_JS = "core.lastUsedDirectoryJS";
 
-  private static final JPanel basicPanel = new JPanel();
-
-  @Getter
-  private static Color defaultBorderColor = Color.LIGHT_GRAY;
-
-  @Getter
-  private static Color defaultBgColor = basicPanel.getBackground();
-
-  @Getter
-  private static Font defaultFont = basicPanel.getFont();
+  String CASE_SENSITIVE = "find.caseSensitive";
+  String USE_REGEX = "find.useRegex";
+  String MATCH_WHOLE_CELL = "find.matchWholeCell";
+  String IN_SELECTION = "find.inSelection";
+  String DIRECTION = "find.direction";
+  String PRESERVE_CASE = "find.preserveCase";
 }

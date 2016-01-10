@@ -32,7 +32,7 @@ import javax.swing.JList;
 
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CharsetUtils;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.AvailableCharsetDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
@@ -439,7 +439,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
 
   private Object[] createEncodingItems() {
     String[] encodings =
-        SettingManager.get(AppSettingKeys.CsvProperties.ENCODING_OPTIONS).split(",");
+        SettingManager.get(CoreSettingKeys.CsvProperties.ENCODING_OPTIONS).split(",");
     List<String> strItems = ArrayUtils.toArrayList(encodings);
 
     List<Object> items =
@@ -453,7 +453,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private Object[] createQuoteCharItems() {
-    List quotes = toCharList(SettingManager.get(AppSettingKeys.CsvProperties.QUOTE_CHAR_OPTIONS));
+    List quotes = toCharList(SettingManager.get(CoreSettingKeys.CsvProperties.QUOTE_CHAR_OPTIONS));
 
     if (!quotes.contains('\0')) {
       quotes.add('\0');
@@ -468,7 +468,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
 
   private Object[] createDelimiterCharItems() {
     List delimiter =
-        toCharList(SettingManager.get(AppSettingKeys.CsvProperties.DELIMITER_CHAR_OPTIONS));
+        toCharList(SettingManager.get(CoreSettingKeys.CsvProperties.DELIMITER_CHAR_OPTIONS));
 
     delimiter.add(OTHERS);
     if (autoDeterminedOptionEnabled) {

@@ -13,7 +13,7 @@
  */
 package command.app;
 
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
@@ -33,9 +33,9 @@ public class NewFileCommand extends Command {
 
   @Override
   public void run() {
-    Settings settings = SettingManager.getSettings(AppSettingKeys.File.$);
-    int rows = settings.getInteger(AppSettingKeys.File.DEFAULT_ROW_SIZE, 5);
-    int columns = settings.getInteger(AppSettingKeys.File.DEFAULT_COLUMN_SIZE, 5);
+    Settings settings = SettingManager.getCoreSettings();
+    int rows = settings.getInteger(CoreSettingKeys.Core.DEFAULT_ROW_SIZE, 5);
+    int columns = settings.getInteger(CoreSettingKeys.Core.DEFAULT_COLUMN_SIZE, 5);
     CsvMeta csvMeta = CsvSheetSupport.getDefaultCsvMeta();
     run(rows, columns, csvMeta);
   }

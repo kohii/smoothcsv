@@ -37,7 +37,7 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
 import com.smoothcsv.core.celleditor.SCTextArea;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.SCApplication;
@@ -47,7 +47,6 @@ import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.menu.CommandMenuItem;
 import com.smoothcsv.framework.setting.SettingManager;
-import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 
 import command.grid.StartEditCommand;
@@ -110,8 +109,7 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   }
 
   public void reloadPanelHeight() {
-    Settings setting = SettingManager.getSettings(AppSettingKeys.Editor.$);
-    int h = setting.getInteger(AppSettingKeys.Editor.VALUEPANEL_HEIGHT);
+    int h = SettingManager.getInteger(CoreSettingKeys.Core.VALUEPANEL_HEIGHT);
     Dimension size = getSize();
     size.height = textArea.getLineHeight() * h + 1;
     setPreferredSize(size);

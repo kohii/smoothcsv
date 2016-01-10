@@ -30,7 +30,8 @@ import javax.swing.UIManager;
 
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.core.condition.AppConditions;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSessionKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetColumnHeaderUI;
 import com.smoothcsv.core.csvsheet.CsvGridSheetTableUI;
@@ -56,6 +57,7 @@ import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.preference.PrefPage;
 import com.smoothcsv.framework.preference.PreferenceManager;
+import com.smoothcsv.framework.session.Session;
 import com.smoothcsv.framework.setting.SettingManager;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.InvocationUtils;
@@ -83,12 +85,12 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         new CloseAllCommand().execute();
 
         Rectangle rectangle = components().getFrame().getBounds();
-        Settings session = SettingManager.getSettings(AppSettingKeys.Session.$);
+        Session session = Session.getSession();
         Map<String, Object> map = new HashMap<>();
-        map.put(AppSettingKeys.Session.WINDOW_WIDTH, rectangle.width);
-        map.put(AppSettingKeys.Session.WINDOW_HEIGHT, rectangle.height);
-        map.put(AppSettingKeys.Session.WINDOW_X, rectangle.x);
-        map.put(AppSettingKeys.Session.WINDOW_Y, rectangle.y);
+        map.put(CoreSessionKeys.WINDOW_WIDTH, rectangle.width);
+        map.put(CoreSessionKeys.WINDOW_HEIGHT, rectangle.height);
+        map.put(CoreSessionKeys.WINDOW_X, rectangle.x);
+        map.put(CoreSessionKeys.WINDOW_Y, rectangle.y);
         session.saveAll(map);
       }
     });
@@ -97,12 +99,12 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
       @Override
       public void call(BeforeOpenWindowEvent event) {
         SCFrame frame = components().getFrame();
-        Settings session = SettingManager.getSettings(AppSettingKeys.Session.$);
 
-        Integer w = session.getInteger(AppSettingKeys.Session.WINDOW_WIDTH, 600);
-        Integer h = session.getInteger(AppSettingKeys.Session.WINDOW_HEIGHT, 500);
-        Integer x = session.getInteger(AppSettingKeys.Session.WINDOW_X);
-        Integer y = session.getInteger(AppSettingKeys.Session.WINDOW_Y);
+        Session session = Session.getSession();
+        Integer w = session.getInteger(CoreSessionKeys.WINDOW_WIDTH, 600);
+        Integer h = session.getInteger(CoreSessionKeys.WINDOW_HEIGHT, 500);
+        Integer x = session.getInteger(CoreSessionKeys.WINDOW_X, null);
+        Integer y = session.getInteger(CoreSessionKeys.WINDOW_Y, null);
 
         frame.setSize(w, h);
         if (x == null || y == null || x < 0 || y < 0) {
@@ -133,14 +135,14 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
     app.listeners().on(WindowOpendEvent.class, new SCListener<WindowOpendEvent>() {
       @Override
       public void call(WindowOpendEvent event) {
-        Settings settings = SettingManager.getSettings(AppSettingKeys.Editor.$);
-        settings.addPropertyChangeListener(AppSettingKeys.Editor.SIZE_OF_UNDOING,
+        Settings settings = SettingManager.getCoreSettings();
+        settings.addPropertyChangeListener(CoreSettingKeys.Core.SIZE_OF_UNDOING,
             new PropertyChangeListener() {
           @Override
           public void propertyChange(PropertyChangeEvent evt) {
             for (BaseTabView<?> v : SCApplication.components().getTabbedPane().getAllViews()) {
               ((CsvSheetView) v).getGridSheetPane().getUndoManager()
-                  .setCapacity(settings.getInteger(AppSettingKeys.Editor.SIZE_OF_UNDOING));
+                  .setCapacity(settings.getInteger(CoreSettingKeys.Core.SIZE_OF_UNDOING));
             }
           }
         });
@@ -170,13 +172,13 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
       public void call(AfterCreateGuiEvent event) {
 
         // set components visible
-        Settings coreSettings = SettingManager.getSettings(AppSettingKeys.Core.$);
+        Settings coreSettings = SettingManager.getCoreSettings();
         components().getStatusBar()
-            .setVisible(coreSettings.getBoolean(AppSettingKeys.Core.STATUSBAR_VISIBLE));
+            .setVisible(coreSettings.getBoolean(CoreSettingKeys.Core.STATUSBAR_VISIBLE));
         components().getToolBar()
-            .setVisible(coreSettings.getBoolean(AppSettingKeys.Core.TOOLBAR_VISIBLE));
+            .setVisible(coreSettings.getBoolean(CoreSettingKeys.Core.TOOLBAR_VISIBLE));
         CsvGridSheetCellValuePanel.getInstance()
-            .setValuePanelVisible(coreSettings.getBoolean(AppSettingKeys.Core.VALUEPANEL_VISIBLE));
+            .setValuePanelVisible(coreSettings.getBoolean(CoreSettingKeys.Core.VALUEPANEL_VISIBLE));
 
         // Disable focus traversal
         components().getFrame().setFocusTraversalPolicy(new LayoutFocusTraversalPolicy() {

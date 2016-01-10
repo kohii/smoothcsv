@@ -13,7 +13,7 @@
  */
 package command.view;
 
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.setting.SettingManager;
@@ -27,10 +27,10 @@ public class ToggleStatusBarCommand extends Command {
 
   @Override
   public void run() {
-    Settings settings = SettingManager.getSettings(AppSettingKeys.Core.$);
-    boolean oldVal = settings.getBoolean(AppSettingKeys.Core.STATUSBAR_VISIBLE);
+    Settings settings = SettingManager.getCoreSettings();
+    boolean oldVal = settings.getBoolean(CoreSettingKeys.Core.STATUSBAR_VISIBLE);
     boolean newVal = !oldVal;
-    settings.save(AppSettingKeys.Core.STATUSBAR_VISIBLE, newVal);
+    settings.save(CoreSettingKeys.Core.STATUSBAR_VISIBLE, newVal);
     SCApplication.components().getStatusBar().setVisible(newVal);
   }
 }

@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -46,7 +46,7 @@ public class CopyCommand extends GridCommand {
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
     CsvQuoteApplyRule quoteRule =
-        CsvQuoteApplyRule.valueOf(SettingManager.get(AppSettingKeys.Editor.QUOTE_RULE_FOR_COPYING));
+        CsvQuoteApplyRule.valueOf(SettingManager.get(CoreSettingKeys.Core.QUOTE_RULE_FOR_COPYING));
     singleTsvMeta.setQuoteOption(quoteRule);
     String text = copy(gridSheetPane, singleTsvMeta);
     ClipboardUtils.writeText(text);

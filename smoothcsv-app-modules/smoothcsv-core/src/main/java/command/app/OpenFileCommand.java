@@ -30,7 +30,7 @@ import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.commons.utils.CharsetUtils.CharsetInfo;
 import com.smoothcsv.core.component.ReadCsvPropertiesDialog;
-import com.smoothcsv.core.constants.AppSettingKeys;
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvFileChooser;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
@@ -78,8 +78,7 @@ public class OpenFileCommand extends Command {
   }
 
   public void run(File file) {
-    String howToDetectProperties = SettingManager.getSettings(AppSettingKeys.File.$)
-        .get(AppSettingKeys.File.HOW_TO_DETECT_PROPERTIES);
+    String howToDetectProperties = SettingManager.get(CoreSettingKeys.Core.HOW_TO_DETECT_PROPERTIES);
     run(file, howToDetectProperties);
   }
 
@@ -97,10 +96,10 @@ public class OpenFileCommand extends Command {
       }
     }
 
-    Settings fileSettings = SettingManager.getSettings(AppSettingKeys.File.$);
-    if (fileSettings.getBoolean(AppSettingKeys.File.ALERT_ON_OPENING_HUGE_FILE)) {
+    Settings settings = SettingManager.getCoreSettings();
+    if (settings.getBoolean(CoreSettingKeys.Core.ALERT_ON_OPENING_HUGE_FILE)) {
       int fileSize = (int) (file.length() / 1024 / 1024);
-      int threshold = fileSettings.getInteger(AppSettingKeys.File.ALERT_THRESHOLD);
+      int threshold = settings.getInteger(CoreSettingKeys.Core.ALERT_THRESHOLD);
       if (threshold <= fileSize) {
         boolean ok = MessageDialogs.confirm("ISCA0003", fileSize);
         if (!ok) {
@@ -193,8 +192,7 @@ public class OpenFileCommand extends Command {
     } finally {
       SmoothComponentManager.stopAdjustingComponents();
     }
-    Settings editorSettings = SettingManager.getSettings(AppSettingKeys.Editor.$);
-    if (editorSettings.getBoolean(AppSettingKeys.Editor.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE)) {
+    if (SettingManager.getBoolean(CoreSettingKeys.Core.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE)) {
       new AutofitColumnWidthCommand().execute();
     }
   }

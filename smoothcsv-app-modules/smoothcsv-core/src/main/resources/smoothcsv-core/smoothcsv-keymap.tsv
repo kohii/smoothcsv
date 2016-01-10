@@ -16,6 +16,7 @@ body
 	ctrl+shift+tab	view:previous-tab
 	ctrl+q	macro:toggle-recording-macro
 	ctrl+shift+q	macro:run
+	shortcut+e	value-panel:focus,value-panel:select-all
 
 csv-sheet
 	shortcut+f	find:show

@@ -1,3 +1,35 @@
-core.statusbarVisible=true
-core.toolbarVisible=false
-core.valuepanelVisible=true
+# General
+language=<NULL>
+
+# Appearance
+statusbarVisible=true
+toolbarVisible=false
+valuepanelVisible=true
+defaultFontSize=13
+statusBarFontSize=12
+gridFontSize=13
+valuePanelFontSize=13
+cellPaddingTop=1
+cellPaddingBottom=1
+
+# File
+alertOnOpeningHugeFile=true
+alertThreshold=50
+howToDetectProperties=auto
+
+# Editor
+defaultRowSize=5
+defaultColumnSize=5
+sizeOfUndoing=35
+valuepanelHeight=2
+
+# Autofit
+autoFitColumnWidthAfterOpeningFile=true
+autoFitColumnWidthWithLimitedRowSize=true
+rowSizeToScanWhenAutoFitting=1000
+limitWidthWhenAutoFitting=true
+maxColumnWidthPerWindowWhenAutoFitting=70
+
+#Copy & Paste
+quoteRuleForCopying=QUOTES_IF_NECESSARY
+pasteRepeatedly=true

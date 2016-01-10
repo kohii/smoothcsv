@@ -20,6 +20,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.smoothcsv.core.constants.CoreSettingKeys;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
 import com.smoothcsv.framework.preference.PrefCheckBox;
@@ -65,9 +66,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_radioButton.gridy = 1;
     add(radioButton, gbc_radioButton);
 
-    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_3 =
-        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.QUOTES_IF_NECESSARY,
-            "Quote values only when necessary");
+    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_3 = new ExRadioButton<CsvQuoteApplyRule>(
+        CsvQuoteApplyRule.QUOTES_IF_NECESSARY, "Quote values only when necessary");
     GridBagConstraints gbc_rdbtnNewRadioButton_3 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_3.gridwidth = 2;
     gbc_rdbtnNewRadioButton_3.anchor = GridBagConstraints.WEST;
@@ -86,7 +86,7 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_4.gridy = 3;
     add(rdbtnNewRadioButton_4, gbc_rdbtnNewRadioButton_4);
 
-    new PrefButtonGroup<CsvQuoteApplyRule>("editor.quoteRuleForCopying", radioButton,
+    new PrefButtonGroup<CsvQuoteApplyRule>(CoreSettingKeys.Core.QUOTE_RULE_FOR_COPYING, radioButton,
         rdbtnNewRadioButton_3, rdbtnNewRadioButton_4);
 
     JLabel lblPaste = new PrefTitleLabel("Paste");
@@ -98,9 +98,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblPaste.gridy = 5;
     add(lblPaste, gbc_lblPaste);
 
-    PrefCheckBox rdbtnNewRadioButton_5 =
-        new PrefCheckBox("editor.pasteRepeatedly",
-            "Fill selected cells with the same data when pasting single data");
+    PrefCheckBox rdbtnNewRadioButton_5 = new PrefCheckBox(CoreSettingKeys.Core.PASTE_REPEATEDLY,
+        "Fill selected cells with the same data when pasting single data");
     GridBagConstraints gbc_rdbtnNewRadioButton_5 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_5.insets = new Insets(0, 0, 5, 0);
     gbc_rdbtnNewRadioButton_5.anchor = GridBagConstraints.WEST;
@@ -127,7 +126,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblTheMaximumNumber.gridy = 9;
     add(lblTheMaximumNumber, gbc_lblTheMaximumNumber);
 
-    textField = new PrefTextField("editor.sizeOfUndoing", PrefTextField.Type.NUMERIC, 2);
+    textField =
+        new PrefTextField(CoreSettingKeys.Core.SIZE_OF_UNDOING, PrefTextField.Type.NUMERIC, 2);
     textField.addValidator(PrefTextValidator.NOT_NULL);
     GridBagConstraints gbc_textField = new GridBagConstraints();
     gbc_textField.insets = new Insets(0, 0, 5, 0);

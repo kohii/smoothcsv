@@ -37,7 +37,7 @@ public class PrintComponentTreeCommand extends Command {
     for (int i = 0; i < depth; i++) {
       System.out.print("  ");
     }
-    System.out.println(comp);
+    System.out.println(comp.getClass() + "" + comp.getFont());
     if (comp instanceof Container) {
       Component[] children = ((Container) comp).getComponents();
       for (Component component : children) {

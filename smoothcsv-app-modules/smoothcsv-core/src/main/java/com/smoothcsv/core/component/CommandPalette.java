@@ -14,9 +14,9 @@
 package com.smoothcsv.core.component;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -48,6 +48,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,8 +136,6 @@ public class CommandPalette extends JDialog {
     columns.add(new ExTableColumn("keybinding", keybindingValueExtracter));
     commandListModel = new ExTableModel<CommandDef>(Collections.emptyList(), columns);
     commandList = new ExTable<CommandDef>(commandListModel);
-    Font font = commandList.getFont();
-    commandList.setFont(font.deriveFont(font.getSize() * 1.1f));
     commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     commandList.setTableHeader(null);
     commandList.setIntercellSpacing(new Dimension());
@@ -157,9 +156,6 @@ public class CommandPalette extends JDialog {
     DefaultTableCellRenderer cr = new DefaultTableCellRenderer();
     cr.setHorizontalAlignment(SwingConstants.RIGHT);
     keybindingCol.setCellRenderer(cr);
-
-    // this column doesn't need to be wide
-    keybindingCol.setMaxWidth(110);
 
     scrollPane = new JScrollPane(commandList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
         JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -317,6 +313,8 @@ public class CommandPalette extends JDialog {
       List<CommandDef> items = CommandRegistry.instance().getEnabledCommands();
       commandListModel.setData(items);
 
+      autofitKeyStrokeColumnWidth();
+
       JFrame frame = SCApplication.components().getFrame();
       int width = (int) (frame.getWidth() * 0.8);
 
@@ -331,6 +329,26 @@ public class CommandPalette extends JDialog {
       setLocation(getLocation().x, frame.getLocation().y + 40);
     }
     super.setVisible(b);
+  }
+
+  private void autofitKeyStrokeColumnWidth() {
+    TableColumn tc = commandList.getColumnModel().getColumn(1);
+
+    int max = 10;
+
+    int vrows = commandList.getRowCount();
+    for (int i = 0; i < vrows; i++) {
+      TableCellRenderer r = commandList.getCellRenderer(i, 1);
+      Object value = commandList.getValueAt(i, 1);
+      Component c = r.getTableCellRendererComponent(commandList, value, false, false, i, 1);
+      int w = c.getPreferredSize().width;
+      if (max < w) {
+        max = w;
+      }
+    }
+
+    tc.setMaxWidth(max);
+    tc.setPreferredWidth(max);
   }
 
   private int calculateDialogHeaderHeight() {

@@ -108,7 +108,7 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   }
 
   public void reloadPanelHeight() {
-    int h = CoreSettings.getInstance().getInteger(CoreSettings.VALUEPANEL_HEIGHT);
+    int h = CoreSettings.getInstance().getInteger(CoreSettings.VALUE_PANEL_HEIGHT);
     Dimension size = getSize();
     size.height = textArea.getLineHeight() * h + 1;
     setPreferredSize(size);

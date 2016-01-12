@@ -15,7 +15,6 @@ package com.smoothcsv.framework.component;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -26,10 +25,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
-public class SCStatusBar extends JPanel {
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+
+import lombok.Getter;
+
+public class SCStatusBar extends JPanel implements SmoothComponent {
 
   private static final long serialVersionUID = 1519182619888030042L;
+
+  @Getter
+  private SmoothComponentSupport componentSupport = new SmoothComponentSupport(this, "statusbar");
 
   private final JToolBar toolBar;
 
@@ -43,9 +51,7 @@ public class SCStatusBar extends JPanel {
     setFocusable(false);
     setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 
-    Font font = getFont();
-    font = font.deriveFont((float) font.getSize() - 1);
-    setFont(font);
+    setFont(UIManager.getFont("StatusBar.font"));
 
     GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.columnWidths = new int[] {199, 27, 0};
@@ -55,7 +61,7 @@ public class SCStatusBar extends JPanel {
     setLayout(gridBagLayout);
 
     messageLabel = new JLabel();
-    messageLabel.setFont(font);
+    messageLabel.setFont(getFont());
     messageLabel.setFocusable(false);
     GridBagConstraints gbc_lblMsg = new GridBagConstraints();
     gbc_lblMsg.anchor = GridBagConstraints.WEST;

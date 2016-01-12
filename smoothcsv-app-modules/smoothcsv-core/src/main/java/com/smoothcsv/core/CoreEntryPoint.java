@@ -39,6 +39,7 @@ import com.smoothcsv.core.preference.EditorPrefPanel;
 import com.smoothcsv.core.preference.GeneralPrefPanel;
 import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
 import com.smoothcsv.core.util.CoreSettings;
+import com.smoothcsv.core.util.SCUIManager;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.SCApplication.AfterCreateGuiEvent;
 import com.smoothcsv.framework.SCApplication.AfterOpenWindowEvent;
@@ -121,6 +122,7 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         uiDefaults.put("CsvGridSheetTableUI", CsvGridSheetTableUI.class.getName());
         uiDefaults.put("CsvGridSheetColumnHeaderUI", CsvGridSheetColumnHeaderUI.class.getName());
         uiDefaults.put("SCTabbedPaneUI", SCTabbedPaneUI.class.getName());
+        SCUIManager.getInstance().init();
         ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setDismissDelay(100000);
         toolTipManager.setInitialDelay(200);
@@ -171,10 +173,9 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         Settings coreSettings = CoreSettings.getInstance();
         components().getStatusBar()
             .setVisible(coreSettings.getBoolean(CoreSettings.STATUSBAR_VISIBLE));
-        components().getToolBar()
-            .setVisible(coreSettings.getBoolean(CoreSettings.TOOLBAR_VISIBLE));
+        components().getToolBar().setVisible(coreSettings.getBoolean(CoreSettings.TOOLBAR_VISIBLE));
         CsvGridSheetCellValuePanel.getInstance()
-            .setValuePanelVisible(coreSettings.getBoolean(CoreSettings.VALUEPANEL_VISIBLE));
+            .setValuePanelVisible(coreSettings.getBoolean(CoreSettings.VALUE_PANEL_VISIBLE));
 
         // Disable focus traversal
         components().getFrame().setFocusTraversalPolicy(new LayoutFocusTraversalPolicy() {

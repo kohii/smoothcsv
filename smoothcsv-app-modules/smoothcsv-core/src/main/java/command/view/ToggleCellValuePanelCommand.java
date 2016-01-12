@@ -27,9 +27,9 @@ public class ToggleCellValuePanelCommand extends Command {
   @Override
   public void run() {
     Settings settings = CoreSettings.getInstance();
-    boolean oldVal = settings.getBoolean(CoreSettings.VALUEPANEL_VISIBLE);
+    boolean oldVal = settings.getBoolean(CoreSettings.VALUE_PANEL_VISIBLE);
     boolean newVal = !oldVal;
-    settings.save(CoreSettings.VALUEPANEL_VISIBLE, newVal);
+    settings.save(CoreSettings.VALUE_PANEL_VISIBLE, newVal);
     CsvGridSheetCellValuePanel.getInstance().setValuePanelVisible(newVal);
   }
 }

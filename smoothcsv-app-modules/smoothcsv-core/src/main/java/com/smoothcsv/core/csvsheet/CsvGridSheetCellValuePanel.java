@@ -40,6 +40,7 @@ import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.core.util.CoreSettings;
+import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.SCContentPane;
@@ -278,6 +279,7 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
 
     public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel) {
       super("value-panel");
+      setFont(SCAppearanceManager.getCelleditorFont());
       this.valuePanel = valuePanel;
     }
   }

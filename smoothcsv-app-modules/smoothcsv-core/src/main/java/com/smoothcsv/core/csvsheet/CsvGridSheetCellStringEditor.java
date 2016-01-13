@@ -20,7 +20,7 @@ import javax.swing.KeyStroke;
 
 import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.macro.MacroRecorder;
-import com.smoothcsv.core.util.SCUIManager;
+import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 
@@ -59,7 +59,7 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     protected CsvGridEditorComponent(CsvGridSheetCellStringEditor editor) {
       super("cell-editor");
       setDocument(CsvGridSheetCellValuePanel.getInstance().getTextArea().getDocument());
-      setFont(SCUIManager.getInstance().getGridFont());
+      setFont(SCAppearanceManager.getInlineCelleditorFont());
     }
 
     /**

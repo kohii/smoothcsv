@@ -1,44 +1,8 @@
 # --General--
 language=<NULL>
-
-# --Appearance--
 statusbarVisible=true
 toolbarVisible=false
 valuePanelVisible=true
-# default
-ui.default.fontSize=
-ui.default.fontName=
-ui.default.foreground=
-ui.default.background=
-# celleditor
-ui.celleditor.fontSize=
-ui.celleditor.fontName=
-ui.celleditor.foreground=
-ui.celleditor.background=
-ui.celleditor.caret=
-# inline-celleditor
-ui.inline-celleditor.fontSize=
-ui.inline-celleditor.fontName=
-ui.inline-celleditor.foreground=
-ui.inline-celleditor.background=
-ui.inline-celleditor.caret=
-# grid
-ui.grid.fontSize=
-ui.grid.fontName=
-ui.grid.foreground=
-ui.grid.background=
-ui.grid.lineColor=
-ui.grid.selection.background=
-ui.grid.selection.borderColor=
-ui.grid.selection.alpha=
-ui.gridHeader.foreground=
-ui.gridHeader.background=
-ui.gridHeader.selected.foreground=
-ui.gridHeader.selected.background=
-ui.gridHeader.lineColor=
-# statusbar
-ui.statusbar.fontSize=
-ui.statusbar.fontName=
 
 # --File--
 alertOnOpeningHugeFile=true

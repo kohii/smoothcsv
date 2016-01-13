@@ -15,6 +15,9 @@ package com.smoothcsv.core.csvsheet;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -26,6 +29,7 @@ import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.find.FindAndReplaceMatcher;
 import com.smoothcsv.core.find.FindAndReplaceParams;
 import com.smoothcsv.core.util.CoreSettings;
+import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.swing.gridsheet.AbstractGridSheetHeaderComponent;
 import com.smoothcsv.swing.gridsheet.GridSheetColumnHeader;
@@ -36,11 +40,13 @@ import com.smoothcsv.swing.gridsheet.GridSheetScrollPane;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.event.GridSheetDataEvent;
+import com.smoothcsv.swing.gridsheet.event.GridSheetStructureEvent;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetHeaderRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetColorProvider;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
+import com.smoothcsv.swing.utils.SwingUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -55,22 +61,6 @@ public class CsvGridSheetPane extends GridSheetPane {
   @Getter
   private GridSheetUndoManager undoManager;
 
-  private Color defaultHeaderBgColor = new Color(230, 230, 230);
-
-  private Color selectedHeaderBgColor = new Color(200, 200, 200);
-
-  private Color focusedHeaderBgColor = new Color(110, 120, 222);
-
-  private Color viewportBgColor = new Color(237, 237, 237);
-
-  private Color ruleLineColor = new Color(213, 213, 213);
-
-  private Color selectionBorderColor = new Color(110, 120, 222);
-
-  private Color selectionColor = new Color(40, 110, 255, 30);
-
-  private Color frozenLineColor = Color.BLACK;
-
   @Getter
   private CsvSheetView csvSheetView;
 
@@ -82,7 +72,9 @@ public class CsvGridSheetPane extends GridSheetPane {
   @Setter
   private Color newlineCharColor = new Color(110, 180, 232);
 
-  private GridSheetHeaderRenderer headerRenderer;
+  private DefaultGridSheetHeaderRenderer headerRenderer;
+
+  private int lineHeight;
 
   /**
    * @param gm
@@ -105,9 +97,10 @@ public class CsvGridSheetPane extends GridSheetPane {
     // .setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, viewportBorderColor));
     // scrollPane.setViewportBorder(BorderFactory.createMatteBorder(1, 1, 0, 0,
     // viewportBorderColor));
-    scrollPane.getRowHeader().setBackground(viewportBgColor);
-    scrollPane.getColumnHeader().setBackground(viewportBgColor);
-    scrollPane.getViewport().setBackground(viewportBgColor);
+    Color bg = SCAppearanceManager.getDefaultBackground();
+    scrollPane.getRowHeader().setBackground(bg);
+    scrollPane.getColumnHeader().setBackground(bg);
+    scrollPane.getViewport().setBackground(bg);
 
     gm.setUndableEditListener(new Consumer<GridSheetUndableEdit>() {
       @Override
@@ -115,6 +108,17 @@ public class CsvGridSheetPane extends GridSheetPane {
         undoManager.put(edit);
       }
     });
+
+    addPropertyChangeListener("font", new PropertyChangeListener() {
+      @Override
+      public void propertyChange(PropertyChangeEvent evt) {
+        lineHeight = SwingUtils.getLineHeight(CsvGridSheetPane.this);
+        getModel().setDefaultRowHeight(lineHeight);
+      }
+    });
+    lineHeight = SwingUtils.getLineHeight(getTable());
+    getModel().setDefaultRowHeight(lineHeight);
+    // recalcRowHeights();
   }
 
   @Override
@@ -123,22 +127,22 @@ public class CsvGridSheetPane extends GridSheetPane {
 
       @Override
       public Color getRuleLineColor() {
-        return ruleLineColor;
+        return SCAppearanceManager.getGridLineColor();
       }
 
       @Override
       public Color getSelectionColor() {
-        return selectionColor;
+        return SCAppearanceManager.getGridSelectionBackground();
       }
 
       @Override
       public Color getSelectionBorderColor() {
-        return selectionBorderColor;
+        return SCAppearanceManager.getGridSelectionBorderColor();
       }
 
       @Override
       public Color getFrozenLineColor() {
-        return frozenLineColor;
+        return SCAppearanceManager.getGridFrozenLineColor();
       }
     };
   }
@@ -146,6 +150,7 @@ public class CsvGridSheetPane extends GridSheetPane {
   @Override
   protected GridSheetTable createTable() {
     GridSheetTable table = new CsvGridSheetTable(this, createCellRenderer());
+    table.setFont(SCAppearanceManager.getGridFont());
     return table;
   }
 
@@ -156,17 +161,20 @@ public class CsvGridSheetPane extends GridSheetPane {
 
   @Override
   protected GridSheetColumnHeader createColumnHeader() {
-    return new CsvGridSheetColumnHeader(this, createHeaderRenderer());
+    CsvGridSheetColumnHeader header = new CsvGridSheetColumnHeader(this, createHeaderRenderer());
+    header.setFont(SCAppearanceManager.getGridFont());
+    return header;
   }
 
   @Override
   protected GridSheetRowHeader createRowHeader() {
-    return new CsvGridSheetRowHeader(this, createHeaderRenderer());
+    GridSheetRowHeader header = new CsvGridSheetRowHeader(this, createHeaderRenderer());
+    header.setFont(SCAppearanceManager.getGridFont());
+    return header;
   }
 
   protected GridSheetCellRenderer createCellRenderer() {
-    return new CsvGridSheetCellRenderer() {
-      private final Color HILIGHTED_CELL_COLOR = new Color(250, 250, 180);
+    CsvGridSheetCellRenderer renderer = new CsvGridSheetCellRenderer() {
 
       @Override
       public Component getGridCellRendererComponent(GridSheetTable table, Object value,
@@ -174,32 +182,34 @@ public class CsvGridSheetPane extends GridSheetPane {
         super.getGridCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (value != null) {
           if (value instanceof String) {
-            setForeground(Color.BLACK);
+            setForeground(SCAppearanceManager.getGridForeground());
 
             if (ApplicationStatus.getInstance().isFindAndReplacePanelVisible()) {
               if (value instanceof String) {
                 if (FindAndReplaceMatcher.matches((String) value,
                     FindAndReplaceParams.getInstance())) {
-                  setBackground(HILIGHTED_CELL_COLOR);
+                  setBackground(SCAppearanceManager.getGridFindhilightColor());
                 } else {
-                  setBackground(Color.WHITE);
+                  setBackground(SCAppearanceManager.getGridBackground());
                 }
               }
             } else {
-              setBackground(Color.WHITE);
+              setBackground(SCAppearanceManager.getGridBackground());
             }
           } else {
             setForeground(newlineCharColor);
-            setBackground(viewportBgColor);
+            setBackground(SCAppearanceManager.getDefaultBackground());
           }
         } else {
           // the cell not exists
-          setBackground(viewportBgColor);
+          setBackground(SCAppearanceManager.getDefaultBackground());
         }
 
         return this;
       }
     };
+    renderer.setFont(SCAppearanceManager.getGridFont());
+    return renderer;
   }
 
   @Override
@@ -221,19 +231,25 @@ public class CsvGridSheetPane extends GridSheetPane {
           setValue(value);
           if (isSelected) {
             if (hasFocus) {
-              setForeground(Color.WHITE);
-              setBackground(focusedHeaderBgColor);
+              setForeground(SCAppearanceManager.getGridHeaderFocusedForeground());
+              setBackground(SCAppearanceManager.getGridHeaderFocusedBackground());
             } else {
-              setForeground(Color.BLACK);
-              setBackground(selectedHeaderBgColor);
+              setForeground(SCAppearanceManager.getGridHeaderSelectedForeground());
+              setBackground(SCAppearanceManager.getGridHeaderSelectedBackground());
             }
           } else {
-            setForeground(Color.BLACK);
-            setBackground(defaultHeaderBgColor);
+            setForeground(SCAppearanceManager.getGridHeaderForeground());
+            setBackground(SCAppearanceManager.getGridHeaderBackground());
           }
           return this;
         }
+
+        @Override
+        public void setFont(Font font) {
+          super.setFont(font);
+        }
       };
+      headerRenderer.setFont(SCAppearanceManager.getGridFont());
     }
     return headerRenderer;
   }
@@ -299,7 +315,41 @@ public class CsvGridSheetPane extends GridSheetPane {
   }
 
   @Override
+  public void structureChanged(GridSheetStructureEvent e) {
+    // switch (e.getType()) {
+    // case GridSheetStructureEvent.INSERT_ROW:
+    // int r = e.getIndex();
+    // for (int i = 0, ln = e.getNumRows(); i < ln; i++) {
+    // getModel().getRow(r).setHeight(calcRowHeightAt(r));
+    // }
+    // break;
+    // case GridSheetStructureEvent.INSERT_COLUMN:
+    // case GridSheetStructureEvent.REMOVE_COLUMN:
+    // case GridSheetStructureEvent.UPDATE_VISIBLE_COLUMNS:
+    // case GridSheetStructureEvent.CHANGE_DATALIST:
+    // recalcRowHeights();
+    // break;
+    // }
+    super.structureChanged(e);
+  }
+
+  @Override
   public void cellValueChanged(GridSheetDataEvent e) {
+    // if (!e.isStructureChanged()) {
+    // if (e.getFirstRow() == GridSheetDataEvent.ALL_CELLS) {
+    // recalcRowHeights();
+    // } else {
+    // int rowIndexTo;
+    // if (e.getLastRow() != GridSheetDataEvent.TO_THE_END) {
+    // rowIndexTo = getRowCount() - 1;
+    // } else {
+    // rowIndexTo = e.getLastRow();
+    // }
+    // for (int i = 0; i <= rowIndexTo; i++) {
+    // getRow(i).setHeight(calcRowHeightAt(i));
+    // }
+    // }
+    // }
     super.cellValueChanged(e);
     getCsvSheetView().showCellValueOnValuePanel();
   }
@@ -313,4 +363,23 @@ public class CsvGridSheetPane extends GridSheetPane {
   public void requestFocus() {
     getTable().requestFocus();
   }
+
+  // private int calcRowHeightAt(int row) {
+  // int columnCount = getColumnCountAt(row);
+  // int maxLineCount = 1;
+  // for (int i = 0; i < columnCount; i++) {
+  // int lc = StringUtils.calcLineCount((String) getValueAt(row, i));
+  // if (maxLineCount < lc) {
+  // maxLineCount = lc;
+  // }
+  // }
+  // return maxLineCount * lineHeight;
+  // }
+  //
+  // private void recalcRowHeights() {
+  // int rowCount = getRowCount();
+  // for (int i = 0; i < rowCount; i++) {
+  // getRow(i).setHeight(calcRowHeightAt(i));
+  // }
+  // }
 }

@@ -20,6 +20,7 @@ import java.awt.Rectangle;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.text.View;
@@ -34,6 +35,10 @@ public class CsvGridSheetCellRendererUI extends BasicLabelUI {
 
   private Rectangle paintIconR = new Rectangle();
   private Rectangle paintTextR = new Rectangle();
+
+  public static ComponentUI createUI(JComponent c) {
+    return new CsvGridSheetCellRendererUI();
+  }
 
   public void paint(Graphics g, JComponent c) {
     CsvGridSheetCellRenderer label = (CsvGridSheetCellRenderer) c;

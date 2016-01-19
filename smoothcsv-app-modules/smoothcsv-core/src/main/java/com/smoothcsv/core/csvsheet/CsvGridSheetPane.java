@@ -15,7 +15,6 @@ package com.smoothcsv.core.csvsheet;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
@@ -31,7 +30,6 @@ import com.smoothcsv.core.find.FindAndReplaceParams;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.swing.gridsheet.AbstractGridSheetHeaderComponent;
 import com.smoothcsv.swing.gridsheet.GridSheetColumnHeader;
 import com.smoothcsv.swing.gridsheet.GridSheetCornerHeader;
 import com.smoothcsv.swing.gridsheet.GridSheetPane;
@@ -42,7 +40,7 @@ import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.event.GridSheetDataEvent;
 import com.smoothcsv.swing.gridsheet.event.GridSheetStructureEvent;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
-import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetHeaderRenderer;
+import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetHeaderCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetColorProvider;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
@@ -72,7 +70,7 @@ public class CsvGridSheetPane extends GridSheetPane {
   @Setter
   private Color newlineCharColor = new Color(110, 180, 232);
 
-  private DefaultGridSheetHeaderRenderer headerRenderer;
+  private DefaultGridSheetHeaderCellRenderer headerRenderer;
 
   private int lineHeight;
 
@@ -81,6 +79,7 @@ public class CsvGridSheetPane extends GridSheetPane {
    */
   public CsvGridSheetPane(CsvSheetView csvSheetView, CsvGridSheetModel gm) {
     super(gm);
+    setFont(SCAppearanceManager.getGridFont());
 
     this.csvSheetView = csvSheetView;
 
@@ -224,32 +223,7 @@ public class CsvGridSheetPane extends GridSheetPane {
 
   protected GridSheetHeaderRenderer createHeaderRenderer() {
     if (headerRenderer == null) {
-      headerRenderer = new DefaultGridSheetHeaderRenderer() {
-        @Override
-        public Component getGridCellRendererComponent(AbstractGridSheetHeaderComponent header,
-            Object value, boolean isSelected, boolean hasFocus, int index) {
-          setValue(value);
-          if (isSelected) {
-            if (hasFocus) {
-              setForeground(SCAppearanceManager.getGridHeaderFocusedForeground());
-              setBackground(SCAppearanceManager.getGridHeaderFocusedBackground());
-            } else {
-              setForeground(SCAppearanceManager.getGridHeaderSelectedForeground());
-              setBackground(SCAppearanceManager.getGridHeaderSelectedBackground());
-            }
-          } else {
-            setForeground(SCAppearanceManager.getGridHeaderForeground());
-            setBackground(SCAppearanceManager.getGridHeaderBackground());
-          }
-          return this;
-        }
-
-        @Override
-        public void setFont(Font font) {
-          super.setFont(font);
-        }
-      };
-      headerRenderer.setFont(SCAppearanceManager.getGridFont());
+      headerRenderer = new CsvGridSheetHeaderCellRenderer();
     }
     return headerRenderer;
   }

@@ -30,8 +30,10 @@ import javax.swing.UIManager;
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.CoreSessionKeys;
+import com.smoothcsv.core.csvsheet.CsvGridSheetCellRendererUI;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetColumnHeaderUI;
+import com.smoothcsv.core.csvsheet.CsvGridSheetHeaderCellRendererUI;
 import com.smoothcsv.core.csvsheet.CsvGridSheetTableUI;
 import com.smoothcsv.core.csvsheet.CsvSheetStatusLabel;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
@@ -120,6 +122,9 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         GridSheetUtils.initializeUI();
         UIDefaults uiDefaults = UIManager.getDefaults();
         uiDefaults.put("CsvGridSheetTableUI", CsvGridSheetTableUI.class.getName());
+        uiDefaults.put("CsvGridSheetCellUI", CsvGridSheetCellRendererUI.class.getName());
+        uiDefaults.put("CsvGridSheetHeaderCellUI",
+            CsvGridSheetHeaderCellRendererUI.class.getName());
         uiDefaults.put("CsvGridSheetColumnHeaderUI", CsvGridSheetColumnHeaderUI.class.getName());
         uiDefaults.put("SCTabbedPaneUI", SCTabbedPaneUI.class.getName());
         SCAppearanceManager.init();

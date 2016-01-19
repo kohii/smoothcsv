@@ -15,6 +15,7 @@ package com.smoothcsv.framework.util;
 
 import java.io.File;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,7 +68,7 @@ public class DirectoryResolver {
 
   private File appDataDirectory;
 
-  private File userDirectory;
+  // private File userDirectory;
 
   private File temporaryDirectory;
 
@@ -123,25 +124,24 @@ public class DirectoryResolver {
     return macroFileDirectory;
   }
 
-  protected File getUserDataDirectory() {
-    if (userDirectory == null) {
-      String appName = SCApplication.getApplication().getName();
-      String base = System.getProperty("user.home");
-      if (base == null) {
-        base = System.getProperty("user.dir");
-        if (base == null) {
-          base = "." + FILE_SEPARATOR;
-        }
-      }
-      userDirectory = new File(base + FILE_SEPARATOR + '.' + appName + FILE_SEPARATOR);
-    }
-    return userDirectory;
-  }
+  // protected File getUserDataDirectory() {
+  // if (userDirectory == null) {
+  // String appName = SCApplication.getApplication().getName();
+  // String base = System.getProperty("user.home");
+  // if (base == null) {
+  // base = System.getProperty("user.dir");
+  // if (base == null) {
+  // base = "." + FILE_SEPARATOR;
+  // }
+  // }
+  // userDirectory = new File(base + FILE_SEPARATOR + '.' + appName + FILE_SEPARATOR);
+  // }
+  // return userDirectory;
+  // }
 
   protected String createAppDataDirectory() {
-    String appName =
-        SCApplication.getApplication() == null ? "SmoothCSV" : SCApplication.getApplication()
-            .getName();
+    String appName = SCApplication.getApplication() == null ? "SmoothCSV"
+        : SCApplication.getApplication().getName();
 
     if (PlatformUtils.isWindows()) {
       String appdata = System.getenv("APPDATA");
@@ -162,8 +162,14 @@ public class DirectoryResolver {
       }
     } else {
       String userDir = System.getProperty("user.home");
-      return new StringBuilder().append(userDir == null ? "" : userDir).append(FILE_SEPARATOR)
-          .append('.').append(appName).append(FILE_SEPARATOR).toString();
+      if (StringUtils.isNotEmpty(userDir)) {
+        return userDir
+            + (userDir.charAt(userDir.length() - 1) == FILE_SEPARATOR ? "" : FILE_SEPARATOR)
+            + "Library" + FILE_SEPARATOR + "Application Support" + FILE_SEPARATOR + "SmoothCSV"
+            + FILE_SEPARATOR;
+      } else {
+        return "~" + FILE_SEPARATOR + ".SmoothCSV" + FILE_SEPARATOR;
+      }
     }
   }
 }

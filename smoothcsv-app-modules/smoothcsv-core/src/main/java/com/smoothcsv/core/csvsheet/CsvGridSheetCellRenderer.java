@@ -38,13 +38,16 @@ public class CsvGridSheetCellRenderer extends JLabel implements GridSheetCellRen
 
   protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
+  @Override
+  public String getUIClassID() {
+    return "CsvGridSheetCellUI";
+  }
+
   public CsvGridSheetCellRenderer() {
     setOpaque(true);
     setBorder(noFocusBorder);
     setName("Grid.cellRenderer");
     setBackground(Color.WHITE);
-
-    setUI(new CsvGridSheetCellRendererUI());
   }
 
   @Override

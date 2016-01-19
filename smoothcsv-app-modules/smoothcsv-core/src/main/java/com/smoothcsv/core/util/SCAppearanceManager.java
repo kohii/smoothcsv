@@ -145,7 +145,6 @@ public class SCAppearanceManager {
     // set grid ui
     UIManager.put("Grid.font", gridFont);
     UIManager.put("GridHeader.font", gridFont);
-    UIManager.put("GridHeader.font", gridFont);
 
     // set defaults
     putDefaultFont(defaultFont);

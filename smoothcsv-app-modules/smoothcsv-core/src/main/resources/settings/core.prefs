@@ -1,36 +1,27 @@
-# General
+# --General--
 language=<NULL>
-
-# Appearance
 statusbarVisible=true
 toolbarVisible=false
-valuepanelVisible=true
-defaultFontSize=13
-defaultFontName=
-statusBarFontSize=
-gridFontSize=
-valuePanelFontSize=
-cellPaddingTop=1
-cellPaddingBottom=1
+valuePanelVisible=true
 
-# File
+# --File--
 alertOnOpeningHugeFile=true
 alertThreshold=50
 howToDetectProperties=auto
 
-# Editor
+# --Editor--
 defaultRowSize=5
 defaultColumnSize=5
 sizeOfUndoing=35
-valuepanelHeight=2
+valuePanelHeight=2
 
-# Autofit
+# --Autofit--
 autoFitColumnWidthAfterOpeningFile=true
 autoFitColumnWidthWithLimitedRowSize=true
 rowSizeToScanWhenAutoFitting=1000
 limitWidthWhenAutoFitting=true
 maxColumnWidthPerWindowWhenAutoFitting=70
 
-#Copy & Paste
+# --Copy&Paste--
 quoteRuleForCopying=QUOTES_IF_NECESSARY
 pasteRepeatedly=true

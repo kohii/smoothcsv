@@ -11,28 +11,28 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.value_panel;
+package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.core.command.ValuePanelCommandBase;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
-import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.framework.setting.Settings;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.LookAndFeel;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
  * @author kohii
  *
  */
-public class CompressCommand extends ValuePanelCommandBase {
+public class CsvGridSheetHeaderCellRendererUI extends BasicLabelUI {
+
+  public static ComponentUI createUI(JComponent c) {
+    return new CsvGridSheetHeaderCellRendererUI();
+  }
 
   @Override
-  protected void run(CsvGridSheetCellValuePanel valuePanel) {
-    Settings setting = CoreSettings.getInstance();
-    int h = setting.getInteger(CoreSettings.VALUE_PANEL_HEIGHT);
-    h--;
-    if (h < 1) {
-      abort();
-    }
-    setting.save(CoreSettings.VALUE_PANEL_HEIGHT, h);
-    valuePanel.reloadPanelHeight();
+  protected void installDefaults(JLabel c) {
+    LookAndFeel.installColorsAndFont(c, "GridHeader.background", "GridHeader.foreground",
+        "GridHeader.font");
+    LookAndFeel.installProperty(c, "opaque", Boolean.FALSE);
   }
 }

@@ -27,12 +27,12 @@ public class ExpandCommand extends ValuePanelCommandBase {
   @Override
   protected void run(CsvGridSheetCellValuePanel valuePanel) {
     Settings setting = CoreSettings.getInstance();
-    int h = setting.getInteger(CoreSettings.VALUEPANEL_HEIGHT);
+    int h = setting.getInteger(CoreSettings.VALUE_PANEL_HEIGHT);
     h++;
     if (h > 12) {
       abort();
     }
-    setting.save(CoreSettings.VALUEPANEL_HEIGHT, h);
+    setting.save(CoreSettings.VALUE_PANEL_HEIGHT, h);
     valuePanel.reloadPanelHeight();
   }
 }

@@ -1,0 +1,39 @@
+# default
+default.fontSize=
+default.fontName=
+default.foreground=
+default.background=
+# statusbar
+statusbar.fontSize=
+statusbar.fontName=
+# grid
+grid.fontSize=20
+grid.fontName=
+grid.foreground=
+grid.background=
+grid.lineColor=
+grid.frozenLineColor=
+grid.selection.background=
+grid.selection.borderColor=
+grid.selection.alpha=
+grid.findHighlight=
+# grid-header
+gridHeader.foreground=
+gridHeader.background=
+gridHeader.selected.foreground=
+gridHeader.selected.background=
+gridHeader.focused.foreground=
+gridHeader.focused.background=
+#gridHeader.lineColor=
+# celleditor
+celleditor.fontSize=
+celleditor.fontName=
+celleditor.foreground=
+celleditor.background=
+celleditor.caretColor=
+# inline-celleditor
+inline-celleditor.fontSize=
+inline-celleditor.fontName=
+inline-celleditor.foreground=
+inline-celleditor.background=
+inline-celleditor.caretColor=

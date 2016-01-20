@@ -24,6 +24,9 @@ import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author kohii
  *
@@ -56,6 +59,10 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
     private boolean quickEdit = false;
 
+    @Getter
+    @Setter
+    private boolean keyRecording;
+
     protected CsvGridEditorComponent(CsvGridSheetCellStringEditor editor) {
       super("cell-editor");
       setDocument(CsvGridSheetCellValuePanel.getInstance().getTextArea().getDocument());
@@ -83,10 +90,10 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
     @Override
     public void replaceSelection(String content) {
-      if (MacroRecorder.isRecording()) {
+      super.replaceSelection(content);
+      if (keyRecording) {
         MacroRecorder.getInstance().recordKeyTyping(content);
       }
-      super.replaceSelection(content);
     }
 
     @Override

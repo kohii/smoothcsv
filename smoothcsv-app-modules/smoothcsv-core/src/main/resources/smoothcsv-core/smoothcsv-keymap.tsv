@@ -69,6 +69,10 @@ grid
 	cmd+right	grid:move-to-last-column
 	cmd+up	grid:move-to-first-row
 	cmd+down	grid:move-to-last-row
+	cmd+shift+left	grid:select-to-first-column
+	cmd+shift+right	grid:select-to-last-column
+	cmd+shift+up	grid:select-to-first-row
+	cmd+shift+down	grid:select-to-last-row
 	alt+left	grid:move-to-left-edge-of-data-region
 	alt+right	grid:move-to-right-edge-of-data-region
 	alt+up	grid:move-to-top-edge-of-data-region

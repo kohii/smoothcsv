@@ -7,7 +7,7 @@ default.background=
 statusbar.fontSize=
 statusbar.fontName=
 # grid
-grid.fontSize=20
+grid.fontSize=
 grid.fontName=
 grid.foreground=
 grid.background=

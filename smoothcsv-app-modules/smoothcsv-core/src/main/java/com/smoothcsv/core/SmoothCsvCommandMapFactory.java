@@ -18,7 +18,11 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 
 import javax.swing.Action;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
 
+import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
+import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel.ValuePanelTextArea;
 import com.smoothcsv.core.macro.Macro;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.SCAppMacroRuntime;
@@ -39,6 +43,8 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
 
   @SuppressWarnings("serial")
   static class SmoothCsvCommandActionMap extends CommandActionMap {
+    private Action keyTypeAction = new KeyTypedAction();
+
     @Override
     public Action get(Object key) {
       if (key instanceof String) {
@@ -46,6 +52,9 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
         if (keyString.startsWith("macro:run ")) {
           return new MacroAction(keyString.substring("macro:run ".length()).trim());
         }
+      }
+      if (DefaultEditorKit.defaultKeyTypedAction.equals(key)) {
+        return keyTypeAction;
       }
       return super.get(key);
     }
@@ -109,6 +118,37 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
       if (MacroRecorder.isRecording()) {
         MacroRecorder.getInstance().recordMacroExecution(path);
       }
+    }
+  }
+
+  @SuppressWarnings("serial")
+  private static class KeyTypedAction
+      extends javax.swing.text.DefaultEditorKit.DefaultKeyTypedAction {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      if (MacroRecorder.isRecording()) {
+        JTextComponent comp = getTextComponent(e);
+        if (comp instanceof CsvGridEditorComponent) {
+          CsvGridEditorComponent textComp = (CsvGridEditorComponent) comp;
+          try {
+            textComp.setKeyRecording(true);
+            super.actionPerformed(e);
+          } finally {
+            textComp.setKeyRecording(false);
+          }
+          return;
+        } else if (comp instanceof ValuePanelTextArea) {
+          ValuePanelTextArea textComp = (ValuePanelTextArea) comp;
+          try {
+            textComp.setKeyRecording(true);
+            super.actionPerformed(e);
+          } finally {
+            textComp.setKeyRecording(false);
+          }
+          return;
+        }
+      }
+      super.actionPerformed(e);
     }
   }
 }

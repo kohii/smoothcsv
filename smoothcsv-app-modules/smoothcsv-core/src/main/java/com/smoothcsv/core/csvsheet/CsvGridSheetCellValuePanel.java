@@ -38,6 +38,7 @@ import javax.swing.undo.UndoManager;
 
 import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.core.util.SCAppearanceManager;
@@ -52,6 +53,7 @@ import com.smoothcsv.swing.icon.AwesomeIcon;
 import command.grid.StartEditCommand;
 import command.grid.StopEditCommand;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author kohii
@@ -275,12 +277,24 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   public static class ValuePanelTextArea extends SCTextArea implements SmoothComponent {
 
     @Getter
+    @Setter
+    private boolean keyRecording;
+
+    @Getter
     private final CsvGridSheetCellValuePanel valuePanel;
 
     public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel) {
       super("value-panel");
       setFont(SCAppearanceManager.getCelleditorFont());
       this.valuePanel = valuePanel;
+    }
+
+    @Override
+    public void replaceSelection(String content) {
+      super.replaceSelection(content);
+      if (keyRecording) {
+        MacroRecorder.getInstance().recordKeyTyping(content);
+      }
     }
   }
 }

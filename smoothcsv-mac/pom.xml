@@ -6,7 +6,7 @@
     <artifactId>smoothcsv</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>smoothcsv-mac-launcher</artifactId>
+  <artifactId>smoothcsv-mac</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
@@ -25,13 +25,38 @@
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
-      <artifactId>smoothcsv-mac</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-ja</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <fork>true</fork>
+          <compilerArgument>-XDignore.symbol.file</compilerArgument>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>sh.tak.appbundler</groupId>
+        <artifactId>appbundle-maven-plugin</artifactId>
+        <version>1.0.4</version>
+        <configuration>
+          <mainClass>com.smoothcsv.mac.SmoothCSV</mainClass>
+          <jvmVersion>1.8+</jvmVersion>
+          <bundleName>SmoothCSV</bundleName>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

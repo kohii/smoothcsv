@@ -11,7 +11,6 @@
   <modules>
     <module>smoothcsv-core</module>
     <module>smoothcsv-debug</module>
-    <module>smoothcsv-mac</module>
     <module>smoothcsv-windows</module>
     <module>smoothcsv-ja</module>
   </modules>

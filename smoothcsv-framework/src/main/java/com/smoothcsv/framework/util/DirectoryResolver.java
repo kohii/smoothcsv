@@ -48,7 +48,7 @@ public class DirectoryResolver {
           protected String createAppDataDirectory() {
             LOG.debug("user.home={}", System.getProperty("user.home"));
             LOG.debug("user.dir={}", System.getProperty("user.dir"));
-            return System.getProperty("user.home") + FILE_SEPARATOR + "SmoothCSV_DEV"
+            return System.getProperty("user.home") + FILE_SEPARATOR + "SmoothCSV 2 DEV"
                 + FILE_SEPARATOR;
           }
         };
@@ -140,7 +140,7 @@ public class DirectoryResolver {
   // }
 
   protected String createAppDataDirectory() {
-    String appName = SCApplication.getApplication() == null ? "SmoothCSV"
+    String appName = SCApplication.getApplication() == null ? "SmoothCSV 2"
         : SCApplication.getApplication().getName();
 
     if (PlatformUtils.isWindows()) {
@@ -168,7 +168,7 @@ public class DirectoryResolver {
             + "Library" + FILE_SEPARATOR + "Application Support" + FILE_SEPARATOR + "SmoothCSV"
             + FILE_SEPARATOR;
       } else {
-        return "~" + FILE_SEPARATOR + ".SmoothCSV" + FILE_SEPARATOR;
+        return "~" + FILE_SEPARATOR + ".SmoothCSV 2" + FILE_SEPARATOR;
       }
     }
   }

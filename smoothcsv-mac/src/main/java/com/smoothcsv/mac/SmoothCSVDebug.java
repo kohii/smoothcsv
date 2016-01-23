@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.launcher;
+package com.smoothcsv.mac;
 
 import com.smoothcsv.core.SmoothCsvApp;
 import com.smoothcsv.framework.Env;
@@ -21,9 +21,10 @@ import com.smoothcsv.framework.SCApplication;
  *
  * @author kohii
  */
-public class SmoothCSV {
+public class SmoothCSVDebug {
 
   public static void main(String[] args) {
+    SmoothCSV.customizeForMac();
     SCApplication application = new SmoothCsvApp(Env.OS_MAC, true);
     application.launch(args);
   }

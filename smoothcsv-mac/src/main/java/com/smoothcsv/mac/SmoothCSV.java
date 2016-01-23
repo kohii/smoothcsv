@@ -26,21 +26,27 @@ import com.apple.eawt.PreferencesHandler;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
+import com.smoothcsv.core.SmoothCsvApp;
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRegistry;
-import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 import command.app.OpenFileCommand;
 
 /**
- * @author kohii
  *
+ * @author kohii
  */
-public class MacEntryPoint extends ModuleEntryPointBase {
+public class SmoothCSV {
 
-  @Override
-  protected void activate() {
+  public static void main(String[] args) {
+    customizeForMac();
+    SCApplication application = new SmoothCsvApp(Env.OS_MAC, false);
+    application.launch(args);
+  }
+
+  static void customizeForMac() {
     System.setProperty("apple.laf.useScreenMenuBar", "true");
     System.setProperty("com.apple.macos.smallTabs", "true");
 

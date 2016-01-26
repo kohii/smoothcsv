@@ -1,40 +1,42 @@
-app:new-file		
-app:new-file-as		
-app:open-file		
-app:open-file-as		
-app:save	available(csv-sheet)	
-app:save-as	available(csv-sheet)	
-app:save-all	available(csv-sheet)	
-app:close	available(csv-sheet)	
-app:close-others	available(csv-sheet)	
-app:close-all	available(csv-sheet)	
-csvsheet:show-properties	available(csv-sheet)	
-app:quit		
-app:about		
-app:toggle-command-palette		
-app:show-sql-tools		
-app:show-settings		
-		
-grid:undo	csv_sheet_can_undo	
-grid:redo	csv_sheet_can_redo	
-grid:copy	not_editing_cell	
-grid:cut	not_editing_cell	
-grid:paste	not_editing_cell	
-grid:copy-using-file-format	not_editing_cell	
-grid:cut-using-file-format	not_editing_cell	
-grid:paste-using-file-format	not_editing_cell	
-grid:clear	not_editing_cell	
-grid:delete-cell	not_editing_cell	
-grid:select-all	not_editing_cell	
-grid:select-entire-row	not_editing_cell	
-grid:select-entire-column	not_editing_cell	
-grid:fill-down	not_editing_cell	
-grid:fill-up	not_editing_cell	
-grid:fill-left	not_editing_cell	
-grid:fill-right	not_editing_cell	
-grid:sort	not_editing_cell	
-grid:sort-selected-rows	not_editing_cell	
-grid:sort-selected-range	not_editing_cell	
+app:new-file
+app:new-file-as
+app:open-file
+app:open-file-as
+app:save	available(csv-sheet)
+app:save-as	available(csv-sheet)
+app:save-all	available(csv-sheet)
+app:close	available(csv-sheet)
+app:close-others	available(csv-sheet)
+app:close-all	available(csv-sheet)
+csvsheet:show-properties	available(csv-sheet)
+app:quit
+app:about
+app:toggle-command-palette
+app:show-sql-tools
+app:show-settings
+
+grid:undo	csv_sheet_can_undo
+grid:redo	csv_sheet_can_redo
+grid:copy	not_editing_cell
+grid:cut	not_editing_cell
+grid:paste	not_editing_cell
+grid:copy-using-file-format	not_editing_cell
+grid:cut-using-file-format	not_editing_cell
+grid:paste-using-file-format	not_editing_cell
+grid:copy-as-markdown-table	not_editing_cell
+grid:copy-as-html-table	not_editing_cell
+grid:clear	not_editing_cell
+grid:delete-cell	not_editing_cell
+grid:select-all	not_editing_cell
+grid:select-entire-row	not_editing_cell
+grid:select-entire-column	not_editing_cell
+grid:fill-down	not_editing_cell
+grid:fill-up	not_editing_cell
+grid:fill-left	not_editing_cell
+grid:fill-right	not_editing_cell
+grid:sort	not_editing_cell
+grid:sort-selected-rows	not_editing_cell
+grid:sort-selected-range	not_editing_cell
 grid:move-left	available(csv-sheet)	command.grid.MoveCommand {"direction":"left"}
 grid:move-right	available(csv-sheet)	command.grid.MoveCommand {"direction":"right"}
 grid:move-up	available(csv-sheet)	command.grid.MoveCommand {"direction":"up"}
@@ -71,24 +73,24 @@ grid:select-to-left-edge-of-data-region	available(csv-sheet)	command.grid.MoveTo
 grid:select-to-right-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"right","extend":true}
 grid:select-to-top-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"up","extend":true}
 grid:select-to-bottom-edge-of-data-region	available(csv-sheet)	command.grid.MoveToDataEdgeCommand {"direction":"down","extend":true}
-grid:insert-rows-above	available(csv-sheet)	
-grid:insert-rows-below	available(csv-sheet)	
-grid:delete-rows	available(csv-sheet)	
-grid:insert-columns-left	available(csv-sheet)	
-grid:insert-columns-right	available(csv-sheet)	
-grid:delete-columns	available(csv-sheet)	
-grid:go-to-line	available(csv-sheet)	
-grid:start-edit	available(csv-sheet)	
-grid:start-quick-edit	not_editing_cell	
-grid:stop-edit	editing_cell	
-grid:cancel-edit	editing_cell	
-grid:autofit-column-width	available(csv-sheet)	
-grid:autofit-column-width-to-selected-cell	available(csv-sheet)	
-grid:toggle-use-first-row-as-header	available(csv-sheet)	
-grid:focus	available(csv-sheet)	
-		
-cell-editor:undo	available(cell-editor)	
-cell-editor:redo	available(cell-editor)	
+grid:insert-rows-above	available(csv-sheet)
+grid:insert-rows-below	available(csv-sheet)
+grid:delete-rows	available(csv-sheet)
+grid:insert-columns-left	available(csv-sheet)
+grid:insert-columns-right	available(csv-sheet)
+grid:delete-columns	available(csv-sheet)
+grid:go-to-line	available(csv-sheet)
+grid:start-edit	available(csv-sheet)
+grid:start-quick-edit	not_editing_cell
+grid:stop-edit	editing_cell
+grid:cancel-edit	editing_cell
+grid:autofit-column-width	available(csv-sheet)
+grid:autofit-column-width-to-selected-cell	available(csv-sheet)
+grid:toggle-use-first-row-as-header	available(csv-sheet)
+grid:focus	available(csv-sheet)
+
+cell-editor:undo	available(cell-editor)
+cell-editor:redo	available(cell-editor)
 cell-editor:insert-break	available(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-break"}
 cell-editor:insert-tab	available(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-tab"}
 cell-editor:move-left	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-backward"}
@@ -122,13 +124,13 @@ cell-editor:copy	available(cell-editor)	command.cell_editor.ActionCommand {"acti
 cell-editor:paste	available(cell-editor)	command.cell_editor.ActionCommand {"action":"paste-from-clipboard"}
 cell-editor:page-up	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
 cell-editor:page-down	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
-cell-editor:focus	available(cell-editor)	
-		
-value-panel:toggle-floating	available(value-panel)	
-value-panel:expand	available(value-panel)	
-value-panel:compress	available(value-panel)	
-value-panel:undo	available(value-panel)	
-value-panel:redo	available(value-panel)	
+cell-editor:focus	available(cell-editor)
+
+value-panel:toggle-floating	available(value-panel)
+value-panel:expand	available(value-panel)
+value-panel:compress	available(value-panel)
+value-panel:undo	available(value-panel)
+value-panel:redo	available(value-panel)
 value-panel:insert-break	available(value-panel)	command.value_panel.ActionCommand {"action":"insert-break"}
 value-panel:insert-tab	available(value-panel)	command.value_panel.ActionCommand {"action":"insert-tab"}
 value-panel:move-left	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-backward"}
@@ -162,45 +164,45 @@ value-panel:copy	available(value-panel)	command.value_panel.ActionCommand {"acti
 value-panel:paste	available(value-panel)	command.value_panel.ActionCommand {"action":"paste-from-clipboard"}
 value-panel:page-up	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-up","action":"page-up"}
 value-panel:page-down	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-page-down","action":"page-down"}
-value-panel:focus	available(value-panel)	
-		
-convert:upper-case	not_editing_cell	
-convert:lower-case	not_editing_cell	
-convert:swap-case	not_editing_cell	
-convert:title-case	not_editing_cell	
-convert:snake-case-to-camel-case	not_editing_cell	
-convert:camel-case-to-snake-case	not_editing_cell	
-		
-view:previous-tab	available(csv-sheet)	
-view:next-tab	available(csv-sheet)	
-view:toggle-status-bar		
-view:toggle-cell-value-panel		
-		
-find:show	available(csv-sheet)	
-find:hide	available(find-panel)	
-find:next	available(find-panel)	
-find:previous	available(find-panel)	
-find:count	available(find-panel)	
-find:replace-next	available(find-panel)	
-find:replace-previous	available(find-panel)	
-find:replace-all	available(find-panel)	
-		
-macro:toggle-macro-tools		
-macro:toggle-recording-macro		
-macro:toggle-console	available(macro-tools)	
-macro:open	!recording_macro	
-macro:save	!recording_macro	
-macro:run	!recording_macro	
-macro:show-editor		
-macrolist:add	available(macro-list)	
-macrolist:remove	available(macro-list)	
-macrolist:run	available(macro-list)	
-		
-#sql:run		
-#sql:open		
-#sql:save		
-#sql:next-sql		
-#sql:previous-sql		
-#sql:show-sql-history		
-#sql:add-table		
-#sql:remove-table		
+value-panel:focus	available(value-panel)
+
+convert:upper-case	not_editing_cell
+convert:lower-case	not_editing_cell
+convert:swap-case	not_editing_cell
+convert:title-case	not_editing_cell
+convert:snake-case-to-camel-case	not_editing_cell
+convert:camel-case-to-snake-case	not_editing_cell
+
+view:previous-tab	available(csv-sheet)
+view:next-tab	available(csv-sheet)
+view:toggle-status-bar
+view:toggle-cell-value-panel
+
+find:show	available(csv-sheet)
+find:hide	available(find-panel)
+find:next	available(find-panel)
+find:previous	available(find-panel)
+find:count	available(find-panel)
+find:replace-next	available(find-panel)
+find:replace-previous	available(find-panel)
+find:replace-all	available(find-panel)
+
+macro:toggle-macro-tools
+macro:toggle-recording-macro
+macro:toggle-console	available(macro-tools)
+macro:open	!recording_macro
+macro:save	!recording_macro
+macro:run	!recording_macro
+macro:show-editor
+macrolist:add	available(macro-list)
+macrolist:remove	available(macro-list)
+macrolist:run	available(macro-list)
+
+#sql:run
+#sql:open
+#sql:save
+#sql:next-sql
+#sql:previous-sql
+#sql:show-sql-history
+#sql:add-table
+#sql:remove-table

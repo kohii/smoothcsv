@@ -14,5 +14,8 @@ mvn clean install
 cd ../smoothcsv
 mvn clean install
 
-cd smoothcsv-mac
+cd ../smoothcsv-mac
+mvn clean install
+
+cd smoothcsv-launcher-mac
 mvn package appbundle:bundle

@@ -13,6 +13,7 @@
     <module>smoothcsv-debug</module>
     <module>smoothcsv-windows</module>
     <module>smoothcsv-ja</module>
+    <module>smoothcsv-mac</module>
   </modules>
   <dependencies>
     <dependency>

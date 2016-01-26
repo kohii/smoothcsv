@@ -1,16 +1,3 @@
-/*
- * Copyright 2015 kohii
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.smoothcsv.mac;
 
 import java.io.File;
@@ -26,27 +13,21 @@ import com.apple.eawt.PreferencesHandler;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
-import com.smoothcsv.core.SmoothCsvApp;
-import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRegistry;
+import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 import command.app.OpenFileCommand;
 
 /**
+ * @author Kohei Ishikawa
  *
- * @author kohii
  */
-public class SmoothCSV {
+public class MacEntryPoint extends ModuleEntryPointBase {
 
-  public static void main(String[] args) {
-    customizeForMac();
-    SCApplication application = new SmoothCsvApp(Env.OS_MAC, false);
-    application.launch(args);
-  }
-
-  static void customizeForMac() {
+  @Override
+  protected void activate() {
     System.setProperty("apple.laf.useScreenMenuBar", "true");
     System.setProperty("com.apple.macos.smallTabs", "true");
 

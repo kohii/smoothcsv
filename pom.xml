@@ -9,7 +9,8 @@
   <modules>
     <module>smoothcsv-framework</module>
     <module>smoothcsv-app-modules</module>
-    <module>smoothcsv-mac</module>
+    <module>smoothcsv-launcher-mac</module>
+    <module>smoothcsv-debuglauncher-mac</module>
   </modules>
   <dependencies>
     <dependency>

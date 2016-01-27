@@ -85,6 +85,7 @@ public class SmoothCsvErrorHandler implements ErrorHandler {
       componentManager.getMacroTools().getConsolePanel().append(t.getMessage());
     } else if (t instanceof OutOfMemoryError
         || (ThrowableUtils.getInitialCause(t) instanceof OutOfMemoryError)) {
+      LOG.error("Error", t);
       MessageDialogs.showMessageString(null, outOfMemoryErrorMessage, JOptionPane.ERROR_MESSAGE);
     } else {
       if (SCAppMacroRuntime.getMacroRuntime().isMacroExecuting()
@@ -93,6 +94,7 @@ public class SmoothCsvErrorHandler implements ErrorHandler {
             (SmoothCsvComponentManager) SCApplication.components();
         componentManager.getMacroTools().getConsolePanel().append(t.toString());
       } else {
+        LOG.error("Error", t);
         SwingUtils.beep();
         MessageDialogs.showMessageString(null, "Error", JOptionPane.ERROR_MESSAGE);
       }

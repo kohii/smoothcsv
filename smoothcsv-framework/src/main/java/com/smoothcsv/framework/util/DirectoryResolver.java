@@ -165,7 +165,7 @@ public class DirectoryResolver {
       if (StringUtils.isNotEmpty(userDir)) {
         return userDir
             + (userDir.charAt(userDir.length() - 1) == FILE_SEPARATOR ? "" : FILE_SEPARATOR)
-            + "Library" + FILE_SEPARATOR + "Application Support" + FILE_SEPARATOR + "SmoothCSV"
+            + "Library" + FILE_SEPARATOR + "Application Support" + FILE_SEPARATOR + "SmoothCSV 2"
             + FILE_SEPARATOR;
       } else {
         return "~" + FILE_SEPARATOR + ".SmoothCSV 2" + FILE_SEPARATOR;

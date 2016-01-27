@@ -36,9 +36,10 @@
         <artifactId>appbundle-maven-plugin</artifactId>
         <version>1.0.4</version>
         <configuration>
-          <mainClass>com.smoothcsv.mac.SmoothCSV</mainClass>
+          <mainClass>com.smoothcsv.SmoothCSV</mainClass>
           <jvmVersion>1.8+</jvmVersion>
           <bundleName>SmoothCSV</bundleName>
+          <iconFile>SmoothCSV.icns</iconFile>
         </configuration>
         <executions>
           <execution>

@@ -36,6 +36,8 @@ public class CoreSettings extends Settings {
   public static final String VALUE_PANEL_HEIGHT = "valuePanelHeight";
   public static final String AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE =
       "autoFitColumnWidthAfterOpeningFile";
+  public static final String AUTO_FIT_COLUMN_WIDTH_AFTER_EDITING_CELL =
+      "autoFitColumnWidthAfterEditingCell";
   public static final String AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE =
       "autoFitColumnWidthWithLimitedRowSize";
   public static final String ROW_SIZE_TO_SCAN_WHEN_AUTO_FITTING = "rowSizeToScanWhenAutoFitting";

@@ -17,6 +17,7 @@ valuePanelHeight=2
 
 # --Autofit--
 autoFitColumnWidthAfterOpeningFile=true
+autoFitColumnWidthAfterEditingCell=true
 autoFitColumnWidthWithLimitedRowSize=true
 rowSizeToScanWhenAutoFitting=1000
 limitWidthWhenAutoFitting=true

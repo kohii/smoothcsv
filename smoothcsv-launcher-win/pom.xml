@@ -1,5 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <properties>
+    <smoothcsv.version>2.0.0.1</smoothcsv.version>
+    <smoothcsv.txtVersion>2.0.0-beta-1</smoothcsv.txtVersion>
+  </properties>
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv</artifactId>
@@ -31,6 +35,26 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>assembly</id>
+            <phase>package</phase>
+            <goals><goal>single</goal></goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>com.smoothcsv.SmoothCSV</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.akathist.maven.plugins.launch4j</groupId>
         <artifactId>launch4j-maven-plugin</artifactId>
         <executions>
@@ -41,7 +65,7 @@
             <configuration>
               <headerType>gui</headerType>
               <outfile>target/SmoothCSV.exe</outfile>
-              <jar>target/smoothcsv-1.0.jar</jar>
+              <jar>${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar</jar>
               <errTitle>enccg</errTitle>
               <classPath>
                 <mainClass>com.smoothcsv.SmoothCSV</mainClass>
@@ -50,31 +74,16 @@
                 <minVersion>1.8.0</minVersion>
               </jre>
               <versionInfo>
-                <fileVersion>1.2.3.4</fileVersion>
-                <txtFileVersion>txt file version?</txtFileVersion>
-                <fileDescription>a description</fileDescription>
-                <copyright>my copyright</copyright>
-                <productVersion>4.3.2.1</productVersion>
-                <txtProductVersion>txt product version</txtProductVersion>
-                <productName>E-N-C-C</productName>
-                <internalName>ccne</internalName>
-                <originalFilename>original.exe</originalFilename>
+                <fileVersion>2.0.0.1</fileVersion>
+                <txtFileVersion>2.0.0-beta-1</txtFileVersion>
+                <fileDescription>Brilliant CSV file editor</fileDescription>
+                <copyright>Copyright (C) 2016 kohii All Rights Reserved.</copyright>
+                <productVersion>${smoothcsv.version}</productVersion>
+                <txtProductVersion>${smoothcsv.txtVersion}</txtProductVersion>
+                <productName>SmoothCSV</productName>
+                <internalName>SmoothCSV</internalName>
+                <originalFilename>SmoothCSV.exe</originalFilename>
               </versionInfo>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>assembly</id>
-            <phase>package</phase>
-            <goals><goal>attached</goal></goals>
-            <configuration>
-              <descriptors>
-                <descriptor>assembly.xml</descriptor>
-              </descriptors>
             </configuration>
           </execution>
         </executions>

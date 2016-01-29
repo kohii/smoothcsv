@@ -40,6 +40,9 @@
           <jvmVersion>1.8+</jvmVersion>
           <bundleName>SmoothCSV</bundleName>
           <iconFile>SmoothCSV.icns</iconFile>
+          <generateDiskImageFile>true</generateDiskImageFile>
+          <diskImageFile>${project.build.directory}/SmoothCSV-${project.version}.dmg</diskImageFile>
+          <diskImageInternetEnable>true</diskImageInternetEnable>
         </configuration>
         <executions>
           <execution>

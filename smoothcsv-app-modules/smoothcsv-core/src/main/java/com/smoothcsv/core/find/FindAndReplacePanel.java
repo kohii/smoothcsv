@@ -217,7 +217,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
 
     btnRegex = new JToggleButton(".*");
     btnRegex.setFocusable(false);
-    btnRegex.setToolTipText(CoreBundle.get("key.useRegex"));
+    btnRegex.setToolTipText(CoreBundle.get("key.regex"));
     btnRegex.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {

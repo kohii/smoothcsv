@@ -13,9 +13,12 @@
  */
 package com.smoothcsv.core.filter;
 
-import java.awt.Frame;
+import java.awt.BorderLayout;
 
+import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.framework.component.dialog.DialogOperation;
+import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.util.SCBundle;
 
 /**
@@ -26,10 +29,38 @@ public class FilterDialog extends DialogBase {
 
   private static final long serialVersionUID = -2551065574232435723L;
 
+  private final FilterOperationPanel operationPanel;
+  private final FilterConditionPanel conditionPanel;
+
   /**
    * @param owner
    */
-  public FilterDialog(Frame owner) {
-    super(owner, SCBundle.get("key.filter"));
+  public FilterDialog() {
+    super(SCApplication.components().getFrame(), SCBundle.get("key.filter"));
+
+    getContentPanel().setLayout(new BorderLayout(0, 0));
+
+    operationPanel = new FilterOperationPanel();
+    getContentPanel().add(operationPanel, BorderLayout.SOUTH);
+
+    conditionPanel = new FilterConditionPanel();
+    getContentPanel().add(conditionPanel);
+    setAutoPack(true);
+  }
+
+  public FilterConditions getFilterConditions() {
+    return new FilterConditions(conditionPanel.getConditions(),
+        operationPanel.getSeletedOperation());
+  }
+
+  @Override
+  protected boolean processOperation(DialogOperation selectedOperation) {
+    if (selectedOperation == DialogOperation.OK) {
+      if (!conditionPanel.getConditions().hasChildren()) {
+        MessageDialogs.alert("WSCA0008", SCBundle.get("key.filter.cond"));
+        return false;
+      }
+    }
+    return super.processOperation(selectedOperation);
   }
 }

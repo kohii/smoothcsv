@@ -64,6 +64,8 @@ Grid
 	Sort Selected Rows...	grid:sort-selected-rows
 	Sort Selected Range...	grid:sort-selected-range
 	-
+	Filter...	grid:filter
+	-
 	Toggle Use First Row As Header	grid:toggle-use-first-row-as-header
 
 Find

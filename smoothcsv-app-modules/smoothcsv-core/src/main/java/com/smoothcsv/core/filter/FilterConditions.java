@@ -11,27 +11,31 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package command.grid;
+package com.smoothcsv.core.filter;
 
-import com.smoothcsv.core.command.GridCommand;
-import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-import com.smoothcsv.core.filter.FilterDialog;
-import com.smoothcsv.framework.component.dialog.DialogOperation;
+import lombok.Getter;
 
 /**
  * @author kohii
  *
  */
-public class FilterCommand extends GridCommand {
+public class FilterConditions {
 
-  @Override
-  public void run(CsvGridSheetPane gridSheetPane) {
+  public static final int FILTER_OPERATION_DELETE_UNMATCH = 1;
+  public static final int FILTER_OPERATION_NEW_TAB = 2;
 
-    FilterDialog filterDialog = new FilterDialog();
+  @Getter
+  private FilterConditionGroup condition;
 
-    filterDialog.setVisible(true);
-    if (filterDialog.getSelectedOperation() != DialogOperation.OK) {
-      return;
-    }
+  @Getter
+  private int operation;
+
+  /**
+   * @param condition
+   * @param operation
+   */
+  public FilterConditions(FilterConditionGroup condition, int operation) {
+    this.condition = condition;
+    this.operation = operation;
   }
 }

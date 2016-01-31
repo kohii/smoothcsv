@@ -22,19 +22,19 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 /**
  * @author kohii
  */
-public class ConditionDialog extends DialogBase {
+public class ConditionItemDialog extends DialogBase {
 
   private static final long serialVersionUID = 7029324868151593734L;
-  private ConditionPanel conditionPanel;
+  private ConditionItemPanel conditionItemPanel;
 
-  public ConditionDialog(Dialog owner, FilterConditionItem item) {
+  public ConditionItemDialog(Dialog owner, FilterConditionItem item) {
     super(owner, "Condition");
     getContentPanel().setLayout(new BorderLayout(0, 0));
 
-    conditionPanel = new ConditionPanel(this);
-    getContentPanel().add(conditionPanel);
+    conditionItemPanel = new ConditionItemPanel(this);
+    getContentPanel().add(conditionItemPanel);
     if (item != null) {
-      conditionPanel.setFilterConditionItem(item);
+      conditionItemPanel.setFilterConditionItem(item);
     }
 
     pack();
@@ -43,10 +43,14 @@ public class ConditionDialog extends DialogBase {
 
   @Override
   protected boolean processOperation(DialogOperation selectedOperation) {
-    return conditionPanel.validateInput();
+    if (selectedOperation == DialogOperation.OK) {
+      return conditionItemPanel.validateInput();
+    } else {
+      return true;
+    }
   }
 
   public FilterConditionItem getItem() {
-    return conditionPanel.getFilterConditionItem();
+    return conditionItemPanel.getFilterConditionItem();
   }
 }

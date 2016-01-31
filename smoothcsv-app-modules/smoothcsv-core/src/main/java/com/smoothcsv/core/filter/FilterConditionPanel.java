@@ -17,8 +17,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -63,6 +63,7 @@ import javax.swing.tree.TreeSelectionModel;
 import com.smoothcsv.commons.constants.OperatorSymbol;
 import com.smoothcsv.core.filter.FilterConditionPanel.OperatorSymbolTreeNode;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
+import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.utils.JTreeUtils;
 
 /**
@@ -87,13 +88,13 @@ public class FilterConditionPanel extends JPanel {
     DefaultTreeModel model = new DefaultTreeModel(root);
     tree.setModel(model);
 
-    JButton button = new JButton("条件を追加");
+    JButton button = new JButton(SCBundle.get("key.filter.add.cond"));
     button.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ConditionDialog conditionDialog = new ConditionDialog(null, null);
-        conditionDialog.setVisible(true);
-        if (conditionDialog.getSelectedOperation() != DialogOperation.OK) {
+        ConditionItemDialog conditionItemDialog = new ConditionItemDialog(null, null);
+        conditionItemDialog.setVisible(true);
+        if (conditionItemDialog.getSelectedOperation() != DialogOperation.OK) {
           return;
         }
         TreePath path = tree.getSelectionPath();
@@ -109,7 +110,7 @@ public class FilterConditionPanel extends JPanel {
             node = root;
           }
         }
-        ConditionTreeNode newNode = new ConditionTreeNode(conditionDialog.getItem());
+        ConditionTreeNode newNode = new ConditionTreeNode(conditionItemDialog.getItem());
         node.add(newNode);
         DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
         model.reload();
@@ -122,7 +123,7 @@ public class FilterConditionPanel extends JPanel {
     });
     panel.add(button);
 
-    JButton button_2 = new JButton("ANDを追加");
+    JButton button_2 = new JButton(SCBundle.get("key.filter.add.and"));
     button_2.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -147,7 +148,7 @@ public class FilterConditionPanel extends JPanel {
     });
     panel.add(button_2);
 
-    JButton button_3 = new JButton("ORを追加");
+    JButton button_3 = new JButton(SCBundle.get("key.filter.add.or"));
     button_3.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -173,14 +174,14 @@ public class FilterConditionPanel extends JPanel {
     });
     panel.add(button_3);
 
-    final JButton editButton = new JButton("編集");
+    final JButton editButton = new JButton(SCBundle.get("key.edit"));
     editButton.setEnabled(false);
     panel.add(editButton);
 
-    final JButton button_1 = new JButton("削除");
+    final JButton button_1 = new JButton(SCBundle.get("key.delete"));
     panel.add(button_1);
 
-    final JButton btnNewButton = new JButton("AND/ORを変更");
+    final JButton btnNewButton = new JButton(SCBundle.get("key.filter.toggle"));
     panel.add(btnNewButton);
 
     editButton.addActionListener(new ActionListener() {
@@ -191,13 +192,13 @@ public class FilterConditionPanel extends JPanel {
         TreePath path = tree.getSelectionPath();
         if (path != null && path.getLastPathComponent() instanceof ConditionTreeNode) {
           ConditionTreeNode node = (ConditionTreeNode) path.getLastPathComponent();
-          ConditionDialog conditionDialog =
-              new ConditionDialog(null, node.getFilterConditionItem());
-          conditionDialog.setVisible(true);
-          if (conditionDialog.getSelectedOperation() != DialogOperation.OK) {
+          ConditionItemDialog conditionItemDialog =
+              new ConditionItemDialog(null, node.getFilterConditionItem());
+          conditionItemDialog.setVisible(true);
+          if (conditionItemDialog.getSelectedOperation() != DialogOperation.OK) {
             return;
           }
-          FilterConditionItem con = conditionDialog.getItem();
+          FilterConditionItem con = conditionItemDialog.getItem();
           node.setFilterConditionItem(con);
           node.setUserObject(con);
           DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
@@ -266,23 +267,15 @@ public class FilterConditionPanel extends JPanel {
     });
 
     scrollPane.setViewportView(tree);
+    Dimension s = scrollPane.getPreferredSize();
+    s.height = 280;
+    scrollPane.setPreferredSize(s);
 
     DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
     renderer.setClosedIcon(null);
     renderer.setOpenIcon(null);
 
     tree.setCellRenderer(renderer);
-
-    // root.add(new DefaultMutableTreeNode("aaaaaa"));
-    // root.add(new DefaultMutableTreeNode("bbbbbb"));
-    // DefaultMutableTreeNode node = new DefaultMutableTreeNode("AND");
-    // node.add(new DefaultMutableTreeNode("aaaaaa"));
-    // node.add(new DefaultMutableTreeNode("bbbbbb"));
-    // root.add(node);
-    // DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("OR");
-    // node2.add(new DefaultMutableTreeNode("aaaaaa"));
-    // node2.add(new DefaultMutableTreeNode("bbbbbb"));
-    // root.add(node2);
 
     JTreeUtils.expandAll(tree);
 
@@ -399,7 +392,7 @@ public class FilterConditionPanel extends JPanel {
       return new FilterConditionGroup(symbol, childrenCon.toArray(new FilterConditionGroup[0]));
 
     } else {
-      // 条件
+      // Condition
       ConditionTreeNode node = (ConditionTreeNode) o;
       return node.getFilterConditionItem();
     }
@@ -489,7 +482,6 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
     DataFlavor[] f = dtde.getCurrentDataFlavors();
     boolean isDataFlavorSupported = f[0].getHumanPresentableName().equals(NAME);
     if (!isDataFlavorSupported) {
-      // サポートされていないDataFlavorである(例えばデスクトップからファイルなど)
       rejectDrag(dtde);
       return;
     }
@@ -497,7 +489,6 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
     Point pt = dtde.getLocation();
     TreePath path = getPathForLocation(pt.x, pt.y);
     if (path == null) {
-      // ノード以外の場所である(例えばJTreeの余白など)
       rejectDrag(dtde);
       return;
     }
@@ -519,13 +510,12 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
     DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) targetNode.getParent();
     while (parentNode != null) {
       if (draggingNode.equals(parentNode)) {
-        // 親ノードを子ノードにドロップしようとしている
+        // Can't drop a child into its parent
         rejectDrag(dtde);
         return;
       }
       parentNode = (DefaultMutableTreeNode) parentNode.getParent();
     }
-    // dropTargetNode は、描画用(Rectangle2D、Line)のflag
     dropTargetNode = targetNode; // (TreeNode) path.getLastPathComponent();
     dtde.acceptDrag(dtde.getDropAction());
     repaint();
@@ -558,7 +548,7 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
     DefaultMutableTreeNode targetNode = (DefaultMutableTreeNode) path.getLastPathComponent();
     DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) targetNode.getParent();
     if (targetNode.equals(draggingNode)) {
-      // 自分を自分にはドロップ不可
+      // Can't drop into myself
       dtde.dropComplete(false);
       return;
     }
@@ -583,7 +573,7 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
   private void rejectDrag(DropTargetDragEvent dtde) {
     dtde.rejectDrag();
     dropTargetNode = null; // dropTargetNode(flag)をnullにして
-    repaint(); // Rectangle2D、Lineを消すためJTreeを再描画
+    repaint();
   }
 
   // <---- DropTargetListener
@@ -617,19 +607,20 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
   }
 
   // custom renderer
+  @SuppressWarnings("serial")
   class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
-    private static final int BOTTOM_PAD = 30;
+    // private static final int BOTTOM_PAD = 30;
     private boolean isTargetNode;
     private boolean isTargetNodeLeaf;
-    private boolean isLastItem;
-    private Insets normalInsets;
-    private Insets lastItemInsets;
+    // private boolean isLastItem;
+    // private Insets normalInsets;
+    // private Insets lastItemInsets;
 
     public DnDTreeCellRenderer() {
       super();
-      normalInsets = super.getInsets();
-      lastItemInsets = new Insets(normalInsets.top, normalInsets.left,
-          normalInsets.bottom + BOTTOM_PAD, normalInsets.right);
+      // normalInsets = super.getInsets();
+      // lastItemInsets = new Insets(normalInsets.top, normalInsets.left,
+      // normalInsets.bottom + BOTTOM_PAD, normalInsets.right);
     }
 
     @Override

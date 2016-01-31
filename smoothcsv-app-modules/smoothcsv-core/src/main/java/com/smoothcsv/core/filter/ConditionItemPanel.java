@@ -28,7 +28,7 @@ import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.RegulatedTextField;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 
-public class ConditionPanel extends JPanel {
+public class ConditionItemPanel extends JPanel {
 
   private static final long serialVersionUID = 1639607L;
   private JTextField textField;
@@ -38,7 +38,7 @@ public class ConditionPanel extends JPanel {
   private JCheckBox colValCheckBox;
   private ComparedValuePanel comparedValuePanel;
 
-  public ConditionPanel(final Dialog parent) {
+  public ConditionItemPanel(final Dialog parent) {
     GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.columnWidths = new int[] {0, 0, 0, 0, 0};
     gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0};
@@ -55,7 +55,7 @@ public class ConditionPanel extends JPanel {
     add(textField, gbc_textField);
     textField.setColumns(10);
 
-    JLabel label = new JLabel("列目の値");
+    JLabel label = new JLabel(SCBundle.get("key.filter.nthColumn"));
     GridBagConstraints gbc_label = new GridBagConstraints();
     gbc_label.anchor = GridBagConstraints.WEST;
     gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -115,7 +115,7 @@ public class ConditionPanel extends JPanel {
     gbc_checkBox_3.gridy = 0;
     panel_1.add(checkBox_3, gbc_checkBox_3);
 
-    colValCheckBox = new JCheckBox("列の値");
+    colValCheckBox = new JCheckBox(SCBundle.get("key.filter.cellValue"));
     GridBagConstraints gbc_checkBox = new GridBagConstraints();
     gbc_checkBox.insets = new Insets(0, 0, 0, 5);
     gbc_checkBox.gridx = 1;
@@ -237,7 +237,7 @@ public class ConditionPanel extends JPanel {
       add(textField_1, gbc_textField_1);
       textField_1.setColumns(10);
 
-      label_1 = new JLabel("列目の値");
+      label_1 = new JLabel(SCBundle.get("key.filter.nthColumn"));
       label_1.setVisible(false);
       GridBagConstraints gbc_label_1 = new GridBagConstraints();
       gbc_label_1.gridx = 2;
@@ -303,7 +303,7 @@ public class ConditionPanel extends JPanel {
             new FilterConditionItem(l, criteria, new FixedValue(right[0]), caseSensitive);
         break;
       default:
-        IValue[] r = new CellValue[right.length];
+        IValue[] r = new IValue[right.length];
         for (int i = 0; i < r.length; i++) {
           if (columnVal) {
             if (!com.smoothcsv.commons.utils.StringUtils.isNumber(right[i])) {

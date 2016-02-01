@@ -87,7 +87,7 @@ public class FilterConditionItem extends FilterConditionGroup {
   }
 
   @Override
-  boolean matches(List<String> list) {
+  public boolean matches(List<String> list) {
     String l, r;
     BigDecimal ln, rn;
     switch (criteria) {

@@ -13,10 +13,23 @@
  */
 package command.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.smoothcsv.core.command.GridCommand;
+import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
+import com.smoothcsv.core.csvsheet.CsvSheetSupport;
+import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
+import com.smoothcsv.core.filter.FilterConditionGroup;
+import com.smoothcsv.core.filter.FilterConditions;
 import com.smoothcsv.core.filter.FilterDialog;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
+import com.smoothcsv.framework.component.dialog.MessageDialogs;
+import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
+
+import command.app.OpenFileCommand;
 
 /**
  * @author kohii
@@ -24,14 +37,71 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
  */
 public class FilterCommand extends GridCommand {
 
+  private static FilterDialog filterDialog = new FilterDialog();
+
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-
-    FilterDialog filterDialog = new FilterDialog();
 
     filterDialog.setVisible(true);
     if (filterDialog.getSelectedOperation() != DialogOperation.OK) {
       return;
+    }
+    FilterConditions conditions = filterDialog.getFilterConditions();
+    int ope = conditions.getOperation();
+    FilterConditionGroup cond = conditions.getCondition();
+
+    gridSheetPane.stopCellEditingIfEditing();
+
+    CsvGridSheetModel model = gridSheetPane.getModel();
+    int rc = model.getRowCount();
+
+    if (ope == FilterConditions.FILTER_OPERATION_DELETE_UNMATCH
+        || ope == FilterConditions.FILTER_OPERATION_DELETE_MATCH) {
+      // Delete rows
+
+      try (EditTransaction tran = gridSheetPane.transaction()) {
+        int numDeleted = 0;
+        for (int i = 0; i < rc; i++) {
+          @SuppressWarnings("unchecked")
+          boolean match = cond.matches(model.getRowDataAt(i - numDeleted));
+          if (ope == FilterConditions.FILTER_OPERATION_DELETE_UNMATCH && !match
+              || ope == FilterConditions.FILTER_OPERATION_DELETE_MATCH && match) {
+            model.deleteRow(i - numDeleted);
+            numDeleted++;
+          }
+        }
+        if (model.getRowCount() == 0) {
+          // insert empty row if there is no row
+          model.insertRow(0, 1);
+          model.deleteCell(0, 0, model.getColumnCount() - 1);
+        }
+
+        DefaultGridSheetSelectionModel sm = gridSheetPane.getSelectionModel();
+        sm.clearHeaderSelection();
+        sm.correctSelectionIfInvalid();
+      }
+    } else {
+      // Open in new tab
+
+      List<List> dataList = new ArrayList<>();
+      for (int i = rc - 1; i >= 0; i--) {
+        @SuppressWarnings("unchecked")
+        boolean match = cond.matches(model.getRowDataAt(i));
+        if (ope == FilterConditions.FILTER_OPERATION_NEW_TAB_UNMATCH && !match
+            || ope == FilterConditions.FILTER_OPERATION_NEW_TAB_MATCH && match) {
+          dataList.add(model.getRowDataAt(i));
+        }
+      }
+
+      if (dataList.isEmpty()) {
+        MessageDialogs.alert("ISCA0010");
+        return;
+      }
+
+      CsvSheetViewInfo viewInfo =
+          new CsvSheetViewInfo(null, CsvSheetSupport.getDefaultCsvMeta(), null);
+      CsvGridSheetModel csvSheetModel = new CsvGridSheetModel(dataList);
+      new OpenFileCommand().run(viewInfo, csvSheetModel);
     }
   }
 }

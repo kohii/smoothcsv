@@ -29,21 +29,32 @@ import com.smoothcsv.swing.components.ExRadioButton;
 public class FilterOperationPanel extends JPanel {
   private ExButtonGroup<Integer> buttonGroup;
 
+  @SuppressWarnings("unchecked")
   public FilterOperationPanel() {
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
     setBorder(BorderFactory.createTitledBorder(""));
 
-    ExRadioButton<Integer> radioButton =
+    ExRadioButton<Integer> deleteUnmatchRadio =
         new ExRadioButton<>(FilterConditions.FILTER_OPERATION_DELETE_UNMATCH,
             SCBundle.get("key.filterOpe.deleteUnmatch"));
-    add(radioButton);
+    add(deleteUnmatchRadio);
 
-    ExRadioButton<Integer> radioButton_1 = new ExRadioButton<>(
-        FilterConditions.FILTER_OPERATION_DELETE_UNMATCH, SCBundle.get("key.filterOpe.newTab"));
-    add(radioButton_1);
+    ExRadioButton<Integer> deleteMatchRadio = new ExRadioButton<>(
+        FilterConditions.FILTER_OPERATION_DELETE_MATCH, SCBundle.get("key.filterOpe.deleteMatch"));
+    add(deleteMatchRadio);
 
-    buttonGroup = new ExButtonGroup<Integer>(radioButton, radioButton_1);
+    ExRadioButton<Integer> newTabUnmatchRadio =
+        new ExRadioButton<>(FilterConditions.FILTER_OPERATION_NEW_TAB_UNMATCH,
+            SCBundle.get("key.filterOpe.newTabUnmatch"));
+    add(newTabUnmatchRadio);
+
+    ExRadioButton<Integer> newTabMatchRadio = new ExRadioButton<>(
+        FilterConditions.FILTER_OPERATION_NEW_TAB_MATCH, SCBundle.get("key.filterOpe.newTabMatch"));
+    add(newTabMatchRadio);
+
+    buttonGroup = new ExButtonGroup<Integer>(deleteUnmatchRadio, deleteMatchRadio,
+        newTabUnmatchRadio, newTabMatchRadio);
   }
 
   public int getSeletedOperation() {

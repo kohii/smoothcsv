@@ -35,7 +35,7 @@ public class FilterConditionGroup {
 
   public FilterConditionGroup() {}
 
-  boolean matches(List<String> list) {
+  public boolean matches(List<String> list) {
     if (filterConditionGroups == null || filterConditionGroups.length == 0) {
       return true;
     }

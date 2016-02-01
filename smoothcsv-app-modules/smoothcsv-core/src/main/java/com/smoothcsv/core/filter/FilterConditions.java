@@ -22,7 +22,9 @@ import lombok.Getter;
 public class FilterConditions {
 
   public static final int FILTER_OPERATION_DELETE_UNMATCH = 1;
-  public static final int FILTER_OPERATION_NEW_TAB = 2;
+  public static final int FILTER_OPERATION_DELETE_MATCH = 2;
+  public static final int FILTER_OPERATION_NEW_TAB_UNMATCH = 3;
+  public static final int FILTER_OPERATION_NEW_TAB_MATCH = 4;
 
   @Getter
   private FilterConditionGroup condition;

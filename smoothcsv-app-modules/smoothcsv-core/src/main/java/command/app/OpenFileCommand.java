@@ -182,11 +182,9 @@ public class OpenFileCommand extends Command {
     return p != null ? p : CsvSheetSupport.getDefaultCsvMeta();
   }
 
-  public void run(File file, CsvMeta properties, CsvReaderOptions options) {
+  public void run(CsvSheetViewInfo viewInfo, CsvGridSheetModel model) {
     try {
       SmoothComponentManager.startAdjustingComponents();
-      CsvSheetViewInfo viewInfo = new CsvSheetViewInfo(file, properties, options);
-      CsvGridSheetModel model = CsvSheetSupport.createModelFromFile(file, properties, options);
       CsvSheetView csvGridSheetView = new CsvSheetView(viewInfo, model);
       SCApplication.components().getTabbedPane().addTab(csvGridSheetView);
     } finally {
@@ -196,6 +194,12 @@ public class OpenFileCommand extends Command {
         .getBoolean(CoreSettings.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE)) {
       new AutofitColumnWidthCommand().execute();
     }
+  }
+
+  public void run(File file, CsvMeta properties, CsvReaderOptions options) {
+    CsvSheetViewInfo viewInfo = new CsvSheetViewInfo(file, properties, options);
+    CsvGridSheetModel model = CsvSheetSupport.createModelFromFile(file, properties, options);
+    run(viewInfo, model);
   }
 
   private File chooseFile(File currentDir) {

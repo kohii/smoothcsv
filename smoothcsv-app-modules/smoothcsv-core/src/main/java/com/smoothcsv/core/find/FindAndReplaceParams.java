@@ -71,7 +71,7 @@ public class FindAndReplaceParams {
     caseSensitive = settings.getBoolean(CoreSessionKeys.CASE_SENSITIVE, false);
     useRegex = settings.getBoolean(CoreSessionKeys.USE_REGEX, false);
     matchWholeCell = settings.getBoolean(CoreSessionKeys.MATCH_WHOLE_CELL, false);
-    inSelection = settings.getBoolean(CoreSessionKeys.IN_SELECTION, false);
+    inSelection = settings.getBoolean(CoreSessionKeys.IN_SELECTION, true);
     orientation =
         Orientation.valueOf(settings.get(CoreSessionKeys.DIRECTION, Orientation.HORIZONTAL.name()));
     preserveCase = settings.getBoolean(CoreSessionKeys.PRESERVE_CASE, false);

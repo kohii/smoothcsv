@@ -1,0 +1,97 @@
+ファイル
+	新規作成	app:new-file
+	条件を指定して新規作成...	app:new-file-as
+	開く...	app:open-file
+	条件を指定して開く...	app:open-file-as
+#	開き直す	app:reopen
+	上書き保存	app:save
+	名前をつけて保存...	app:save-as
+	すべて保存	app:save-all
+	閉じる	app:close
+	すべて閉じる	app:close-all
+	-
+	プロパティ...	csvsheet:show-properties
+
+編集
+	元に戻す	grid:undo
+	やり直す	grid:redo
+	-
+	コピー	grid:copy
+	切り取り	grid:cut
+	貼り付け	grid:paste
+	クリア	grid:clear
+	-
+	ファイルの書式でコピー	grid:copy-using-file-format
+	ファイルの書式で切り取り	grid:cut-using-file-format
+	ファイルの書式で貼り付け	grid:paste-using-file-format
+	-
+	マークダウンのテーブル形式でコピー	grid:copy-as-markdown-table
+	HTMLのテーブル形式でコピー	grid:copy-as-html-table
+	-
+	すべて選択	grid:select-all
+	すべての行を選択	grid:select-entire-row
+	すべての列を選択	grid:select-entire-column
+	-
+	指定行に移動...	grid:go-to-line
+	-
+	フィル
+		下方向にコピー	grid:fill-down
+		右方向にコピー	grid:fill-right
+		上方向にコピー	grid:fill-up
+		左方向にコピー	grid:fill-left
+	変換
+		小文字→大文字	convert:upper-case
+		大文字→小文字	convert:lower-case
+		大文字と小文字を入れ替える	convert:swap-case
+		語頭だけを大文字にする	convert:title-case
+		-
+		スネークケース→キャメルケース	convert:snake-case-to-camel-case
+		キャメルケース→スネークケース	convert:camel-case-to-snake-case
+
+テーブル
+	上に行を挿入	grid:insert-rows-above
+	下に行を挿入	grid:insert-rows-below
+	行を削除	grid:delete-rows
+	-
+	上に列を挿入	grid:insert-columns-left
+	下に列を挿入	grid:insert-columns-right
+	列を削除	grid:delete-columns
+	-
+	セルを削除	grid:delete-cell
+	-
+	並べ替え...	grid:sort
+	選択した行を並べ替え...	grid:sort-selected-rows
+	選択範囲を並べ替え...	grid:sort-selected-range
+	-
+	フィルタ...	grid:filter
+	-
+	1行目を列名として扱う	grid:toggle-use-first-row-as-header
+
+検索	
+	検索・置換パネルを表示／非表示	find:show
+	次を検索	find:next
+	前を検索	find:previous
+	次を置換	find:replace-next
+	前を置換	find:replace-previous
+
+表示
+	列幅を自動調整	grid:autofit-column-width
+	選択中のデータに合わせて列幅を自動調整	grid:autofit-column-width-to-selected-cell
+	-
+	前のタブ	view:previous-tab
+	次のタブ	view:next-tab
+	-
+	ステータスバーを表示／非表示	view:toggle-status-bar
+	セル値を表示／非表示	view:toggle-cell-value-panel
+
+ツール
+	コマンドパレットを表示／非表示...	app:toggle-command-palette
+#	SQLツール...	app:show-sql-tools
+
+マクロ
+	マクロツールを表示／非表示	macro:toggle-macro-tools
+	マクロ記録開始	macro:toggle-recording-macro	!recording_macro
+	マクロ記録終了	macro:toggle-recording-macro	recording_macro
+	マクロ実行	macro:run
+	マクロを編集	macro:show-editor
+	マクロを保存...	macro:save

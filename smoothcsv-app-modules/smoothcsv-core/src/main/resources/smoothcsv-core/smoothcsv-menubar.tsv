@@ -36,10 +36,10 @@ Edit
 	Go To Line...	grid:go-to-line
 	-
 	Fill
-		Fill Left	grid:fill-left
-		Fill Up	grid:fill-up
-		Fill Right	grid:fill-right
 		Fill Down	grid:fill-down
+		Fill Right	grid:fill-right
+		Fill Up	grid:fill-up
+		Fill Left	grid:fill-left
 	Convert
 		Upper Case	convert:upper-case
 		Lower Case	convert:lower-case

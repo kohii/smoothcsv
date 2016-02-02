@@ -20,9 +20,9 @@ Edit
 	Cut	grid:cut
 	Paste	grid:paste
 	-
-	Copy Using The File Format	grid:copy-using-file-format
-	Cut Using The File Format	grid:cut-using-file-format
-	Paste Using The File Format	grid:paste-using-file-format
+	Copy Using File Format	grid:copy-using-file-format
+	Cut Using File Format	grid:cut-using-file-format
+	Paste Using File Format	grid:paste-using-file-format
 	-
 	Copy As Markdown Table	grid:copy-as-markdown-table
 	Copy As HTML Table	grid:copy-as-html-table

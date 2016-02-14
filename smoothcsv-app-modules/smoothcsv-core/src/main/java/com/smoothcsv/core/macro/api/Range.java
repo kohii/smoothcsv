@@ -175,7 +175,7 @@ public interface Range {
    *        represent columns left from the range's top-left cell
    * @param numRows the height in rows of the new range
    * @param numColumns the width in columns of the new range
-   * @return
+   * @return the range for chaining
    */
   Range offset(int rowOffset, int columnOffset, int numRows, int numColumns);
 
@@ -198,7 +198,7 @@ public interface Range {
   /**
    * Sorts the cells in a given range, by column and order specified.
    *
-   * @param sortSpecObj
+   * @param sortSpecObj TODO
    * @return the range, for chaining
    */
   Range sort(Object sortSpecObj);
@@ -207,7 +207,6 @@ public interface Range {
    * Executes a provided function for each cell in the range
    *
    * @param callback
-   * @param orientation
    */
   void forEach(CellVisitor callback);
 }

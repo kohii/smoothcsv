@@ -39,7 +39,7 @@ public class SaveAsCommand extends CsvSheetCommandBase {
     SaveCommand.save(view, file);
   }
 
-  private File chooseFile(CsvSheetViewInfo viewInfo) {
+  public static File chooseFile(CsvSheetViewInfo viewInfo) {
 
     CsvFileChooser fileChooser = CsvFileChooser.getInstance();
 

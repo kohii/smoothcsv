@@ -40,28 +40,28 @@ public interface CsvSheet {
 
   /**
    * Returns the pathname of the file to be saved.
-   * 
+   *
    * @return the pathname of the file
    */
   String getPathname();
 
   /**
    * Sets the pathname of the file to be saved.
-   * 
+   *
    * @param pathname the pathname of the file
    */
   void setPathname(String pathname);
 
   /**
    * Returns the properties that will be used for saving data to a file.
-   * 
+   *
    * @return the properties
    */
   CsvProperties getProperties();
 
   /**
    * Sets the properties that will be used for saving data to a file.
-   * 
+   *
    * @param properties the properties to set
    * @return the sheet, useful for method chaining
    */
@@ -69,7 +69,7 @@ public interface CsvSheet {
 
   /**
    * Returns true if this editor has been modified.
-   * 
+   *
    * @return whether this editor has been modified or not
    */
   boolean isModified();
@@ -84,7 +84,7 @@ public interface CsvSheet {
 
   /**
    * Saves changes to the different file.
-   * 
+   *
    * @param pathname the pathname of the file to be saved.
    */
   void saveAs(String pathname);
@@ -97,13 +97,14 @@ public interface CsvSheet {
 
   /**
    * Closes this sheet.
-   * 
+   *
    * @param saveChanges If there are no changes to the sheet, this argument is ignored. If there are
    *        changes to the sheet, this argument specifies whether changes should be saved. If set to
    *        true, changes are saved to the file. If there is not yet a file pathname associated with
    *        the sheet, then pathname is used. If pathname is omitted, the user is asked to supply a
    *        pathname.
-   * @param pathname
+   * @param pathname If saveChanges is true, the pathname with which to save the file. The default
+   *        is to prompt for the pathname.
    */
   void close(boolean saveChanges, String pathname);
 
@@ -111,14 +112,14 @@ public interface CsvSheet {
 
   /**
    * Undo the last change.
-   * 
+   *
    * @return true if the undoing has succeeded, false if the undoing couldn't complete
    */
   boolean undo();
 
   /**
    * Redo the last change.
-   * 
+   *
    * @return true if the redoing has succeeded, false if the redoing couldn't complete
    */
   boolean redo();
@@ -160,7 +161,7 @@ public interface CsvSheet {
 
   /**
    * Sets the width of the given column in pixels.
-   * 
+   *
    * @param columnPosition the position of the given column to set
    * @param width the width in pixels to set it to
    * @return the sheet, useful for method chaining
@@ -201,7 +202,7 @@ public interface CsvSheet {
   /**
    * Inserts a row after the given row position.
    *
-   * @param the row after which the new row should be added
+   * @param afterPosition the row after which the new row should be added
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertRowAfter(int afterPosition);
@@ -218,7 +219,7 @@ public interface CsvSheet {
   /**
    * Inserts a row before the given row position.
    *
-   * @param the row before which the new row should be added
+   * @param beforePosition the row before which the new row should be added
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertRowBefore(int beforePosition);
@@ -253,7 +254,7 @@ public interface CsvSheet {
   /**
    * Inserts a column after the given column position.
    *
-   * @param the column after which the new column should be added
+   * @param afterPosition the column after which the new column should be added
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertColumnAfter(int afterPosition);
@@ -270,7 +271,7 @@ public interface CsvSheet {
   /**
    * Inserts a column before the given column position.
    *
-   * @param the column before which the new column should be added
+   * @param beforePosition the column before which the new column should be added
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertColumnBefore(int beforePosition);
@@ -407,14 +408,14 @@ public interface CsvSheet {
   /**
    * Returns the active range for the active sheet. Returns the range of cells that is currently
    * considered active. This generally means the range that a user has selected in the active sheet.
-   * 
+   *
    * @return the active range
    */
   Range getActiveRange();
 
   /**
    * Sets the active range for the active sheet.
-   * 
+   *
    * @param range the range to set as the active range
    * @return the newly active range
    */
@@ -422,14 +423,14 @@ public interface CsvSheet {
 
   /**
    * Returns the active cell in this sheet.
-   * 
+   *
    * @return the current active cell
    */
   Range getActiveCell();
 
   /**
    * Returns the range containing all the cells.
-   * 
+   *
    * @return a {@link Range} containing all the cells
    */
   Range getRange();
@@ -447,7 +448,7 @@ public interface CsvSheet {
   /**
    * Sorts a sheet, by column and order specified.
    *
-   * @param sortSpecObj
+   * @param sortSpecObj TODO
    * @return the sheet, useful for method chaining
    */
   CsvSheet sort(Object sortSpecObj);

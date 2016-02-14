@@ -15,6 +15,8 @@ package com.smoothcsv.core.macro.api.impl;
 
 import java.io.File;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
@@ -108,7 +110,20 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
     if (!saveChanges || getGridSheet().getUndoManager().isSavepoint()) {
       CloseCommand.close(getCsvSheetView(), false);
     } else {
-      SaveCommand.save(getCsvSheetView(), new File(pathname));
+      File f;
+      if (StringUtils.isEmpty(pathname)) {
+        CsvSheetView csvSheet = getCsvSheetView();
+        f = csvSheet.getViewInfo().getFile();
+        if (f == null) {
+          f = SaveAsCommand.chooseFile(csvSheet.getViewInfo());
+          if (f == null) {
+            return;
+          }
+        }
+      } else {
+        f = new File(pathname);
+      }
+      SaveCommand.save(getCsvSheetView(), f);
       CloseCommand.close(getCsvSheetView(), false);
     }
   }

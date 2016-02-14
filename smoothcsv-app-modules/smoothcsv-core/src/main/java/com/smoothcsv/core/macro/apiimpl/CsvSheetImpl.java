@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package com.smoothcsv.core.macro.apiimpl;
 
 import java.io.File;
 
@@ -21,6 +21,8 @@ import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
+import com.smoothcsv.core.macro.MacroUtils;
+import com.smoothcsv.core.macro.api.CsvProperties;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.core.macro.api.Range;
 import com.smoothcsv.framework.SCApplication;
@@ -76,12 +78,12 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
 
   @Override
   public CsvProperties getProperties() {
-    return new CsvProperties(getCsvSheetView().getViewInfo().getCsvMeta());
+    return MacroUtils.toCsvProperties(getCsvSheetView().getViewInfo().getCsvMeta());
   }
 
   @Override
   public CsvSheet setProperties(CsvProperties properties) {
-    getCsvSheetView().getViewInfo().setCsvMeta(properties.toCsvMeta());
+    getCsvSheetView().getViewInfo().setCsvMeta(MacroUtils.toCsvMeta(properties));
     return this;
   }
 

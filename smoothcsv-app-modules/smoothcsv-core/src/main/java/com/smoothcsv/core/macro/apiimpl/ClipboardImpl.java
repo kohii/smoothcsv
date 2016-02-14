@@ -11,21 +11,31 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package com.smoothcsv.core.macro.apiimpl;
 
+import com.smoothcsv.core.macro.api.Clipboard;
+import com.smoothcsv.swing.utils.ClipboardUtils;
+
+import lombok.Getter;
 
 /**
  * @author kohii
  *
  */
-public class APIBase {
+public class ClipboardImpl extends APIBase implements Clipboard {
+
+  @Getter
+  private static final Clipboard instance = new ClipboardImpl();
+
+  private ClipboardImpl() {}
 
   @Override
-  public String toString() {
-    String name = getClass().getSimpleName();
-    if (name.endsWith("Impl")) {
-      name = name.substring(0, name.length() - 4);
-    }
-    return "[object " + name + "]";
+  public String readText() {
+    return ClipboardUtils.readText();
+  }
+
+  @Override
+  public void writeText(String text) {
+    ClipboardUtils.writeText(text);
   }
 }

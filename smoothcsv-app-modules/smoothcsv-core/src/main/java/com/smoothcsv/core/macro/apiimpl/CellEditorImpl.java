@@ -11,28 +11,30 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package com.smoothcsv.core.macro.apiimpl;
 
 import javax.swing.text.JTextComponent;
 
 import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.core.macro.api.CellEditor;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
- * 
+ *
  * @author kohii
  *
  */
-public class CellEditor {
+public class CellEditorImpl implements CellEditor {
 
   private CsvSheet parent;
 
-  CellEditor(CsvSheet csvSheet) {
+  CellEditorImpl(CsvSheet csvSheet) {
     this.parent = csvSheet;
   }
 
+  @Override
   public boolean type(String text) {
     CsvSheetView csvSheetView = ((CsvSheetImpl) parent).getCsvSheetView();
     if (!csvSheetView.getGridSheetPane().isEditing()) {

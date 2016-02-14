@@ -11,14 +11,16 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package com.smoothcsv.core.macro.apiimpl;
 
 import java.io.File;
 import java.util.ResourceBundle;
 
-import lombok.Getter;
-
 import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.core.macro.MacroUtils;
+import com.smoothcsv.core.macro.api.App;
+import com.smoothcsv.core.macro.api.CellEditor;
+import com.smoothcsv.core.macro.api.CsvProperties;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.core.macro.api.Range;
 import com.smoothcsv.framework.SCApplication;
@@ -26,118 +28,73 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
+import lombok.Getter;
 
 /**
  * @author kohii
  *
  */
-public class App extends APIBase {
+public class AppImpl extends APIBase implements App {
 
   @Getter
-  private static final App instance = new App();
+  private static final AppImpl instance = new AppImpl();
 
-  private App() {}
+  private AppImpl() {}
 
-  /**
-   * Returns the name of this application.
-   *
-   * @return the name of this application
-   */
+  @Override
   public String getName() {
     return SCApplication.getApplication().getName();
   }
 
-  /**
-   * Returns the version name of this application.
-   *
-   * @return the version name
-   */
+  @Override
   public String getVersion() {
     return ResourceBundle.getBundle("application").getString("version.name");
   }
 
-  /**
-   * Creates a new csvsheet with the default properties.
-   */
+  @Override
   public void create() {
     new NewFileCommand().run();
   }
 
-  /**
-   * Creates a new csvsheet with the specified number of rows and columns and properties.
-   *
-   * @param rows the number of rows for the csvsheet
-   * @param columns the number of columns for the csvsheet
-   * @param properties the properties
-   */
+  @Override
   public void create(int rows, int columns, CsvProperties properties) {
-    new NewFileCommand().run(rows, columns, properties.toCsvMeta());
+    new NewFileCommand().run(rows, columns, MacroUtils.toCsvMeta(properties));
   }
 
-  /**
-   * Opens the csvsheet that corresponds to the given file path with the default properties.
-   *
-   * @param pathname the file path to open
-   */
+  @Override
   public void open(String pathname) {
     open(pathname, CsvProperties.defaultProperties());
   }
 
-  /**
-   * Opens the csvsheet that corresponds to the given file path with the specified properties.
-   *
-   * @param pathname the file path to open
-   * @param properties the properties
-   */
+  @Override
   public void open(String pathname, CsvProperties properties) {
-    new OpenFileCommand().run(new File(pathname), properties.toCsvMeta(), null);
+    new OpenFileCommand().run(new File(pathname), MacroUtils.toCsvMeta(properties), null);
   }
 
-  /**
-   * Gets the active csvsheet. Returns null if there is no sheet.
-   *
-   * @return the active {@link CsvSheet} object
-   */
+  @Override
   public CsvSheet getActiveSheet() {
     CsvSheetView csvSheetView =
         (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
     return csvSheetView == null ? null : new CsvSheetImpl(csvSheetView.getViewId());
   }
 
-  /**
-   * Sets the active csvsheet.
-   */
+  @Override
   public void setActiveSheet(CsvSheet csvSheet) {
     csvSheet.activate();
   }
 
-  /**
-   * Returns the range of cells that is currently considered active. This generally means the range
-   * that a user has selected in the active sheet.
-   *
-   * @return the active range
-   */
+  @Override
   public Range getActiveRange() {
     CsvSheet activeSheet = getActiveSheet();
     return activeSheet == null ? null : activeSheet.getActiveRange();
   }
 
-  /**
-   * Returns the active {@link CellEditor} or null if there is no active CellEditor.
-   *
-   * @return the active {@link CellEditor}
-   */
+  @Override
   public CellEditor getActiveCellEditor() {
     return getActiveCellEditor(false);
   }
 
-  /**
-   * Returns the active {@link CellEditor}.
-   *
-   * @param startEdit <code>true</code> to start editing if there is no active CellEditor.;
-   *        <code>false</code> to return null if there is no active CellEditor.
-   * @return the active {@link CellEditor}
-   */
+  @Override
   public CellEditor getActiveCellEditor(boolean startEdit) {
     CsvSheetView csvSheetView =
         (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
@@ -151,14 +108,10 @@ public class App extends APIBase {
         return null;
       }
     }
-    return new CellEditor(new CsvSheetImpl(csvSheetView.getViewId()));
+    return new CellEditorImpl(new CsvSheetImpl(csvSheetView.getViewId()));
   }
 
-  /**
-   * Gets all the sheets in this application.
-   *
-   * @return an array of all the sheets in the application
-   */
+  @Override
   public CsvSheet[] getSheets() {
     SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();
     int compCount = tabbedPane.getTabCount();

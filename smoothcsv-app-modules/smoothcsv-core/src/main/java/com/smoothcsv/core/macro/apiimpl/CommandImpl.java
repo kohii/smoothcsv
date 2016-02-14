@@ -11,17 +11,28 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
+package com.smoothcsv.core.macro.apiimpl;
+
+import com.smoothcsv.core.macro.api.Command;
+import com.smoothcsv.framework.command.CommandRegistry;
+
+import lombok.Getter;
 
 /**
  * @author kohii
  *
  */
-public class MacroException extends RuntimeException {
+public class CommandImpl extends APIBase implements Command {
 
-  private static final long serialVersionUID = 288345837664229467L;
+  @Getter
+  private static final Command instance = new CommandImpl();
 
-  public MacroException(String message) {
-    super(message);
+  private CommandImpl() {}
+
+  @Override
+  public boolean run(String id) {
+    boolean b = CommandRegistry.instance().runCommand(id);
+    System.out.println(id + " -> " + b);
+    return b;
   }
 }

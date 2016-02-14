@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 kohii
+ * Copyright 2015 kohii.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,28 +11,25 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
-
-import lombok.Getter;
-
-import com.smoothcsv.swing.utils.ClipboardUtils;
+package com.smoothcsv.core.macro.api;
 
 /**
  * @author kohii
  *
  */
-public class Clipboard extends APIBase {
+public interface Clipboard {
 
-  @Getter
-  private static final Clipboard instance = new Clipboard();
+  /**
+   * Returns the content in the clipboard as plain text.
+   *
+   * @return the content in the clipboard
+   */
+  String readText();
 
-  private Clipboard() {}
-
-  public String readText() {
-    return ClipboardUtils.readText();
-  }
-
-  public void writeText(String text) {
-    ClipboardUtils.writeText(text);
-  }
+  /**
+   * Writes the text into the clipboard as plain text.
+   *
+   * @param text the text
+   */
+  void writeText(String text);
 }

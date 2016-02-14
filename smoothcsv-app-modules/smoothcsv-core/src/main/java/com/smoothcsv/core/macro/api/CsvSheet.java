@@ -13,9 +13,6 @@
  */
 package com.smoothcsv.core.macro.api;
 
-import com.smoothcsv.core.macro.api.impl.CsvProperties;
-
-
 /**
  *
  * @author kohii

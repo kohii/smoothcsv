@@ -11,14 +11,12 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.core.macro.api.impl;
-
-import java.nio.charset.Charset;
+package com.smoothcsv.core.macro.api;
 
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
+import com.smoothcsv.core.macro.apiimpl.APIBase;
 import com.smoothcsv.csv.NewlineCharacter;
 
 /**
@@ -68,7 +66,7 @@ public class CsvProperties extends APIBase {
   /**
    * @param csvMeta
    */
-  CsvProperties(CsvMeta csvMeta) {
+  private CsvProperties(CsvMeta csvMeta) {
     this.delimiter = String.valueOf(csvMeta.getDelimiter());
     this.quote = String.valueOf(csvMeta.getQuote());
     this.escape = String.valueOf(csvMeta.getEscape());
@@ -92,7 +90,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Returns the character to separate each field.
-   * 
+   *
    * @return the character to separate each field
    */
   public String getDelimiter() {
@@ -101,7 +99,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Sets the character to separate each field.
-   * 
+   *
    * @param delimiter the character to separate each field
    */
   public void setDelimiter(String delimiter) {
@@ -113,7 +111,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Returns the character to quote a field.
-   * 
+   *
    * @return the character to quote a field
    */
   public String getQuote() {
@@ -122,7 +120,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Sets the character to quote a field.
-   * 
+   *
    * @param quote the character to quote a field
    */
   public void setQuote(String quote) {
@@ -135,7 +133,7 @@ public class CsvProperties extends APIBase {
   /**
    * Returns the character to escape quote characters. If this character equals '\0', quote
    * characters must be represented by a pair of quote characters.
-   * 
+   *
    * @return the character to escape quote characters
    */
   public String getEscape() {
@@ -145,7 +143,7 @@ public class CsvProperties extends APIBase {
   /**
    * Sets the character to escape quote characters. If this character equals '\0', quote characters
    * must be represented by a pair of quote characters.
-   * 
+   *
    * @param escape the character to escape quote characters
    */
   public void setEscape(String escape) {
@@ -157,7 +155,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Returns the charset that is used for saving file.
-   * 
+   *
    * @return the charset
    */
   public String getCharset() {
@@ -166,7 +164,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Sets the charset that is used for saving file.
-   * 
+   *
    * @param charset the charset to set
    */
   public void setCharset(String charset) {
@@ -179,7 +177,7 @@ public class CsvProperties extends APIBase {
   /**
    * Sets if the BOM (Byte Order Mark) will be inserted. If hasBOM is true and a UTF codec is used,
    * the BOM (Byte Order Mark) will be inserted before any data has been written to the file.
-   * 
+   *
    * @param hasBOM true if the BOM (Byte Order Mark) will be inserted
    */
   public void setHasBOM(boolean hasBOM) {
@@ -189,7 +187,7 @@ public class CsvProperties extends APIBase {
   /**
    * Returns if the BOM (Byte Order Mark) will be inserted. If hasBOM is true and a UTF codec is
    * used, the BOM (Byte Order Mark) will be inserted before any data has been written to the file.
-   * 
+   *
    * @return true if the BOM (Byte Order Mark) will be inserted
    */
   public boolean hasBOM() {
@@ -198,7 +196,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Returns the newline character that is used for saving file.
-   * 
+   *
    * @return the newline character
    */
   public String getNewlineCharacter() {
@@ -207,7 +205,7 @@ public class CsvProperties extends APIBase {
 
   /**
    * Sets the newline character that is used for saving file.
-   * 
+   *
    * @param newlineCharacter the newline character to set
    */
   public void setNewlineCharacter(String newlineCharacter) {
@@ -226,7 +224,7 @@ public class CsvProperties extends APIBase {
    * <li>{@link #QUOTES_ALL}</li>
    * <li>{@link #QUOTES_IF_NECESSARY}</li>
    * </ul>
-   * 
+   *
    * @return the quoteOption
    */
   public int getQuoteOption() {
@@ -241,39 +239,14 @@ public class CsvProperties extends APIBase {
    * <li>{@link #QUOTES_ALL}</li>
    * <li>{@link #QUOTES_IF_NECESSARY}</li>
    * </ul>
-   * 
+   *
    * @param quoteOption the quoteOption to set
    */
   public void setQuoteOption(int quoteOption) {
-    if (quoteOption != NO_QUOTE && quoteOption != QUOTES_ALL && quoteOption != QUOTES_IF_NECESSARY) {
+    if (quoteOption != NO_QUOTE && quoteOption != QUOTES_ALL
+        && quoteOption != QUOTES_IF_NECESSARY) {
       throw new IllegalArgumentException("quoteOption:" + quoteOption);
     }
     this.quoteOption = quoteOption;
-  }
-
-  CsvMeta toCsvMeta() {
-    CsvMeta csvMeta = new CsvMeta();
-    csvMeta.setDelimiter(delimiter.charAt(0));
-    csvMeta.setQuote(quote.charAt(0));
-    csvMeta.setEscape(escape.charAt(0));
-    csvMeta.setCharset(Charset.forName(charset));
-    csvMeta.setHasBom(hasBOM);
-    csvMeta.setNewlineCharacter(NewlineCharacter.of(newlineCharacter));
-    CsvQuoteApplyRule quoteApplyRule;
-    switch (quoteOption) {
-      case NO_QUOTE:
-        quoteApplyRule = CsvQuoteApplyRule.NO_QUOTE;
-        break;
-      case QUOTES_ALL:
-        quoteApplyRule = CsvQuoteApplyRule.QUOTES_ALL;
-        break;
-      case QUOTES_IF_NECESSARY:
-        quoteApplyRule = CsvQuoteApplyRule.QUOTES_IF_NECESSARY;
-        break;
-      default:
-        throw new IllegalStateException("" + quoteOption);
-    }
-    csvMeta.setQuoteOption(quoteApplyRule);
-    return csvMeta;
   }
 }

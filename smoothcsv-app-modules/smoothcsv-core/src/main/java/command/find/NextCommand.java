@@ -54,9 +54,9 @@ public class NextCommand extends GridCommand {
 
     FindAndReplaceParams params = FindAndReplaceParams.getInstance();
 
-    CellIterator itr =
-        new CellIterator(gridSheetPane, params.isInSelection()
-            && params.isInSelectionCheckboxEnabled(), true, reverse, params.getOrientation(), false);
+    CellIterator itr = new CellIterator(gridSheetPane,
+        params.isInSelection() && params.isInSelectionCheckboxEnabled(), true, reverse,
+        params.getOrientation(), false);
 
     if (!itr.next()) {
       return false;
@@ -73,6 +73,7 @@ public class NextCommand extends GridCommand {
             gridSheetPane.getSelectionModel().setSelectionInterval(itr.getRow(), itr.getColumn(),
                 itr.getRow(), itr.getColumn());
           }
+          gridSheetPane.getTable().scrollRectToVisible(itr.getRow(), itr.getColumn());
           return true;
         }
       }

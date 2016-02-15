@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.LayoutFocusTraversalPolicy;
+import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -197,12 +198,17 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
             new SCListener<FileDroppedEvent>() {
           @Override
           public void call(FileDroppedEvent ev) {
-            OpenFileCommand command = new OpenFileCommand();
-            if (ev.getFile().isFile()) {
-              command.run(ev.getFile());
-            } else if (ev.getFile().isDirectory()) {
-              command.chooseAndOpenFile(ev.getFile());
-            }
+            SwingUtilities.invokeLater(new Runnable() {
+              @Override
+              public void run() {
+                OpenFileCommand command = new OpenFileCommand();
+                if (ev.getFile().isFile()) {
+                  command.run(ev.getFile());
+                } else if (ev.getFile().isDirectory()) {
+                  command.chooseAndOpenFile(ev.getFile());
+                }
+              }
+            });
           }
         });
 

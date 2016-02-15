@@ -33,6 +33,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.core.macro.apiimpl.AppImpl;
+import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
+import com.smoothcsv.core.macro.apiimpl.CommandImpl;
 
 public class MacroRuntime {
 
@@ -60,7 +63,7 @@ public class MacroRuntime {
     // try {
     List<URI> paths;
     try {
-      paths = Arrays.asList(this.getClass().getResource("/macro/app.js").toURI());
+      paths = Arrays.asList(this.getClass().getResource("/macro/console.js").toURI());
     } catch (URISyntaxException e) {
       throw new UnexpectedException(e);
     }
@@ -78,11 +81,13 @@ public class MacroRuntime {
     // some script manually, then just do:
     require.install(globalScope);
     globalScope.defineProperty("global", globalScope, ScriptableObject.READONLY);
-    loadScriptToGlobalVariable("App", "app");
-    loadScriptToGlobalVariable("Clipboard", "clipboard");
-    loadScriptToGlobalVariable("Command", "command");
+    loadScriptToGlobalVariable("App", AppImpl.getInstance());
+    loadScriptToGlobalVariable("Clipboard", ClipboardImpl.getInstance());
+    loadScriptToGlobalVariable("Command", CommandImpl.getInstance());
+    loadScriptToGlobalVariable("Macro", com.smoothcsv.core.macro.api.Macro.class);
+    loadScriptToGlobalVariable("CsvProperties", com.smoothcsv.core.macro.api.CsvProperties.class);
     loadScriptToGlobalVariable("Window", "window");
-    loadScriptToGlobalVariable("console", "lib/console");
+    loadScriptToGlobalVariable("console", "console");
     // } catch (URISyntaxException e) {
     // throw new UnexpectedException(e);
     // }
@@ -92,6 +97,10 @@ public class MacroRuntime {
 
   private void loadScriptToGlobalVariable(String varName, String moduleName) {
     Object o = context.evaluateString(globalScope, "require('" + moduleName + "')", null, 1, null);
+    loadScriptToGlobalVariable(varName, o);
+  }
+
+  private void loadScriptToGlobalVariable(String varName, Object o) {
     globalScope.defineProperty(varName, o, ScriptableObject.READONLY);
   }
 

@@ -71,6 +71,8 @@ public interface App {
 
   /**
    * Sets the active csvsheet.
+   *
+   * @param csvSheet the sheet to be activated
    */
   void setActiveSheet(CsvSheet csvSheet);
 

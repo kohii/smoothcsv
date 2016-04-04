@@ -209,7 +209,9 @@ public class SortCriteriasDialog extends DialogBase {
         boolean hasFocus, int row, int column) {
       Component ret =
           super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-      selectValue((int) value);
+      if (value != null) {
+        selectValue((int) value);
+      }
       return ret;
     }
 

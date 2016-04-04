@@ -123,123 +123,115 @@ public class FillSeriesCommand extends GridCommand {
       throw new IllegalArgumentException();
     }
 
-    // parse source data into DataSeed
-    DataSeed[] dataSeeds = new DataSeed[source.length];
-    for (int i = 0; i < source.length; i++) {
-      String s = source[i];
-      if (StringUtils.isDecimal(s)) {
-        dataSeeds[i] = new NumericDataSeed(s);
+    DataSeed dataSeed = generateDataSeed(source[0]);
+
+    if (dataSeed != null && source.length > 1) {
+      DataSeed secondDataSeed = generateDataSeed(source[1]);
+      if (secondDataSeed != null) {
+        dataSeed.setStepFrom(secondDataSeed);
       } else {
-        Matcher matcher = numericPtn.matcher(s);
-        if (!matcher.find()) {
-          dataSeeds[i] = new StringDataSeed(s);
-        } else {
-          int start = -1, end = -1;
-          do {
-            int groupCount = matcher.groupCount();
-            start = matcher.start(groupCount);
-            end = matcher.end(groupCount);
-          } while (matcher.find());
-          dataSeeds[i] =
-              new CombinedDataSeed(Long.parseLong(s.substring(start, end)), s.substring(0, start),
-                  s.substring(end));
-        }
+        dataSeed = null;
       }
     }
 
-    // calculate the increments
-    int prevIdx = -1;
-    for (int i = 0; i < dataSeeds.length; i++) {
-      DataSeed s = dataSeeds[i];
-      if (s instanceof NumericDataSeed) {
-        NumericDataSeed s1 = (NumericDataSeed) s;
-        if (prevIdx == -1) {
-          s1.increment = reverse ? BigDecimal.ONE.negate() : BigDecimal.ONE;
-        } else {
-          s1.increment = s1.value.subtract(((NumericDataSeed) dataSeeds[prevIdx]).value);
-          // share the same seed as the cells are sequential
-          dataSeeds[prevIdx] = s1;
+    if (dataSeed != null) {
+      // test if every source string matches the generated value from data seed
+
+      for (String string : source) {
+        if (!dataSeed.next().equals(string)) {
+          dataSeed = null;
+          break;
         }
-        prevIdx = i;
-      }
-    }
-    prevIdx = -1;
-    for (int i = 0; i < dataSeeds.length; i++) {
-      DataSeed s = dataSeeds[i];
-      if (s instanceof CombinedDataSeed) {
-        CombinedDataSeed s1 = (CombinedDataSeed) s;
-        if (prevIdx == -1) {
-          s1.increment = reverse ? -1 : 1;
-        } else {
-          CombinedDataSeed s0 = (CombinedDataSeed) dataSeeds[prevIdx];
-          if (s0.prefix.equals(s1.prefix) && s0.postfix.equals(s1.postfix)) {
-            s1.increment = s1.value - s0.value;
-            // share the same seed as the cells are sequential
-            dataSeeds[prevIdx] = s1;
-          } else {
-            s1.increment = reverse ? -1 : 1;
-          }
-        }
-        prevIdx = i;
       }
     }
 
     String[] ret = new String[num];
-    for (int i = 0; i < num; i++) {
-      ret[i] = dataSeeds[i % dataSeeds.length].next();
+    if (dataSeed != null) {
+      for (int i = 0; i < num; i++) {
+        ret[i] = dataSeed.next();
+      }
+    } else {
+      for (int i = 0; i < num; i++) {
+        ret[i] = source[i % source.length];
+      }
     }
     return ret;
   }
 
-  private static interface DataSeed {
-    String next();
+  private static DataSeed generateDataSeed(String s) {
+    if (StringUtils.isDecimal(s)) {
+      return new NumericDataSeed(new BigDecimal(s));
+    } else {
+      Matcher matcher = numericPtn.matcher(s);
+      if (matcher.find()) {
+        int start = -1, end = -1;
+        do {
+          int groupCount = matcher.groupCount();
+          start = matcher.start(groupCount);
+          end = matcher.end(groupCount);
+        } while (matcher.find());
+        return new CombinedDataSeed(new BigDecimal(s.substring(start, end)), s.substring(0, start),
+            s.substring(end));
+      } else {
+        return null;
+      }
+    }
   }
 
-  private static class StringDataSeed implements DataSeed {
-    String value;
+  private static interface DataSeed {
+    String next();
 
-    StringDataSeed(String value) {
-      this.value = value;
-    }
+    void setStepFrom(DataSeed next);
 
-    @Override
-    public String next() {
-      return value;
-    }
+    void reset();
   }
 
   private static class NumericDataSeed implements DataSeed {
 
+    final BigDecimal originalValue;
     BigDecimal value;
-    BigDecimal increment;
+    BigDecimal step = BigDecimal.ONE;
 
-    NumericDataSeed(String value) {
-      this.value = new BigDecimal(value);
+    NumericDataSeed(BigDecimal value) {
+      this.originalValue = this.value = value;
     }
 
     @Override
     public String next() {
-      value = value.add(increment);
-      return value.toString();
+      String ret = value.toString();
+      value = value.add(step);
+      return ret;
+    }
+
+    @Override
+    public void setStepFrom(DataSeed next) {
+      this.step = ((NumericDataSeed) next).value.subtract(this.value);
+    }
+
+    @Override
+    public void reset() {
+      this.value = originalValue;
     }
   }
 
-  private static class CombinedDataSeed implements DataSeed {
-    long value;
-    long increment;
-    String prefix;
-    String postfix;
+  private static class CombinedDataSeed extends NumericDataSeed {
+    final String prefix;
+    final String postfix;
 
-    CombinedDataSeed(long value, String prefix, String postfix) {
-      this.value = value;
+    CombinedDataSeed(BigDecimal value, String prefix, String postfix) {
+      super(value);
       this.prefix = prefix;
       this.postfix = postfix;
     }
 
     @Override
     public String next() {
-      value += increment;
-      return prefix + value + postfix;
+      return prefix + super.next() + postfix;
+    }
+
+    @Override
+    public String toString() {
+      return prefix + "(" + value + "~)" + postfix;
     }
   }
 }

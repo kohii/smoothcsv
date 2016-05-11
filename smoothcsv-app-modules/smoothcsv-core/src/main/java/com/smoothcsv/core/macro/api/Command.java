@@ -14,8 +14,8 @@
 package com.smoothcsv.core.macro.api;
 
 /**
- * @author kohii
  *
+ * @author kohii
  */
 public interface Command {
 
@@ -23,7 +23,7 @@ public interface Command {
    * Runs the given command.
    *
    * @param id the command id to run
-   * @return
+   * @return true if the command was successfully executed
    */
   boolean run(String id);
 }

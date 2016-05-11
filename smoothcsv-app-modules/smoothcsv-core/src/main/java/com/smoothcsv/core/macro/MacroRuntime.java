@@ -13,16 +13,11 @@
  */
 package com.smoothcsv.core.macro;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.List;
-
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ImporterTopLevel;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.core.macro.apiimpl.AppImpl;
+import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
+import com.smoothcsv.core.macro.apiimpl.CommandImpl;
+import org.mozilla.javascript.*;
 import org.mozilla.javascript.commonjs.module.ModuleScriptProvider;
 import org.mozilla.javascript.commonjs.module.Require;
 import org.mozilla.javascript.commonjs.module.RequireBuilder;
@@ -32,10 +27,10 @@ import org.mozilla.javascript.commonjs.module.provider.UrlModuleSourceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.core.macro.apiimpl.AppImpl;
-import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
-import com.smoothcsv.core.macro.apiimpl.CommandImpl;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 
 public class MacroRuntime {
 

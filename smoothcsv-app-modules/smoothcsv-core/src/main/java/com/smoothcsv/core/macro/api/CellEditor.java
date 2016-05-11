@@ -15,15 +15,14 @@ package com.smoothcsv.core.macro.api;
 
 /**
  * @author kohii
- *
  */
 public interface CellEditor {
 
   /**
    * Type keys.
    *
-   * @param text
-   * @return
+   * @param text the text to be input
+   * @return true if succeeded
    */
   boolean type(String text);
 }

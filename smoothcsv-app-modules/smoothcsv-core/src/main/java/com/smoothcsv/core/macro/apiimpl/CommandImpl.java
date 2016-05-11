@@ -15,24 +15,21 @@ package com.smoothcsv.core.macro.apiimpl;
 
 import com.smoothcsv.core.macro.api.Command;
 import com.smoothcsv.framework.command.CommandRegistry;
-
 import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 public class CommandImpl extends APIBase implements Command {
 
   @Getter
   private static final Command instance = new CommandImpl();
 
-  private CommandImpl() {}
+  private CommandImpl() {
+  }
 
   @Override
   public boolean run(String id) {
-    boolean b = CommandRegistry.instance().runCommand(id);
-    System.out.println(id + " -> " + b);
-    return b;
+    return CommandRegistry.instance().runCommand(id);
   }
 }

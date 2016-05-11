@@ -14,7 +14,6 @@
 package com.smoothcsv.core.macro.api;
 
 /**
- *
  * @author kohii
  */
 public interface Range {
@@ -36,7 +35,7 @@ public interface Range {
   /**
    * Returns a given cell within a range.
    *
-   * @param row the row of the cell relative to the range
+   * @param row    the row of the cell relative to the range
    * @param column the column of the cell relative to the range
    * @return a range containing a single cell at the specified coordinates
    */
@@ -103,7 +102,6 @@ public interface Range {
    * values, indexed by row, then by column.
    *
    * @return a two-dimensional array of values
-   *
    */
   Object[][] getValues();
 
@@ -156,10 +154,10 @@ public interface Range {
    * Returns a new range that is offset from this range by the given number of rows and columns
    * (which can be negative). The new range will be the same size as the original range.
    *
-   * @param rowOffset number of rows down from the range's top-left cell; negative values represent
-   *        rows up from the range's top-left cell
+   * @param rowOffset    number of rows down from the range's top-left cell; negative values represent
+   *                     rows up from the range's top-left cell
    * @param columnOffset number of columns right from the range's top-left cell; negative values
-   *        represent columns left from the range's top-left cell
+   *                     represent columns left from the range's top-left cell
    * @return the range for chaining
    */
   Range offset(int rowOffset, int columnOffset);
@@ -169,12 +167,12 @@ public interface Range {
    * from the current range by the given rows and columns, and with the given height and width in
    * cells.
    *
-   * @param rowOffset number of rows down from the range's top-left cell; negative values represent
-   *        rows up from the range's top-left cell
+   * @param rowOffset    number of rows down from the range's top-left cell; negative values represent
+   *                     rows up from the range's top-left cell
    * @param columnOffset number of columns right from the range's top-left cell; negative values
-   *        represent columns left from the range's top-left cell
-   * @param numRows the height in rows of the new range
-   * @param numColumns the width in columns of the new range
+   *                     represent columns left from the range's top-left cell
+   * @param numRows      the height in rows of the new range
+   * @param numColumns   the width in columns of the new range
    * @return the range for chaining
    */
   Range offset(int rowOffset, int columnOffset, int numRows, int numColumns);
@@ -206,7 +204,7 @@ public interface Range {
   /**
    * Executes a provided function for each cell in the range
    *
-   * @param callback
+   * @param callback a callback function which will be called for each cell. See {@link CellVisitor} for details.
    */
   void forEach(CellVisitor callback);
 }

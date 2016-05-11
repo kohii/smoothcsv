@@ -17,7 +17,12 @@ import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.macro.apiimpl.AppImpl;
 import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
 import com.smoothcsv.core.macro.apiimpl.CommandImpl;
-import org.mozilla.javascript.*;
+import com.smoothcsv.core.macro.apiimpl.WindowImpl;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ImporterTopLevel;
+import org.mozilla.javascript.Script;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.commonjs.module.ModuleScriptProvider;
 import org.mozilla.javascript.commonjs.module.Require;
 import org.mozilla.javascript.commonjs.module.RequireBuilder;
@@ -81,7 +86,7 @@ public class MacroRuntime {
     loadScriptToGlobalVariable("Command", CommandImpl.getInstance());
     loadScriptToGlobalVariable("Macro", com.smoothcsv.core.macro.api.Macro.class);
     loadScriptToGlobalVariable("CsvProperties", com.smoothcsv.core.macro.api.CsvProperties.class);
-    loadScriptToGlobalVariable("Window", "window");
+    loadScriptToGlobalVariable("Window", WindowImpl.getInstance());
     loadScriptToGlobalVariable("console", "console");
     // } catch (URISyntaxException e) {
     // throw new UnexpectedException(e);

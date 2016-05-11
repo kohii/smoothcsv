@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.framework.menu;
 
+import java.awt.Component;
 import javax.swing.JMenu;
 
 /**
- *
  * @author kohii
  */
 @SuppressWarnings("serial")
@@ -50,17 +50,6 @@ public class ParentMenu extends JMenu implements IParentMenu {
     return caption;
   }
 
-  // private void refreshChildren() {
-  // CommandRepository commands = CommandRepository.instance();
-  // for (int i = 0, len = getItemCount(); i < len; i++) {
-  // JMenuItem mi = getItem(i);
-  // if (mi instanceof CommandMenuItem) {
-  // CommandMenuItem cmi = (CommandMenuItem) mi;
-  // cmi.setEnabled(commands.isEnabled(cmi.getCommandId()));
-  // }
-  // }
-  // }
-
   @Override
   public void add(ParentMenu menu) {
     super.add(menu);
@@ -69,5 +58,15 @@ public class ParentMenu extends JMenu implements IParentMenu {
   @Override
   public void add(CommandMenuItem menu) {
     super.add(menu);
+  }
+
+  @Override
+  public void setAcceleratorEnabled(boolean enabled) {
+    Component[] children = getMenuComponents();
+    for (Component child : children) {
+      if (child instanceof IMenu) {
+        ((IMenu) child).setAcceleratorEnabled(enabled);
+      }
+    }
   }
 }

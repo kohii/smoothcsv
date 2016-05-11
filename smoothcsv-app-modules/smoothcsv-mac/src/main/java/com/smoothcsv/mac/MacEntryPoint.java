@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.mac;
 
-import java.io.File;
-
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.OpenFilesEvent;
@@ -26,22 +24,24 @@ import com.apple.eawt.PreferencesHandler;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
 import com.smoothcsv.commons.exception.CancellationException;
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.swing.utils.SwingUtils;
-
 import command.app.OpenFileCommand;
+
+import java.io.File;
 
 /**
  * @author Kohei Ishikawa
- *
  */
 public class MacEntryPoint extends ModuleEntryPointBase {
 
   @Override
   protected void activate() {
     System.setProperty("apple.laf.useScreenMenuBar", "true");
+    Env.revalidateUsingMacSystemMenuBar();
     System.setProperty("com.apple.macos.smallTabs", "true");
 
     Application app = Application.getApplication();

@@ -13,8 +13,9 @@
  */
 package com.smoothcsv.framework;
 
+import lombok.Getter;
+
 /**
- *
  * @author kohii
  */
 public class Env {
@@ -22,19 +23,20 @@ public class Env {
   public static final int OS_MAC = 1;
   public static final int OS_WINDOWS = 2;
 
-  private static int os;
+  @Getter
+  private static int OS;
+  @Getter
   private static boolean debug;
+  @Getter
+  private static boolean usingMacSystemMenuBar;
 
   static void init(int os, boolean debug) {
-    Env.os = os;
+    Env.OS = os;
     Env.debug = debug;
+    revalidateUsingMacSystemMenuBar();
   }
 
-  public static int getOS() {
-    return os;
-  }
-
-  public static boolean isDebug() {
-    return debug;
+  public static void revalidateUsingMacSystemMenuBar() {
+    usingMacSystemMenuBar = Boolean.parseBoolean(System.getProperty("apple.laf.useScreenMenuBar"));
   }
 }

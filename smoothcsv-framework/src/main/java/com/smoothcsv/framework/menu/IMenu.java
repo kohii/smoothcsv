@@ -16,9 +16,10 @@ package com.smoothcsv.framework.menu;
 
 /**
  * @author kohii
- *
  */
 public interface IMenu {
 
   String getCaption();
+
+  void setAcceleratorEnabled(boolean enabled);
 }

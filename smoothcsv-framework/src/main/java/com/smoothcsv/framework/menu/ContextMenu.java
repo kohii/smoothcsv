@@ -13,16 +13,17 @@
  */
 package com.smoothcsv.framework.menu;
 
+import java.awt.Component;
 import javax.swing.JPopupMenu;
 
 /**
  * @author kohii
- *
  */
 public class ContextMenu extends JPopupMenu implements IParentMenu {
   private static final long serialVersionUID = -2561700947475373524L;
 
-  public ContextMenu() {}
+  public ContextMenu() {
+  }
 
   @Override
   public void add(ParentMenu menu) {
@@ -35,4 +36,17 @@ public class ContextMenu extends JPopupMenu implements IParentMenu {
   }
 
 
+  @Override
+  public String getCaption() {
+    return null;
+  }
+
+  @Override
+  public void setAcceleratorEnabled(boolean enabled) {
+    for (Component child : getComponents()) {
+      if (child instanceof IMenu) {
+        ((IMenu) child).setAcceleratorEnabled(enabled);
+      }
+    }
+  }
 }

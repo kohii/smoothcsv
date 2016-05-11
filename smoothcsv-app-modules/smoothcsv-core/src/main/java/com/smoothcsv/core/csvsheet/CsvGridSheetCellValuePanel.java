@@ -13,6 +13,24 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import com.smoothcsv.core.celleditor.SCTextArea;
+import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.macro.MacroRecorder;
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.core.util.CoreSettings;
+import com.smoothcsv.core.util.SCAppearanceManager;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.BaseTabView;
+import com.smoothcsv.framework.component.SCContentPane;
+import com.smoothcsv.framework.component.SCToolBar;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.menu.CommandMenuItem;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import command.grid.StartEditCommand;
+import command.grid.StopEditCommand;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
@@ -21,7 +39,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -36,28 +53,8 @@ import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 
-import com.smoothcsv.core.celleditor.SCTextArea;
-import com.smoothcsv.core.constants.UIConstants;
-import com.smoothcsv.core.macro.MacroRecorder;
-import com.smoothcsv.core.util.CoreBundle;
-import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.core.util.SCAppearanceManager;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.BaseTabView;
-import com.smoothcsv.framework.component.SCContentPane;
-import com.smoothcsv.framework.component.SCToolBar;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.menu.CommandMenuItem;
-import com.smoothcsv.swing.icon.AwesomeIcon;
-
-import command.grid.StartEditCommand;
-import command.grid.StopEditCommand;
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener, DocumentListener {
@@ -126,18 +123,15 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
     JPopupMenu popupMenu = new JPopupMenu();
 
     CommandMenuItem menuItemExpand = new CommandMenuItem(CoreBundle.get("key.expand"),
-        "value-panel:expand", AwesomeIcon.create(AwesomeIcon.FA_EXPAND));
-    menuItemExpand.setContextMenu(true);
+        "value-panel:expand", null, AwesomeIcon.create(AwesomeIcon.FA_EXPAND), true, true);
     popupMenu.add(menuItemExpand);
 
     CommandMenuItem menuItemCompress = new CommandMenuItem(CoreBundle.get("key.compress"),
-        "value-panel:compress", AwesomeIcon.create(AwesomeIcon.FA_COMPRESS));
-    menuItemCompress.setContextMenu(true);
+        "value-panel:compress", null, AwesomeIcon.create(AwesomeIcon.FA_COMPRESS), true, true);
     popupMenu.add(menuItemCompress);
 
     CommandMenuItem menuItemToggleFloating =
-        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value-panel:toggle-floating");
-    menuItemToggleFloating.setContextMenu(true);
+        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value-panel:toggle-floating", null, null, true, true);
     popupMenu.add(menuItemToggleFloating);
 
     JToggleButton dropDownButton =
@@ -273,7 +267,8 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   }
 
   @Override
-  public void focusLost(FocusEvent e) {}
+  public void focusLost(FocusEvent e) {
+  }
 
   public static class ValuePanelTextArea extends SCTextArea implements SmoothComponent {
 

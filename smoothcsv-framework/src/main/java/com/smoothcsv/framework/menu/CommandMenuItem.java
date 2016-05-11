@@ -13,15 +13,6 @@
  */
 package com.smoothcsv.framework.menu;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.function.Consumer;
-
-import javax.swing.Icon;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
@@ -29,34 +20,36 @@ import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 
-import lombok.Setter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
+import javax.swing.Icon;
+import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu {
 
   private final String caption;
   private final String commandId;
-  @Setter
-  private boolean contextMenu = false;
 
   public CommandMenuItem(String caption, String commandId) {
-    this(caption, commandId, (Condition) null);
+    this(caption, commandId, null);
   }
 
   public CommandMenuItem(String caption, String commandId, Condition visibleWhen) {
-    this(caption, commandId, visibleWhen, null, true);
+    this(caption, commandId, visibleWhen, null, true, false);
   }
 
-  public CommandMenuItem(String caption, String commandId, Icon icon) {
-    this(caption, commandId, null, icon, true);
-  }
-
-  public CommandMenuItem(String caption, String commandId, Condition visibleWhen, Icon icon,
-      boolean watchEnabledCondition) {
+  public CommandMenuItem(String caption,
+                         String commandId,
+                         Condition visibleWhen,
+                         Icon icon,
+                         boolean watchEnabledCondition,
+                         boolean enableAccelerator) {
     this.caption = caption;
     this.commandId = commandId;
     setText(caption);
@@ -90,6 +83,13 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
             });
       }
     }
+
+    if (!Env.isUsingMacSystemMenuBar() || enableAccelerator) {
+      setAcceleratorEnabled(true);
+    } else {
+      // In order to make the system menu bar's key binding disabled, do not register accelerator.
+      // See SCMenuBar#add() for more details.
+    }
   }
 
   /*
@@ -110,13 +110,11 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
   }
 
   @Override
-  public KeyStroke getAccelerator() {
-    if (Env.getOS() != Env.OS_MAC || contextMenu) {
-      return CommandKeymap.getDefault().findKeyStroke(commandId);
+  public void setAcceleratorEnabled(boolean enabled) {
+    if (enabled) {
+      setAccelerator(CommandKeymap.getDefault().findKeyStroke(commandId));
     } else {
-      // In order to make the system menu bar's key binding disabled, do not use accelerator.
-      // TODO Is there any better way?
-      return null;
+      setAccelerator(null);
     }
   }
 

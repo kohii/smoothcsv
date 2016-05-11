@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（Editor）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>マクロリファレンス（Editor）</h1>
+<h2>Editorクラス</h2>
+<p>
+	セルの値を編集するときにアクティブになるテキストボックスを表すクラスです。<br>
+	DataTableクラスのstartEditing()を実行すると、セルの編集を開始し、Editorクラスのインスタンスを返します。<br>
+	（この方法が、Editorクラスのインスタンスを取得する唯一の方法です。）<br>
+	編集を終了する場合は、DataTableクラスのstopEditing()を実行します。
+</p>
+
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・2文字目と3文字目の間に「あいう」を挿入する。
+<code><pre>
+editor = document.dataTable.startEditing();    // セルの編集を開始
+editor.caretBegin();                           // キャレットを先頭に移動
+editor.caretForward(2);                        // キャレットを右に2つ移動
+editor.type('あいう');                         // 「あいう」を入力
+document.dataTable.stopEditing();              // 編集を終了
+</pre></code>
+</p>
+<p>
+・末尾から3文字を切り取って、先頭に貼り付ける
+<code><pre>
+editor = document.dataTable.startEditing();    // セルの編集を開始
+editor.caretBackward(3, true);                 // 文字を選択しながらキャレットを左側に3つ移動
+editor.cut();                                  // 切り取り
+editor.caretBegin();                           // キャレットを先頭に移動
+editor.paste();                                // 貼り付け
+document.dataTable.stopEditing();              // 編集を終了
+</pre></code>
+</p>
+</div>
+
+<h2>メソッド</h2>
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>キー</th><th>説明</th></tr>
+	<tr><td>void undo()</td><td>なし</td><td>Ctrl+Z</td><td>編集内容を元に戻します。</td></tr>
+	<tr><td>void redo()</td><td>なし</td><td>Ctrl+Y</td><td>編集内容をやり直します。</td></tr>
+	<tr><td>void caretBackward(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]←</td><td>キャレットを左側に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void caretForward(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]→</td><td>キャレットを右側に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void caretBegin(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]HOME</td><td>キャレットを左端に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void caretEnd(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]END</td><td>キャレットを右端に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void caretPrevWord(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]←</td><td>キャレットを左側の単語の切れ目に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void caretNextWord(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]→</td><td>キャレットを右側の単語の切れ目に移動します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void copy()</td><td>なし</td><td>Ctrl+C</td><td>クリップボードにデータをコピーします。</td></tr>
+	<tr><td>void cut()</td><td>なし</td><td>Ctrl+X</td><td>クリップボードにデータをコピーし、データを削除します。</td></tr>
+	<tr><td>void paste()</td><td>なし</td><td>Ctrl+V</td><td>クリップボードの内容を貼り付けます。</td></tr>
+	<tr><td>void deleteNext()</td><td>なし</td><td>DELETE</td><td>右側の文字を削除します。</td></tr>
+	<tr><td>void deleteNextWord()</td><td>なし</td><td>Ctrl+DELETE</td><td>右側の単語を削除します。</td></tr>
+	<tr><td>void deletePrevious()</td><td>なし</td><td>BACK_SPACE</td><td>左側の文字を削除します。</td></tr>
+	<tr><td>void deletePreviousWord()</td><td>なし</td><td>Ctrl+BACK_SPACE</td><td>左側の単語を削除します。</td></tr>
+	<tr><td>void insertBreak()</td><td>なし</td><td>Alt+ENTER</td><td>改行を挿入します。</td></tr>
+	<tr><td>void selectAll()</td><td>なし</td><td>Ctrl+A</td><td>すべてのテキストを選択します。</td></tr>
+	<tr><td>void unselect()</td><td>なし</td><td>Ctrl+BACK_SLASH</td><td>選択を解除します。</td></tr>
+	<tr><td>void type(String text)</td><td>text - 挿入する文字</td><td>　</td><td>文字を挿入します。</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（IOFunctions）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>マクロリファレンス（IOFunctions）</h1>
+<h2>DataTableクラス</h2>
+<p>
+	ファイルやディレクトリに関する便利な関数を提供します。<br>
+	IOFunctionsクラスのすべてのメソッドは、<a href="macro.html#builtin_func">ビルトイン関数</a>としても定義されています。<br>
+	（※このクラスのすべてのメソッドはクラスメソッドとして定義されているため、インスタンス化する必要はありません。）<br>
+</p>
+
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・ファイルが存在するかどうかを表示する。
+<code><pre>
+var e = IOFunctions.exists('c:¥¥sample.csv');
+alert(e ? '存在する' : '存在しない');
+</pre></code>
+</p>
+<p>
+・sample.csvという名前のファイルを作成し、中身に「Hello World!」とUTF-8で書き込む。
+<code><pre>
+IOFunctions.write('c:¥¥sample.csv', 'Hello World!', 'UTF-8');
+</pre></code>
+</div>
+
+<h2>メソッド</h2>
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>説明</th></tr>
+    <tr><td>boolean exists(String path)</td><td>path - ファイルのパス</td><td>引数のパスに該当するファイルまたはディレクトリが存在するかどうかを返します。</td></tr>
+    <tr><td>boolean isFile(String path)</td><td>path - ファイルのパス</td><td>引数のパスがファイルならtrueを返します。その他の場合はfalseを返します。</td></tr>
+    <tr><td>boolean isDirectory(String path)</td><td>path - ディレクトリのパス</td><td>引数のパスがディレクトリならtrueを返します。その他の場合はfalseを返します。<br></td></tr>
+    <tr><td>java.io.File[] listFiles(String path, String type)</td><td>path - ディレクトリのパス<br>type - 対象のタイプ（&quot;file&quot;または&quot;directory&quot;。省略可）</td><td>引数「path」のディレクトリに存在するすべてのファイル・ディレクトリを配列で返します。<br>引数「type」に&quot;file&quot;を指定した場合はファイルのみ、&quot;directory&quot;を指定した場合はディレクトリのみを返します。<br>戻り値の型はjava.io.Fileの配列です。</td></tr>
+    <tr><td>String[] listFileNames(String path, String type)</td><td>path - ディレクトリのパス<br>type - 対象のタイプ（&quot;file&quot;または&quot;directory&quot;。省略可）</td><td>引数「path」のディレクトリに存在するすべてのファイル・ディレクトリの名前を配列で返します。<br>引数「type」に&quot;file&quot;を指定した場合はファイルのみ、&quot;directory&quot;を指定した場合はディレクトリのみを返します。<br>戻り値の型は文字列の配列です。</td></tr>
+    <tr><td>void write(String path, String content, String charset)</td><td>path - ファイルのパス<br>content - ファイルの内容<br>charset - 文字コード</td><td>ファイルを作成します。すでに存在する場合は上書きします。</td></tr>
+    <tr><td>String read(String path, String charset)</td><td>path - ファイルのパス<br>charset - 文字コード</td><td>ファイルの内容を読み込んで返します。</td></tr>
+    <tr><td>boolean rename(String directory, String before, String after)</td><td>directory - 対象のファイルが存在するディレクトリのパス<br>before - 対象のファイル名<br>after - 変更後のファイル名</td><td>ファイルの名前を変更します。成功した場合はtrueを、失敗した場合はfalseを返します。</td></tr>
+</table>
+
+</body>
+</html>

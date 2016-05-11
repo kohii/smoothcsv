@@ -1,0 +1,22 @@
+/* CSS Document */
+
+h1{
+	padding: 5px;
+	margin:5px 5px 15px;
+	font-size: large;
+	background-color:#999999;
+	color:#FFF;
+}
+
+h2{
+	padding: 3px;
+	margin:15px 5px 5px;
+	border-left: solid 7px #999999;
+	border-bottom: solid 1px #999999;
+	font-size: medium;
+}
+
+#link-to-hp{
+	margin-top: 30px;
+	padding: 10px;
+}

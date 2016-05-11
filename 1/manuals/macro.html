@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロ:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>マクロ</h1>
+<h2>マクロとは</h2>
+<p>
+SmoothCSVで行う操作をスクリプトとして定義しておき、自動実行するものです。
+繰り返し行う操作をマクロとして定義しておけば、より効率的に作業を行うことができます。
+</p>
+
+<h2>マクロの作成方法</h2>
+<p>
+SmoothCSVのマクロはJavaScriptで記述します。
+マクロを記述したファイルは以下の形式に従って保存しておきます。
+</p>
+<table class="tbl1">
+	<tr><th>文字コード</th><td>UTF-8</td></tr>
+	<tr><th>拡張子</th><td>指定なし（デフォルトでは.js）</td></tr>
+	<tr><th>保存先</th><td>指定なし（デフォルトではmacroフォルダ）</td></tr>
+</table>
+
+<h2>JavaScriptの言語仕様について</h2>
+<ul>
+<li>
+マクロを実行するためのJavaScriptエンジンにRhinoを使用しています。
+従って基本的な仕様はRhinoに準拠します。（詳細については<a href="https://developer.mozilla.org/ja/Rhino_documentation" target="_blank">Rhinoのドキュメント</a>を参照してください。）<br>
+　※RhinoはECMAScript に準拠した実装です。<br>
+　※RhinoはJavaScriptでしばしば用いられる「browserオブジェクト」をサポートしていません。
+</li>
+<li>
+
+</li>
+</ul>
+
+<h2 id="builtin_field">ビルトイン変数</h2>
+<p>
+Rhinoの標準のビルトイン変数以外で次のものを利用できます。
+<p>
+<table class="macro">
+	<tr><th>変数名</th><th>型</th><th>説明</th></tr>
+	<tr><td>document</td><td><a href="macro_document.html">Document</a></td><td><a href="macro_document.html">Document</a>クラスのインスタンスです。</td></tr>
+	<tr><td>convertActions</td><td><a href="macro_convertactions.html">ConvertActions</a></td><td><a href="macro_convertactions.html">ConvertActions</a>クラスのインスタンスです。</td></tr>
+</table>
+
+</p>
+
+<h2 id="builtin_func">ビルトイン関数</h2>
+<p>
+Rhinoの標準のビルトイン関数以外で次のものを利用できます。
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>説明</th></tr>
+	<tr><td>void alert(Object message)</td><td>message - 表示するメッセージ</td><td>※<a href="macro_document.html#alert">document.alert(message)</a>と同じです。</td></tr>
+	<tr><td>boolean confirm(Object message)</td><td>message - 表示するメッセージ</td><td>※<a href="macro_document.html#confirm">document.confirm(message)</a>と同じです。</td></tr>
+	<tr><td>String prompt(Object message)</td><td>message - 表示するメッセージ</td><td>※<a href="macro_document.html#prompt">document.prompt(message)</a>と同じです。</td></tr>
+	<tr><td>String clipboard()</td><td>なし</td><td>※<a href="macro_document.html#getTextFromClipboard">document.clipboard()</a>と同じです。</td></tr>
+	<tr><td>void clipboard(String text)</td><td>text - セットする文字列</td><td>※<a href="macro_document.html#setTextToClipboard">document.clipboard(text)</a>と同じです。</td></tr>
+	<tr><td>（<a href="macro_datatable.html">DataTable</a>クラスのすべてのメソッド）</td><td>　</td><td>「document.dataTable.xxx();」は「xxx();」と記述できます。</td></tr>
+    <tr><td>（<a href="macro_iofunctions.html">IOFunctions</a>クラスのすべてのメソッド）</td><td>　</td><td>「IOFunctions.xxx();」は「xxx();」と記述できます。</td></tr>
+</table>
+</p>
+
+
+<h2>その他</h2>
+<p>「macrolib」という名前のフォルダにJavascriptファイルを配置しておくと、マクロ実行時に自動的に読み込まれます。</p>
+
+</body>
+</html>

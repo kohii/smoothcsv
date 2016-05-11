@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（ConvertActions）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>マクロリファレンス（ConvertActions）</h1>
+<h2>ConvertActionsクラス</h2>
+<p>
+セルの値を変換するために用います。<br>
+ConvertActionsのインスタンスは、<a href="macro.html#builtin_field">ビルトイン変数</a>「convertActions」として用意されています。<br><br>
+＜使用方法＞<br>
+ConvertActionsのフィールドをDataTable#processSelectedCell()またはDataTable#processAllCell()の引数に渡します。
+</p>
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・選択中のセルの値を小文字に変換する
+<code><pre>
+document.dataTable.processSelectedCell(convertActions.toLowerCase);
+</pre></code>
+</p>
+＜使用例＞<br>
+<p>
+・すべてのセルの値を「"」で囲む
+<code><pre>
+document.dataTable.processAllCell(convertActions.doubleQuote);
+</pre></code>
+</p>
+</div>
+
+<h2>フィールド</h2>
+<table class="macro">
+	<tr><th>フィールド名</th><th>型</th><th>説明</th></tr>
+	<tr><td>toUpperCase</td><td>　</td><td>小文字を大文字に変換する機能を提供します。</td></tr>
+	<tr><td>toLowerCase</td><td>　</td><td>大文字を小文字に変換する機能を提供します。</td></tr>
+	<tr><td>toZenkaku</td><td>　</td><td>半角を全角に変換する機能を提供します。</td></tr>
+	<tr><td>toHankaku</td><td>　</td><td>全角を半角に変換する機能を提供します。</td></tr>
+	<tr><td>toHiragana</td><td>　</td><td>カタカナをひらがなに変換する機能を提供します。</td></tr>
+	<tr><td>toKatakana</td><td>　</td><td>ひらがなをカタカナに変換する機能を提供します。</td></tr>
+	<tr><td>camerize</td><td>　</td><td>_記法をキャメル記法に変換する機能を提供します。</td></tr>
+	<tr><td>decamerize</td><td>　</td><td>キャメル記法を_記法に変換する機能を提供します。</td></tr>
+	<tr><td>capitalize</td><td>　</td><td>先頭の文字を大文字に変換する機能を提供します。</td></tr>
+	<tr><td>decapitalize</td><td>　</td><td>先頭の文字を小文字に変換する機能を提供します。</td></tr>
+	<tr><td>doubleQuote</td><td>　</td><td>「"」で囲む機能を提供します。</td></tr>
+	<tr><td>singleQuote</td><td>　</td><td>「'」で囲む機能を提供します。</td></tr>
+</table>
+
+</body>
+</html>

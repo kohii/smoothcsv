@@ -1,0 +1,72 @@
+/* CSS Document */
+
+body{
+	padding: 5px;
+}
+
+h1{
+	font-size: large;
+	margin:10px;
+	text-align: center;
+}
+
+h2{
+	font-size: normal;
+	margin: 25px auto 5px 0;
+}
+
+h3{
+	font-size: small;
+	margin-left: 10px;
+	margin-top: 5px;
+	color: #666;
+}
+
+p{
+	margin-left: 15px;
+	margin-bottom: 3px;
+}
+
+table.tbl1{
+	margin-left: 20px;
+	border: 1px solid #888;
+}
+
+table.tbl1 th,td{
+	border: 1px solid #aaa;
+	padding: 2px 5px;
+}
+
+
+table.macro{
+	width: 90%;
+	margin-left: 20px;
+	border: 1px solid #888;
+}
+
+table.macro th,td{
+	border: 1px solid #aaa;
+	padding: 2px 5px;
+}
+
+div.samplecode {
+	margin-top: 10px;
+	margin-left: 33px;
+	margin-bottom: 3px;
+	padding: 5px;
+	background-color: #eee;
+}
+
+.samplecode p {
+	margin-top: 10px;
+}
+
+.samplecode pre {
+	border-left: 3px solid #ccc;
+	margin-left: 25px;
+	padding-left: 5px;
+}
+
+ol {
+	margin-left: 20px;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（DataTable）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>マクロリファレンス（DataTable）</h1>
+<h2>DataTableクラス</h2>
+<p>
+	現在編集中のタブのテーブルを表すクラスです。<br>
+	DataTableクラスのインスタンスは<a href="macro_document.html">Document</a>クラスのフィールド「dataTable」に格納されています。<br>
+	DataTableクラスのすべてのメソッドは、<a href="macro.html#builtin_func">ビルトイン関数</a>としても定義されています。<br>
+	したがって、「document.dataTable.right();」は「right();」と記述できます。<br>
+	（※行番号、列番号は先頭を「0」として数えます。）<br>
+	（※このクラスに対する操作は常に選択中のタブに対して行われます。）<br>
+</p>
+
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・現在選択中のセルの値を切り取って2つ右のセルに貼り付ける
+<code><pre>
+document.dataTable.cut();       // 現在選択中のセルの値を切り取る
+document.dataTable.right(2);    // 選択を右側に2つ移動
+document.dataTable.paste();     // 値を張りつける
+</pre></code>
+</p>
+<p>
+・すべてのセルの値に「あいう」をセットする
+<code><pre>
+document.dataTable.selectAll();       // すべてのセルを選択
+document.dataTable.fill('あいう');    //選択範囲を「 あいう」で埋める
+</pre></code>
+</div>
+
+<h2>メソッド</h2>
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>キー</th><th>説明</th></tr>
+	<tr><td>void left(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]←</td><td>左側のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void right(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]→</td><td>右側のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void up(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]↑</td><td>上側のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void down(int times, boolean extendSelection)</td><td>times - 繰り返し回数（省略可。デフォルト=1）<br>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]↓</td><td>下側のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。パラメータtimesで指定した回数繰り返します。</td></tr>
+	<tr><td>void selectPrevColumn(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>　</td><td>※left(boolean extendSelection)と同じです。</td></tr>
+	<tr><td>void selectNextColumn(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>　</td><td>※right(boolean extendSelection)と同じです。</td></tr>
+	<tr><td>void selectPrevRow(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>　</td><td>※up(boolean extendSelection)と同じです。</td></tr>
+	<tr><td>void selectNextRow(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>　</td><td>※down(boolean extendSelection)と同じです。</td></tr>
+	<tr><td>void selectFirstColumn(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]HOME</td><td>左端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectLastColumn(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>[Shift+]END</td><td>右端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectFirstRow(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]HOME</td><td>上端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectLastRow(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]END</td><td>下端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectPrevEdgeOfColumnData(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]←</td><td>左側でデータが格納されている終端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectNextEdgeOfColumnData(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]→</td><td>右側でデータが格納されている終端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectPrevEdgeOfRowData(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]↑</td><td>上側でデータが格納されている終端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectNextEdgeOfRowData(boolean extendSelection)</td><td>extendSelection - 選択範囲を拡張するかどうか（省略可。デフォルト=false）</td><td>Ctrl+[Shift+]↓</td><td>下側でデータが格納されている終端のセルを選択します。パラメータextendSelectionがtrueの場合、現在の選択を拡張します。</td></tr>
+	<tr><td>void selectPrevColumnCell()</td><td>なし</td><td>Shift+TAB</td><td>前のセルを選択します。（行方向）</td></tr>
+	<tr><td>void selectNextColumnCell()</td><td>なし</td><td>TAB</td><td>次のセルを選択します。（行方向）</td></tr>
+	<tr><td>void selectPrevRowCell()</td><td>なし</td><td>Shift+ENTER</td><td>前のセルを選択します。（列方向）</td></tr>
+	<tr><td>void selectNextRowCell()</td><td>なし</td><td>ENTER</td><td>次のセルを選択します。（列方向）</td></tr>
+	<tr><td>void selectAll()</td><td>なし</td><td>Ctrl+A</td><td>すべてのセルを選択します。</td></tr>
+	<tr><td>void selectEntireRow()</td><td>なし</td><td>Shift+SPACE</td><td>現在の選択を横方向（行全体）に拡張します。</td></tr>
+	<tr><td>void selectEntireColumn()</td><td>なし</td><td>Ctrl+Spase</td><td>現在の選択を縦方向（列全体）に拡張します。</td></tr>
+	<tr><td>void select(int row, int column, boolean addToSelection)</td><td>row - 行番号<br>column - 列番号<br>addToSelection - 選択範囲に追加するかどうか（省略可。デフォルト=false）</td><td>　</td><td>引数の行・列番号のセルを選択します。引数addToSelectionがtrueの場合、現在の選択範囲をクリアせずに、追加選択します。</td></tr>
+	<tr><td>void selectRange(int row0, int row1, int column0, int column1, boolean addToSelection)</td><td>row0 - 始点の行番号<br>row1 - 終点の行番号<br>column0 - 始点の列番号<br>column1 - 終点の列番号<br>addToSelection - 選択範囲に追加するかどうか（省略可。デフォルト=false）</td><td>　</td><td>始点の行・列番号から終点の行・列番号の範囲をすべて選択します。引数addToSelectionがtrueの場合、現在の選択範囲をクリアせずに、追加選択します。</td></tr>
+	<tr><td>void copy()</td><td>なし</td><td>Ctrl+C</td><td>クリップボードにデータをコピーします。</td></tr>
+	<tr><td>void cut()</td><td>なし</td><td>Ctrl+X</td><td>クリップボードにデータをコピーし、データを削除します。</td></tr>
+	<tr><td>void paste()</td><td>なし</td><td>Ctrl+V</td><td>クリップボードの内容を貼り付けます。</td></tr>
+	<tr><td>void del()</td><td>なし</td><td>DELETE</td><td>選択範囲のセルの値を削除します。</td></tr>
+	<tr><td>void remove()</td><td>なし</td><td>Ctrl+DELETE</td><td>選択されているセルより右側のセルを除去します。</td></tr>
+	<tr><td>void repare()</td><td>なし</td><td>INSERT</td><td>除去されているセルを空白のセルに置き換えます。</td></tr>
+	<tr><td>void undo()</td><td>なし</td><td>Ctrl+Z</td><td>編集内容を元に戻します。</td></tr>
+	<tr><td>void redo()</td><td>なし</td><td>Ctrl+Y</td><td>編集内容をやり直します。</td></tr>
+	<tr><td>void insertRow()</td><td>なし</td><td>Ctrl+I</td><td>現在選択されている行の前に新しい行を挿入します。</td></tr>
+	<tr><td>void insertColumn()</td><td>なし</td><td>Ctrl+Shift+I</td><td>現在選択されている列の前に新しい列を挿入します。</td></tr>
+	<tr><td>void deleteRow()</td><td>なし</td><td>Ctrl+D</td><td>現在選択されている行を削除します。</td></tr>
+	<tr><td>void deleteColumn()</td><td>なし</td><td>Ctrl+Shift+D</td><td>現在選択されている列を削除します。</td></tr>
+	<tr><td>void addRow(int i)</td><td>i - 追加する行数（省略可。デフォルト=1）</td><td>Ctrl+;</td><td>末尾に行を追加します。</td></tr>
+	<tr><td>void addColumn(int i)</td><td>i - 追加する列数（省略可。デフォルト=1）</td><td>Ctrl+Shift+;</td><td>末尾に列を追加します。</td></tr>
+    <tr><td>void insertCell(String direction, boolean trunc)</td><td>direction - シフトする方向（&quot;right&quot;または&quot;down&quot;）<br>trunc - はみ出したセルを削除するかどうか（省略可。デフォルト=false）</td><td></td><td>セルを挿入します。</td></tr>
+    <tr><td>void deleteCell(String direction)</td><td>direction - シフトする方向（&quot;left&quot;または&quot;up&quot;）</td><td></td><td>セルを削除します。</td></tr>
+	<tr><td>void fillRightToLeft()</td><td>なし</td><td>Ctrl+Alt+L</td><td>選択範囲の右端の値を左方向にコピーします。</td></tr>
+	<tr><td>void fillLeftToRight()</td><td>なし</td><td>Ctrl+Alt+R</td><td>選択範囲の左端の値を右方向にコピーします。</td></tr>
+	<tr><td>void fillBotomToTop()</td><td>なし</td><td>Ctrl+Alt+U</td><td>選択範囲の下端の値を上方向にコピーします。</td></tr>
+	<tr><td>void fillTopToBottom()</td><td>なし</td><td>Ctrl+Alt+D</td><td>選択範囲の上端の値を下方向にコピーします。</td></tr>
+	<tr><td>void fill(String text)</td><td>text - セットする文字列（省略可。省略時は入力ダイアログを開く）</td><td>Ctrl+J</td><td>選択範囲のすべてのセルに、引数textの値をセットします。</td></tr>
+	<tr><td>void adjustColumnWidth()</td><td>なし</td><td>Ctrl+Shift+F</td><td>列の幅をヘッダーとセルの値に合わせて調整します。列ヘッダーが選択されている場合は、選択されている列のみを対象とします。</td></tr>
+	<tr><td>void adjustColumnWidthToHeader()</td><td>なし</td><td>Alt+Shift+F</td><td>列の幅をヘッダーの値に合わせて調整します。列ヘッダーが選択されている場合は、選択されている列のみを対象とします。</td></tr>
+	<tr><td>void adjustColumnWidthToData()</td><td>なし</td><td>Ctrl+Alt+F</td><td>列の幅をセルの値に合わせて調整します。列ヘッダーが選択されている場合は、選択されている列のみを対象とします。</td></tr>
+	<tr><td>void adjustColumnWidthToSelectedCell()</td><td>なし</td><td>Ctrl+G</td><td>列の幅を選択中のセルの値に合わせて調整します。</td></tr>
+	<tr><td><a href="macro_editor.html">Editor</a> startEditing()</td><td>なし</td><td>F2</td><td>編集を開始します。<a href="macro_editor.html">Editor</a>クラスのインスタンスを返します。</td></tr>
+	<tr><td>void stopEditing()</td><td>なし</td><td>　</td><td>編集を終了します。</td></tr>
+	<tr><td>void cancelEditing()</td><td>なし</td><td>ESC</td><td>編集内容を破棄して、編集を終了します。</td></tr>
+	<tr><td>void setProperty(<a href="macro_property.html">Property</a> property)</td><td><a href="macro_property.html">Property</a> - プロパティ</td><td>　</td><td>ファイルにプロパティをセットします。</td></tr>
+	<tr><td><a href="macro_property.html">Property</a> getProperty()</td><td>なし</td><td>　</td><td>ファイルからプロパティを取得します。
+	<tr><td>int getRowCount()</td><td>なし</td><td>　</td><td>テーブルの行数を返します。</td></tr>
+	<tr><td>int getColumnCount()</td><td>なし</td><td>　</td><td>テーブルの列数を返します。</td></tr>
+	<tr><td>int getFocusedRow()</td><td>なし</td><td>　</td><td>フォーカスを持っているセルの行番号を返します。</td></tr>
+	<tr><td>int getFocusedColumn()</td><td>なし</td><td>　</td><td>フォーカスを持っているセルの列番号を返します。</td></tr>
+	<tr><td>int[] getSelectedRows()</td><td>なし</td><td>　</td><td>選択中の行の行番号を配列で返します。</td></tr>
+	<tr><td>int[] getSelectedColumns()</td><td>なし</td><td>　</td><td>選択中の列の列番号を配列で返します。</td></tr>
+	<tr><td>int getSelectedCellCount()</td><td>なし</td><td>　</td><td>選択されたセルの数を返します。</td></tr>
+	<tr><td>boolean isSelected(int row, int column)</td><td>row - 行番号<br>column - 列番号</td><td>　</td><td>セルが選択されているかどうかを返します。</td></tr>
+	<tr><td>void setValue(String text)</td><td>text - セットする文字列</td><td>　</td><td>現在フォーカスを持っているセルに引数textの値を設定します。</td></tr>
+	<tr><td>void setValue(String text, int row, int column)</td><td>text - セットする文字列<br>row - 行番号<br>column - 列番号</td><td>　</td><td>引数の行・列番号のセルに、引数textの値を設定します。</td></tr>
+	<tr><td>String getValue()</td><td>なし</td><td>　</td><td>現在フォーカスを持っているセルの値を取得します。</td></tr>
+	<tr><td>String getValue(int row, int column)</td><td>row - 行番号<br>column - 列番号</td><td>　</td><td>引数の行・列番号のセルの値を取得します。</td></tr>
+	<tr><td>void processSelectedCell(function func)</td><td>func - 関数</td><td>　</td><td>選択範囲のセル１つ１つについて、引数の関数を呼び出します。<br>関数は引数に行番号、列番号をとることができます。<br>＜例＞<br>document.dataTable.processSelectedCell(function(row, column){<br>&nbsp;&nbsp;&nbsp;&nbsp;alert('行：' + row + '列：' + column);<br>});</td></tr>
+	<tr><td>void processAllCell(function func)</td><td>func - 関数</td><td>　</td><td>すべてのセル１つ１つについて、引数の関数を呼び出します。<br>関数は引数に行番号、列番号をとることができます。<br>＜例＞<br>document.dataTable.processAllCell(function(row, column){<br>&nbsp;&nbsp;&nbsp;&nbsp;alert('行：' + row + '列：' + column);<br>});</td></tr>
+</td></tr>
+</table>
+</body>
+</html>

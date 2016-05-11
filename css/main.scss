@@ -51,3 +51,20 @@ $on-laptop:        800px;
         "layout",
         "syntax-highlighting"
 ;
+
+h1, h2 {
+  margin-top: $spacing-unit;
+}
+
+h3, h4 {
+  margin-top: $spacing-unit / 2;
+}
+
+hr {
+  margin: $spacing-unit 0;
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.7rem; }
+h4 { font-size: 1.3rem; }

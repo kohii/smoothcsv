@@ -1,0 +1,30 @@
+/* CSS Document */
+
+/*-----------------------------------*/
+/* common */
+
+/* init styles */
+* {
+	margin:0;
+	padding:0;
+	color: #333;
+    font-family: "ＭＳ Ｐゴシック",sans-serif;
+	font-size:small;
+}
+
+li{
+	list-style-position:inside;
+	padding-left: 10px;
+}
+
+li img{
+	padding-left: 15px;
+}
+
+a{
+	color:#777;
+}
+
+a:hover{
+	color:#099;
+}

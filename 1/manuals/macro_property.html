@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（Property）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>マクロリファレンス（Property）</h1>
+<h2>Propertyクラス</h2>
+<p>
+ファイルのプロパティ（文字コードや区切り文字など）を表すクラスです。
+
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・ファイルのプロパティを変更する
+<code><pre>
+var prop = document.dataTable.getProperty();    // 現在のプロパティを取得
+prop.charset = 'Shift_JIS';                     // 文字コードに「Shift_JIS」をセット
+prop.quote = '"';                               // 囲み文字に「"」をセット
+prop.quotePolicy = Property.QUOTE_ALL;          // 囲み文字の適用ルールに「すべての値を囲む」をセット
+document.dataTable.setProperty(prop);           // プロパティを反映
+</pre></code>
+</p>
+</div>
+
+<h2>定数</h2>
+<table class="macro">
+	<tr><th>定数名</th><th>型</th><th>説明</th></tr>
+	<tr><td>NULL_CHARACTER</td><td>char</td><td>nullを表す文字です。</td></tr>
+	<tr><td>CR</td><td>String</td><td>改行コードCR（"\r"）です。</td></tr>
+	<tr><td>CR_LF</td><td>String</td><td>改行コードCR+LF（"\r\n"）です。</td></tr>
+	<tr><td>LF</td><td>String</td><td>改行コードLF（"\n"）です。</td></tr>
+	<tr><td>QUOTE_NONE</td><td>int</td><td>「囲み文字なし」を表す定数です。</td></tr>
+	<tr><td>QUOTE_ALL</td><td>int</td><td>「すべての値を囲む」を表す定数です。</td></tr>
+	<tr><td>QUOTE_IF_NECESSARY</td><td>int</td><td>「区切り文字または改行を含む値のみ囲む」を表す定数です。</td></tr>
+</table>
+
+<h2>フィールド</h2>
+<table class="macro">
+	<tr><th>フィールド名</th><th>型</th><th>説明</th></tr>
+	<tr><td>charset</td><td>String</td><td>文字コードです。</td></tr>
+	<tr><td>separator</td><td>char</td><td>区切り文字です。</td></tr>
+	<tr><td>quote</td><td>String</td><td>囲み文字です。</td></tr>
+	<tr><td>quotePolicy</td><td>int</td><td>囲み文字の適用ルールです。定数「QUOTE_NONE」「QUOTE_ALL」「QUOTE_IF_NECESSARY」のいずれかを設定します。</td></tr>
+	<tr><td>hasUtf8bom</td><td>boolean</td><td>文字コードがUTF-8のときに BOM (Byte Order Mark) を付与するかどうか。文字コードがUTF-8以外の場合は無視されます。</td></tr>
+	<tr><td>lineSeparator</td><td>String</td><td>改行コードです。定数「CR」「CR_LF」「LF」のいずれかを設定します。</td></tr>
+</table>
+
+</body>
+</html>

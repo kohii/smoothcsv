@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（Document）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>マクロリファレンス（Document）</h1>
+<h2>Documentクラス</h2>
+<p>
+SmoothCSVの本体を表すクラスです。
+<a href="macro.html#builtin_field">ビルトイン変数</a>「document」に唯一のインスタンスが格納されています。<br>
+（※コンストラクタは不可視なので新規作成することはできません。）
+</p>
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・現在選択中のタブの右側のタブを選択し、その他のタブを閉じる
+<code><pre>
+document.nextTab();
+document.closeOtherTabs();
+</pre></code>
+</p>
+<p>
+・クリップボードの内容をダイアログに表示する
+<code><pre>
+alert(document.getTextFromClipboard());    // 「alert()」は「document.alert()」と同じです。（<a href="macro.html#builtin_func">ビルトイン関数</a>として用意されています。）
+</pre></code>
+</p>
+</div>
+
+<h2>フィールド</h2>
+<table class="macro">
+	<tr><th>フィールド名</th><th>型</th><th>説明</th></tr>
+	<tr><td>dataTable</td><td><a href="macro_datatable.html">DataTable</a></td><td>現在選択中のタブのテーブルです。</td></tr>
+</table>
+
+<h2 id="method">メソッド</h2>
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>キー</th><th>説明</th></tr>
+	<tr id="alert"><td>void alert(Object message)</td><td>message - 表示するメッセージ</td><td>　</td><td>メッセージダイアログを表示します。</td></tr>
+	<tr id="confirm"><td>boolean confirm(Object message)</td><td>message - 表示するメッセージ</td><td>　</td><td>確認ダイアログを表示します。「OK」がクリックされた場合trueを返します。キャンセルがクリックされた場合falseを返します。</td></tr>
+	<tr id="prompt"><td>String prompt(Object message)</td><td>message - 表示するメッセージ</td><td>　</td><td>入力ダイアログを表示します。「OK」がクリックされた場合入力された文字を返します。キャンセルがクリックされた場合nullを返します。</td></tr>
+	<tr><td>void closeTab()</td><td>なし</td><td>Ctrl+W</td><td>現在選択中のタブを閉じます。</td></tr>
+	<tr><td>void closeAllTabs()</td><td>なし</td><td>Ctrl+Shift+W</td><td>すべてのタブを閉じます。</td></tr>
+	<tr><td>void closeOtherTabs()</td><td>なし</td><td>Arl+Shift+W</td><td>現在選択中のタブ以外のタブを閉じます。</td></tr>
+	<tr><td>void newTab()</td><td>なし</td><td>Ctrl+N</td><td>新しいタブを作成します。</td></tr>
+	<tr><td>void newTab(int row, int column)</td><td>row - 行数<br>column - 列数</td><td>　</td><td>新しいタブを作成します。</td></tr>
+	<tr><td>void newTab(int row, int column, <a href="macro_property.html">Property</a> property)</td><td>row - 行数<br>column - 列数<br><a href="macro_property.html">Property</a> - プロパティ</td><td>　</td><td>新しいタブを作成します。</td></tr>
+	<tr><td>void save()</td><td>なし</td><td>Ctrl+S</td><td>ファイルを上書き保存します。</td></tr>
+	<tr><td>void saveAs()</td><td>なし</td><td>Ctrl+Shift+S</td><td>保存ダイアログを開きます。</td></tr>
+	<tr><td>void saveAs(String filePath)</td><td>filePath - ファイルのパス</td><td>　</td><td>filePathにファイルを保存します。</td></tr>
+	<tr><td>void saveAll()</td><td>なし</td><td>Arl+Shift+S</td><td>すべてのタブについて、ファイルを保存します。</td></tr>
+	<tr><td>void open()</td><td>なし</td><td>Ctrl+O</td><td>「ファイルを開く」ダイアログを開きます。</td></tr>
+	<tr><td>void open(String filePath)</td><td>filePath - ファイルのパス</td><td>　</td><td>filePathに該当するファイルを開きます。（文字コード、区切り文字などのプロパティは自動判定します。）</td></tr>
+	<tr><td>void open(String filePath, <a href="macro_property.html">Property</a> property)</td><td>filePath - ファイルのパス<br><a href="macro_property.html">Property</a> - プロパティ</td><td>　</td><td>filePathに該当するファイルを開きます。</td></tr>
+	<tr><td>void reload()</td><td>なし</td><td>F5</td><td>ファイルを読み直します。</td></tr>
+	<tr><td>void exit()</td><td>なし</td><td>　</td><td>SmoothCSVを終了します。</td></tr>
+	<tr><td>void nextTab()</td><td>なし</td><td>Alt+→</td><td>現在選択中のタブの右側のタブを選択します。</td></tr>
+	<tr><td>void prevTab()</td><td>なし</td><td>Alt+←</td><td>現在選択中のタブの左側のタブを選択します。</td></tr>
+	<tr><td>int getTabCount()</td><td>なし</td><td>　</td><td>SmoothCSVで開いているタブの数を返します。</td></tr>
+	<tr><td>int getSelectedTabIndex()</td><td>なし</td><td>　</td><td>現在選択中のタブが、左から何番目のタブかを返します。（一番左を0として数えます。）</td></tr>
+	<tr id="clipboard"><td>String clipboard()</td><td>なし</td><td>　</td><td>クリップボードから文字列を取得します。クリップボードが空のときまたは文字列でない時はnullを返します。</td></tr>
+	<tr id="clipboard"><td>void clipboard(String text)</td><td>text - セットする文字列</td><td>　</td><td>クリップボードに文字をセットします。</td></tr>
+</table>
+</body>
+</html>

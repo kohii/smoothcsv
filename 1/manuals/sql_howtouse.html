@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>SQLの実行:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>SQLの実行</h1>
+
+
+<h2>SQLの利用するには</h2>
+<p>
+画面上部のメニューバーから「ツール」＞「SQL実行」を選択します。<br>
+SQL実行用のウインドウが表示されます。
+</p>
+
+<h2>SQL実行ウインドウ</h2>
+<img src="img/sqldialog.jpg"></img>
+
+<h3>A:CSVファイル一覧ビュー</h3>
+<p>
+　CSVファイルを表示します。ファイル名をダブルクリックすることで、Eにテーブル名が自動入力されます。
+</p>
+
+<h3>B:プロパティビュー</h3>
+<p>
+　Aで選択中のファイルのプロパティを表示します。
+</p>
+<p>
+<h3>C:CSV内容ビュー</h3>
+<p>
+　Aで選択中のファイルの中身を表示します。
+列名のみの表示 または 先頭5行のプレビュー を表示します。<br>
+　列名をダブルクリックすることで、Eに列名が自動入力されます。
+</p>
+
+<h3>D:SQL操作ツールバー</h3>
+<p>
+　アイコンをクリックすることで以下の操作が行えます。<br>
+</p>
+<ul style="margin-left:20px;">
+<li>SQL実行・・・Eに入力したSQLを実行します。</li>
+<li>SQLを開く・・・外部SQLファイルを読み込み、ファイルの中身をEに表示します。</li>
+<li>SQLを保存・・・Eに入力したSQLをファイルに保存します。</li>
+<li>SQLを整形する・・・Eに入力したSQLを整形し、見やすくします。</li>
+<li>SQL履歴・・・過去に実行したSQLの一覧を表示します。</li>
+<li>前のSQL・・・直前に実行したSQLをEに表示します。</li>
+<li>次のSQL・・・直後に実行したSQLをEに表示します。</li>
+</ul>
+
+<h3>E:SQLエディター</h3>
+<p>
+　SQLを入力するためのエリアです。
+</p>
+
+
+
+<h2>SQLの実行手順の例</h2>
+<p>
+1.SQLエディターに「SELECT * FROM」と入力します。<br>
+　<img src="img/WS000000.JPG"></img><br>
+</p>
+<p>
+2.CSVファイル一覧ビューのファイル名をダブルクリックします。テーブル名が自動入力されます。<br>
+　<img src="img/WS000001.JPG"></img><br>
+　<img src="img/WS000002.JPG"></img><br>
+</p>
+
+<p>
+3.SQLエディターに「WHERE」を入力します。<br>
+　<img src="img/WS000003.JPG"></img><br>
+</p>
+
+<p>
+4.CSV内容ビューの列名をダブルクリックします。列名が自動入力されます。<br>
+　<img src="img/WS000004.JPG"></img><br>
+　<img src="img/WS000005.JPG"></img><br>
+</p>
+
+<p>
+5.SQLエディターに「= 'abc'」を入力します。<br>
+　<img src="img/WS000006.JPG"></img><br>
+</p>
+<p>
+6.以上でSQLが完成しました。ツールバーのSQL実行アイコンをクリックし、SQLを実行します。<br>
+　<img src="img/WS000007.JPG"></img><br>
+</p>
+
+<p>
+7.SQLの実行が完了すると、出力方法の選択ダイアログが表示されます。ここでは「新しいタブに表示する」を選択します。<br>
+　<img src="img/WS000008.JPG"></img><br>
+</p>
+
+<p>
+8.SQLの実行結果が表示されます。<br>
+　<img src="img/WS000009.JPG"></img><br>
+</p>
+
+
+</body>
+</html>

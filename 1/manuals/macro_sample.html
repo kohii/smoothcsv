@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロサンプル:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>マクロサンプル</h1>
+
+<div class="samplecode" style="margin-left: 0px;">
+
+<h2>一番左の列のセルに行番号を設定する</h2>
+<p>
+<code><pre>
+document.dataTable.selectFirstColumn();         // 一番左側のセルを選択
+document.dataTable.selectEntireColumn();        // 選択範囲を縦方向に拡張
+document.dataTable.processSelectedCell(function(row, column){
+	document.dataTable.setValue(row + 1, row, column);    // 選択範囲の各セルに行番号+1をセットする
+});
+</pre></code>
+</p>
+
+<h2>値が空でないセルをすべて選択する</h2>
+<p>
+<code><pre>
+document.dataTable.processAllCell(function(row, column){
+	if(document.dataTable.getValue(row, column) != ''){
+		document.dataTable.select(row, column, true);
+	}
+});
+</pre></code>
+</p>
+
+<h2>選択中のセルの値を、右側のタブの同じ位置に貼り付ける</h2>
+<p>
+<code><pre>
+document.dataTable.copy();        // セルの値をクリップボードにコピーする
+var row = document.dataTable.getFocusedRow();    // 選択位置を取得
+var column = document.dataTable.getFocusedColumn();
+document.nextTab();        // 右側のセルを選択
+document.dataTable.select(row, column);    // セルを選択
+document.dataTable.paste();        // クリップボードの内容を貼り付ける
+</pre></code>
+</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja-JP">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>マクロリファレンス（CellProcessor）:SmoothCSVマニュアル</title>
+	<meta name="description" content="「SmoothCSV」のマニュアルです。" >
+	<meta name="author" content="Kohei Ishikawa" >
+	<meta name="copyright" content="(C)2012 Kohei Ishikawa" >
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="global.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>マクロリファレンス（CellProcessor）</h1>
+<h2>CellProcessorインターフェース</h2>
+<p>
+	選択中のセル１つ１つについて、同じ処理を繰り返す場合に用いるインターフェースです。<br>
+	DataTableクラスのproceessSelectedCell()またはproceessAllCell()関数の引数に、このインターフェースを実装したクラスを渡します。<br>
+
+	proceessSelectedCellは選択されたセル１つ１つについて、CellProcessor#process(行番号, 列番号, DataTable)を実行します。<br>
+</p>
+
+<div class="samplecode">
+＜使用例＞<br>
+<p>
+・選択中のセルのうち、値が「あ」の場合に「ア」に置き換える。
+<code><pre>
+document.dataTable.processSelectedCell(function(row, column){
+	if(document.dataTable.getValue(row, column) == 'あ'){
+		document.dataTable.setValue(row, column, 'ア');
+	}
+});
+</pre></code>
+</p>
+</div>
+
+<h2>メソッド</h2>
+<table class="macro">
+	<tr><th>&lt;戻り値&gt; &lt;メソッド名&gt;(&lt;引数&gt;)</th><th>パラメータ</th><th>説明</th></tr>
+	<tr><td>void proceess(int row, int column, <a href="macro_datatable.html">DataTable</a> dataTable)</td><td>row - 行番号<br>column - 列番号<br>dataTable - DataTableのインスタンス(省略可)<a href="macro_datatable.html">DataTable</a>のインスタンス</td><td>選択中のセル1つ1つについて呼び出されるメソッドです。</td></tr>
+</table>
+</body>
+</html>

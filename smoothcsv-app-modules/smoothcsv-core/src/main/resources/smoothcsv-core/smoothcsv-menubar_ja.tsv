@@ -17,6 +17,7 @@
 	やり直す	grid:redo
 	-
 	コピー	grid:copy
+	区切り文字を付加せずにコピー	grid:copy-without-meta-chars
 	切り取り	grid:cut
 	貼り付け	grid:paste
 	クリア	grid:clear

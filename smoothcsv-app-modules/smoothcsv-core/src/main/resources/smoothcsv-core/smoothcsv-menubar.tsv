@@ -17,6 +17,7 @@ Edit
 	Redo	grid:redo
 	-
 	Copy	grid:copy
+	Copy Without Meta Characters	grid:copy-without-meta-chars
 	Cut	grid:cut
 	Paste	grid:paste
 	-

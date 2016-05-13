@@ -96,6 +96,7 @@ grid:not(:editing)
 	shortcut+z	grid:undo
 	shortcut+y	grid:redo
 	shortcut+c	grid:copy
+	shortcut+alt+c	grid:copy-without-meta-chars
 	shortcut+x	grid:cut
 	shortcut+v	grid:paste
 	shortcut+shift+c	grid:copy-using-file-format

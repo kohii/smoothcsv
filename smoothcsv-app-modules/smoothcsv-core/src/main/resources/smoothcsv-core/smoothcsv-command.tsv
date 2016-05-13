@@ -18,6 +18,7 @@ app:show-settings
 grid:undo	csv_sheet_can_undo
 grid:redo	csv_sheet_can_redo
 grid:copy	not_editing_cell
+grid:copy-without-meta-chars	not_editing_cell
 grid:cut	not_editing_cell
 grid:paste	not_editing_cell
 grid:copy-using-file-format	not_editing_cell

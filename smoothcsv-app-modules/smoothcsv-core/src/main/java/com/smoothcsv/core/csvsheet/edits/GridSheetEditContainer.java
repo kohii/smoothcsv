@@ -17,7 +17,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionSnapshot;
 
 /**
- *
  * @author kohii
  */
 public interface GridSheetEditContainer {

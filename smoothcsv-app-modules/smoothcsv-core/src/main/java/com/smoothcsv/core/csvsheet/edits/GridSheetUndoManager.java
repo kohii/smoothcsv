@@ -13,21 +13,19 @@
  */
 package com.smoothcsv.core.csvsheet.edits;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import lombok.Getter;
-import lombok.Setter;
-
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.framework.event.EventListenerSupport;
 import com.smoothcsv.framework.event.EventListenerSupportImpl;
 import com.smoothcsv.framework.event.SCEvent;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionSnapshot;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
- *
  * @author kohii
  */
 public class GridSheetUndoManager {

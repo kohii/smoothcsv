@@ -15,12 +15,10 @@ package com.smoothcsv.core.macro.apiimpl;
 
 import com.smoothcsv.core.macro.api.Clipboard;
 import com.smoothcsv.swing.utils.ClipboardUtils;
-
 import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 public class ClipboardImpl extends APIBase implements Clipboard {
 

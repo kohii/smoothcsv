@@ -13,14 +13,12 @@
  */
 package com.smoothcsv.framework.selector;
 
-import lombok.EqualsAndHashCode;
-
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author kohii
- *
  */
 @EqualsAndHashCode
 public class FocusOwnerSelector implements CssSelector {

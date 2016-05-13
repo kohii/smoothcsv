@@ -13,25 +13,6 @@
  */
 package com.smoothcsv.core.sort;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.dialog.DialogBase;
@@ -42,10 +23,26 @@ import com.smoothcsv.swing.table.ComboBoxCellEditorRenderer;
 import com.smoothcsv.swing.table.ExTable;
 import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SortCriteriasDialog extends DialogBase {
@@ -62,7 +59,7 @@ public class SortCriteriasDialog extends DialogBase {
    * @param title
    */
   public SortCriteriasDialog(String title, List<ColumnInfo> availableColumns,
-      List<SortCriteria> defaultData) {
+                             List<SortCriteria> defaultData) {
     super(SCApplication.components().getFrame(), title);
     this.availableColumns = availableColumns;
 
@@ -197,7 +194,7 @@ public class SortCriteriasDialog extends DialogBase {
       getComboBoxPanel().getComboBox().setRenderer(new DefaultListCellRenderer() {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-            boolean isSelected, boolean cellHasFocus) {
+                                                      boolean isSelected, boolean cellHasFocus) {
           return super.getListCellRendererComponent(list, ((ColumnInfo) value).getText(), index,
               isSelected, cellHasFocus);
         }
@@ -206,7 +203,7 @@ public class SortCriteriasDialog extends DialogBase {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-        boolean hasFocus, int row, int column) {
+                                                   boolean hasFocus, int row, int column) {
       Component ret =
           super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
       if (value != null) {
@@ -217,7 +214,7 @@ public class SortCriteriasDialog extends DialogBase {
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected,
-        int row, int column) {
+                                                 int row, int column) {
       Component ret = super.getTableCellEditorComponent(table, value, isSelected, row, column);
       selectValue((int) value);
       return ret;

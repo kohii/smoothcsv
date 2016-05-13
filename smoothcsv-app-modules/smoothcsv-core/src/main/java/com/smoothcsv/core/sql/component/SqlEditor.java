@@ -13,26 +13,22 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import java.awt.BorderLayout;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-import lombok.Getter;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
-
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
+import lombok.Getter;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
+
+import java.awt.BorderLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SqlEditor extends JPanel implements SmoothComponent {

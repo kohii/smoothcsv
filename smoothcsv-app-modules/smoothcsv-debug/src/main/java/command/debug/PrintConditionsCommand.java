@@ -13,16 +13,14 @@
  */
 package command.debug;
 
-import java.util.Set;
-
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.condition.Conditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.framework.command.Command;
-import com.smoothcsv.framework.condition.Conditions;
+import java.util.Set;
 
 /**
- *
  * @author kohii
  */
 public class PrintConditionsCommand extends Command {
@@ -33,7 +31,7 @@ public class PrintConditionsCommand extends Command {
   public void run() {
     Set<String> conditions = Conditions.getConditionNames();
     StringBuilder sb = new StringBuilder();
-    for (String s: conditions) {
+    for (String s : conditions) {
       sb.append(s);
       sb.append("\n");
     }

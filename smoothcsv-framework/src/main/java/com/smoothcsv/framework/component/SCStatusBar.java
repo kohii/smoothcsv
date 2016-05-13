@@ -13,12 +13,15 @@
  */
 package com.smoothcsv.framework.component;
 
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import lombok.Getter;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -26,11 +29,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-
-import lombok.Getter;
 
 public class SCStatusBar extends JPanel implements SmoothComponent {
 
@@ -54,10 +52,10 @@ public class SCStatusBar extends JPanel implements SmoothComponent {
     setFont(UIManager.getFont("StatusBar.font"));
 
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {199, 27, 0};
-    gridBagLayout.rowHeights = new int[] {16, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 0.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{199, 27, 0};
+    gridBagLayout.rowHeights = new int[]{16, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
     messageLabel = new JLabel();

@@ -19,7 +19,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 /**
  * @author kohii
- *
  */
 public class ToggleUseFirstRowAsHeaderCommand extends GridCommand {
 

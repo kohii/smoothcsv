@@ -19,7 +19,6 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 /**
- *
  * @author kohii
  */
 public class DebugUtils {
@@ -60,12 +59,12 @@ public class DebugUtils {
   }
 
   public static void sysoutActionMap(JComponent com) {
-     final ActionMap am = com.getActionMap();
-     Object[] keys = am.allKeys();
-    
-     for (Object ks : keys) {
-     System.out.println(ks.toString() + " : " + am.get(ks));
-     }
+    final ActionMap am = com.getActionMap();
+    Object[] keys = am.allKeys();
+
+    for (Object ks : keys) {
+      System.out.println(ks.toString() + " : " + am.get(ks));
+    }
   }
 
 }

@@ -13,22 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JToggleButton;
-
-import lombok.Getter;
-
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.ConsoleInputHandler;
 import com.smoothcsv.core.macro.component.SimpleTabbedPane.TabChangeEvent;
@@ -43,10 +27,23 @@ import com.smoothcsv.swing.components.AwesomeIconToggleButton;
 import com.smoothcsv.swing.components.ExSplitPane;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
+import lombok.Getter;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JToggleButton;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class MacroToolsPanel extends JPanel implements SmoothComponent {
@@ -88,10 +85,10 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
         BorderFactory.createMatteBorder(1, 0, 1, 0, UIConstants.getDefaultBorderColor()));
     add(headerPanel, BorderLayout.NORTH);
     GridBagLayout gbl_headerPanel = new GridBagLayout();
-    gbl_headerPanel.columnWidths = new int[] {0, 0, 0, 0};
-    gbl_headerPanel.rowHeights = new int[] {0, 0};
-    gbl_headerPanel.columnWeights = new double[] {1.0, 0.0, 0.0, Double.MIN_VALUE};
-    gbl_headerPanel.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    gbl_headerPanel.columnWidths = new int[]{0, 0, 0, 0};
+    gbl_headerPanel.rowHeights = new int[]{0, 0};
+    gbl_headerPanel.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
+    gbl_headerPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
     headerPanel.setLayout(gbl_headerPanel);
 
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();

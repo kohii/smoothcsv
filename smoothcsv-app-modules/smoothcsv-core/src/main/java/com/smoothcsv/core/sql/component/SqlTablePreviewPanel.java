@@ -13,12 +13,6 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import java.awt.BorderLayout;
-import java.awt.event.MouseEvent;
-import java.util.Arrays;
-import java.util.EventObject;
-import java.util.List;
-
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
@@ -30,13 +24,18 @@ import com.smoothcsv.swing.gridsheet.event.GridSheetCornerHeaderSelectionListene
 import com.smoothcsv.swing.gridsheet.event.GridSheetFocusListener;
 import com.smoothcsv.swing.gridsheet.event.GridSheetRowHeaderSelectionListener;
 import com.smoothcsv.swing.gridsheet.event.GridSheetSelectionListener;
-import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
+import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
+
+import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
+import java.util.EventObject;
+import java.util.List;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SqlTablePreviewPanel extends AbstractSqlTableDetailsPanel {
@@ -171,16 +170,22 @@ public class SqlTablePreviewPanel extends AbstractSqlTableDetailsPanel {
     public void setValueIsAdjusting(boolean adjusting) {}
 
     @Override
-    public void addSelectionInterval(int rowAnchor, int columnAnchor, int rowLead,
-        int columnLead) {}
+    public void addSelectionInterval(int rowAnchor,
+                                     int columnAnchor,
+                                     int rowLead,
+                                     int columnLead) {}
 
     @Override
-    public void setSelectionInterval(int rowAnchor, int columnAnchor, int rowLead,
-        int columnLead) {}
+    public void setSelectionInterval(int rowAnchor,
+                                     int columnAnchor,
+                                     int rowLead,
+                                     int columnLead) {}
 
     @Override
-    public void setSelectionIntervalNoChangeAnchor(int minRowIndex, int minColumnIndex,
-        int maxRowIndex, int maxColumnIndex) {}
+    public void setSelectionIntervalNoChangeAnchor(int minRowIndex,
+                                                   int minColumnIndex,
+                                                   int maxRowIndex,
+                                                   int maxColumnIndex) {}
 
     @Override
     public void changeLeadSelection(int row, int column, int option) {}

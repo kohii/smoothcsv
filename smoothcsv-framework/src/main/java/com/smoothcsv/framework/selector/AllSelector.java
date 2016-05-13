@@ -17,7 +17,6 @@ import com.smoothcsv.framework.component.support.SmoothComponent;
 
 /**
  * @author kohii
- *
  */
 public class AllSelector implements CssSelector {
 
@@ -27,9 +26,6 @@ public class AllSelector implements CssSelector {
     return instatnce;
   }
 
-  /**
-   * @param selector
-   */
   private AllSelector() {}
 
   @Override

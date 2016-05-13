@@ -13,11 +13,6 @@
  */
 package com.smoothcsv.framework.modular;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Locale;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.Env;
@@ -37,9 +32,13 @@ import com.smoothcsv.framework.selector.SelectorFactory;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.framework.util.SCBundle;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Locale;
+
 /**
  * @author kohii
- *
  */
 public class ModuleEntryPointBase implements ModuleEntryPoint {
 
@@ -101,8 +100,8 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
       return;
     }
     try (InputStream _in = in;
-        ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
-            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
+         ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
+             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
         if (StringUtils.isNotEmpty(rowData[0])) {
@@ -120,8 +119,8 @@ public class ModuleEntryPointBase implements ModuleEntryPoint {
       return;
     }
     try (InputStream _in = in;
-        ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
-            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
+         ArrayCsvReader reader = new ArrayCsvReader(new InputStreamReader(in, "UTF-8"),
+             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       CssSelector prevContext = null;
       String[] rowData;
       boolean ignore = false;

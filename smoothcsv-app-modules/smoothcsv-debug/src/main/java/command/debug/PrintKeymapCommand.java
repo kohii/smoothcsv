@@ -18,7 +18,6 @@ import com.smoothcsv.framework.command.CommandKeymap;
 
 /**
  * @author kohii
- *
  */
 public class PrintKeymapCommand extends Command {
 

@@ -16,7 +16,6 @@ package com.smoothcsv.framework.component.dialog;
 import com.smoothcsv.framework.util.SCBundle;
 
 /**
- *
  * @author kohii
  */
 public class DialogOperation {

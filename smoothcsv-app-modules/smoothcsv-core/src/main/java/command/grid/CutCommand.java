@@ -18,7 +18,6 @@ import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 
 /**
  * @author kohii
- *
  */
 public class CutCommand extends CopyCommand {
 

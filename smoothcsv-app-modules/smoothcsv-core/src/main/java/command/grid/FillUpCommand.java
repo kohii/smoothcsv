@@ -19,13 +19,13 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
 /**
  * @author kohii
- *
  */
 public class FillUpCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
+    ;
 
     GridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
     int minR = selectionModel.getMinRowSelectionIndex();

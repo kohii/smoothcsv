@@ -13,23 +13,22 @@
  */
 package com.smoothcsv.core.sort;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 /**
  * @author kohii
- *
  */
 public class CsvSorter {
 
   public static SortResult sort(List<SortCriteria> criterias, List<List> data,
-      boolean exceptLastEmptyRow) {
+                                boolean exceptLastEmptyRow) {
     int rowSize = data.size();
     boolean exceptLastRow = exceptLastEmptyRow && data.get(rowSize - 1).size() == 0;
     if (exceptLastRow) {

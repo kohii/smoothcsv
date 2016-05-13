@@ -13,18 +13,6 @@
  */
 package com.smoothcsv.core.component;
 
-import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
@@ -34,9 +22,19 @@ import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.RegulatedTextField;
 
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvPropertiesDialog extends DialogBase {
@@ -51,7 +49,7 @@ public class CsvPropertiesDialog extends DialogBase {
   private RegulatedTextField colNum;
 
   public CsvPropertiesDialog(Dialog parent, String title, boolean autoDeterminedOptionEnabled,
-      boolean readMode, boolean showSizeOption) {
+                             boolean readMode, boolean showSizeOption) {
     super(parent, title);
     setAutoPack(true);
     this.autoDeterminedOptionEnabled = autoDeterminedOptionEnabled;
@@ -61,7 +59,7 @@ public class CsvPropertiesDialog extends DialogBase {
   }
 
   public CsvPropertiesDialog(Frame parent, String title, boolean autoDeterminedOptionEnabled,
-      boolean readMode, boolean showSizeOption) {
+                             boolean readMode, boolean showSizeOption) {
     super(parent, title);
     setAutoPack(true);
     this.autoDeterminedOptionEnabled = autoDeterminedOptionEnabled;
@@ -90,10 +88,10 @@ public class CsvPropertiesDialog extends DialogBase {
         .setBorder(BorderFactory.createTitledBorder(CoreBundle.get("key.gridSize")));
 
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 0.0, 0.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     columnAndRowSizePanel.setLayout(gridBagLayout);
 
     JLabel label_4 = new JLabel("　");

@@ -13,16 +13,15 @@
  */
 package com.smoothcsv.core.macro;
 
-import java.lang.reflect.Array;
-
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 import org.mozilla.javascript.WrapFactory;
 
+import java.lang.reflect.Array;
+
 /**
  * @author kohii
- *
  */
 public class SCWrapFactory extends WrapFactory {
 

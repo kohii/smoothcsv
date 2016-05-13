@@ -13,11 +13,16 @@
  */
 package com.smoothcsv.framework.component;
 
+import com.smoothcsv.framework.command.CommandDef;
+import com.smoothcsv.framework.command.CommandKeymap;
+import com.smoothcsv.framework.command.CommandRegistry;
+import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.Action;
@@ -27,12 +32,6 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.border.Border;
-
-import com.smoothcsv.framework.command.CommandDef;
-import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRegistry;
-import com.smoothcsv.framework.condition.Condition;
-import com.smoothcsv.swing.icon.AwesomeIcon;
 
 public class SCToolBar extends JToolBar {
 
@@ -84,9 +83,6 @@ public class SCToolBar extends JToolBar {
 
     private final String commandId;
 
-    /**
-     * @param commandIds
-     */
     public ToolBarAction(CommandDef commandDef, Icon icon, String caption) {
       this.commandId = commandDef.getCommandId();
       Condition enableCondition = commandDef.getEnableWhen();

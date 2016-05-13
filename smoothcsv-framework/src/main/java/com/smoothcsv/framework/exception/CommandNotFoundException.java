@@ -15,7 +15,6 @@ package com.smoothcsv.framework.exception;
 
 /**
  * @author kohii
- *
  */
 public class CommandNotFoundException extends RuntimeException {
 

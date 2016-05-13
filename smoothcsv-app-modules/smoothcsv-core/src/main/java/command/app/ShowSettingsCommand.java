@@ -19,7 +19,6 @@ import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.preference.PreferencesDialog;
 
 /**
- *
  * @author kohii
  */
 public class ShowSettingsCommand extends Command {

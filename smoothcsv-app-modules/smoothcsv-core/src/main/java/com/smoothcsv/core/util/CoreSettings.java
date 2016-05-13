@@ -14,12 +14,10 @@
 package com.smoothcsv.core.util;
 
 import com.smoothcsv.framework.setting.Settings;
-
 import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 public class CoreSettings extends Settings {
 

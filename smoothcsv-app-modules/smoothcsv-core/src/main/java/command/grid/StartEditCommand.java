@@ -13,16 +13,15 @@
  */
 package command.grid;
 
-import javax.swing.JComponent;
-
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor.GridTableTextField;
 
+import javax.swing.JComponent;
+
 /**
  * @author kohii
- *
  */
 public class StartEditCommand extends GridCommand {
 

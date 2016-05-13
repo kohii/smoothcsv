@@ -18,7 +18,6 @@ import com.smoothcsv.core.macro.component.MacroToolsPanel;
 
 /**
  * @author kohii
- *
  */
 public class ToggleConsoleCommand extends VisibleComponentCommandBase<MacroToolsPanel> {
 

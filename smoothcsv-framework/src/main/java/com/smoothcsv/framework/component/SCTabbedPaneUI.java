@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.framework.component;
 
+import com.smoothcsv.swing.utils.SwingUtils;
+
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -21,17 +23,13 @@ import java.awt.Insets;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-import com.smoothcsv.swing.utils.SwingUtils;
-
 /**
  * @author kohii
- *
  */
 public class SCTabbedPaneUI extends BasicTabbedPaneUI {
 
@@ -97,14 +95,14 @@ public class SCTabbedPaneUI extends BasicTabbedPaneUI {
   }
 
   protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y,
-      int w, int h, boolean isSelected) {
+                                    int w, int h, boolean isSelected) {
     Graphics2D g2D = (Graphics2D) g;
     g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     int[] xp =
-        new int[] {x - 4, x - 1, x + 3, x + 4, x + 6, x + w - 6, x + w - 4, x + w - 3, x + w + 1,
+        new int[]{x - 4, x - 1, x + 3, x + 4, x + 6, x + w - 6, x + w - 4, x + w - 3, x + w + 1,
             x + w + 4};
-    int[] yp = new int[] {y + h, y + h - 2, y + 3, y + 1, y, y, y + 1, y + 3, y + h - 2, y + h};
+    int[] yp = new int[]{y + h, y + h - 2, y + 3, y + 1, y, y, y + 1, y + 3, y + h - 2, y + h};
 
     Polygon shape = new Polygon(xp, yp, xp.length);
 
@@ -131,12 +129,12 @@ public class SCTabbedPaneUI extends BasicTabbedPaneUI {
   }
 
   protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w,
-      int h, boolean isSelected) {
+                                int h, boolean isSelected) {
     // Do nothing
   }
 
   protected void paintContentBorderTopEdge(Graphics g, int tabPlacement, int selectedIndex, int x,
-      int y, int w, int h) {
+                                           int y, int w, int h) {
     g.setColor(tabBorderColor);
     g.drawLine(x, y, x + w, y);
 
@@ -162,22 +160,22 @@ public class SCTabbedPaneUI extends BasicTabbedPaneUI {
   }
 
   protected void paintContentBorderRightEdge(Graphics g, int tabPlacement, int selectedIndex,
-      int x, int y, int w, int h) {
+                                             int x, int y, int w, int h) {
     // Do nothing
   }
 
   protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement, int selectedIndex, int x,
-      int y, int w, int h) {
+                                            int y, int w, int h) {
     // Do nothing
   }
 
   protected void paintContentBorderBottomEdge(Graphics g, int tabPlacement, int selectedIndex,
-      int x, int y, int w, int h) {
+                                              int x, int y, int w, int h) {
     // Do nothing
   }
 
   protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
-      Rectangle iconRect, Rectangle textRect, boolean isSelected) {
+                                     Rectangle iconRect, Rectangle textRect, boolean isSelected) {
     // Do nothing
   }
 

@@ -13,16 +13,14 @@
  */
 package com.smoothcsv.framework.preference;
 
+import com.smoothcsv.framework.setting.Settings;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
 import javax.swing.JCheckBox;
-
-import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class PrefCheckBox extends JCheckBox {

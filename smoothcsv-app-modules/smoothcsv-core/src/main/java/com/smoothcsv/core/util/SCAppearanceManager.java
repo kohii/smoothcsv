@@ -13,19 +13,16 @@
  */
 package com.smoothcsv.core.util;
 
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.Getter;
-
 /**
  * @author kohii
- *
  */
 public class SCAppearanceManager {
 

@@ -19,7 +19,6 @@ import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 
 /**
  * @author kohii
- *
  */
 public class ClearCommand extends GridCommand {
 

@@ -21,7 +21,6 @@ import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 /**
  * @author kohii
- *
  */
 public class DeleteCellCommand extends GridCommand {
 

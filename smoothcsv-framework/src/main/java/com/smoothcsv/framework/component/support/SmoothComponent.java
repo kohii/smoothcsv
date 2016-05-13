@@ -16,10 +16,8 @@ package com.smoothcsv.framework.component.support;
 import java.awt.event.MouseEvent;
 
 
-
 /**
  * @author kohii
- *
  */
 public interface SmoothComponent {
 

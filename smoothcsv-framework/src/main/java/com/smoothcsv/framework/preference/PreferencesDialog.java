@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.framework.preference;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.dialog.DialogBase;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,7 +26,6 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -35,13 +38,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.dialog.DialogBase;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class PreferencesDialog extends DialogBase {
@@ -66,7 +64,7 @@ public class PreferencesDialog extends DialogBase {
     sideBar.setCellRenderer(new DefaultListCellRenderer() {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-          boolean isSelected, boolean cellHasFocus) {
+                                                    boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 10));
         return this;

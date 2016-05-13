@@ -13,19 +13,18 @@
  */
 package com.smoothcsv.framework.command;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.condition.Condition;
 
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
 /**
  * @author kohii
- *
  */
 public class CommandDef {
   private final String commandId;
@@ -52,7 +51,6 @@ public class CommandDef {
   }
 
   /**
-   * @param commandIds
    * @return the command
    */
   @SuppressWarnings("unchecked")
@@ -109,7 +107,7 @@ public class CommandDef {
       return false;
     }
     Condition enableWhen = getEnableWhen();
-    return enableWhen == null ? true : enableWhen.getValue();
+    return enableWhen == null || enableWhen.getValue();
   }
 
   public void setEnabled(Boolean enabled) {

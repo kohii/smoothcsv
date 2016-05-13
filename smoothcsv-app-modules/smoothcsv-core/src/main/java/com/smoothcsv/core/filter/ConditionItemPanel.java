@@ -13,6 +13,13 @@
  */
 package com.smoothcsv.core.filter;
 
+import com.smoothcsv.core.find.Regex;
+import com.smoothcsv.framework.component.dialog.MessageDialogs;
+import com.smoothcsv.framework.util.SCBundle;
+import com.smoothcsv.swing.components.RegulatedTextField;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.GridBagConstraints;
@@ -24,7 +31,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -32,14 +38,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.smoothcsv.core.find.Regex;
-import com.smoothcsv.framework.component.dialog.MessageDialogs;
-import com.smoothcsv.framework.util.SCBundle;
-import com.smoothcsv.swing.components.RegulatedTextField;
-import com.smoothcsv.swing.icon.AwesomeIcon;
 
 public class ConditionItemPanel extends JPanel {
 
@@ -53,10 +51,10 @@ public class ConditionItemPanel extends JPanel {
 
   public ConditionItemPanel(final Dialog parent) {
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0, 0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
     textField = new RegulatedTextField(RegulatedTextField.Type.NUMERIC, 8);
@@ -105,10 +103,10 @@ public class ConditionItemPanel extends JPanel {
     JPanel panel_1 = new JPanel();
     lowerPanel.add(panel_1);
     GridBagLayout gbl_panel_1 = new GridBagLayout();
-    gbl_panel_1.columnWidths = new int[] {21, 0, 0, 0, 0, 0};
-    gbl_panel_1.rowHeights = new int[] {21, 0};
-    gbl_panel_1.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-    gbl_panel_1.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+    gbl_panel_1.columnWidths = new int[]{21, 0, 0, 0, 0, 0};
+    gbl_panel_1.rowHeights = new int[]{21, 0};
+    gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
     panel_1.setLayout(gbl_panel_1);
 
     checkBox_3 = new JLabel(AwesomeIcon.create(AwesomeIcon.FA_PLUS_CIRCLE));
@@ -217,10 +215,10 @@ public class ConditionItemPanel extends JPanel {
 
     public ComparedValuePanel() {
       GridBagLayout gbl_panel_1 = new GridBagLayout();
-      gbl_panel_1.columnWidths = new int[] {0, 0, 0, 0};
-      gbl_panel_1.rowHeights = new int[] {0, 0};
-      gbl_panel_1.columnWeights = new double[] {0.0, 1.0, 0.0, Double.MIN_VALUE};
-      gbl_panel_1.rowWeights = new double[] {0.0, Double.MIN_VALUE};
+      gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
+      gbl_panel_1.rowHeights = new int[]{0, 0};
+      gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+      gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
       setLayout(gbl_panel_1);
 
       checkBox_3 = new JLabel(AwesomeIcon.create(AwesomeIcon.FA_MINUS_CIRCLE));

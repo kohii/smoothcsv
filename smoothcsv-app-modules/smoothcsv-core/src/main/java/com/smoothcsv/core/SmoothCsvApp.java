@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.core;
 
-import java.io.File;
-import java.util.List;
-import java.util.Locale;
-
 import com.smoothcsv.core.component.SmoothCsvComponentManager;
 import com.smoothcsv.core.handler.SmoothCsvErrorHandler;
 import com.smoothcsv.core.util.CoreSettings;
@@ -25,12 +21,14 @@ import com.smoothcsv.framework.component.support.CommandMapFactory;
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
 import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
-
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
 
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
+
 /**
- *
  * @author kohii
  */
 public class SmoothCsvApp extends SCApplication {

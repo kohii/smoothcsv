@@ -15,7 +15,6 @@ package com.smoothcsv.framework.exception;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class IllegalConfigException extends AppException {

@@ -13,17 +13,16 @@
  */
 package com.smoothcsv.core.filter;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class FilterOperationPanel extends JPanel {

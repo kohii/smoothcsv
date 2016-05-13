@@ -13,15 +13,6 @@
  */
 package com.smoothcsv.core.macro.apiimpl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.mozilla.javascript.NativeArray;
-import org.mozilla.javascript.NativeObject;
-import org.mozilla.javascript.ScriptRuntime;
-
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
@@ -34,13 +25,19 @@ import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.core.sort.ValueType;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 import com.smoothcsv.swing.gridsheet.model.CellRect;
-
 import command.grid.PasteCommand;
 import command.grid.PasteCommand.PasteRange;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.mozilla.javascript.NativeArray;
+import org.mozilla.javascript.NativeObject;
+import org.mozilla.javascript.ScriptRuntime;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author kohii
- *
  */
 public class RangeImpl extends APIBase implements Range {
 

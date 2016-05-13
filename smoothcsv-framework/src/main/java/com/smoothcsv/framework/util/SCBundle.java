@@ -20,7 +20,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- *
  * @author kohii
  */
 public class SCBundle {

@@ -22,7 +22,6 @@ import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 
 /**
  * @author kohii
- *
  */
 public class AutofitColumnWidthCommand extends GridCommand {
 

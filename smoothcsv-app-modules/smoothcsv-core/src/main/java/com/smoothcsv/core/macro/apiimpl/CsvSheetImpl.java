@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.core.macro.apiimpl;
 
-import java.io.File;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
@@ -28,17 +24,18 @@ import com.smoothcsv.core.macro.api.Range;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
-
 import command.app.CloseCommand;
 import command.app.SaveAsCommand;
 import command.app.SaveCommand;
 import command.grid.AutofitColumnWidthCommand;
 import command.grid.RedoCommand;
 import command.grid.UndoCommand;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
 
 /**
  * @author kohii
- *
  */
 public class CsvSheetImpl extends APIBase implements CsvSheet {
 
@@ -193,7 +190,8 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
   @Override
   public CsvSheet insertRowsBefore(int beforePosition, int howMany) {
     CsvGridSheetPane gridSheetPane = getGridSheet();
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
+    ;
     GridSheetModel model = gridSheetPane.getModel();
     model.insertRow(beforePosition - 1, howMany);
     gridSheetPane.getSelectionModel().clearHeaderSelection();
@@ -242,7 +240,8 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
   @Override
   public CsvSheet insertColumnsBefore(int beforePosition, int howMany) {
     CsvGridSheetPane gridSheetPane = getGridSheet();
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
+    ;
     GridSheetModel model = gridSheetPane.getModel();
     model.insertColumn(beforePosition - 1, howMany);
     gridSheetPane.getSelectionModel().clearHeaderSelection();

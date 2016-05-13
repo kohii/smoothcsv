@@ -13,14 +13,13 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import java.io.File;
-
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 import com.smoothcsv.framework.component.view.ViewInfo;
 
+import java.io.File;
+
 /**
- *
  * @author kohii
  */
 public class CsvSheetViewInfo extends ViewInfo {

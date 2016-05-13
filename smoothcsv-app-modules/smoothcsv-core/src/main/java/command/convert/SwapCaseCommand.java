@@ -13,13 +13,11 @@
  */
 package command.convert;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.smoothcsv.core.command.ConvertCommandBase;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author kohii
- *
  */
 public class SwapCaseCommand extends ConvertCommandBase {
 

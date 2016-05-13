@@ -22,7 +22,6 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
 /**
  * @author kohii
- *
  */
 public class InsertColumnsLeftCommand extends GridCommand {
 
@@ -32,7 +31,8 @@ public class InsertColumnsLeftCommand extends GridCommand {
   }
 
   public void run(CsvGridSheetPane gridSheetPane, int[] selectedColumnIndices) {
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
+    ;
 
     GridSheetModel model = gridSheetPane.getModel();
 

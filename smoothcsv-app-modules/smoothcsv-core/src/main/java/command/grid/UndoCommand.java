@@ -19,7 +19,6 @@ import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 
 /**
  * @author kohii
- *
  */
 public class UndoCommand extends GridCommand {
 
@@ -29,7 +28,7 @@ public class UndoCommand extends GridCommand {
   }
 
   public static boolean undo(CsvGridSheetPane gridSheetPane) {
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
     GridSheetUndoManager undoManager = gridSheetPane.getUndoManager();
     if (undoManager.canUndo()) {
       undoManager.undo();

@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 
 /**
  * @author kohii
- *
  */
 public class OrCondition extends Condition {
   private final Condition condition0;

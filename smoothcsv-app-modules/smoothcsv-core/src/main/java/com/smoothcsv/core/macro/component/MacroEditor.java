@@ -13,17 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import java.awt.BorderLayout;
-import java.util.function.Consumer;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
-
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
@@ -33,12 +22,19 @@ import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
-
 import lombok.Getter;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
+
+import java.awt.BorderLayout;
+import java.util.function.Consumer;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class MacroEditor extends JPanel implements SmoothComponent {

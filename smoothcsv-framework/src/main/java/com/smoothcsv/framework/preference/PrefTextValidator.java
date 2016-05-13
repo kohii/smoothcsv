@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author kohii
- *
  */
 public interface PrefTextValidator {
 

@@ -13,15 +13,13 @@
  */
 package com.smoothcsv.core.macro;
 
-import java.util.function.Consumer;
-
+import com.smoothcsv.core.macro.bridge.ConsoleBridge;
 import org.mozilla.javascript.NativeJavaObject;
 
-import com.smoothcsv.core.macro.bridge.ConsoleBridge;
+import java.util.function.Consumer;
 
 /**
  * @author kohii
- *
  */
 public class ConsoleInputHandler implements Consumer<String> {
 
@@ -35,7 +33,7 @@ public class ConsoleInputHandler implements Consumer<String> {
         && ((NativeJavaObject) result).unwrap() == ConsoleBridge.CONSOLE_LOG_INVOKED) {
       // do nothing
     } else {
-      ConsoleBridge.log(new Object[] {result});
+      ConsoleBridge.log(new Object[]{result});
     }
   }
 }

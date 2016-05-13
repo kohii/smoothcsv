@@ -22,7 +22,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
- *
  * @author kohii
  */
 public class JarLoader {
@@ -38,9 +37,9 @@ public class JarLoader {
   public static void load(URI u) throws IOException {
     URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
     try {
-      Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] {URL.class});
+      Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
       method.setAccessible(true);
-      method.invoke(sysloader, new Object[] {u});
+      method.invoke(sysloader, new Object[]{u});
     } catch (NoSuchMethodException | SecurityException | IllegalAccessException
         | IllegalArgumentException | InvocationTargetException e) {
       throw new IOException("Error, could not load Jar file.", e);

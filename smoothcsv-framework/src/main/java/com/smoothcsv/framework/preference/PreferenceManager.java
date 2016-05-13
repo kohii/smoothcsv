@@ -19,7 +19,6 @@ import java.util.List;
 
 /**
  * @author kohii
- *
  */
 public class PreferenceManager {
 

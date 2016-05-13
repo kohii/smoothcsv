@@ -18,7 +18,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 /**
  * @author kohii
- *
  */
 public class StopEditCommand extends GridCommand {
 

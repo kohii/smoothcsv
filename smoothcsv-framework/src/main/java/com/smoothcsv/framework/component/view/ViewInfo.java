@@ -16,7 +16,6 @@ package com.smoothcsv.framework.component.view;
 import java.beans.PropertyChangeSupport;
 
 /**
- *
  * @author kohii
  */
 public abstract class ViewInfo {

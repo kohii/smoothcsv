@@ -14,7 +14,6 @@
 package com.smoothcsv.framework.exception;
 
 /**
- *
  * @author kohii
  */
 public class AppException extends RuntimeException {

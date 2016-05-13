@@ -25,7 +25,6 @@ import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.setting.Settings;
 
 /**
- *
  * @author kohii
  */
 public class NewFileCommand extends Command {

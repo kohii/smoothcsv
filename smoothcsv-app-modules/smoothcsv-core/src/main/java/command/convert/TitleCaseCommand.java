@@ -13,13 +13,11 @@
  */
 package command.convert;
 
-import org.apache.commons.lang3.text.WordUtils;
-
 import com.smoothcsv.core.command.ConvertCommandBase;
+import org.apache.commons.lang3.text.WordUtils;
 
 /**
  * @author kohii
- *
  */
 public class TitleCaseCommand extends ConvertCommandBase {
 

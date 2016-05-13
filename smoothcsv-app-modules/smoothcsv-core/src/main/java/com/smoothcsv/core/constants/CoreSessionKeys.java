@@ -15,7 +15,6 @@ package com.smoothcsv.core.constants;
 
 /**
  * @author kohii
- *
  */
 public interface CoreSessionKeys {
   String WINDOW_WIDTH = "core.windowWidth";

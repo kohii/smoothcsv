@@ -13,22 +13,19 @@
  */
 package com.smoothcsv.framework.modular;
 
+import com.smoothcsv.commons.exception.IORuntimeException;
+import com.smoothcsv.framework.exception.SystemException;
+import com.smoothcsv.framework.util.MessageBundles;
+import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
-import lombok.Getter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.smoothcsv.commons.exception.IORuntimeException;
-import com.smoothcsv.framework.exception.SystemException;
-import com.smoothcsv.framework.util.MessageBundles;
-
 /**
  * @author kohii
- *
  */
 public class Module {
 

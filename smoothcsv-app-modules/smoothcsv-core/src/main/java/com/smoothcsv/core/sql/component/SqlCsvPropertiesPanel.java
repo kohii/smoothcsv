@@ -13,19 +13,17 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import java.awt.BorderLayout;
+import com.smoothcsv.core.component.CsvMetaPanel;
+import com.smoothcsv.core.sql.model.SqlTableInfo;
 
+import java.awt.BorderLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.smoothcsv.core.component.CsvMetaPanel;
-import com.smoothcsv.core.sql.model.SqlTableInfo;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SqlCsvPropertiesPanel extends AbstractSqlTableDetailsPanel {

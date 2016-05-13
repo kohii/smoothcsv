@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.core.preference;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
@@ -27,9 +20,14 @@ import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.swing.components.ExLabel;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class AppearenceEditorPrefPanel extends JPanel {
@@ -37,10 +35,10 @@ public class AppearenceEditorPrefPanel extends JPanel {
   public AppearenceEditorPrefPanel() {
     setBorder(null);
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 22, 0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 22, 0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
     JLabel lblAutofitColumnWidth = new PrefTitleLabel("Auto-fit Column Width");

@@ -13,22 +13,19 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import com.smoothcsv.swing.gridsheet.GridSheetTable;
+import com.smoothcsv.swing.gridsheet.GridSheetUtils;
+import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
+import lombok.Getter;
+
 import java.awt.Color;
 import java.awt.Component;
-
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.smoothcsv.swing.gridsheet.GridSheetTable;
-import com.smoothcsv.swing.gridsheet.GridSheetUtils;
-import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
-
-import lombok.Getter;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvGridSheetCellRenderer extends JLabel implements GridSheetCellRenderer {
@@ -52,7 +49,7 @@ public class CsvGridSheetCellRenderer extends JLabel implements GridSheetCellRen
 
   @Override
   public Component getGridCellRendererComponent(GridSheetTable table, Object value,
-      boolean isSelected, boolean hasFocus, int row, int column) {
+                                                boolean isSelected, boolean hasFocus, int row, int column) {
 
     setValue(value);
 

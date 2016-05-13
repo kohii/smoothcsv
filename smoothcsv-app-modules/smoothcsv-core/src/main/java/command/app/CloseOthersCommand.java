@@ -20,7 +20,6 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
  * @author kohii
- *
  */
 public class CloseOthersCommand extends Command {
 

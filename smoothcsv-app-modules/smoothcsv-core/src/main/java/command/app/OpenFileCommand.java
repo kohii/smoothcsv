@@ -13,17 +13,6 @@
  */
 package command.app;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.List;
-
-import javax.swing.JFileChooser;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.IORuntimeException;
 import com.smoothcsv.commons.exception.UnexpectedException;
@@ -48,11 +37,18 @@ import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.framework.setting.Settings;
-
 import command.grid.AutofitColumnWidthCommand;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.List;
+import javax.swing.JFileChooser;
 
 /**
- *
  * @author kohii
  */
 public class OpenFileCommand extends Command {
@@ -135,7 +131,7 @@ public class OpenFileCommand extends Command {
 
       // TODO Should I use BufferedReader?
       try (InputStreamReader r =
-          new InputStreamReader(new FileInputStream(file), properties.getCharset())) {
+               new InputStreamReader(new FileInputStream(file), properties.getCharset())) {
         char[] chars = new char[2048];
         int nread;
         if ((nread = r.read(chars)) != -1) {

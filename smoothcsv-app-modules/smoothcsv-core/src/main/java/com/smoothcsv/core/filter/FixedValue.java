@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.filter;
 
+import com.smoothcsv.core.find.Regex;
+
 import java.math.BigDecimal;
 import java.util.List;
-
-import com.smoothcsv.core.find.Regex;
 
 /**
  * @author kohii

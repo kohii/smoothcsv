@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.framework.preference;
 
+import com.smoothcsv.framework.setting.Settings;
+import com.smoothcsv.swing.components.RegulatedTextField;
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.HierarchyEvent;
@@ -20,14 +24,8 @@ import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.smoothcsv.framework.setting.Settings;
-import com.smoothcsv.swing.components.RegulatedTextField;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class PrefTextField extends RegulatedTextField {

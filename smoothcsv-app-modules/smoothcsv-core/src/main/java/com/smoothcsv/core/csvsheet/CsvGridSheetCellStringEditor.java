@@ -13,23 +13,20 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import java.awt.event.InputMethodEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.KeyStroke;
-
 import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.event.InputMethodEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.KeyStroke;
+
 /**
  * @author kohii
- *
  */
 public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
@@ -44,7 +41,7 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
   @Override
   public boolean prepare(GridSheetTable table, Object value, boolean isSelected, int row,
-      int column) {
+                         int column) {
     CsvGridSheetCellValuePanel.getInstance().getUndoManager().discardAllEdits();
     return true;
   }

@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Arrays;
-import java.util.function.Consumer;
-
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
@@ -45,13 +38,18 @@ import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetColorProvider;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
 import com.smoothcsv.swing.utils.SwingUtils;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvGridSheetPane extends GridSheetPane {
@@ -177,7 +175,7 @@ public class CsvGridSheetPane extends GridSheetPane {
 
       @Override
       public Component getGridCellRendererComponent(GridSheetTable table, Object value,
-          boolean isSelected, boolean hasFocus, int row, int column) {
+                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         super.getGridCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (value != null) {
           if (value instanceof String) {

@@ -13,10 +13,6 @@
  */
 package command.grid;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -27,15 +23,18 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class SortCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
     List<SortCriteria> criterias = chooseSortCriteria(gridSheetPane);
     if (criterias != null) {
       ((CsvGridSheetModel) gridSheetPane.getModel()).sort(criterias);
@@ -62,7 +61,7 @@ public class SortCommand extends GridCommand {
   }
 
   public static List<SortCriteria> chooseSortCriteria(CsvGridSheetPane gridSheetPane,
-      List<ColumnInfo> columns, List<SortCriteria> defaultSortCriterias) {
+                                                      List<ColumnInfo> columns, List<SortCriteria> defaultSortCriterias) {
 
     if (defaultSortCriterias == null || defaultSortCriterias.isEmpty()) {
       defaultSortCriterias = Arrays.asList(new SortCriteria(columns.get(0).getIndex()));

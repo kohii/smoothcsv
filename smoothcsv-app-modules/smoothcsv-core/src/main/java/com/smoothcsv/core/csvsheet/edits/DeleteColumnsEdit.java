@@ -17,7 +17,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 
 /**
  * @author kohii
- *
  */
 public class DeleteColumnsEdit implements GridSheetUndableEdit {
 
@@ -36,7 +35,7 @@ public class DeleteColumnsEdit implements GridSheetUndableEdit {
   @Override
   public void undo(CsvGridSheetModel model) {
     model.insertColumn(index, data);
-    
+
   }
 
   @Override

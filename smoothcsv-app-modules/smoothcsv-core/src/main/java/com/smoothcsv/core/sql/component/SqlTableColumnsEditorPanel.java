@@ -13,34 +13,27 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.sql.JDBCType;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import com.smoothcsv.core.sql.model.SqlColumnInfo;
 import com.smoothcsv.core.sql.model.SqlTableInfo;
 import com.smoothcsv.swing.table.ExTable;
 import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.sql.JDBCType;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SqlTableColumnsEditorPanel extends AbstractSqlTableDetailsPanel {
@@ -49,10 +42,10 @@ public class SqlTableColumnsEditorPanel extends AbstractSqlTableDetailsPanel {
 
   public SqlTableColumnsEditorPanel() {
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 1.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 1.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
     chckbxUseTheFirst = new JCheckBox("Use The First Line As Column Names");

@@ -23,7 +23,6 @@ import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 /**
  * @author kohii
- *
  */
 public class AutofitColumnWidthToSelectedCellCommand extends GridCommand {
 

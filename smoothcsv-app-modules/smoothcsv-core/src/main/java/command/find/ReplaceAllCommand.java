@@ -27,7 +27,6 @@ import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii
- *
  */
 public class ReplaceAllCommand extends GridCommand {
 

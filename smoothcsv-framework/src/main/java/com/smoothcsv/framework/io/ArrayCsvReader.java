@@ -13,14 +13,13 @@
  */
 package com.smoothcsv.framework.io;
 
-import java.io.Reader;
-
 import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.reader.AbstractCsvReader;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 
+import java.io.Reader;
+
 /**
- *
  * @author kohii
  */
 public class ArrayCsvReader extends AbstractCsvReader<String[]> {

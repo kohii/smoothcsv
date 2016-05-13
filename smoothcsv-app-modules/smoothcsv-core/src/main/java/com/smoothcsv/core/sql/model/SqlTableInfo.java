@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * @author kohii
- *
  */
 public interface SqlTableInfo {
 

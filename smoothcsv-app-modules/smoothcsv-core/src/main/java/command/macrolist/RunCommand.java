@@ -13,23 +13,19 @@
  */
 package command.macrolist;
 
-import java.io.File;
-
 import com.smoothcsv.core.command.VisibleComponentCommandBase;
 import com.smoothcsv.core.macro.Macro;
 import com.smoothcsv.core.macro.SCAppMacroRuntime;
 import com.smoothcsv.core.macro.component.MacroListPanel;
 import com.smoothcsv.framework.exception.AbortionException;
 
+import java.io.File;
+
 /**
  * @author kohii
- *
  */
 public class RunCommand extends VisibleComponentCommandBase<MacroListPanel> {
 
-  /**
-   * @param cssSelector
-   */
   public RunCommand() {
     super("macro-list");
   }

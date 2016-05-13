@@ -18,12 +18,10 @@ import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.gridsheet.GridSheetCornerHeader;
 import com.smoothcsv.swing.gridsheet.GridSheetPane;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
-
 import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvGridSheetCornerHeader extends GridSheetCornerHeader implements SmoothComponent {
@@ -38,6 +36,6 @@ public class CsvGridSheetCornerHeader extends GridSheetCornerHeader implements S
   public CsvGridSheetCornerHeader(GridSheetPane gridSheetPane, GridSheetHeaderRenderer renderer) {
     super(gridSheetPane, renderer);
     componentSupport = new SmoothComponentSupport(this, "grid-cornerheader");
-    componentSupport.setStyleClasses(new String[] {"grid-header"});
+    componentSupport.setStyleClasses(new String[]{"grid-header"});
   }
 }

@@ -15,7 +15,6 @@ package com.smoothcsv.core.component;
 
 /**
  * @author kohii
- *
  */
 public class CsvReadOptionPanel {
 

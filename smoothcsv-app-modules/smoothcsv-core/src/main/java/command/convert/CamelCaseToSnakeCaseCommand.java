@@ -18,7 +18,6 @@ import com.smoothcsv.core.command.ConvertCommandBase;
 
 /**
  * @author kohii
- *
  */
 public class CamelCaseToSnakeCaseCommand extends ConvertCommandBase {
 

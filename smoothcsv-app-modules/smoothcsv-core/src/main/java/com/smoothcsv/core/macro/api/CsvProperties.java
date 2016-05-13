@@ -21,7 +21,6 @@ import com.smoothcsv.csv.NewlineCharacter;
 
 /**
  * @author kohii
- *
  */
 public class CsvProperties extends APIBase {
 

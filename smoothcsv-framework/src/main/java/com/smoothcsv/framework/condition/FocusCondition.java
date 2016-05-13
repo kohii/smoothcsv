@@ -13,16 +13,15 @@
  */
 package com.smoothcsv.framework.condition;
 
-import java.awt.Component;
-import java.util.Objects;
-
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.selector.SelectorFactory;
 
+import java.awt.Component;
+import java.util.Objects;
+
 /**
- *
  * @author kohii
  */
 public class FocusCondition extends Condition {

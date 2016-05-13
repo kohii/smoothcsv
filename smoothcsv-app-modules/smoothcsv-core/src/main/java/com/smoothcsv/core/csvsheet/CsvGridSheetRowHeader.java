@@ -13,21 +13,19 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.gridsheet.GridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetRowHeader;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
-
 import lombok.Getter;
+
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CsvGridSheetRowHeader extends GridSheetRowHeader implements SmoothComponent {
@@ -42,7 +40,7 @@ public class CsvGridSheetRowHeader extends GridSheetRowHeader implements SmoothC
   public CsvGridSheetRowHeader(GridSheetPane gridSheetPane, GridSheetHeaderRenderer renderer) {
     super(gridSheetPane, renderer);
     componentSupport = new SmoothComponentSupport(this, "grid-rowheader");
-    componentSupport.setStyleClasses(new String[] {"grid-header"});
+    componentSupport.setStyleClasses(new String[]{"grid-header"});
   }
 
   @Override

@@ -19,7 +19,6 @@ import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 
 /**
  * @author kohii
- *
  */
 public abstract class ConvertCommandBase extends GridCommand {
 

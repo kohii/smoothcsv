@@ -13,22 +13,19 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-
-import javax.swing.Action;
-import javax.swing.ActionMap;
-
+import com.smoothcsv.commons.utils.StringUtils;
+import com.smoothcsv.framework.command.CommandRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.commons.utils.StringUtils;
-import com.smoothcsv.framework.command.CommandRegistry;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import javax.swing.Action;
+import javax.swing.ActionMap;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CommandActionMap extends ActionMap {
@@ -64,7 +61,7 @@ public class CommandActionMap extends ActionMap {
           boolean isEnabled = CommandRegistry.instance().isEnabled(id);
           LOG.debug("Command handler found. id:{}, enabled:{}", id, isEnabled);
           if (isEnabled) {
-            return createActionFromCommand(new String[] {id});
+            return createActionFromCommand(new String[]{id});
           }
         } else {
           LOG.warn("Command doesn't exists. id:{}", id);

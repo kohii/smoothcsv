@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.core.component;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.swing.components.LinkLabel;
+import com.smoothcsv.swing.utils.SwingUtils;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -20,7 +24,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,13 +32,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.swing.components.LinkLabel;
-import com.smoothcsv.swing.utils.SwingUtils;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class AboutDialog extends JDialog {
@@ -47,17 +45,16 @@ public class AboutDialog extends JDialog {
     ResourceBundle bundle = ResourceBundle.getBundle("application");
 
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 0.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     getContentPane().setLayout(gridBagLayout);
     getRootPane().setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     ImageIcon imageIcon = SwingUtils.getImageIcon("/img/appicon.png");
     Image image = imageIcon.getImage();
-    Image newimg = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH); // scale it the
-                                                                                 // smooth way
+    Image newimg = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
     imageIcon = new ImageIcon(newimg);
 
     GridBagConstraints gbc_lblIcon = new GridBagConstraints();

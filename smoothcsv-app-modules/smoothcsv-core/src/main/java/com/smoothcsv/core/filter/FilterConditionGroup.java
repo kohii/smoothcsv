@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.filter;
 
-import java.util.List;
-
 import com.smoothcsv.commons.constants.OperatorSymbol;
 import com.smoothcsv.csv.NewlineCharacter;
+
+import java.util.List;
 
 /**
  * @author kohii
@@ -28,7 +28,7 @@ public class FilterConditionGroup {
   private FilterConditionGroup[] filterConditionGroups;
 
   public FilterConditionGroup(OperatorSymbol operatorSymbol,
-      FilterConditionGroup[] conditionContainers) {
+                              FilterConditionGroup[] conditionContainers) {
     this.operatorSymbol = operatorSymbol;
     this.filterConditionGroups = conditionContainers;
   }

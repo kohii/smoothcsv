@@ -16,7 +16,6 @@ package command.find;
 
 /**
  * @author kohii
- *
  */
 public class ReplacePreviousCommand extends ReplaceNextCommand {
 

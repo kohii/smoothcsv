@@ -13,8 +13,8 @@
  */
 package com.smoothcsv.core.command;
 
-import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
+import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 public abstract class CellEditorCommandBase extends GridCommand {
 

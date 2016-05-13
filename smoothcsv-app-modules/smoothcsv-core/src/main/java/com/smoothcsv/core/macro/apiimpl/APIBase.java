@@ -16,7 +16,6 @@ package com.smoothcsv.core.macro.apiimpl;
 
 /**
  * @author kohii
- *
  */
 public class APIBase {
 

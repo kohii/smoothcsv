@@ -17,7 +17,6 @@ import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 public class FilterConditions {
 

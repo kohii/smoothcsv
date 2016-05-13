@@ -13,6 +13,21 @@
  */
 package com.smoothcsv.core.component;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.command.CommandDef;
+import com.smoothcsv.framework.command.CommandKeymap;
+import com.smoothcsv.framework.command.CommandRegistry;
+import com.smoothcsv.framework.util.KeyStrokeUtils;
+import com.smoothcsv.swing.action.SimpleAction;
+import com.smoothcsv.swing.table.ExTable;
+import com.smoothcsv.swing.table.ExTableColumn;
+import com.smoothcsv.swing.table.ExTableModel;
+import com.smoothcsv.swing.table.ExTableRowFilter;
+import com.smoothcsv.swing.table.ReadOnlyExTableCellValueExtracter;
+import com.smoothcsv.swing.utils.SwingUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -30,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.ActionMap;
@@ -51,25 +65,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.command.Command;
-import com.smoothcsv.framework.command.CommandDef;
-import com.smoothcsv.framework.command.CommandKeymap;
-import com.smoothcsv.framework.command.CommandRegistry;
-import com.smoothcsv.framework.util.KeyStrokeUtils;
-import com.smoothcsv.swing.action.SimpleAction;
-import com.smoothcsv.swing.table.ExTable;
-import com.smoothcsv.swing.table.ExTableColumn;
-import com.smoothcsv.swing.table.ExTableModel;
-import com.smoothcsv.swing.table.ExTableRowFilter;
-import com.smoothcsv.swing.table.ReadOnlyExTableCellValueExtracter;
-import com.smoothcsv.swing.utils.SwingUtils;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CommandPalette extends JDialog {
@@ -101,8 +98,7 @@ public class CommandPalette extends JDialog {
     ReadOnlyExTableCellValueExtracter<CommandDef> commandValueExtracter =
         new ReadOnlyExTableCellValueExtracter<CommandDef>() {
           @Override
-          public Object getValue(CommandDef rowData, ExTableColumn column, int rowIndex,
-              int columnIndex) {
+          public Object getValue(CommandDef rowData, ExTableColumn column, int rowIndex, int columnIndex) {
             String commandId = rowData.getCommandId();
             StringBuilder sb = new StringBuilder(commandId.length() + 6);
             sb.append(Character.toUpperCase(commandId.charAt(0)));
@@ -127,8 +123,7 @@ public class CommandPalette extends JDialog {
     ReadOnlyExTableCellValueExtracter<CommandDef> keybindingValueExtracter =
         new ReadOnlyExTableCellValueExtracter<CommandDef>() {
           @Override
-          public Object getValue(CommandDef rowData, ExTableColumn column, int rowIndex,
-              int columnIndex) {
+          public Object getValue(CommandDef rowData, ExTableColumn column, int rowIndex, int columnIndex) {
             KeyStroke ks = CommandKeymap.getDefault().findKeyStroke(rowData.getCommandId());
             return ks == null ? "" : KeyStrokeUtils.getKeyStrokeText(ks);
           }

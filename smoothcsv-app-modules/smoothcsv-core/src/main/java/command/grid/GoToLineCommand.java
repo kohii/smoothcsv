@@ -20,7 +20,6 @@ import com.smoothcsv.framework.util.MessageBundles;
 
 /**
  * @author kohii
- *
  */
 public class GoToLineCommand extends GridCommand {
 

@@ -13,18 +13,16 @@
  */
 package command.debug;
 
-import java.awt.Component;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.command.Command;
 
+import java.awt.Component;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.command.Command;
-
 /**
  * @author kohii
- *
  */
 public class PrintMenuComponentTreeCommand extends Command {
 

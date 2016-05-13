@@ -26,7 +26,6 @@ import com.smoothcsv.swing.gridsheet.GridSheetPane;
 
 /**
  * @author kohii
- *
  */
 public class CountCommand extends GridCommand {
 

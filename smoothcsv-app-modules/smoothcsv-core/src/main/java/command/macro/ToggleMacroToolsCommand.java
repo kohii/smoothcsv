@@ -20,7 +20,6 @@ import com.smoothcsv.framework.component.support.SmoothComponentManager;
 
 /**
  * @author kohii
- *
  */
 public class ToggleMacroToolsCommand extends Command {
 

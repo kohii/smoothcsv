@@ -13,12 +13,6 @@
  */
 package command.grid;
 
-import java.math.BigDecimal;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.smoothcsv.commons.constants.Direction;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
@@ -26,10 +20,14 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author kohii
- *
  */
 public class FillSeriesCommand extends GridCommand {
 
@@ -41,7 +39,7 @@ public class FillSeriesCommand extends GridCommand {
   }
 
   public static void autofill(CsvGridSheetPane gridSheetPane, GridSheetCellRange base,
-      Direction direction, int num) {
+                              Direction direction, int num) {
     if (num == 0) {
       return;
     }

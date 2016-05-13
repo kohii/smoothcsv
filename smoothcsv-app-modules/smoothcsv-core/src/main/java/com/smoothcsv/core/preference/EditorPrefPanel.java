@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class EditorPrefPanel extends JPanel {

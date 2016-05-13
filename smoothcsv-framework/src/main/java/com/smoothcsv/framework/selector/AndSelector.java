@@ -13,16 +13,14 @@
  */
 package com.smoothcsv.framework.selector;
 
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import lombok.EqualsAndHashCode;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import lombok.EqualsAndHashCode;
-
-import com.smoothcsv.framework.component.support.SmoothComponent;
-
 /**
  * @author kohii
- *
  */
 @EqualsAndHashCode
 public class AndSelector implements CssSelector {

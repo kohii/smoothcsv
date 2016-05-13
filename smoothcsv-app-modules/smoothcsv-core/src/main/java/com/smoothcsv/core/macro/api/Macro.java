@@ -19,9 +19,7 @@ import com.smoothcsv.core.macro.apiimpl.APIBase;
 import java.io.File;
 
 /**
- * 
  * @author kohii
- *
  */
 public class Macro extends APIBase {
 

@@ -13,13 +13,12 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import com.smoothcsv.swing.gridsheet.ui.GridSheetTableNoActionUI;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
-
-import com.smoothcsv.swing.gridsheet.ui.GridSheetTableNoActionUI;
 
 public class CsvGridSheetTableUI extends GridSheetTableNoActionUI {
 
@@ -48,7 +47,7 @@ public class CsvGridSheetTableUI extends GridSheetTableNoActionUI {
 
   @Override
   protected void paintCells(Graphics g, int rMin, int rMax, int cMin, int cMax, int correctionX,
-      int correctionY) {
+                            int correctionY) {
 
     super.paintCells(g, rMin, rMax, cMin, cMax, correctionX, correctionY);
 

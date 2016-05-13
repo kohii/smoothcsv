@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
+import com.smoothcsv.framework.SCApplication;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.HeadlessException;
@@ -22,7 +24,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.ActionMap;
@@ -35,8 +36,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.smoothcsv.framework.SCApplication;
 
 public class BasicFileChooser extends JFileChooser {
 
@@ -139,11 +138,10 @@ public class BasicFileChooser extends JFileChooser {
     ActionMap actionmap = SwingUtilities.getUIActionMap(new JTable());
 
     actions = new Object[4];
-    actions[0] = new Object[] {"selectNextRowCell", actionmap.get("selectNextRowCell")};
-    actions[1] = new Object[] {"selectPreviousRowCell", actionmap.get("selectPreviousRowCell")};
-    actions[2] = new Object[] {"selectNextColumnCell", actionmap.get("selectNextColumnCell")};
-    actions[3] =
-        new Object[] {"selectPreviousColumnCell", actionmap.get("selectPreviousColumnCell")};
+    actions[0] = new Object[]{"selectNextRowCell", actionmap.get("selectNextRowCell")};
+    actions[1] = new Object[]{"selectPreviousRowCell", actionmap.get("selectPreviousRowCell")};
+    actions[2] = new Object[]{"selectNextColumnCell", actionmap.get("selectNextColumnCell")};
+    actions[3] = new Object[]{"selectPreviousColumnCell", actionmap.get("selectPreviousColumnCell")};
 
     actionmap.remove("selectNextRowCell");
     actionmap.remove("selectPreviousRowCell");

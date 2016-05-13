@@ -15,7 +15,6 @@ package com.smoothcsv.core.macro;
 
 /**
  * @author kohii
- *
  */
 public class MacroException extends RuntimeException {
 

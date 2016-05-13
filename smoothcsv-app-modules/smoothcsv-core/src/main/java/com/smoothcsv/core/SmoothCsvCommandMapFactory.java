@@ -13,14 +13,6 @@
  */
 package com.smoothcsv.core;
 
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
-
-import javax.swing.Action;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.JTextComponent;
-
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel.ValuePanelTextArea;
 import com.smoothcsv.core.macro.Macro;
@@ -30,9 +22,15 @@ import com.smoothcsv.framework.component.support.CommandActionMap;
 import com.smoothcsv.framework.component.support.DefaultCommandMapFactory;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import javax.swing.Action;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
+
 /**
  * @author kohii
- *
  */
 public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
 

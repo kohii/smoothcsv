@@ -13,15 +13,13 @@
  */
 package com.smoothcsv.core.filter;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.smoothcsv.core.find.Regex;
 import com.smoothcsv.framework.util.SCBundle;
-
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author kohii
@@ -44,7 +42,7 @@ public class FilterConditionItem extends FilterConditionGroup {
    * @param caseSensitive
    */
   public FilterConditionItem(IValue left, Criteria criteria, IValue[] right,
-      boolean caseSensitive) {
+                             boolean caseSensitive) {
     this.left = left;
     this.criteria = criteria;
     this.right = right;
@@ -52,7 +50,7 @@ public class FilterConditionItem extends FilterConditionGroup {
   }
 
   public FilterConditionItem(IValue left, Criteria criteria, IValue right, boolean caseSensitive) {
-    this(left, criteria, new IValue[] {right}, caseSensitive);
+    this(left, criteria, new IValue[]{right}, caseSensitive);
   }
 
   public FilterConditionItem(IValue left, Criteria criteria) {

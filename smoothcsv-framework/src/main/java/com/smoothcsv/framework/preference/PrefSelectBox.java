@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.framework.preference;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.commons.utils.BeanUtils;
+import com.smoothcsv.framework.setting.Settings;
+
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -20,19 +24,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Objects;
-
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.BeanUtils;
-import com.smoothcsv.framework.setting.Settings;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class PrefSelectBox<E> extends JComboBox<E> {
@@ -45,7 +43,7 @@ public class PrefSelectBox<E> extends JComboBox<E> {
 
   @SuppressWarnings("unchecked")
   public PrefSelectBox(Settings settings, String prefKey, Collection<E> items,
-      String valueFieldName, String displayFieldName) {
+                       String valueFieldName, String displayFieldName) {
     super((E[]) items.stream().toArray());
     this.prefKey = prefKey;
     this.valueFieldName = valueFieldName;
@@ -99,7 +97,7 @@ public class PrefSelectBox<E> extends JComboBox<E> {
 
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object item, int index,
-        boolean isSelected, boolean cellHasFocus) {
+                                                  boolean isSelected, boolean cellHasFocus) {
       if (item == null) {
         return super.getListCellRendererComponent(list, item, index, isSelected, cellHasFocus);
       }

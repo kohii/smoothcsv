@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.core.filter;
 
-import java.awt.BorderLayout;
-import java.awt.Dialog;
-
 import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
+
+import java.awt.BorderLayout;
+import java.awt.Dialog;
 
 /**
  * @author kohii

@@ -14,12 +14,10 @@
 package com.smoothcsv.core.component;
 
 import java.awt.Dialog;
-
 import javax.swing.JPanel;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class ReadCsvPropertiesDialog extends CsvPropertiesDialog {

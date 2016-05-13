@@ -18,13 +18,9 @@ import com.smoothcsv.core.macro.component.MacroListPanel;
 
 /**
  * @author kohii
- *
  */
 public class RemoveCommand extends VisibleComponentCommandBase<MacroListPanel> {
 
-  /**
-   * @param cssSelector
-   */
   public RemoveCommand() {
     super("macro-list");
   }

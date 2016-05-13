@@ -17,7 +17,6 @@ import com.smoothcsv.framework.exception.AbortionException;
 
 /**
  * @author kohii
- *
  */
 public abstract class Command {
 

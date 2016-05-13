@@ -13,23 +13,6 @@
  */
 package com.smoothcsv.core.component;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ItemEvent;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JDialog;
-import javax.swing.JList;
-
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.csv.AvailableCharsetDialog;
@@ -44,8 +27,23 @@ import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JDialog;
+import javax.swing.JList;
+
 /**
- *
  * @author kohii2
  */
 public class CsvMetaPanel extends javax.swing.JPanel {
@@ -123,9 +121,9 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     dummy = new javax.swing.JLabel();
 
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 1.0};
+    gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0};
     gridBagLayout.rowWeights =
-        new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+        new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
     setLayout(gridBagLayout);
 
     encoding.setModel(new javax.swing.DefaultComboBoxModel(createEncodingItems()));
@@ -373,7 +371,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     encoding.setRenderer(new DefaultListCellRenderer() {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-          boolean isSelected, boolean cellHasFocus) {
+                                                    boolean isSelected, boolean cellHasFocus) {
         DefaultListCellRenderer rendererComponent =
             (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
@@ -388,7 +386,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     delimiterChar.setRenderer(new DefaultListCellRenderer() {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-          boolean isSelected, boolean cellHasFocus) {
+                                                    boolean isSelected, boolean cellHasFocus) {
         DefaultListCellRenderer rendererComponent =
             (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
@@ -404,7 +402,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     quoteChar.setRenderer(new DefaultListCellRenderer() {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-          boolean isSelected, boolean cellHasFocus) {
+                                                    boolean isSelected, boolean cellHasFocus) {
         DefaultListCellRenderer rendererComponent =
             (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);

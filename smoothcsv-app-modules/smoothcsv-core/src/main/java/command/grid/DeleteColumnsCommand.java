@@ -23,7 +23,6 @@ import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
 /**
  * @author kohii
- *
  */
 public class DeleteColumnsCommand extends GridCommand {
 
@@ -34,7 +33,8 @@ public class DeleteColumnsCommand extends GridCommand {
 
   public void run(CsvGridSheetPane gridSheetPane, int[] selectedColumnIndices) {
 
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
+    ;
 
     if (selectedColumnIndices == null) {
       selectedColumnIndices = gridSheetPane.getSelectionModel().getSelectedColumns();

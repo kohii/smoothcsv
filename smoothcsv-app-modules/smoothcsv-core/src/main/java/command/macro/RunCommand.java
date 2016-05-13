@@ -21,7 +21,6 @@ import com.smoothcsv.framework.command.Command;
 
 /**
  * @author kohii
- *
  */
 public class RunCommand extends Command {
 

@@ -21,7 +21,6 @@ import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
  * @author kohii
- *
  */
 public class CsvGridSheetHeaderCellRendererUI extends BasicLabelUI {
 

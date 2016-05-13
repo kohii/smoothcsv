@@ -13,14 +13,12 @@
  */
 package command.convert;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.ibm.icu.text.Transliterator;
 import com.smoothcsv.core.command.ConvertCommandBase;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author kohii
- *
  */
 public class KanaToLatinCommand extends ConvertCommandBase {
 

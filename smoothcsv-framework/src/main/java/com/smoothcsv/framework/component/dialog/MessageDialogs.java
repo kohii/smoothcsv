@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
-import java.awt.Component;
-
-import javax.swing.JOptionPane;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.HtmlUtils;
 import com.smoothcsv.csv.NewlineCharacter;
@@ -24,8 +20,10 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.swing.utils.SwingUtils;
 
+import java.awt.Component;
+import javax.swing.JOptionPane;
+
 /**
- *
  * @author kohii
  */
 public class MessageDialogs {
@@ -47,7 +45,6 @@ public class MessageDialogs {
    * @param parentComponent
    * @param msg
    * @param messageType
-   *
    */
   public static void showMessageString(Component parentComponent, String msg, int messageType) {
     if (messageType == JOptionPane.ERROR_MESSAGE || messageType == JOptionPane.WARNING_MESSAGE) {

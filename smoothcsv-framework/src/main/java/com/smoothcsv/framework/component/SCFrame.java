@@ -13,22 +13,21 @@
  */
 package com.smoothcsv.framework.component;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.error.ErrorHandlerFactory;
+import com.smoothcsv.framework.event.EventListenerSupport;
+import com.smoothcsv.framework.event.EventListenerSupportImpl;
+import com.smoothcsv.framework.event.SCEvent;
+
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.TransferHandler;
-
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.error.ErrorHandlerFactory;
-import com.smoothcsv.framework.event.EventListenerSupport;
-import com.smoothcsv.framework.event.EventListenerSupportImpl;
-import com.smoothcsv.framework.event.SCEvent;
 
 @SuppressWarnings("serial")
 public class SCFrame extends JFrame {

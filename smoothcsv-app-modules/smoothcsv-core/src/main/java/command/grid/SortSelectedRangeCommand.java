@@ -13,9 +13,6 @@
  */
 package command.grid;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.sort.SortCriteria;
@@ -24,9 +21,11 @@ import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.gridsheet.model.CellRect;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class SortSelectedRangeCommand extends GridCommand {
 
@@ -52,7 +51,7 @@ public class SortSelectedRangeCommand extends GridCommand {
   }
 
   public static void sort(CsvGridSheetPane gridSheetPane, List<SortCriteria> criterias,
-      CellRect range) {
+                          CellRect range) {
     if (range.getColumn() <= 0 && gridSheetPane.getColumnCount() - 1 <= range.getLastColumn()) {
       // entire columns
 

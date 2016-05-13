@@ -21,7 +21,6 @@ import java.util.StringTokenizer;
 
 /**
  * @author kohii
- *
  */
 public class SelectorFactory {
 

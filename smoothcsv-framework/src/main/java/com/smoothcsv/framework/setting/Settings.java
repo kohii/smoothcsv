@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.framework.setting;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.framework.util.DirectoryResolver;
+import lombok.Getter;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +27,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.framework.util.DirectoryResolver;
-
-import lombok.Getter;
-
 /**
- *
  * @author kohii
  */
 public class Settings extends SCProperties {

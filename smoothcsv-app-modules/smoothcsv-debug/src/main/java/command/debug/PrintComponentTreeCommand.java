@@ -13,17 +13,15 @@
  */
 package command.debug;
 
-import java.awt.Component;
-import java.awt.Container;
-
-import javax.swing.JPanel;
-
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JPanel;
+
 /**
  * @author kohii
- *
  */
 public class PrintComponentTreeCommand extends Command {
 

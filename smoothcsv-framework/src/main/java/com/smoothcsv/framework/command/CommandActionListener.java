@@ -18,7 +18,6 @@ import java.awt.event.ActionListener;
 
 /**
  * @author kohii
- *
  */
 public class CommandActionListener implements ActionListener {
 

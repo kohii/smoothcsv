@@ -13,14 +13,13 @@
  */
 package com.smoothcsv.core.sql.model;
 
-import java.sql.JDBCType;
-
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.JDBCType;
+
 /**
  * @author kohii
- *
  */
 public class SqlColumnInfo {
 

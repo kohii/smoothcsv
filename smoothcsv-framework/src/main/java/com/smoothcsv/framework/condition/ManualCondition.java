@@ -15,7 +15,6 @@ package com.smoothcsv.framework.condition;
 
 /**
  * @author kohii
- *
  */
 public class ManualCondition extends Condition {
 

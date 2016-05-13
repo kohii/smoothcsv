@@ -15,7 +15,6 @@ package com.smoothcsv.core.macro.api;
 
 /**
  * @author kohii
- *
  */
 public interface Clipboard {
 

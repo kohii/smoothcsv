@@ -13,17 +13,6 @@
  */
 package com.smoothcsv.core.preference;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandKeymap.Keybinding;
 import com.smoothcsv.swing.components.ExTextField;
@@ -32,13 +21,20 @@ import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
 import com.smoothcsv.swing.table.ExTableRowFilter;
 import com.smoothcsv.swing.utils.SwingUtils;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class KeyBindingsPrefPanel extends JPanel {

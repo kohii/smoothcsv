@@ -13,17 +13,16 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.swing.components.RegulatedTextField;
+
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.swing.components.RegulatedTextField;
 
 public class NumberInputDialog extends DialogBase {
 
@@ -76,10 +75,10 @@ public class NumberInputDialog extends DialogBase {
 
   private void init(String msg, int maxLen) {
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {1.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[] {0.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+    gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
     getContentPanel().setLayout(gridBagLayout);
 
     msgLabel = new JLabel(msg);

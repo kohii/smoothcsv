@@ -13,6 +13,23 @@
  */
 package com.smoothcsv.core.macro.component;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.commons.utils.FileUtils;
+import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.macro.MacroInfo;
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.SCToolBar;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.framework.exception.AbortionException;
+import com.smoothcsv.framework.exception.AppException;
+import com.smoothcsv.framework.io.ArrayCsvReader;
+import com.smoothcsv.framework.io.ArrayCsvWriter;
+import com.smoothcsv.framework.io.CsvSupport;
+import com.smoothcsv.framework.util.DirectoryResolver;
+import com.smoothcsv.swing.icon.AwesomeIconConstants;
+import lombok.Getter;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -34,7 +51,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -43,27 +59,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
-import lombok.Getter;
-
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.FileUtils;
-import com.smoothcsv.core.constants.UIConstants;
-import com.smoothcsv.core.macro.MacroInfo;
-import com.smoothcsv.core.util.CoreBundle;
-import com.smoothcsv.framework.component.SCToolBar;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.framework.exception.AbortionException;
-import com.smoothcsv.framework.exception.AppException;
-import com.smoothcsv.framework.io.ArrayCsvReader;
-import com.smoothcsv.framework.io.ArrayCsvWriter;
-import com.smoothcsv.framework.io.CsvSupport;
-import com.smoothcsv.framework.util.DirectoryResolver;
-import com.smoothcsv.swing.icon.AwesomeIconConstants;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class MacroListPanel extends JPanel implements SmoothComponent {
@@ -199,7 +196,8 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     }
     Component comp = listBodyPanel.getComponent(index);
     if (comp instanceof MacroListItemPanel) {
-      ((MacroListItemPanel) comp).setSelected(true);;
+      ((MacroListItemPanel) comp).setSelected(true);
+      ;
     }
     selected = index;
 
@@ -263,10 +261,10 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
   public void save() {
     FileUtils.ensureWritable(confFile);
     try (OutputStream os = new FileOutputStream(confFile);
-        ArrayCsvWriter writer =
-            new ArrayCsvWriter(new OutputStreamWriter(os, "UTF-8"), CsvSupport.TSV_PROPERTIES)) {
+         ArrayCsvWriter writer =
+             new ArrayCsvWriter(new OutputStreamWriter(os, "UTF-8"), CsvSupport.TSV_PROPERTIES)) {
       for (MacroInfo macroInfo : macroInfoList) {
-        writer.writeRow(new String[] {macroInfo.getFilePath()});
+        writer.writeRow(new String[]{macroInfo.getFilePath()});
       }
     } catch (IOException e) {
       throw new UnexpectedException(e);
@@ -277,9 +275,9 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     macroInfoList.clear();
     if (confFile.exists()) {
       try (InputStream in = new FileInputStream(confFile);
-          ArrayCsvReader reader =
-              new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
-                  CsvSupport.SKIP_EMPTYROW_OPTION, 2)) {
+           ArrayCsvReader reader =
+               new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
+                   CsvSupport.SKIP_EMPTYROW_OPTION, 2)) {
         String[] rowData;
         while ((rowData = reader.readRow()) != null) {
           macroInfoList.add(new MacroInfo(rowData[0]));

@@ -15,7 +15,6 @@ package com.smoothcsv.framework.exception;
 
 /**
  * @author kohii
- *
  */
 public class AbortionException extends RuntimeException {
   private static final long serialVersionUID = -831862901566868605L;

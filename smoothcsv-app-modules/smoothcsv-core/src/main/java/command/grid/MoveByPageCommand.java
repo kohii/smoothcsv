@@ -13,17 +13,16 @@
  */
 package command.grid;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.util.Map;
-
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.util.Map;
+
 /**
  * @author kohii
- *
  */
 public class MoveByPageCommand extends GridSheetSelectCommand {
 
@@ -86,7 +85,7 @@ public class MoveByPageCommand extends GridSheetSelectCommand {
    */
   @Override
   protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm, int dx,
-      int dy, boolean extend, int anchorRow, int anchorColumn) {
+                                 int dy, boolean extend, int anchorRow, int anchorColumn) {
     GridSheetTable table = gridSheetPane.getTable();
 
     Dimension delta = table.getParent().getParent().getSize();

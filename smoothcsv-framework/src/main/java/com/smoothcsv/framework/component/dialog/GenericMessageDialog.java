@@ -13,17 +13,15 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
-import java.awt.Dimension;
+import com.smoothcsv.framework.SCApplication;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.smoothcsv.framework.SCApplication;
-
 /**
- *
  * @author kohii
  */
 @SuppressWarnings("serial")

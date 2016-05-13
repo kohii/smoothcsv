@@ -26,7 +26,6 @@ import com.smoothcsv.framework.component.support.SmoothComponentManager;
 
 /**
  * @author kohii
- *
  */
 public class CloseCommand extends Command {
 

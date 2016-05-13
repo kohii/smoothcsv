@@ -20,7 +20,6 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
 /**
  * @author kohii
- *
  */
 public class GridSheetSelectCommand extends GridCommand {
 
@@ -69,7 +68,7 @@ public class GridSheetSelectCommand extends GridCommand {
    * @param anchorColumn
    */
   protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm,
-      int dx, int dy, boolean extend, int anchorRow, int anchorColumn) {
+                                 int dx, int dy, boolean extend, int anchorRow, int anchorColumn) {
     GridSheetTable table = gridSheetPane.getTable();
 
     // Unfortunately, this strategy introduces bugs because
@@ -149,9 +148,11 @@ public class GridSheetSelectCommand extends GridCommand {
           }
         } else {
           if (dx > 0) {
-            maxC = moveWithinTableRange(maxC, dx, columnCount);;
+            maxC = moveWithinTableRange(maxC, dx, columnCount);
+            ;
           } else if (dx < 0) {
-            minC = moveWithinTableRange(minC, dx, columnCount);;
+            minC = moveWithinTableRange(minC, dx, columnCount);
+            ;
           }
         }
       }

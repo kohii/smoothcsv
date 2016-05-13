@@ -16,7 +16,6 @@ package command.app;
 import com.smoothcsv.framework.command.Command;
 
 /**
- *
  * @author kohii
  */
 public class OpenFileAsCommand extends Command {

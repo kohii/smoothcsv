@@ -13,17 +13,15 @@
  */
 package com.smoothcsv.core.sql.model;
 
+import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.swing.gridsheet.model.GridSheetColumn;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-
-import com.smoothcsv.core.csvsheet.CsvSheetView;
-import com.smoothcsv.swing.gridsheet.model.GridSheetColumn;
-
 /**
  * @author kohii
- *
  */
 public class SqlCsvSheetTableInfo implements SqlTableInfo {
 

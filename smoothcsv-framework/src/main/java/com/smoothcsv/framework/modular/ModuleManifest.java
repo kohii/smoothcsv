@@ -18,7 +18,6 @@ import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 @Getter
 public class ModuleManifest {
@@ -29,7 +28,7 @@ public class ModuleManifest {
   private final Language[] supportedLanguages;
 
   public ModuleManifest(String name, String entryPoint, String[] dependencies, String author,
-      Language[] supportedLanguages) {
+                        Language[] supportedLanguages) {
     this.name = name;
     this.entryPoint = entryPoint;
     this.dependencies = dependencies;

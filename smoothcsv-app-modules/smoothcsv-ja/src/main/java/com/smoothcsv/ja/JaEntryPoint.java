@@ -17,7 +17,6 @@ import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 
 /**
  * @author kohii
- *
  */
 public class JaEntryPoint extends ModuleEntryPointBase {
 }

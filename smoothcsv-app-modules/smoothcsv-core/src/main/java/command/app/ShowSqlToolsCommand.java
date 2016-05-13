@@ -13,15 +13,14 @@
  */
 package command.app;
 
-import java.lang.ref.SoftReference;
-
 import com.smoothcsv.core.sql.component.SqlToolsDialog;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.command.Command;
 
+import java.lang.ref.SoftReference;
+
 /**
  * @author kohii
- *
  */
 public class ShowSqlToolsCommand extends Command {
 

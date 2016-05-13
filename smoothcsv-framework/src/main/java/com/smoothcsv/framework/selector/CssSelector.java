@@ -17,7 +17,6 @@ import com.smoothcsv.framework.component.support.SmoothComponent;
 
 /**
  * @author kohii
- *
  */
 public interface CssSelector {
 

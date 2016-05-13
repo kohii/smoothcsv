@@ -17,13 +17,9 @@ import com.smoothcsv.core.sql.component.SqlEditor;
 
 /**
  * @author kohii
- *
  */
 public abstract class SqlEditorCommandBase extends VisibleComponentCommandBase<SqlEditor> {
 
-  /**
-   * @param cssSelector
-   */
   public SqlEditorCommandBase() {
     super("sql-editor");
   }

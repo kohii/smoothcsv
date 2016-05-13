@@ -16,7 +16,6 @@ package com.smoothcsv.framework.error;
 import com.smoothcsv.commons.utils.ThrowableUtils;
 
 /**
- *
  * @author kohii
  */
 public class ErrorHandlerFactory {

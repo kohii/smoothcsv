@@ -13,16 +13,15 @@
  */
 package com.smoothcsv.core.component;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-
 import com.smoothcsv.core.macro.component.MacroToolsPanel;
 import com.smoothcsv.core.macro.component.MacroToolsWrapperPanel;
 import com.smoothcsv.framework.component.ComponentManager;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+
 /**
  * @author kohii
- *
  */
 public class SmoothCsvComponentManager extends ComponentManager {
 

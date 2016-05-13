@@ -13,6 +13,10 @@
  */
 package com.smoothcsv.core.csv;
 
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.framework.component.dialog.DialogOperation;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Frame;
@@ -21,7 +25,6 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,12 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import com.smoothcsv.core.util.CoreBundle;
-import com.smoothcsv.framework.component.dialog.DialogBase;
-import com.smoothcsv.framework.component.dialog.DialogOperation;
-
 /**
- *
  * @author kohii
  */
 @SuppressWarnings("serial")
@@ -94,8 +92,8 @@ public class AvailableCharsetDialog extends DialogBase {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         // table.getTableHeader().getDefaultRenderer().setHorizontalAlignment(SwingConstants.LEFT);
         table.getTableHeader().setReorderingAllowed(false);
-        table.setModel(new DefaultTableModel(new Object[][] {},
-            new String[] {CoreBundle.get("key.encoding"), CoreBundle.get("key.alias")}) {
+        table.setModel(new DefaultTableModel(new Object[][]{},
+            new String[]{CoreBundle.get("key.encoding"), CoreBundle.get("key.alias")}) {
           @Override
           public boolean isCellEditable(int row, int column) {
             return false;
@@ -114,7 +112,7 @@ public class AvailableCharsetDialog extends DialogBase {
     DefaultTableModel model = (DefaultTableModel) table.getModel();
     for (Map.Entry<String, Charset> cse : csm.entrySet()) {
       Charset cs = cse.getValue();
-      model.addRow(new String[] {cs.name(), toStr(cs.aliases())});
+      model.addRow(new String[]{cs.name(), toStr(cs.aliases())});
     }
 
     table.getSelectionModel().setSelectionInterval(0, 0);

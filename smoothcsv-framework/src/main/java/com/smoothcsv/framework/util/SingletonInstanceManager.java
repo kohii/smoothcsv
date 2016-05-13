@@ -13,14 +13,13 @@
  */
 package com.smoothcsv.framework.util;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-
 /**
- *
  * @author kohii
  */
 public class SingletonInstanceManager {

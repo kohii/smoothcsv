@@ -20,7 +20,6 @@ import com.smoothcsv.framework.command.Command;
 
 /**
  * @author kohii
- *
  */
 public class ShowEditorCommand extends Command {
 

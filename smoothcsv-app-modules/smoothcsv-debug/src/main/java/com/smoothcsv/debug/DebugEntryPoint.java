@@ -13,16 +13,6 @@
  */
 package com.smoothcsv.debug;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.function.Consumer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandKeymap;
@@ -37,9 +27,17 @@ import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.util.DirectoryResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.function.Consumer;
 
 /**
- *
  * @author kohii
  */
 public class DebugEntryPoint extends ModuleEntryPointBase {
@@ -86,11 +84,11 @@ public class DebugEntryPoint extends ModuleEntryPointBase {
       for (String conditionName : conditionNames) {
         Conditions.getCondition(conditionName)
             .addValueChangedListener(new Consumer<Condition.ConditionValueChangeEvent>() {
-          @Override
-          public void accept(ConditionValueChangeEvent t) {
-            System.out.println("ConditionChanged: " + conditionName + " -> " + t.newValue);
-          }
-        });
+              @Override
+              public void accept(ConditionValueChangeEvent t) {
+                System.out.println("ConditionChanged: " + conditionName + " -> " + t.newValue);
+              }
+            });
       }
     });
 

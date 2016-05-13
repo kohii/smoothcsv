@@ -13,13 +13,12 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import javax.swing.JPanel;
-
 import com.smoothcsv.core.sql.model.SqlTableInfo;
+
+import javax.swing.JPanel;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public abstract class AbstractSqlTableDetailsPanel extends JPanel {

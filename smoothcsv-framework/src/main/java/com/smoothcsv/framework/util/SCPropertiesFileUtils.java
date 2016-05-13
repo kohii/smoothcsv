@@ -15,7 +15,6 @@ package com.smoothcsv.framework.util;
 
 
 /**
- *
  * @author kohii
  */
 public class SCPropertiesFileUtils {

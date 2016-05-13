@@ -18,7 +18,6 @@ import com.smoothcsv.framework.command.Command;
 
 /**
  * @author kohii
- *
  */
 public class QuitCommand extends Command {
 

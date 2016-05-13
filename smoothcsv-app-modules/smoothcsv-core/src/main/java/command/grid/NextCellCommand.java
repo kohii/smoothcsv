@@ -13,8 +13,6 @@
  */
 package command.grid;
 
-import java.util.Map;
-
 import com.smoothcsv.commons.constants.Orientation;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -22,9 +20,10 @@ import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
+import java.util.Map;
+
 /**
  * @author kohii
- *
  */
 public class NextCellCommand extends GridCommand {
 
@@ -68,7 +67,7 @@ public class NextCellCommand extends GridCommand {
   }
 
   protected void changeSelection(CsvGridSheetPane gridSheetPane, GridSheetSelectionModel sm, int dx,
-      int dy) {
+                                 int dy) {
     GridSheetTable table = gridSheetPane.getTable();
 
     boolean stayInSelection = !sm.isSingleCellSelected();

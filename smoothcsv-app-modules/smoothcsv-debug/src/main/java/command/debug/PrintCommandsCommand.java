@@ -18,10 +18,9 @@ import com.smoothcsv.framework.command.CommandRegistry;
 
 /**
  * @author kohii
- *
  */
-public class PrintCommandsCommand extends Command{
-  
+public class PrintCommandsCommand extends Command {
+
   @Override
   public void run() {
     System.out.println(CommandRegistry.instance());

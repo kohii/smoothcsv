@@ -16,7 +16,6 @@ package com.smoothcsv.framework.event;
 import java.util.function.Consumer;
 
 /**
- *
  * @author kohii
  */
 public interface NamedEventListenerSupport {

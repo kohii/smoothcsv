@@ -18,7 +18,6 @@ import lombok.Setter;
 
 /**
  * @author kohii
- *
  */
 @Getter
 @Setter

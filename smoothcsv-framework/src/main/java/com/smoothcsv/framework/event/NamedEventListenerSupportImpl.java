@@ -13,13 +13,12 @@
  */
 package com.smoothcsv.framework.event;
 
-import java.util.function.Consumer;
-
 import com.smoothcsv.commons.collections.ArrayMap;
 import com.smoothcsv.commons.data.KeyValue;
 
+import java.util.function.Consumer;
+
 /**
- *
  * @author kohii
  */
 public class NamedEventListenerSupportImpl implements NamedEventListenerSupport {

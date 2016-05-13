@@ -14,7 +14,6 @@
 package com.smoothcsv.framework.event;
 
 /**
- *
  * @author kohii
  */
 public class ErrorEvent implements SCEvent {

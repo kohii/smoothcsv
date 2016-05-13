@@ -13,6 +13,13 @@
  */
 package com.smoothcsv.framework.modular;
 
+import com.smoothcsv.commons.exception.IORuntimeException;
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.framework.Env;
+import com.smoothcsv.framework.modular.ModuleManifest.Language;
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -28,17 +35,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import lombok.Getter;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.smoothcsv.commons.exception.IORuntimeException;
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.framework.Env;
-import com.smoothcsv.framework.modular.ModuleManifest.Language;
-
 /**
- *
  * @author kohii
  */
 public class ModuleManager {
@@ -105,7 +102,8 @@ public class ModuleManager {
     for (Entry<String, Module> entry : modules.entrySet()) {
       Language[] languages = entry.getValue().getManifest().getSupportedLanguages();
       if (languages != null) {
-        langLoop: for (Language language : languages) {
+        langLoop:
+        for (Language language : languages) {
           for (Language l : availableLanguages) {
             if (l.getId().equals(language.getId())) {
               break langLoop;

@@ -13,16 +13,6 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.commons.utils.SerializeUtils;
@@ -30,9 +20,17 @@ import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvReader;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 import com.smoothcsv.framework.util.DirectoryResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author kohii
  */
 public class CsvSheetSupport {
@@ -91,15 +89,15 @@ public class CsvSheetSupport {
   }
 
   public static CsvGridSheetModel createModelFromFile(File file, CsvMeta csvMeta,
-      CsvReaderOptions options) {
+                                                      CsvReaderOptions options) {
 
     if (options == null) {
       options = CsvReaderOptions.DEFAULT;
     }
 
     try (SmoothCsvReader reader =
-        new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getCharset()),
-            csvMeta, options)) {
+             new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getCharset()),
+                 csvMeta, options)) {
       List<List> data = new ArrayList<>();
       List r;
       while ((r = reader.readRow()) != null) {

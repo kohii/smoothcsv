@@ -18,12 +18,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
 import javax.swing.AbstractButton;
 
 /**
  * @author kohii
- *
  */
 public class PrefUtils {
 

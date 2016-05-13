@@ -17,7 +17,6 @@ import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 
 /**
- *
  * @author kohii
  */
 public class CsvSupport {
@@ -26,6 +25,7 @@ public class CsvSupport {
       '\0', '\0');
 
   public static final CsvReaderOptions SKIP_EMPTYROW_OPTION = new CsvReaderOptions();
+
   static {
     SKIP_EMPTYROW_OPTION.setSkipEmptyLines(true);
     SKIP_EMPTYROW_OPTION.setSkipCommentLines(true);

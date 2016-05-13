@@ -13,14 +13,6 @@
  */
 package com.smoothcsv.framework.menu;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.Icon;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.io.ArrayCsvReader;
@@ -28,9 +20,15 @@ import com.smoothcsv.framework.io.CsvSupport;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.utils.SwingUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.Icon;
+
 /**
  * @author kohii
- *
  */
 public class ToolBarItems {
 
@@ -47,9 +45,9 @@ public class ToolBarItems {
 
   public void loadConfig(InputStream in, String resourceName) {
     try (InputStream in2 = in;
-        ArrayCsvReader reader =
-            new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
-                CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
+         ArrayCsvReader reader =
+             new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
+                 CsvSupport.SKIP_EMPTYROW_OPTION, 3)) {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
         String commandId = rowData[0];

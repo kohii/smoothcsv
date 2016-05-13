@@ -19,7 +19,6 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
  * @author kohii
- *
  */
 public class NextTabCommand extends Command {
 

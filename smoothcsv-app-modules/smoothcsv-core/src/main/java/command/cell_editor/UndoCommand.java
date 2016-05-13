@@ -18,7 +18,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor;
 
 /**
  * @author kohii
- *
  */
 public class UndoCommand extends
     VisibleComponentCommandBase<CsvGridSheetCellStringEditor.CsvGridEditorComponent> {

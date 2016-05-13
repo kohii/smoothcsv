@@ -13,21 +13,6 @@
  */
 package com.smoothcsv.core;
 
-import static com.smoothcsv.framework.SCApplication.components;
-
-import java.awt.Component;
-import java.awt.Rectangle;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.util.HashMap;
-
-import javax.swing.LayoutFocusTraversalPolicy;
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.CoreSessionKeys;
@@ -65,13 +50,25 @@ import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.InvocationUtils;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.utils.SwingUtils;
-
 import command.app.CloseAllCommand;
 import command.app.OpenFileCommand;
 
+import java.awt.Component;
+import java.awt.Rectangle;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.util.HashMap;
+import javax.swing.LayoutFocusTraversalPolicy;
+import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+
+import static com.smoothcsv.framework.SCApplication.components;
+
 
 /**
- *
  * @author kohii
  */
 public class CoreEntryPoint extends ModuleEntryPointBase {
@@ -142,14 +139,14 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         Settings settings = CoreSettings.getInstance();
         settings.addPropertyChangeListener(CoreSettings.SIZE_OF_UNDOING,
             new PropertyChangeListener() {
-          @Override
-          public void propertyChange(PropertyChangeEvent evt) {
-            for (BaseTabView<?> v : SCApplication.components().getTabbedPane().getAllViews()) {
-              ((CsvSheetView) v).getGridSheetPane().getUndoManager()
-                  .setCapacity(settings.getInteger(CoreSettings.SIZE_OF_UNDOING));
-            }
-          }
-        });
+              @Override
+              public void propertyChange(PropertyChangeEvent evt) {
+                for (BaseTabView<?> v : SCApplication.components().getTabbedPane().getAllViews()) {
+                  ((CsvSheetView) v).getGridSheetPane().getUndoManager()
+                      .setCapacity(settings.getInteger(CoreSettings.SIZE_OF_UNDOING));
+                }
+              }
+            });
         InvocationUtils.runAsync(new Runnable() {
           @Override
           public void run() {
@@ -196,42 +193,42 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         // Register Drag & Drop handler
         components().getFrame().listeners().on(FileDroppedEvent.class,
             new SCListener<FileDroppedEvent>() {
-          @Override
-          public void call(FileDroppedEvent ev) {
-            SwingUtilities.invokeLater(new Runnable() {
               @Override
-              public void run() {
-                OpenFileCommand command = new OpenFileCommand();
-                if (ev.getFile().isFile()) {
-                  command.run(ev.getFile());
-                } else if (ev.getFile().isDirectory()) {
-                  command.chooseAndOpenFile(ev.getFile());
-                }
+              public void call(FileDroppedEvent ev) {
+                SwingUtilities.invokeLater(new Runnable() {
+                  @Override
+                  public void run() {
+                    OpenFileCommand command = new OpenFileCommand();
+                    if (ev.getFile().isFile()) {
+                      command.run(ev.getFile());
+                    } else if (ev.getFile().isDirectory()) {
+                      command.chooseAndOpenFile(ev.getFile());
+                    }
+                  }
+                });
               }
             });
-          }
-        });
 
         components().getTabbedPane().listeners().on(ViewChangeEvent.class,
             new SCListener<ViewChangeEvent>() {
-          @Override
-          public void call(ViewChangeEvent ev) {
-            if (ev.getOldView() != null && ev.getOldView() instanceof CsvSheetView) {
-              CsvSheetView oldView = (CsvSheetView) ev.getOldView();
-              oldView.getGridSheetPane().getTable().stopCellEditing();
-            }
-            CsvGridSheetCellValuePanel cvp = CsvGridSheetCellValuePanel.getInstance();
-            if (ev.getNewView() != null) {
-              if (cvp.isValuePanelVisible() && !cvp.isFloating()) {
-                cvp.setValuePanelVisible(true);
+              @Override
+              public void call(ViewChangeEvent ev) {
+                if (ev.getOldView() != null && ev.getOldView() instanceof CsvSheetView) {
+                  CsvSheetView oldView = (CsvSheetView) ev.getOldView();
+                  oldView.getGridSheetPane().getTable().stopCellEditing();
+                }
+                CsvGridSheetCellValuePanel cvp = CsvGridSheetCellValuePanel.getInstance();
+                if (ev.getNewView() != null) {
+                  if (cvp.isValuePanelVisible() && !cvp.isFloating()) {
+                    cvp.setValuePanelVisible(true);
+                  }
+                } else {
+                  if (cvp.isFloating()) {
+                    cvp.toggleFloating();
+                  }
+                }
               }
-            } else {
-              if (cvp.isFloating()) {
-                cvp.toggleFloating();
-              }
-            }
-          }
-        });
+            });
 
         CsvSheetStatusLabel.instance().install();
       }

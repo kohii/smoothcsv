@@ -26,7 +26,6 @@ import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii
- *
  */
 public class NextCommand extends GridCommand {
 

@@ -18,7 +18,6 @@ import com.smoothcsv.core.sql.component.SqlEditor;
 
 /**
  * @author kohii
- *
  */
 public class PreviousSqlCommand extends SqlEditorCommandBase {
 

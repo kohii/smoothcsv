@@ -17,7 +17,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 /**
- *
  * @author kohii
  */
 public class ComponentManager {

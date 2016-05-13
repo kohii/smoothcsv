@@ -13,17 +13,15 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCTabbedPane;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class MacroToolsWrapperPanel extends JPanel {

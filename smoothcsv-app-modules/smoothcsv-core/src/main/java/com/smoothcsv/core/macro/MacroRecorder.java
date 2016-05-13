@@ -13,21 +13,18 @@
  */
 package com.smoothcsv.core.macro;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.ManualCondition;
-
 import command.app.ToggleCommandPaletteCommand;
 import lombok.Getter;
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.ArrayList;
 
 /**
  * @author kohii
- *
  */
 public class MacroRecorder {
 

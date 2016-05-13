@@ -18,7 +18,6 @@ import java.util.function.Consumer;
 
 /**
  * @author kohii
- *
  */
 public class AndCondition extends Condition {
 

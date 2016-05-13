@@ -17,7 +17,6 @@ import com.smoothcsv.commons.utils.EnumStringSupport;
 
 /**
  * @author kohii
- *
  */
 public enum BlanksOption {
   BLANKS_FIRST, BLANKS_LAST, DEFAULT;

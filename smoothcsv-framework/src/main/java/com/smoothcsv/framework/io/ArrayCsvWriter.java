@@ -13,15 +13,14 @@
  */
 package com.smoothcsv.framework.io;
 
-import java.io.Writer;
-
 import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.csv.writer.AbstractCsvWriter;
 import com.smoothcsv.csv.writer.CsvWriterOptions;
 
+import java.io.Writer;
+
 /**
- *
  * @author kohii
  */
 public class ArrayCsvWriter extends AbstractCsvWriter<String[]> {

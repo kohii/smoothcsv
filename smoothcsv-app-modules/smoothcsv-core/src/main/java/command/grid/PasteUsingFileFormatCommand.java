@@ -20,7 +20,6 @@ import com.smoothcsv.swing.utils.ClipboardUtils;
 
 /**
  * @author kohii
- *
  */
 public class PasteUsingFileFormatCommand extends GridCommand {
 

@@ -15,7 +15,6 @@ package com.smoothcsv.framework.component.support;
 
 /**
  * @author kohii
- *
  */
 public class DefaultCommandMapFactory implements CommandMapFactory {
 

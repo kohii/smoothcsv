@@ -22,7 +22,6 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 
 /**
  * @author kohii
- *
  */
 public class ShowPropertiesCommand extends Command {
 

@@ -13,14 +13,12 @@
  */
 package command.debug;
 
+import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.swing.utils.SwingUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.framework.command.Command;
-import com.smoothcsv.swing.utils.SwingUtils;
-
 /**
- *
  * @author kohii
  */
 public class PrintFocusOwnerCommand extends Command {

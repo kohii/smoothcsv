@@ -24,7 +24,6 @@ import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.SCBundle;
 
 /**
- *
  * @author kohii
  */
 public class NewFileAsCommand extends Command {

@@ -17,7 +17,6 @@ import java.util.Objects;
 
 /**
  * @author kohii
- *
  */
 public class NotCondition extends Condition {
 

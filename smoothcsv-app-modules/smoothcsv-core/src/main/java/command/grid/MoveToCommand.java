@@ -17,7 +17,6 @@ import java.util.Map;
 
 /**
  * @author kohii
- *
  */
 public class MoveToCommand extends GridSheetSelectCommand {
 

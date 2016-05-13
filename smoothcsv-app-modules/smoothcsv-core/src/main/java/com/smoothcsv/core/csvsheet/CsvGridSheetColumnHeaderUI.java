@@ -13,9 +13,6 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import javax.swing.JComponent;
-import javax.swing.plaf.ComponentUI;
-
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.setting.Settings;
@@ -23,9 +20,11 @@ import com.smoothcsv.swing.gridsheet.GridSheetPane;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.ui.GridSheetColumnHeaderUI;
 
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+
 /**
  * @author kohii
- *
  */
 public class CsvGridSheetColumnHeaderUI extends GridSheetColumnHeaderUI {
 

@@ -18,7 +18,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 
 /**
  * @author kohii
- *
  */
 public class ToggleFloatingCommand extends ValuePanelCommandBase {
 

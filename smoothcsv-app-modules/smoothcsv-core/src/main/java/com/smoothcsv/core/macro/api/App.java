@@ -15,7 +15,6 @@ package com.smoothcsv.core.macro.api;
 
 /**
  * @author kohii
- *
  */
 public interface App {
 
@@ -41,8 +40,8 @@ public interface App {
   /**
    * Creates a new csvsheet with the specified number of rows and columns and properties.
    *
-   * @param rows the number of rows for the csvsheet
-   * @param columns the number of columns for the csvsheet
+   * @param rows       the number of rows for the csvsheet
+   * @param columns    the number of columns for the csvsheet
    * @param properties the properties
    */
   void create(int rows, int columns, CsvProperties properties);
@@ -57,7 +56,7 @@ public interface App {
   /**
    * Opens the csvsheet that corresponds to the given file path with the specified properties.
    *
-   * @param pathname the file path to open
+   * @param pathname   the file path to open
    * @param properties the properties
    */
   void open(String pathname, CsvProperties properties);
@@ -95,7 +94,7 @@ public interface App {
    * Returns the active {@link CellEditor}.
    *
    * @param startEdit <code>true</code> to start editing if there is no active CellEditor.;
-   *        <code>false</code> to return null if there is no active CellEditor.
+   *                  <code>false</code> to return null if there is no active CellEditor.
    * @return the active {@link CellEditor}
    */
   CellEditor getActiveCellEditor(boolean startEdit);

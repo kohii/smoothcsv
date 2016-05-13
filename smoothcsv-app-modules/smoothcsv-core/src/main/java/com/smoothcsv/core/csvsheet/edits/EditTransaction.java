@@ -17,7 +17,6 @@ import java.io.Closeable;
 
 /**
  * @author kohii
- *
  */
 public class EditTransaction implements Closeable {
 

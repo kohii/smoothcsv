@@ -16,7 +16,6 @@ package com.smoothcsv.core.filter;
 import com.smoothcsv.commons.utils.EnumStringSupport;
 
 /**
- *
  * @author kohii
  */
 public enum Criteria {

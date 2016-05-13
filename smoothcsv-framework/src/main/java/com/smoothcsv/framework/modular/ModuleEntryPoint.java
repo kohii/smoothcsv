@@ -14,7 +14,6 @@
 package com.smoothcsv.framework.modular;
 
 /**
- *
  * @author kohii
  */
 public interface ModuleEntryPoint {

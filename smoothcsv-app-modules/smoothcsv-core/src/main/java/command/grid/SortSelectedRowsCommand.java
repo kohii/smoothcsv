@@ -13,23 +13,22 @@
  */
 package command.grid;
 
-import java.util.List;
-
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class SortSelectedRowsCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    gridSheetPane.stopCellEditingIfEditing();;
+    gridSheetPane.stopCellEditingIfEditing();
     if (!gridSheetPane.getSelectionModel().isColumnHeaderSelected()
         || !gridSheetPane.getSelectionModel().isRowHeaderSelected()) {
       new SelectEntireRowCommand().run(gridSheetPane);

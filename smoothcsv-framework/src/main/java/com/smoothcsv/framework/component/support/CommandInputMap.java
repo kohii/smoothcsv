@@ -13,21 +13,18 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import java.awt.event.KeyEvent;
+import com.smoothcsv.framework.command.CommandKeymap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.awt.event.KeyEvent;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.smoothcsv.framework.command.CommandKeymap;
-
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class CommandInputMap extends InputMap {

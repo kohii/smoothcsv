@@ -13,15 +13,14 @@
  */
 package com.smoothcsv.core.csvsheet.edits;
 
-import java.util.List;
-
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.sort.SortCriteria;
 import com.smoothcsv.swing.gridsheet.model.CellRect;
 
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class PartialSortEdit implements GridSheetUndableEdit {
 

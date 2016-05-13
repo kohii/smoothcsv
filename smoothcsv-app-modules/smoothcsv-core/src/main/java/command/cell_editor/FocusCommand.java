@@ -19,7 +19,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorCom
 
 /**
  * @author kohii
- *
  */
 public class FocusCommand
     extends VisibleComponentCommandBase<CsvGridSheetCellStringEditor.CsvGridEditorComponent> {

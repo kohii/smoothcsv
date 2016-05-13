@@ -18,7 +18,6 @@ import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 
 /**
- *
  * @author kohii
  */
 public class SmoothCSV {

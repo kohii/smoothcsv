@@ -13,16 +13,14 @@
  */
 package command.debug;
 
+import com.smoothcsv.framework.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.smoothcsv.framework.command.Command;
-
 /**
- *
  * @author kohii
  */
-public class EnableWatchThreadCommand extends Command  {
+public class EnableWatchThreadCommand extends Command {
 
   static Logger LOG = LoggerFactory.getLogger(EnableWatchThreadCommand.class);
 
@@ -38,6 +36,6 @@ public class EnableWatchThreadCommand extends Command  {
   }
 
   void start() {
-    
+
   }
 }

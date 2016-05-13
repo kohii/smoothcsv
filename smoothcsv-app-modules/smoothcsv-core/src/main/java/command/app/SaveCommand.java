@@ -13,11 +13,6 @@
  */
 package command.app;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.CsvSheetCommandBase;
 import com.smoothcsv.core.csv.CsvMeta;
@@ -25,9 +20,13 @@ import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 /**
  * @author kohii
- *
  */
 public class SaveCommand extends CsvSheetCommandBase {
 
@@ -45,8 +44,8 @@ public class SaveCommand extends CsvSheetCommandBase {
     view.getGridSheetPane().stopCellEditingIfEditing();
     CsvMeta csvMeta = view.getViewInfo().getCsvMeta();
     try (SmoothCsvWriter writer =
-        new SmoothCsvWriter(
-            new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()), csvMeta)) {
+             new SmoothCsvWriter(
+                 new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()), csvMeta)) {
       GridSheetModel model = view.getGridSheetPane().getModel();
       int rowCount = model.getRowCount();
       if (rowCount > 0) {

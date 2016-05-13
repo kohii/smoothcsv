@@ -13,19 +13,6 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import java.awt.BorderLayout;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
 import com.smoothcsv.core.sql.model.SqlTableInfo;
@@ -34,12 +21,21 @@ import com.smoothcsv.framework.component.SCTabbedPaneUI;
 import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-
 import lombok.Getter;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+
+import java.awt.BorderLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class SqlToolsDialog extends DialogBase {

@@ -13,6 +13,12 @@
  */
 package com.smoothcsv.framework.component;
 
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.framework.component.view.ViewInfo;
+import lombok.Getter;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -24,19 +30,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.framework.component.view.ViewInfo;
-
-import lombok.Getter;
 
 public abstract class BaseTabView<T extends ViewInfo> extends JPanel implements SmoothComponent {
 

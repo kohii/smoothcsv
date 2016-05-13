@@ -19,7 +19,6 @@ import com.smoothcsv.framework.selector.SelectorFactory;
 
 /**
  * @author kohii
- *
  */
 public class AvailableCondition extends Condition {
 

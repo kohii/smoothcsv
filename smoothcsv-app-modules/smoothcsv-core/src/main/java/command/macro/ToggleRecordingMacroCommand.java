@@ -14,15 +14,14 @@
 package command.macro;
 
 import com.smoothcsv.core.component.SmoothCsvComponentManager;
-import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.Macro;
+import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.util.MessageBundles;
 
 /**
  * @author kohii
- *
  */
 public class ToggleRecordingMacroCommand extends Command {
 

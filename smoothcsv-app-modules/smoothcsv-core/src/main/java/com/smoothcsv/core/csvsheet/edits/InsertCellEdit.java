@@ -17,10 +17,8 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 
 /**
  * @author kohii
- *
  */
 public class InsertCellEdit implements GridSheetUndableEdit {
-
 
 
   private final int rowIndex;

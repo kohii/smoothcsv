@@ -13,11 +13,6 @@
  */
 package command.macro;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.swing.JFileChooser;
-
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.FileUtils;
@@ -28,9 +23,12 @@ import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.dialog.BasicFileChooser;
 import com.smoothcsv.framework.exception.AppException;
 
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 /**
  * @author kohii
- *
  */
 public class SaveCommand extends Command {
 

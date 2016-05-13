@@ -17,7 +17,6 @@ import com.smoothcsv.core.sql.component.SqlTableList;
 
 /**
  * @author kohii
- *
  */
 public abstract class SqlTableListCommandBase extends VisibleComponentCommandBase<SqlTableList> {
 

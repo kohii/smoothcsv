@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.framework.menu;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.csv.reader.DefaultCsvReader;
 import com.smoothcsv.framework.component.SCMenuBar;
@@ -28,9 +21,15 @@ import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.exception.IllegalConfigException;
 import com.smoothcsv.framework.io.CsvSupport;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class MainMenuItems {
 
@@ -79,8 +78,8 @@ public class MainMenuItems {
     LinkedList<ParentMenu> menuStack = new LinkedList<>();
     ParentMenu previous = null;
     try (InputStream in2 = in;
-        DefaultCsvReader reader = new DefaultCsvReader(new InputStreamReader(in, "UTF-8"),
-            CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION)) {
+         DefaultCsvReader reader = new DefaultCsvReader(new InputStreamReader(in, "UTF-8"),
+             CsvSupport.TSV_PROPERTIES, CsvSupport.SKIP_EMPTYROW_OPTION)) {
       List<String> rowData;
       while ((rowData = reader.readRow()) != null) {
         int newDepth = 0;

@@ -14,7 +14,6 @@
 package com.smoothcsv.core.macro.api;
 
 /**
- *
  * @author kohii
  */
 public interface CsvSheet {
@@ -72,6 +71,7 @@ public interface CsvSheet {
   boolean isModified();
 
   // File Operations ////////////////////////////////////////////////////////
+
   /**
    * Saves changes to the specified file. The first time you save a CSV, use
    * {@link #setPathname(String)} before calling this method to specify a name for the file, or use
@@ -87,6 +87,7 @@ public interface CsvSheet {
   void saveAs(String pathname);
 
   // Close //////////////////////////////////////////////////////////////////
+
   /**
    * Closes this sheet.
    */
@@ -96,12 +97,12 @@ public interface CsvSheet {
    * Closes this sheet.
    *
    * @param saveChanges If there are no changes to the sheet, this argument is ignored. If there are
-   *        changes to the sheet, this argument specifies whether changes should be saved. If set to
-   *        true, changes are saved to the file. If there is not yet a file pathname associated with
-   *        the sheet, then pathname is used. If pathname is omitted, the user is asked to supply a
-   *        pathname.
-   * @param pathname If saveChanges is true, the pathname with which to save the file. The default
-   *        is to prompt for the pathname.
+   *                    changes to the sheet, this argument specifies whether changes should be saved. If set to
+   *                    true, changes are saved to the file. If there is not yet a file pathname associated with
+   *                    the sheet, then pathname is used. If pathname is omitted, the user is asked to supply a
+   *                    pathname.
+   * @param pathname    If saveChanges is true, the pathname with which to save the file. The default
+   *                    is to prompt for the pathname.
    */
   void close(boolean saveChanges, String pathname);
 
@@ -122,6 +123,7 @@ public interface CsvSheet {
   boolean redo();
 
   // width and height ////////////////////////////////////////////////////////
+
   /**
    * Sets the width of the given column to fit its contents.
    *
@@ -160,7 +162,7 @@ public interface CsvSheet {
    * Sets the width of the given column in pixels.
    *
    * @param columnPosition the position of the given column to set
-   * @param width the width in pixels to set it to
+   * @param width          the width in pixels to set it to
    * @return the sheet, useful for method chaining
    */
   CsvSheet setColumnWidth(int columnPosition, int width);
@@ -208,7 +210,7 @@ public interface CsvSheet {
    * Inserts a number of rows after the given row position.
    *
    * @param afterPosition the row after which the new row should be added
-   * @param howMany the number of rows to insert
+   * @param howMany       the number of rows to insert
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertRowsAfter(int afterPosition, int howMany);
@@ -225,7 +227,7 @@ public interface CsvSheet {
    * Inserts a number of rows before the given row position.
    *
    * @param beforePosition the row before which the new row should be added
-   * @param howMany the number of rows to insert
+   * @param howMany        the number of rows to insert
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertRowsBefore(int beforePosition, int howMany);
@@ -242,7 +244,7 @@ public interface CsvSheet {
    * Deletes a number of rows starting at the given row position.
    *
    * @param rowPosition the position of the first row to delete
-   * @param howMany the number of rows to delete
+   * @param howMany     the number of rows to delete
    * @return the sheet, useful for method chaining
    */
   CsvSheet deleteRows(int rowPosition, int howMany);
@@ -260,7 +262,7 @@ public interface CsvSheet {
    * Inserts a number of columns after the given column position.
    *
    * @param afterPosition the column after which the new column should be added
-   * @param howMany the number of columns to insert
+   * @param howMany       the number of columns to insert
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertColumnsAfter(int afterPosition, int howMany);
@@ -277,7 +279,7 @@ public interface CsvSheet {
    * Inserts a number of columns before the given column position.
    *
    * @param beforePosition the column before which the new column should be added
-   * @param howMany the number of columns to insert
+   * @param howMany        the number of columns to insert
    * @return the sheet, useful for method chaining
    */
   CsvSheet insertColumnsBefore(int beforePosition, int howMany);
@@ -294,7 +296,7 @@ public interface CsvSheet {
    * Deletes a number of columns starting at the given column position.
    *
    * @param columnPosition the position of the first column to delete
-   * @param howMany the number of columns to delete
+   * @param howMany        the number of columns to delete
    * @return the sheet, useful for method chaining
    */
   CsvSheet deleteColumns(int columnPosition, int howMany);
@@ -381,10 +383,11 @@ public interface CsvSheet {
   // void showRows(int rowIndex, int numRows);
 
   // range ///////////////////////////////////////////////////////////////////
+
   /**
    * Returns the range with the top left cell at the given coordinates.
    *
-   * @param row the row of the cell to return
+   * @param row    the row of the cell to return
    * @param column the column of the cell to return
    * @return a {@link Range} containing only this cell
    */
@@ -394,9 +397,9 @@ public interface CsvSheet {
    * Returns the range with the top left cell at the given coordinates with the given number of rows
    * and columns.
    *
-   * @param row the starting row of the range
-   * @param column the starting column of the range
-   * @param numRows the number of rows to return
+   * @param row        the starting row of the range
+   * @param column     the starting column of the range
+   * @param numRows    the number of rows to return
    * @param numColumns the number of columns to return
    * @return a {@link Range} corresponding to the area specified
    */

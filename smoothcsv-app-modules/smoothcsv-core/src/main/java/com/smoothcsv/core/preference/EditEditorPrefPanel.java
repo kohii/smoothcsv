@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.core.preference;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
@@ -29,9 +22,14 @@ import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  * @author kohii
- *
  */
 @SuppressWarnings("serial")
 public class EditEditorPrefPanel extends JPanel {
@@ -40,11 +38,11 @@ public class EditEditorPrefPanel extends JPanel {
   public EditEditorPrefPanel() {
     setBorder(null);
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[] {22, 0, 0, 0};
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[] {0.0, 1.0, 0.0, Double.MIN_VALUE};
+    gridBagLayout.columnWidths = new int[]{22, 0, 0, 0};
+    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
     gridBagLayout.rowWeights =
-        new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
     JLabel lblEdit = new PrefTitleLabel("Copy");

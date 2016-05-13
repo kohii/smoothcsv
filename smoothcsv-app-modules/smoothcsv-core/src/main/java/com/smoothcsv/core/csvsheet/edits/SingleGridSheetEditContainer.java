@@ -13,14 +13,12 @@
  */
 package com.smoothcsv.core.csvsheet.edits;
 
-import lombok.Getter;
-
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionSnapshot;
+import lombok.Getter;
 
 /**
  * @author kohii
- *
  */
 public class SingleGridSheetEditContainer implements GridSheetEditContainer {
 
@@ -29,7 +27,7 @@ public class SingleGridSheetEditContainer implements GridSheetEditContainer {
   private GridSheetUndableEdit edit;
 
   public SingleGridSheetEditContainer(GridSheetSelectionSnapshot selection,
-      GridSheetUndableEdit edit) {
+                                      GridSheetUndableEdit edit) {
     this.selection = selection;
     this.edit = edit;
   }

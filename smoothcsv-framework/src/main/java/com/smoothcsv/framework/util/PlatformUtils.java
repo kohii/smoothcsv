@@ -16,7 +16,6 @@ package com.smoothcsv.framework.util;
 import java.awt.Toolkit;
 
 /**
- *
  * @author kohii
  */
 public class PlatformUtils {

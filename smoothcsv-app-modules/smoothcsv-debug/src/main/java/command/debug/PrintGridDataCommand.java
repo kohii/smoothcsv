@@ -20,7 +20,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 /**
  * @author kohii
- *
  */
 public class PrintGridDataCommand extends GridCommand {
 

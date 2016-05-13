@@ -18,7 +18,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor;
 
 /**
  * @author kohii
- *
  */
 public class RedoCommand extends
     VisibleComponentCommandBase<CsvGridSheetCellStringEditor.CsvGridEditorComponent> {
@@ -32,6 +31,6 @@ public class RedoCommand extends
 
   @Override
   public void run(CsvGridSheetCellStringEditor.CsvGridEditorComponent component) {
-    new command.value_panel.RedoCommand().execute();;
+    new command.value_panel.RedoCommand().execute();
   }
 }

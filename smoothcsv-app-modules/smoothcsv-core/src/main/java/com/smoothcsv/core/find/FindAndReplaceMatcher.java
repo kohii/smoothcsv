@@ -13,9 +13,9 @@
  */
 package com.smoothcsv.core.find;
 
-import java.util.regex.Matcher;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Matcher;
 
 /**
  * @author kohii
@@ -100,7 +100,7 @@ public class FindAndReplaceMatcher {
   }
 
   private static String replacePreservingCase(String value, String findWhat, String replaceWith,
-      boolean caseSensitive) {
+                                              boolean caseSensitive) {
     int valueLen = value.length();
     char[] chars = replaceWith.toCharArray();
     for (int i = 0; i < chars.length && i < valueLen; i++) {

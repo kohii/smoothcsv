@@ -18,12 +18,11 @@ import com.smoothcsv.core.sql.component.SqlTableList;
 
 /**
  * @author kohii
- *
  */
-public class RemoveTableCommand extends SqlTableListCommandBase{
+public class RemoveTableCommand extends SqlTableListCommandBase {
 
   @Override
   public void run(SqlTableList component) {
-    
+
   }
 }

@@ -20,7 +20,6 @@ import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii
- *
  */
 public class ExpandCommand extends ValuePanelCommandBase {
 

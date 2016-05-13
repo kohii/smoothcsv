@@ -13,19 +13,17 @@
  */
 package com.smoothcsv.framework.condition;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.smoothcsv.commons.exception.UnexpectedException;
-
 /**
  * @author kohii
- *
  */
 public class Conditions {
 
@@ -90,7 +88,7 @@ public class Conditions {
     }
 
     // TODO SmoothCSV's condition system currently doesn't support query which has both of && and ||
-    if (name.indexOf("&&") >= 0) {
+    if (name.contains("&&")) {
       String[] conditionNames = StringUtils.split(name, "&&");
       Condition[] conditions = new Condition[conditionNames.length];
       for (int i = 0; i < conditionNames.length; i++) {
@@ -104,7 +102,7 @@ public class Conditions {
       conditionMap.put(name, condition);
       return condition;
     }
-    if (name.indexOf("||") >= 0) {
+    if (name.contains("||")) {
       String[] conditionNames = StringUtils.split(name, "||");
       Condition[] conditions = new Condition[conditionNames.length];
       for (int i = 0; i < conditionNames.length; i++) {

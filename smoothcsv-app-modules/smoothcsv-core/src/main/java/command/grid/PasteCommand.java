@@ -13,11 +13,6 @@
  */
 package command.grid;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
@@ -32,9 +27,13 @@ import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.utils.ClipboardUtils;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author kohii
- *
  */
 public class PasteCommand extends GridCommand {
 
@@ -57,7 +56,7 @@ public class PasteCommand extends GridCommand {
   }
 
   public static void paste(CsvGridSheetPane gridSheetPane, String text, CsvMeta csvMeta,
-      boolean doNotChangeSelection) {
+                           boolean doNotChangeSelection) {
     List<List<?>> values = parse(text, csvMeta);
     DefaultGridSheetSelectionModel sm = gridSheetPane.getSelectionModel();
     PasteRange range = new PasteRange() {
@@ -82,7 +81,7 @@ public class PasteCommand extends GridCommand {
   }
 
   public static void paste(CsvGridSheetPane gridSheetPane, PasteRange range, List<List<?>> values,
-      boolean doNotChangeSelection) {
+                           boolean doNotChangeSelection) {
     int leftTopRow = range.getRow();
     int leftTopColumn = range.getColumn();
     int rowSize = gridSheetPane.getRowCount();

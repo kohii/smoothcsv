@@ -20,6 +20,8 @@ import com.smoothcsv.core.macro.apiimpl.APIBase;
 import com.smoothcsv.csv.NewlineCharacter;
 
 /**
+ * A class representing CSV properties such as delimiter, quote, and so on.
+ *
  * @author kohii
  */
 public class CsvProperties extends APIBase {
@@ -44,7 +46,9 @@ public class CsvProperties extends APIBase {
   public static final String CRLF = NewlineCharacter.CRLF.stringValue();
 
   /**
-   * @return
+   * Creates default CsvProperties.
+   *
+   * @return CsvProperties
    */
   public static CsvProperties defaultProperties() {
     return new CsvProperties();
@@ -58,6 +62,9 @@ public class CsvProperties extends APIBase {
   private String newlineCharacter;
   private int quoteOption;
 
+  /**
+   * Creates CsvProperties.
+   */
   public CsvProperties() {
     this(CsvSheetSupport.getDefaultCsvMeta());
   }

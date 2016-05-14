@@ -19,29 +19,46 @@ import com.smoothcsv.core.macro.apiimpl.APIBase;
 import java.io.File;
 
 /**
+ * Represents a macro.
+ *
  * @author kohii
  */
 public class Macro extends APIBase {
 
+  /**
+   * Constructs Macro from the given pathname.
+   *
+   * @param pathname the pathname
+   * @return a Macro instance
+   */
   public static Macro fromFile(String pathname) {
     return new Macro(new File(pathname));
   }
 
+  /**
+   * Constructs Macro from the given source.
+   *
+   * @param source the source code
+   * @return a Macro instance
+   */
   public static Macro fromString(String source) {
     return new Macro(source);
   }
 
-  private com.smoothcsv.core.macro.Macro macro;
+  private com.smoothcsv.core.macro.Macro macroImpl;
 
-  public Macro(File file) {
-    macro = new com.smoothcsv.core.macro.Macro(file);
+  private Macro(File file) {
+    macroImpl = new com.smoothcsv.core.macro.Macro(file);
   }
 
-  public Macro(String source) {
-    macro = new com.smoothcsv.core.macro.Macro(source);
+  private Macro(String source) {
+    macroImpl = new com.smoothcsv.core.macro.Macro(source);
   }
 
+  /**
+   * Executes the macro.
+   */
   public void execute() {
-    SCAppMacroRuntime.getMacroRuntime().execute(macro);
+    SCAppMacroRuntime.getMacroRuntime().execute(macroImpl);
   }
 }

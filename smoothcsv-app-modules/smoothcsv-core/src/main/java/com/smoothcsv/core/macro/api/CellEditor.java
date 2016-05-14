@@ -19,7 +19,7 @@ package com.smoothcsv.core.macro.api;
 public interface CellEditor {
 
   /**
-   * Type keys.
+   * Input a text into the cell.
    *
    * @param text the text to be input
    * @return true if succeeded

@@ -14,6 +14,8 @@
 package com.smoothcsv.core.macro.api;
 
 /**
+ * This class represents the SmoothCSV application itself.
+ *
  * @author kohii
  */
 public interface App {

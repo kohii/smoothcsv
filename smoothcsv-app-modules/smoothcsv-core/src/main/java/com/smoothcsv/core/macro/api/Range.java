@@ -14,6 +14,8 @@
 package com.smoothcsv.core.macro.api;
 
 /**
+ * The representation of a cell (or cells) on your csv sheet.
+ *
  * @author kohii
  */
 public interface Range {

@@ -46,6 +46,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 /**
  * @author kohii2
@@ -396,37 +397,24 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       }
     });
 
-    delimiterChar.setRenderer(new DefaultListCellRenderer() {
+    ListCellRenderer charComboboxRenderer = new DefaultListCellRenderer() {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                                                     boolean isSelected, boolean cellHasFocus) {
         DefaultListCellRenderer rendererComponent =
             (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
-        if (value.equals(',')) {
-          rendererComponent.setText(CoreBundle.get("key.comma"));
-        } else if (value.equals('\t')) {
-          rendererComponent.setText(CoreBundle.get("key.tab"));
-        } else if (value.equals(' ')) {
-          rendererComponent.setText(CoreBundle.get("key.space"));
+        if (value instanceof Character) {
+          String s = toDisplayString((Character) value);
+          if (s != null) {
+            rendererComponent.setText(s);
+          }
         }
         return rendererComponent;
       }
-    });
-
-    quoteChar.setRenderer(new DefaultListCellRenderer() {
-      @Override
-      public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                    boolean isSelected, boolean cellHasFocus) {
-        DefaultListCellRenderer rendererComponent =
-            (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
-                isSelected, cellHasFocus);
-        if (value.equals('\0')) {
-          rendererComponent.setText(NONE);
-        }
-        return rendererComponent;
-      }
-    });
+    };
+    delimiterChar.setRenderer(charComboboxRenderer);
+    quoteChar.setRenderer(charComboboxRenderer);
 
     escapeType = new ExButtonGroup<Integer>(escapeTypeDuplicate, escapeTypeEscapechar);
     escapeType.addSelectionListener((radio) -> {
@@ -833,6 +821,20 @@ public class CsvMetaPanel extends javax.swing.JPanel {
         break;
       }
     }
+  }
+
+  private static String toDisplayString(char c) {
+    switch (c) {
+      case '\0':
+        return NONE;
+      case ',':
+        return CoreBundle.get("key.comma");
+      case '\t':
+        return CoreBundle.get("key.tab");
+      case ' ':
+        return CoreBundle.get("key.space");
+    }
+    return null;
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

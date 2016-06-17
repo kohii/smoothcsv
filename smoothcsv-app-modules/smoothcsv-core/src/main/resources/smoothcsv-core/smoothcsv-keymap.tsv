@@ -158,6 +158,8 @@ cell-editor
 	alt+shift+right	cell-editor:select-to-next-word
 	alt+backspace	cell-editor:delete-previous-word
 	alt+delete	cell-editor:delete-next-word
+	cmd+backspace	cell-editor:delete-to-beginning-of-line
+	cmd+delete	cell-editor:delete-to-end-of-line
 
 @win cell-editor
 	home	cell-editor:move-to-beginning-of-line
@@ -232,6 +234,8 @@ value-panel
 	alt+shift+right	value-panel:select-to-next-word
 	alt+backspace	value-panel:delete-previous-word
 	alt+delete	value-panel:delete-next-word
+	cmd+backspace	value-panel:delete-to-beginning-of-line
+	cmd+delete	value-panel:delete-to-end-of-line
 
 @win value-panel
 	home	value-panel:move-to-beginning-of-line

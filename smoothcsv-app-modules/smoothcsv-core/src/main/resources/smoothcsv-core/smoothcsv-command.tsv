@@ -121,6 +121,8 @@ cell-editor:delete-previous	available(cell-editor)	command.cell_editor.ActionCom
 cell-editor:delete-next	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next"}
 cell-editor:delete-previous-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-previous-word"}
 cell-editor:delete-next-word	available(cell-editor)	command.cell_editor.ActionCommand {"action":"delete-next-word"}
+cell-editor:delete-to-beginning-of-line	available(cell-editor)
+cell-editor:delete-to-end-of-line	available(cell-editor)
 cell-editor:cut	available(cell-editor)	command.cell_editor.ActionCommand {"action":"cut-to-clipboard"}
 cell-editor:copy	available(cell-editor)	command.cell_editor.ActionCommand {"action":"copy-to-clipboard"}
 cell-editor:paste	available(cell-editor)	command.cell_editor.ActionCommand {"action":"paste-from-clipboard"}
@@ -161,6 +163,8 @@ value-panel:delete-previous	available(value-panel)	command.value_panel.ActionCom
 value-panel:delete-next	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-next"}
 value-panel:delete-previous-word	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-previous-word"}
 value-panel:delete-next-word	available(value-panel)	command.value_panel.ActionCommand {"action":"delete-next-word"}
+value-panel:delete-to-beginning-of-line	available(value-panel)
+value-panel:delete-to-end-of-line	available(value-panel)
 value-panel:cut	available(value-panel)	command.value_panel.ActionCommand {"action":"cut-to-clipboard"}
 value-panel:copy	available(value-panel)	command.value_panel.ActionCommand {"action":"copy-to-clipboard"}
 value-panel:paste	available(value-panel)	command.value_panel.ActionCommand {"action":"paste-from-clipboard"}

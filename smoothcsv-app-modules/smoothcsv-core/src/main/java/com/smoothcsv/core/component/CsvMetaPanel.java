@@ -442,12 +442,12 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (autoDeterminedOptionEnabled) {
       encodings.add(AUTO);
     }
+    encodings.addAll(ENCODING_HISTORY.getAll().stream()
+        .filter(CharsetUtils::isAvailable)
+        .map(Charset::forName).collect(Collectors.toList()));
     List<String> strItems = ArrayUtils.toArrayList(
         CsvPropertySettings.getInstance().get(CsvPropertySettings.ENCODING_OPTIONS).split(","));
     encodings.addAll(strItems.stream()
-        .filter(CharsetUtils::isAvailable)
-        .map(Charset::forName).collect(Collectors.toList()));
-    encodings.addAll(ENCODING_HISTORY.getAll().stream()
         .filter(CharsetUtils::isAvailable)
         .map(Charset::forName).collect(Collectors.toList()));
     encodings.add(OTHERS);
@@ -462,11 +462,11 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (autoDeterminedOptionEnabled) {
       quotes.add(AUTO);
     }
+    quotes.addAll(QUOTE_HISTORY.getAll().stream().map(s -> s.charAt(0)).collect(Collectors.toList()));
     quotes.addAll(toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.QUOTE_CHAR_OPTIONS)));
     if (!quotes.contains('\0')) {
       quotes.add('\0');
     }
-    quotes.addAll(QUOTE_HISTORY.getAll().stream().map(s -> s.charAt(0)).collect(Collectors.toList()));
     quotes.add(OTHERS);
 
     return CollectionUtils.unique(quotes).toArray();
@@ -477,8 +477,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (autoDeterminedOptionEnabled) {
       delimiters.add(AUTO);
     }
-    delimiters.addAll(toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.DELIMITER_CHAR_OPTIONS)));
     delimiters.addAll(DELIMITER_HISTORY.getAll().stream().map(s -> s.charAt(0)).collect(Collectors.toList()));
+    delimiters.addAll(toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.DELIMITER_CHAR_OPTIONS)));
     delimiters.add(OTHERS);
 
     return CollectionUtils.unique(delimiters).toArray();

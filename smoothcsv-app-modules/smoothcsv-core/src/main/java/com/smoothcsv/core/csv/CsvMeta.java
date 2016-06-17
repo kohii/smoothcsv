@@ -114,6 +114,8 @@ public class CsvMeta extends CsvProperties implements Cloneable {
       sb.append(SCBundle.get("key.comma"));
     } else if (value == '\t') {
       sb.append(SCBundle.get("key.tab"));
+    } else if (value == ' ') {
+      sb.append(SCBundle.get("key.space"));
     } else if (value == '\0') {
       sb.append("None");
     } else {

@@ -394,6 +394,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
           rendererComponent.setText(CoreBundle.get("key.comma"));
         } else if (value.equals('\t')) {
           rendererComponent.setText(CoreBundle.get("key.tab"));
+        } else if (value.equals(' ')) {
+          rendererComponent.setText(CoreBundle.get("key.space"));
         }
         return rendererComponent;
       }

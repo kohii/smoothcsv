@@ -15,6 +15,7 @@ package com.smoothcsv.core.component;
 
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CharsetUtils;
+import com.smoothcsv.commons.utils.CollectionUtils;
 import com.smoothcsv.core.csv.AvailableCharsetDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
@@ -24,14 +25,17 @@ import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.exception.AppException;
+import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
+import com.smoothcsv.swing.components.History;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +61,15 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private static final String AUTO;
   private static final String OTHERS;
   private static final String NONE;
+
+  private static final History DELIMITER_HISTORY = new History(
+      new File(DirectoryResolver.instance().getSessionDirectory(), "delimiter.history"), true, 10, true);
+
+  private static final History QUOTE_HISTORY = new History(
+      new File(DirectoryResolver.instance().getSessionDirectory(), "quote.history"), true, 10, true);
+
+  private static final History ENCODING_HISTORY = new History(
+      new File(DirectoryResolver.instance().getSessionDirectory(), "encoding.history"), true, 10, true);
 
   static {
     AUTO = CoreBundle.get("key.autoDetermined");
@@ -437,44 +450,50 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private Object[] createEncodingItems() {
-    String[] encodings =
-        CsvPropertySettings.getInstance().get(CsvPropertySettings.ENCODING_OPTIONS).split(",");
-    List<String> strItems = ArrayUtils.toArrayList(encodings);
-
-    List<Object> items =
-        strItems.stream().map(s -> Charset.forName(s)).collect(Collectors.toList());
-
-    items.add(OTHERS);
+    List<Object> encodings = new ArrayList<>();
     if (autoDeterminedOptionEnabled) {
-      items.add(0, AUTO);
+      encodings.add(AUTO);
     }
-    return items.toArray(new Object[items.size()]);
+    List<String> strItems = ArrayUtils.toArrayList(
+        CsvPropertySettings.getInstance().get(CsvPropertySettings.ENCODING_OPTIONS).split(","));
+    encodings.addAll(strItems.stream()
+        .filter(CharsetUtils::isAvailable)
+        .map(Charset::forName).collect(Collectors.toList()));
+    encodings.addAll(ENCODING_HISTORY.getAll().stream()
+        .filter(CharsetUtils::isAvailable)
+        .map(Charset::forName).collect(Collectors.toList()));
+    encodings.add(OTHERS);
+
+    CollectionUtils.unique(encodings);
+
+    return encodings.toArray();
   }
 
   private Object[] createQuoteCharItems() {
-    List quotes =
-        toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.QUOTE_CHAR_OPTIONS));
-
+    List<Object> quotes = new ArrayList<>();
+    if (autoDeterminedOptionEnabled) {
+      quotes.add(AUTO);
+    }
+    quotes.addAll(toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.QUOTE_CHAR_OPTIONS)));
     if (!quotes.contains('\0')) {
       quotes.add('\0');
     }
-
+    quotes.addAll(QUOTE_HISTORY.getAll().stream().map(s -> s.charAt(0)).collect(Collectors.toList()));
     quotes.add(OTHERS);
-    if (autoDeterminedOptionEnabled) {
-      quotes.add(0, AUTO);
-    }
-    return quotes.toArray(new Object[quotes.size()]);
+
+    return CollectionUtils.unique(quotes).toArray();
   }
 
   private Object[] createDelimiterCharItems() {
-    List delimiter = toCharList(
-        CsvPropertySettings.getInstance().get(CsvPropertySettings.DELIMITER_CHAR_OPTIONS));
-
-    delimiter.add(OTHERS);
+    List<Object> delimiters = new ArrayList<>();
     if (autoDeterminedOptionEnabled) {
-      delimiter.add(0, AUTO);
+      delimiters.add(AUTO);
     }
-    return delimiter.toArray(new Object[delimiter.size()]);
+    delimiters.addAll(toCharList(CsvPropertySettings.getInstance().get(CsvPropertySettings.DELIMITER_CHAR_OPTIONS)));
+    delimiters.addAll(DELIMITER_HISTORY.getAll().stream().map(s -> s.charAt(0)).collect(Collectors.toList()));
+    delimiters.add(OTHERS);
+
+    return CollectionUtils.unique(delimiters).toArray();
   }
 
   private Object[] createNewlineCharItems() {
@@ -565,6 +584,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     } else {
       csvMeta.setCharset((Charset) encoding.getSelectedItem());
       csvMeta.setHasBom(hasBOM.isEnabled() && hasBOM.isSelected());
+      ENCODING_HISTORY.put(((Charset) encoding.getSelectedItem()).displayName());
     }
 
     // delimiter
@@ -573,6 +593,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       csvMeta.setDelimiterNotDetermined(true);
     } else if (delimiter instanceof Character) {
       csvMeta.setDelimiter((Character) delimiter);
+      DELIMITER_HISTORY.put(delimiter.toString());
     } else {
       throw new IllegalStateException(delimiter.toString());
     }
@@ -588,6 +609,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       csvMeta.setQuote((Character) quote);
       CsvQuoteApplyRule quoteRule = quoteType.getSelectedValue();
       csvMeta.setQuoteOption(quoteRule);
+      QUOTE_HISTORY.put(quote.toString());
 
       // escape rule
       if (escapeType.getSelectedValue() == ESCAPE_WITH_DUPLICATING_QUOTE) {

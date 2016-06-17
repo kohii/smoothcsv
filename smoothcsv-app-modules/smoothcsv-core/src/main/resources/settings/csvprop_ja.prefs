@@ -1,3 +1,3 @@
-csvprop.encodingOptions=SHIFT_JIS,JIS,EUC-JP,UTF-8,UTF-16,UTF-16BE,ISO-8859-1
+csvprop.encodingOptions=SHIFT_JIS,JIS,EUC-JP,UTF-8,UTF-16,UTF-16BE
 csvprop.delimiterCharOptions=,\t
 csvprop.quoteCharOptions="'

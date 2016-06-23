@@ -18,6 +18,7 @@ import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
 import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
+import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExLabel;
 
 import java.awt.GridBagConstraints;
@@ -41,7 +42,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
-    JLabel lblAutofitColumnWidth = new PrefTitleLabel("Auto-fit Column Width");
+    JLabel lblAutofitColumnWidth = new PrefTitleLabel(SCBundle.get("key.pref.autoFitColumnWidth"));
     GridBagConstraints gbc_lblAutofitColumnWidth = new GridBagConstraints();
     gbc_lblAutofitColumnWidth.insets = new Insets(0, 0, 5, 0);
     gbc_lblAutofitColumnWidth.gridwidth = 4;

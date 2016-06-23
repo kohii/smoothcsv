@@ -20,6 +20,7 @@ import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
 import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
+import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExRadioButton;
 
 import java.awt.GridBagConstraints;
@@ -45,7 +46,7 @@ public class EditEditorPrefPanel extends JPanel {
         new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
-    JLabel lblEdit = new PrefTitleLabel("Copy");
+    JLabel lblEdit = new PrefTitleLabel(SCBundle.get("key.pref.copy"));
     GridBagConstraints gbc_lblEdit = new GridBagConstraints();
     gbc_lblEdit.insets = new Insets(0, 0, 5, 0);
     gbc_lblEdit.gridwidth = 3;
@@ -88,7 +89,7 @@ public class EditEditorPrefPanel extends JPanel {
         CoreSettings.QUOTE_RULE_FOR_COPYING, radioButton, rdbtnNewRadioButton_3,
         rdbtnNewRadioButton_4);
 
-    JLabel lblPaste = new PrefTitleLabel("Paste");
+    JLabel lblPaste = new PrefTitleLabel(SCBundle.get("key.pref.paste"));
     GridBagConstraints gbc_lblPaste = new GridBagConstraints();
     gbc_lblPaste.insets = new Insets(0, 0, 5, 0);
     gbc_lblPaste.anchor = GridBagConstraints.WEST;
@@ -108,7 +109,7 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_5.gridy = 6;
     add(rdbtnNewRadioButton_5, gbc_rdbtnNewRadioButton_5);
 
-    JLabel lblUndoredo = new PrefTitleLabel("Undo/Redo");
+    JLabel lblUndoredo = new PrefTitleLabel(SCBundle.get("key.pref.undoAndRedo"));
     GridBagConstraints gbc_lblUndoredo = new GridBagConstraints();
     gbc_lblUndoredo.insets = new Insets(0, 0, 5, 0);
     gbc_lblUndoredo.gridwidth = 3;

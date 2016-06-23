@@ -26,11 +26,11 @@ import javax.swing.JPanel;
 @NoArgsConstructor
 @Getter
 public class PrefPage {
-  private String title;
+  private String titleKey;
   private Class<? extends JPanel> prefCompClass;
 
   @Override
   public String toString() {
-    return title;
+    return titleKey;
   }
 }

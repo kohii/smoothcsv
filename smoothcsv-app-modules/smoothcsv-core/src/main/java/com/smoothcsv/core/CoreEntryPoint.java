@@ -151,11 +151,11 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
           @Override
           public void run() {
             PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("General", GeneralPrefPanel.class));
+                .addPrefPage(new PrefPage("key.pref.title.general", GeneralPrefPanel.class));
             PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("Editor", EditorPrefPanel.class));
+                .addPrefPage(new PrefPage("key.pref.title.editor", EditorPrefPanel.class));
             PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("Key Bindings", KeyBindingsPrefPanel.class));
+                .addPrefPage(new PrefPage("key.pref.title.keyBindings", KeyBindingsPrefPanel.class));
 
             // Execute JsonUtils.stringify() so that it can perform faster next time
             try {

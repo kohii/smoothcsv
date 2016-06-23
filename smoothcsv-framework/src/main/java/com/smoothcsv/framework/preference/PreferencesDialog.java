@@ -16,6 +16,7 @@ package com.smoothcsv.framework.preference;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.framework.util.SCBundle;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -65,7 +66,8 @@ public class PreferencesDialog extends DialogBase {
       @Override
       public Component getListCellRendererComponent(JList<?> list, Object value, int index,
                                                     boolean isSelected, boolean cellHasFocus) {
-        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        PrefPage page = (PrefPage) value;
+        super.getListCellRendererComponent(list, SCBundle.get(page.getTitleKey()), index, isSelected, cellHasFocus);
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 10));
         return this;
       }
@@ -125,7 +127,7 @@ public class PreferencesDialog extends DialogBase {
 
   private void showPage(PrefPage prefPage) {
     try {
-      titleLabel.setText(prefPage.getTitle());
+      titleLabel.setText(SCBundle.get(prefPage.getTitleKey()));
       if (currentPrefPanel != null) {
         // invoke focus lost before removing
         invokeFocusLost();

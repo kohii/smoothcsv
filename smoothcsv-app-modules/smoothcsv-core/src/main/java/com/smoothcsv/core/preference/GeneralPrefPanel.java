@@ -18,6 +18,7 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
 import com.smoothcsv.framework.preference.PrefSelectBox;
 import com.smoothcsv.framework.util.MessageBundles;
+import com.smoothcsv.framework.util.SCBundle;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -43,7 +44,7 @@ public class GeneralPrefPanel extends JPanel {
     gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
-    JLabel lblNewLabel = new JLabel("Language");
+    JLabel lblNewLabel = new JLabel(SCBundle.get("key.pref.language"));
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
     gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
     gbc_lblNewLabel.gridwidth = 2;

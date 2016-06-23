@@ -149,7 +149,7 @@ public class CsvPropertiesDialog extends DialogBase {
   private JPanel createPropPanel() {
     JPanel propPanel = new JPanel();
     propPanel.setLayout(new BorderLayout());
-    propPanel.setBorder(BorderFactory.createTitledBorder("Properties"));
+    propPanel.setBorder(BorderFactory.createTitledBorder(SCBundle.get("key.properties")));
 
     csvMetaPanel = new CsvMetaPanel(autoDeterminedOptionEnabled, readMode);
     propPanel.add(csvMetaPanel, BorderLayout.CENTER);

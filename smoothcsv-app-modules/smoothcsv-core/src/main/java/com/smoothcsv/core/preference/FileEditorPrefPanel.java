@@ -27,6 +27,7 @@ import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.framework.preference.PrefUtils;
 import com.smoothcsv.framework.setting.Settings;
+import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
 
@@ -62,7 +63,7 @@ public class FileEditorPrefPanel extends JPanel {
         new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     setLayout(gridBagLayout);
 
-    JLabel lblOpen = new PrefTitleLabel("Open File");
+    JLabel lblOpen = new PrefTitleLabel(SCBundle.get("key.pref.openFile"));
     GridBagConstraints gbc_lblOpen = new GridBagConstraints();
     gbc_lblOpen.anchor = GridBagConstraints.WEST;
     gbc_lblOpen.gridwidth = 3;
@@ -127,7 +128,7 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_lblNewLabel_1.gridy = 5;
     add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-    JLabel lblNewLabel = new PrefTitleLabel("New File");
+    JLabel lblNewLabel = new PrefTitleLabel(SCBundle.get("key.pref.newFile"));
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
     gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
     gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
@@ -136,7 +137,7 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_lblNewLabel.gridy = 7;
     add(lblNewLabel, gbc_lblNewLabel);
 
-    JLabel lblDefaultProperties = new JLabel("Default Properties:");
+    JLabel lblDefaultProperties = new JLabel(SCBundle.get("key.pref.defaultProperties"));
     GridBagConstraints gbc_lblDefaultProperties = new GridBagConstraints();
     gbc_lblDefaultProperties.insets = new Insets(0, 0, 5, 0);
     gbc_lblDefaultProperties.gridwidth = 2;
@@ -155,7 +156,7 @@ public class FileEditorPrefPanel extends JPanel {
     add(defaultPropLabel, gbc_label);
     displayDefaultProperties();
 
-    JButton btnEdit = new JButton("Edit...");
+    JButton btnEdit = new JButton(SCBundle.get("key.edit") + "...");
     GridBagConstraints gbc_btnEdit = new GridBagConstraints();
     gbc_btnEdit.insets = new Insets(0, 0, 5, 0);
     gbc_btnEdit.anchor = GridBagConstraints.WEST;
@@ -178,7 +179,7 @@ public class FileEditorPrefPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         CsvPropertiesDialog dialog = new CsvPropertiesDialog(SCApplication.components().getFrame(),
-            "Properties", false, false, true);
+            SCBundle.get("key.properties"), false, false, true);
 
         Settings settings = CoreSettings.getInstance();
         String r = settings.get(CoreSettings.DEFAULT_ROW_SIZE);

@@ -19,6 +19,7 @@ import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
+import com.smoothcsv.framework.util.SCBundle;
 
 /**
  * @author kohii
@@ -33,7 +34,7 @@ public class ShowPropertiesCommand extends Command {
     }
     CsvSheetViewInfo viewInfo = view.getViewInfo();
     CsvPropertiesDialog propDialog = new CsvPropertiesDialog(SCApplication.components().getFrame(),
-        "Properties", false, false, false);
+        SCBundle.get("key.properties"), false, false, false);
     propDialog.setCsvProperties(viewInfo.getCsvMeta());
     DialogOperation opt = propDialog.showDialog();
     if (opt == DialogOperation.OK) {

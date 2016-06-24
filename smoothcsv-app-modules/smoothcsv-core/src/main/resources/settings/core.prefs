@@ -14,6 +14,8 @@ defaultRowSize=5
 defaultColumnSize=5
 sizeOfUndoing=35
 valuePanelHeight=2
+showNewLineChar=true
+showEOF=true
 
 # --Autofit--
 autoFitColumnWidthAfterOpeningFile=true

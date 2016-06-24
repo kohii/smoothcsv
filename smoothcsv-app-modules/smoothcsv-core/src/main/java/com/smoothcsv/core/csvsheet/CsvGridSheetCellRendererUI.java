@@ -13,6 +13,7 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import com.smoothcsv.core.util.CoreSettings;
 import sun.swing.SwingUtilities2;
 
 import java.awt.FontMetrics;
@@ -42,15 +43,21 @@ public class CsvGridSheetCellRendererUI extends BasicLabelUI {
     CsvGridSheetCellRenderer label = (CsvGridSheetCellRenderer) c;
     Object value = label.getValue();
 
-    if (value instanceof String) {
-      paintImpl(g, c);
-    } else if (value == CsvGridSheetTable.END_OF_LINE) {
-      FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
-      int height = fm.getHeight();
-      int width = (int) (height * 0.7);
-      paintEndOfLine(c, g, 0, 0, width, height);
+    if (value == CsvGridSheetTable.END_OF_LINE) {
+      if (CoreSettings.getInstance().getBoolean(CoreSettings.SHOW_NEW_LINE_CHAR)) {
+        FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
+        int height = fm.getHeight();
+        int width = (int) (height * 0.7);
+        paintEndOfLine(c, g, 0, 0, width, height);
+      }
     } else if (value == CsvGridSheetTable.END_OF_FILE) {
-      paintEndOfFile(label, g);
+      if (CoreSettings.getInstance().getBoolean(CoreSettings.SHOW_EOF)) {
+        paintEndOfFile(label, g);
+      }
+    } else {
+      if (value != null) {
+        paintImpl(g, c);
+      }
     }
   }
 

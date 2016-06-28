@@ -183,6 +183,7 @@ view:previous-tab	available(csv-sheet)
 view:next-tab	available(csv-sheet)
 view:toggle-status-bar
 view:toggle-cell-value-panel
+view:toggle-tool-bar
 
 find:show	available(csv-sheet)
 find:hide	available(find-panel)

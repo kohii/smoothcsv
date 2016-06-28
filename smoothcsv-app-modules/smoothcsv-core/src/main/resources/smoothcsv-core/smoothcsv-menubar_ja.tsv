@@ -83,6 +83,7 @@
 	次のタブ	view:next-tab
 	-
 	ステータスバーを表示／非表示	view:toggle-status-bar
+	ツールバーを表示／非表示	view:toggle-tool-bar
 	セル値を表示／非表示	view:toggle-cell-value-panel
 
 ツール

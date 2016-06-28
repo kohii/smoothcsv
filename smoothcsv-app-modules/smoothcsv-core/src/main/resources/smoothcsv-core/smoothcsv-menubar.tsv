@@ -84,6 +84,7 @@ View
 	Next Tab	view:next-tab
 	-
 	Toggle Status Bar	view:toggle-status-bar
+	Toggle Tool Bar	view:toggle-tool-bar
 	Toggle Cell Value Panel	view:toggle-cell-value-panel
 
 Tools

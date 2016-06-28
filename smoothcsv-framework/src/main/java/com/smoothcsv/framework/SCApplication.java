@@ -28,6 +28,7 @@ import com.smoothcsv.framework.event.EventListenerSupport;
 import com.smoothcsv.framework.event.EventListenerSupportImpl;
 import com.smoothcsv.framework.event.SCEvent;
 import com.smoothcsv.framework.menu.MainMenuItems;
+import com.smoothcsv.framework.menu.ToolBarItems;
 import com.smoothcsv.framework.modular.ModuleManager;
 import com.smoothcsv.framework.setting.Session;
 
@@ -123,8 +124,12 @@ public abstract class SCApplication {
 
         listeners().invokeListeners(new AfterCreateGuiEvent());
 
-        // Prepare menues
+        // Load menus
         MainMenuItems.instance().loadToMenuBar(componentManager.getMenuBar());
+
+        // Load toolbar
+        ToolBarItems.instance().loadToToolBar(componentManager.getToolBar());
+
 
         // Initialize conditions
         Conditions.initializeConditions();

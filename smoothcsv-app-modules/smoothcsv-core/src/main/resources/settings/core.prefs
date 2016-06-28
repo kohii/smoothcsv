@@ -1,7 +1,7 @@
 # --General--
 language=<NULL>
 statusbarVisible=true
-toolbarVisible=false
+toolbarVisible=true
 valuePanelVisible=true
 
 # --File--

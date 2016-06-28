@@ -34,6 +34,8 @@ public class ToolBarItems {
 
   private static ToolBarItems instance = new ToolBarItems();
 
+  private static final ToolBarItemDef SEPARATOR = new ToolBarItemDef("-", null, null);
+
   /**
    * @return the instance
    */
@@ -51,9 +53,13 @@ public class ToolBarItems {
       String[] rowData;
       while ((rowData = reader.readRow()) != null) {
         String commandId = rowData[0];
-        String icon = rowData[1];
-        String caption = rowData[2];
-        items.add(new ToolBarItemDef(commandId, icon, caption));
+        if (commandId.equals("-")) {
+          items.add(SEPARATOR);
+        } else {
+          String icon = rowData[1];
+          String caption = rowData[2];
+          items.add(new ToolBarItemDef(commandId, icon, caption));
+        }
       }
     } catch (IOException e) {
       throw new UnexpectedException(e);
@@ -63,10 +69,14 @@ public class ToolBarItems {
   public void loadToToolBar(SCToolBar toolBar) {
     for (int i = 0; i < items.size(); i++) {
       ToolBarItemDef itemDef = items.get(i);
+      if (itemDef == SEPARATOR) {
+        toolBar.addSeparator();
+        continue;
+      }
       String iconStr = itemDef.icon;
       Icon icon;
-      if (iconStr.startsWith("#")) {
-        char awesomeIconKey = (char) Integer.decode("#3044").intValue();
+      if (iconStr.startsWith("fa:")) {
+        char awesomeIconKey = (char) Integer.decode(iconStr.substring(3)).intValue();
         icon = AwesomeIcon.create(awesomeIconKey);
       } else {
         icon = SwingUtils.getImageIcon(iconStr);

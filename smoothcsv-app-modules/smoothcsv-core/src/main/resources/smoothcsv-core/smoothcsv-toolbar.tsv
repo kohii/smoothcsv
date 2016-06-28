@@ -1,1 +1,10 @@
-newFile	#f000	New File
+app:new-file	fa:#f016	New
+app:open-file	fa:#f115	Open...
+app:save	fa:#f0c7	Save
+-
+grid:copy	fa:#f0c5	Copy
+grid:cut	fa:#f0c4	Cut
+grid:paste	fa:#f0ea	Paste
+-
+grid:undo	fa:#f0e2	Undo
+grid:redo	fa:#f01e	Redo

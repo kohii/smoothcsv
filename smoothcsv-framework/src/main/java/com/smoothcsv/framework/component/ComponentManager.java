@@ -14,7 +14,9 @@
 package com.smoothcsv.framework.component;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import javax.swing.BorderFactory;
 
 /**
  * @author kohii
@@ -55,7 +57,10 @@ public class ComponentManager {
   }
 
   protected SCToolBar createToolBar() {
-    return new SCToolBar();
+    SCToolBar tooBar = new SCToolBar();
+    tooBar.setDefaultButtonBorder(BorderFactory.createEmptyBorder(5, 4, 3, 4));
+    tooBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+    return tooBar;
   }
 
   protected SCStatusBar createStatusBar() {

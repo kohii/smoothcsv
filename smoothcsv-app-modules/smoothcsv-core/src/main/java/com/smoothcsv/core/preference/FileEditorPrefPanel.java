@@ -137,7 +137,7 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_lblNewLabel.gridy = 7;
     add(lblNewLabel, gbc_lblNewLabel);
 
-    JLabel lblDefaultProperties = new JLabel(SCBundle.get("key.pref.defaultProperties"));
+    JLabel lblDefaultProperties = new JLabel(SCBundle.get("key.pref.defaultProperties") + ":");
     GridBagConstraints gbc_lblDefaultProperties = new GridBagConstraints();
     gbc_lblDefaultProperties.insets = new Insets(0, 0, 5, 0);
     gbc_lblDefaultProperties.gridwidth = 2;
@@ -148,7 +148,7 @@ public class FileEditorPrefPanel extends JPanel {
 
     defaultPropLabel = new JLabel();
     GridBagConstraints gbc_label = new GridBagConstraints();
-    gbc_label.insets = new Insets(0, 0, 5, 0);
+    gbc_label.insets = new Insets(0, 10, 5, 0);
     gbc_label.anchor = GridBagConstraints.WEST;
     gbc_label.gridwidth = 2;
     gbc_label.gridx = 1;

@@ -55,7 +55,9 @@ grid
 	shortcut+u	grid:fill-up
 	shortcut+d	grid:fill-down
 	shortcut+i	grid:insert-rows-above
+	shortcut+j	grid:insert-rows-below
 	shortcut+shift+i	grid:insert-columns-left
+	shortcut+shift+j	grid:insert-columns-right
 	shortcut+k	grid:delete-rows
 	shortcut+shift+k	grid:delete-columns
 	ctrl+g	grid:go-to-line

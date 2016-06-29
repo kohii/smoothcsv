@@ -76,13 +76,13 @@
               <versionInfo>
                 <fileVersion>2.0.0.1</fileVersion>
                 <txtFileVersion>2.0.0-beta-1</txtFileVersion>
-                <fileDescription>Brilliant CSV file editor</fileDescription>
+                <fileDescription>CSV file editor</fileDescription>
                 <copyright>Copyright (C) 2016 kohii All Rights Reserved.</copyright>
                 <productVersion>${smoothcsv.version}</productVersion>
                 <txtProductVersion>${smoothcsv.txtVersion}</txtProductVersion>
                 <productName>SmoothCSV</productName>
                 <internalName>SmoothCSV</internalName>
-                <originalFilename>SmoothCSV.exe</originalFilename>
+                <originalFilename>SmoothCSV2.exe</originalFilename>
               </versionInfo>
             </configuration>
           </execution>

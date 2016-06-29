@@ -127,6 +127,15 @@ public class CsvGridSheetModel extends GridSheetModel {
 
   public void insertCell(int rowIndex, int columnIndex, Object[] data) {
     List rowData = getRowDataAt(rowIndex);
+    int rowColumnSize = rowData.size();
+    if (rowColumnSize + data.length > getColumnCount()) {
+      GridSheetColumn[] columns = new GridSheetColumn[rowColumnSize + data.length - getColumnCount()];
+      for (int i = 0; i < columns.length; i++) {
+        columns[i] = createDefaultColumn();
+      }
+      this.columns.addAll(Arrays.asList(columns));
+      fireColumnsInserted(rowColumnSize, columns, false);
+    }
     rowData.addAll(columnIndex, Arrays.asList(data));
     collectEdit(new InsertCellEdit(rowIndex, columnIndex, data));
     fireDataUpdated(rowIndex, columnIndex, rowIndex, getColumnCount(), false);
@@ -142,9 +151,9 @@ public class CsvGridSheetModel extends GridSheetModel {
   }
 
   @Override
-  protected void fireColumnsInserted(int index, GridSheetColumn[] columnsInserted) {
+  protected void fireColumnsInserted(int index, GridSheetColumn[] columnsInserted, boolean createData) {
     collectEdit(new InserColumnsEdit(index, columnsInserted.length));
-    super.fireColumnsInserted(index, columnsInserted);
+    super.fireColumnsInserted(index, columnsInserted, createData);
   }
 
   @Override

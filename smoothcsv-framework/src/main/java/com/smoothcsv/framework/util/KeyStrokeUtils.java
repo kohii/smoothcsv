@@ -128,6 +128,8 @@ public class KeyStrokeUtils {
         return KeyEvent.VK_PERIOD;
       case "slash":
         return KeyEvent.VK_SLASH;
+      case "colon":
+        return KeyEvent.VK_COLON;
       case "semicolon":
         return KeyEvent.VK_SEMICOLON;
       case "equals":

@@ -105,7 +105,8 @@ grid:not(:editing)
 	shortcut+shift+x	grid:cut-using-file-format
 	shortcut+shift+v	grid:paste-using-file-format
 	delete	grid:clear
-	shortcut+delete	grid:delete-cell
+	shortcut+backspace	grid:delete-cell
+	shortcut+colon	grid:insert-cell
 
 cell-editor
 	escape	grid:cancel-edit

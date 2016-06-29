@@ -28,6 +28,7 @@ grid:copy-as-markdown-table	not_editing_cell
 grid:copy-as-html-table	not_editing_cell
 grid:clear	not_editing_cell
 grid:delete-cell	not_editing_cell
+grid:insert-cell	not_editing_cell
 grid:select-all	not_editing_cell
 grid:select-entire-row	not_editing_cell
 grid:select-entire-column	not_editing_cell

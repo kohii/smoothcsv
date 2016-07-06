@@ -15,6 +15,7 @@ package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
+import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 
 /**
@@ -25,28 +26,27 @@ public class FillLeftCommand extends GridCommand {
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
     gridSheetPane.stopCellEditingIfEditing();
-    ;
 
     GridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
     int minC = selectionModel.getMinColumnSelectionIndex();
     int maxC = selectionModel.getMaxColumnSelectionIndex();
 
-    // gridSheetPane.getEditManager().startMultiCellEdit();
-    gridSheetPane.getSelectionModel().forEachSelectedRows((row) -> {
-      Object val = null;
-      boolean first = true;
-      for (int column = maxC; minC <= column; column--) {
-        if (selectionModel.isCellSelected(row, column)) {
-          if (first) {
-            val = gridSheetPane.getValueAt(row, column);
-            first = false;
-          } else {
-            gridSheetPane.setValueAt(val, row, column);
+    try (EditTransaction tran = gridSheetPane.transaction()) {
+      gridSheetPane.getSelectionModel().forEachSelectedRows((row) -> {
+        Object val = null;
+        boolean first = true;
+        for (int column = maxC; minC <= column; column--) {
+          if (selectionModel.isCellSelected(row, column)) {
+            if (first) {
+              val = gridSheetPane.getValueAt(row, column);
+              first = false;
+            } else {
+              gridSheetPane.setValueAt(val, row, column);
+            }
           }
         }
-      }
-    });
-    // gridSheetPane.getEditManager().stopMultiCellEdit();
+      });
+    }
   }
 
 }

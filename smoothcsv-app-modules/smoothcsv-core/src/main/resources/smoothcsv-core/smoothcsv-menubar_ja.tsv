@@ -35,7 +35,7 @@
 	-
 	指定行に移動...	grid:go-to-line
 	-
-	重複を削除...	grid:remove-duplicate
+	重複を削除	grid:remove-duplicate
 	-
 	フィル
 		下方向にコピー	grid:fill-down

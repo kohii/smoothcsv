@@ -36,6 +36,8 @@ Edit
 	-
 	Go To Line...	grid:go-to-line
 	-
+	Remove duplicate...	grid:remove-duplicate
+	-
 	Fill
 		Fill Down	grid:fill-down
 		Fill Right	grid:fill-right

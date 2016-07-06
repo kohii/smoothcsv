@@ -91,6 +91,7 @@ grid:autofit-column-width-to-selected-cell	available(csv-sheet)
 grid:toggle-use-first-row-as-header	available(csv-sheet)
 grid:focus	available(csv-sheet)
 grid:filter	available(csv-sheet)
+grid:remove-duplicate	not_editing_cell
 
 cell-editor:undo	available(cell-editor)
 cell-editor:redo	available(cell-editor)

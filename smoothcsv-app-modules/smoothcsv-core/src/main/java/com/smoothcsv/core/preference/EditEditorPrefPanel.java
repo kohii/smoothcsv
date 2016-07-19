@@ -56,7 +56,7 @@ public class EditEditorPrefPanel extends JPanel {
     add(lblEdit, gbc_lblEdit);
 
     ExRadioButton<CsvQuoteApplyRule> radioButton =
-        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.QUOTES_ALL, "Quote all values");
+        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.QUOTES_ALL, SCBundle.get("key.pref.quoteAll"));
     GridBagConstraints gbc_radioButton = new GridBagConstraints();
     gbc_radioButton.gridwidth = 2;
     gbc_radioButton.anchor = GridBagConstraints.WEST;
@@ -65,8 +65,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_radioButton.gridy = 1;
     add(radioButton, gbc_radioButton);
 
-    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_3 = new ExRadioButton<CsvQuoteApplyRule>(
-        CsvQuoteApplyRule.QUOTES_IF_NECESSARY, "Quote values only when necessary");
+    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_3 = new ExRadioButton<>(
+        CsvQuoteApplyRule.QUOTES_IF_NECESSARY, SCBundle.get("key.pref.quoteIfNecessary"));
     GridBagConstraints gbc_rdbtnNewRadioButton_3 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_3.gridwidth = 2;
     gbc_rdbtnNewRadioButton_3.anchor = GridBagConstraints.WEST;
@@ -76,7 +76,7 @@ public class EditEditorPrefPanel extends JPanel {
     add(rdbtnNewRadioButton_3, gbc_rdbtnNewRadioButton_3);
 
     ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_4 =
-        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.NO_QUOTE, "Do not quote");
+        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.NO_QUOTE, SCBundle.get("key.pref.noQuote"));
     GridBagConstraints gbc_rdbtnNewRadioButton_4 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_4.insets = new Insets(0, 0, 5, 0);
     gbc_rdbtnNewRadioButton_4.gridwidth = 2;
@@ -100,7 +100,7 @@ public class EditEditorPrefPanel extends JPanel {
 
     PrefCheckBox rdbtnNewRadioButton_5 =
         new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.PASTE_REPEATEDLY,
-            "Fill selected cells with the same data when pasting single data");
+            SCBundle.get("key.pref.fillWhenPastingSingleCell"));
     GridBagConstraints gbc_rdbtnNewRadioButton_5 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_5.insets = new Insets(0, 0, 5, 0);
     gbc_rdbtnNewRadioButton_5.anchor = GridBagConstraints.WEST;
@@ -118,7 +118,7 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblUndoredo.gridy = 8;
     add(lblUndoredo, gbc_lblUndoredo);
 
-    JLabel lblTheMaximumNumber = new JLabel("The maximum number of changes that can be undone:");
+    JLabel lblTheMaximumNumber = new JLabel(SCBundle.get("key.pref.undoStackSize") + ":");
     GridBagConstraints gbc_lblTheMaximumNumber = new GridBagConstraints();
     gbc_lblTheMaximumNumber.anchor = GridBagConstraints.WEST;
     gbc_lblTheMaximumNumber.insets = new Insets(0, 0, 5, 0);

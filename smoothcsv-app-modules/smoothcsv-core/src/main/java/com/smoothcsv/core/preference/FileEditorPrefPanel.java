@@ -73,7 +73,7 @@ public class FileEditorPrefPanel extends JPanel {
     add(lblOpen, gbc_lblOpen);
 
     ExRadioButton<String> rdbtnNewRadioButton =
-        new ExRadioButton<>("manual", "Choose properties manually");
+        new ExRadioButton<>("manual", SCBundle.get("key.pref.prop.manual"));
     GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
     gbc_rdbtnNewRadioButton.gridwidth = 2;
     gbc_rdbtnNewRadioButton.anchor = GridBagConstraints.WEST;
@@ -82,7 +82,7 @@ public class FileEditorPrefPanel extends JPanel {
     add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
 
     ExRadioButton<String> rdbtnNewRadioButton_1 =
-        new ExRadioButton<>("auto", "Detect properties automatically");
+        new ExRadioButton<>("auto", SCBundle.get("key.pref.prop.auto"));
     GridBagConstraints gbc_rdbtnNewRadioButton_1 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_1.gridwidth = 2;
     gbc_rdbtnNewRadioButton_1.anchor = GridBagConstraints.WEST;
@@ -91,7 +91,7 @@ public class FileEditorPrefPanel extends JPanel {
     add(rdbtnNewRadioButton_1, gbc_rdbtnNewRadioButton_1);
 
     ExRadioButton<String> rdbtnNewRadioButton_2 =
-        new ExRadioButton<>("default", "Use default properties");
+        new ExRadioButton<>("default", SCBundle.get("key.pref.prop.default"));
     GridBagConstraints gbc_rdbtnNewRadioButton_2 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_2.gridwidth = 2;
     gbc_rdbtnNewRadioButton_2.insets = new Insets(0, 0, 5, 0);
@@ -100,12 +100,12 @@ public class FileEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_2.gridy = 3;
     add(rdbtnNewRadioButton_2, gbc_rdbtnNewRadioButton_2);
 
-    new PrefButtonGroup<String>(CoreSettings.getInstance(),
+    new PrefButtonGroup<>(CoreSettings.getInstance(),
         CoreSettings.HOW_TO_DETECT_PROPERTIES, rdbtnNewRadioButton, rdbtnNewRadioButton_1,
         rdbtnNewRadioButton_2);
 
     PrefCheckBox chckbxNewCheckBox = new PrefCheckBox(CoreSettings.getInstance(),
-        CoreSettings.ALERT_ON_OPENING_HUGE_FILE, "Alert before opening a huge file");
+        CoreSettings.ALERT_ON_OPENING_HUGE_FILE, SCBundle.get("key.pref.alertBeforeOpeningHugeFile"));
     GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
     gbc_chckbxNewCheckBox.insets = new Insets(10, 0, 0, 0);
     gbc_chckbxNewCheckBox.gridwidth = 2;
@@ -118,7 +118,8 @@ public class FileEditorPrefPanel extends JPanel {
         CoreSettings.ALERT_THRESHOLD, PrefTextField.Type.NUMERIC, 6);
     txtAlertThresholdFileSize.addValidator(PrefTextValidator.MORE_THAN_ZERO);
     ExLabel lblNewLabel_1 =
-        new ExLabel("When the size is more than {} MB", txtAlertThresholdFileSize);
+        new ExLabel(SCBundle.get("key.pref.alertBeforeOpeningHugeFile.threshold"),
+            txtAlertThresholdFileSize);
     FlowLayout flowLayout = (FlowLayout) lblNewLabel_1.getLayout();
     flowLayout.setAlignment(FlowLayout.LEADING);
     GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();

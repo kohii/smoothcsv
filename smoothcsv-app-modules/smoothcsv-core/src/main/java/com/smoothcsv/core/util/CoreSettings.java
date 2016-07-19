@@ -32,7 +32,7 @@ public class CoreSettings extends Settings {
   public static final String DEFAULT_COLUMN_SIZE = "defaultColumnSize";
   public static final String SIZE_OF_UNDOING = "sizeOfUndoing";
   public static final String VALUE_PANEL_HEIGHT = "valuePanelHeight";
-  public static final String SHOW_NEW_LINE_CHAR = "showNewLineChar";
+  public static final String SHOW_EOL = "showEOL";
   public static final String SHOW_EOF = "showEOF";
   public static final String AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE =
       "autoFitColumnWidthAfterOpeningFile";

@@ -14,7 +14,7 @@ defaultRowSize=5
 defaultColumnSize=5
 sizeOfUndoing=35
 valuePanelHeight=2
-showNewLineChar=true
+showEOL=false
 showEOF=true
 
 # --Autofit--

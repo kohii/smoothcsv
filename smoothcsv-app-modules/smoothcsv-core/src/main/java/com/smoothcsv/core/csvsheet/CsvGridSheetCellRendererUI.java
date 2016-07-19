@@ -44,7 +44,7 @@ public class CsvGridSheetCellRendererUI extends BasicLabelUI {
     Object value = label.getValue();
 
     if (value == CsvGridSheetTable.END_OF_LINE) {
-      if (CoreSettings.getInstance().getBoolean(CoreSettings.SHOW_NEW_LINE_CHAR)) {
+      if (CoreSettings.getInstance().getBoolean(CoreSettings.SHOW_EOL)) {
         FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
         int height = fm.getHeight();
         int width = (int) (height * 0.7);

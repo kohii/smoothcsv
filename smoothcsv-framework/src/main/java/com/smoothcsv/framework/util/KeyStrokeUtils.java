@@ -263,6 +263,8 @@ public class KeyStrokeUtils {
         return "period";
       case KeyEvent.VK_SLASH:
         return "slash";
+      case KeyEvent.VK_COLON:
+        return "colon";
       case KeyEvent.VK_SEMICOLON:
         return "semicolon";
       case KeyEvent.VK_EQUALS:

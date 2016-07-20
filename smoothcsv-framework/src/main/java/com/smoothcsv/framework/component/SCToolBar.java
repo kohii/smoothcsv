@@ -88,6 +88,7 @@ public class SCToolBar extends JToolBar {
       Condition enableCondition = commandDef.getEnableWhen();
       if (enableCondition != null) {
         enableCondition.addValueChangedListener(e -> setEnabled(e.newValue));
+        setEnabled(enableCondition.getValue());
       }
       putValue(Action.SMALL_ICON, icon);
       putValue(Action.SHORT_DESCRIPTION, caption);

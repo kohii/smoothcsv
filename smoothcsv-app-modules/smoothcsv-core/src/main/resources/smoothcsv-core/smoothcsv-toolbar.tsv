@@ -8,3 +8,5 @@ grid:paste	fa:#f0ea	Paste
 -
 grid:undo	fa:#f0e2	Undo
 grid:redo	fa:#f01e	Redo
+-
+find:show	fa:#f002	Find And Replace

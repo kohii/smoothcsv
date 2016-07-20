@@ -8,3 +8,5 @@ grid:paste	fa:#f0ea	貼り付け
 -
 grid:undo	fa:#f0e2	元に戻す
 grid:redo	fa:#f01e	やり直す
+-
+find:show	fa:#f002	検索と検索

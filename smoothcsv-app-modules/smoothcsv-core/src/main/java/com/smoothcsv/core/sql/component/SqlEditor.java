@@ -44,15 +44,15 @@ public class SqlEditor extends JPanel implements SmoothComponent {
     setLayout(new BorderLayout(0, 0));
 
     SCToolBar toolBar = new SCToolBar();
-    toolBar.add("sql:run", AwesomeIconConstants.FA_PLAY, "Run SQL");
+    toolBar.add("sql:Run", AwesomeIconConstants.FA_PLAY, "Run SQL");
     toolBar.addSeparator();
-    toolBar.add("sql:open", AwesomeIconConstants.FA_FOLDER_OPEN_O, "Open...");
-    toolBar.add("sql:save", AwesomeIconConstants.FA_SAVE, "Save...");
+    toolBar.add("sql:Open", AwesomeIconConstants.FA_FOLDER_OPEN_O, "Open...");
+    toolBar.add("sql:Save", AwesomeIconConstants.FA_SAVE, "Save...");
     toolBar.addSeparator();
-    toolBar.add("sql:showSqlHistory", AwesomeIconConstants.FA_HISTORY, "Show SQL History...");
-    toolBar.add("sql:previousSql", AwesomeIconConstants.FA_ARROW_CIRCLE_LEFT,
+    toolBar.add("sql:ShowSqlHistory", AwesomeIconConstants.FA_HISTORY, "Show SQL History...");
+    toolBar.add("sql:PreviousSql", AwesomeIconConstants.FA_ARROW_CIRCLE_LEFT,
         "Restore Previous SQL From History");
-    toolBar.add("sql:nextSql", AwesomeIconConstants.FA_ARROW_CIRCLE_RIGHT,
+    toolBar.add("sql:NextSql", AwesomeIconConstants.FA_ARROW_CIRCLE_RIGHT,
         "Restore Next SQL From History");
 
     add(toolBar, BorderLayout.NORTH);

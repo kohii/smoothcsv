@@ -1,3 +1,3 @@
 body
-	shortcut+shift+f12	debug:enable-watch-thread
-	shortcut+f12	debug:print-focus-owner
+	shortcut+shift+f12	debug:EnableWatchThread
+	shortcut+f12	debug:PrintFocusOwner

@@ -15,8 +15,8 @@ package com.smoothcsv.framework.command;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.JsonUtils;
-import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.condition.Condition;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -32,6 +32,7 @@ public class CommandDef {
   private final Condition enableWhen;
   private final String commandRef;
   private Boolean enabled;
+  private String displayName;
 
   public CommandDef(String commandId, Condition enableWhen, Command instance) {
     this.commandId = commandId;
@@ -121,12 +122,38 @@ public class CommandDef {
     return commandId;
   }
 
+  public String getDisplayName() {
+    if (displayName == null) {
+      int splitterIndex = commandId.indexOf(':');
+      String firstPart = commandId.substring(0, splitterIndex + 1);
+      String secondPart = commandId.substring(splitterIndex + 1);
+
+      StringBuilder sb = new StringBuilder();
+
+      String[] firstParts = StringUtils.split(firstPart, '_');
+      for (String part : firstParts) {
+        sb.append(StringUtils.capitalize(part)).append(' ');
+      }
+
+      String[] secondParts = StringUtils.splitByCharacterTypeCamelCase(secondPart);
+      for (int i = 0; i < secondParts.length; i++) {
+        if (i != 0) {
+          sb.append(' ');
+        }
+        String part = secondParts[i];
+        sb.append(StringUtils.capitalize(part));
+      }
+      return sb.toString();
+    }
+    return displayName;
+  }
+
   private static String createCommandClassName(String commandId) {
     StringBuilder buf = new StringBuilder("command.");
     int sepIndex = commandId.indexOf(':');
-    buf.append(commandId.substring(0, sepIndex).replace('-', '_'));
+    buf.append(commandId.substring(0, sepIndex));
     buf.append('.');
-    buf.append(StringUtils.camelize(commandId.substring(sepIndex + 1), '-'));
+    buf.append(commandId.substring(sepIndex + 1));
     buf.append("Command");
     return buf.toString();
   }

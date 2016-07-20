@@ -1,41 +1,41 @@
 grid
-	コピー	grid:copy
-	切り取り	grid:cut
-	貼り付け	grid:paste
+	コピー	grid:Copy
+	切り取り	grid:Cut
+	貼り付け	grid:Paste
 	-
-	ファイルの書式でコピー	grid:copy-using-file-format
-	ファイルの書式で切り取り	grid:cut-using-file-format
-	ファイルの書式で貼り付け	grid:paste-using-file-format
+	ファイルの書式でコピー	grid:CopyUsingFileFormat
+	ファイルの書式で切り取り	grid:CutUsingFileFormat
+	ファイルの書式で貼り付け	grid:PasteUsingFileFormat
 	-
-	クリア	grid:clear
-	セルを除去	grid:delete-cell
+	クリア	grid:Clear
+	セルを除去	grid:DeleteCell
 	-
-	すべて選択	grid:select-all
+	すべて選択	grid:SelectAll
 
 grid-rowheader
-	コピー	grid:copy
-	切り取り	grid:cut
-	貼り付け	grid:paste
+	コピー	grid:Copy
+	切り取り	grid:Cut
+	貼り付け	grid:Paste
 	-
-	上に行を挿入	grid:insert-rows-above
-	下に行を挿入	grid:insert-rows-below
-	行を削除	grid:delete-rows
+	上に行を挿入	grid:InsertRowsAbove
+	下に行を挿入	grid:InsertRowsBelow
+	行を削除	grid:DeleteRows
 
 grid-columnheader
-	コピー	grid:copy
-	切り取り	grid:cut
-	貼り付け	grid:paste
+	コピー	grid:Copy
+	切り取り	grid:Cut
+	貼り付け	grid:Paste
 	-
-	左に列を挿入	grid:insert-columns-left
-	右に列を挿入	grid:insert-columns-right
-	列を削除	grid:delete-columns
+	左に列を挿入	grid:InsertColumnsLeft
+	右に列を挿入	grid:InsertColumnsRight
+	列を削除	grid:DeleteColumns
 
 grid-cornerheader
-	コピー	grid:copy
-	切り取り	grid:cut
-	貼り付け	grid:paste
+	コピー	grid:Copy
+	切り取り	grid:Cut
+	貼り付け	grid:Paste
 
 tab
-	閉じる	app:close
-	他のタブを閉じる	app:close-others
-	すべて閉じる	app:close-all
+	閉じる	app:Close
+	他のタブを閉じる	app:CloseOthers
+	すべて閉じる	app:CloseAll

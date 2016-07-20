@@ -47,8 +47,8 @@ public class SmoothCsvCommandMapFactory extends DefaultCommandMapFactory {
     public Action get(Object key) {
       if (key instanceof String) {
         String keyString = (String) key;
-        if (keyString.startsWith("macro:run ")) {
-          return new MacroAction(keyString.substring("macro:run ".length()).trim());
+        if (keyString.startsWith("macro:Run ")) {
+          return new MacroAction(keyString.substring("macro:Run ".length()).trim());
         }
       }
       if (DefaultEditorKit.defaultKeyTypedAction.equals(key)) {

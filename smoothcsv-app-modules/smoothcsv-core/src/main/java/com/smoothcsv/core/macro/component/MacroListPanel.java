@@ -121,18 +121,18 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     };
     addKeyAction(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), selectNextAction);
     addKeyAction(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), selectPrevAction);
-    toolBar.add("macrolist:add", AwesomeIconConstants.FA_PLUS, CoreBundle.get("key.macroList.add")
+    toolBar.add("macrolist:Add", AwesomeIconConstants.FA_PLUS, CoreBundle.get("key.macroList.add")
         + "...");
-    toolBar.add("macrolist:remove", AwesomeIconConstants.FA_MINUS,
+    toolBar.add("macrolist:Remove", AwesomeIconConstants.FA_MINUS,
         CoreBundle.get("key.macroList.remove"));
-    toolBar.add("macrolist:run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.macroList.run"));
+    toolBar.add("macrolist:Run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.macroList.run"));
 
-    // toolBar.add("macrolist:addMacro", AwesomeIconConstants.FA_PLUS, "Add a new macro");
-    // toolBar.add("macrolist:removeMacro", AwesomeIconConstants.FA_MINUS,
+    // toolBar.add("macrolist:AddMacro", AwesomeIconConstants.FA_PLUS, "Add a new macro");
+    // toolBar.add("macrolist:RemoveMacro", AwesomeIconConstants.FA_MINUS,
     // "Remove the selected macro");
-    // toolBar.add("macrolist:selectNextMacro", AwesomeIconConstants.FA_ANGLE_DOWN,
+    // toolBar.add("macrolist:SelectNextMacro", AwesomeIconConstants.FA_ANGLE_DOWN,
     // "Select the next macro");
-    // toolBar.add("macrolist:selectPrevMacro", AwesomeIconConstants.FA_PLUS,
+    // toolBar.add("macrolist:SelectPrevMacro", AwesomeIconConstants.FA_PLUS,
     // "Select the previous macro");
     load();
   }
@@ -205,9 +205,9 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
   }
 
   // private void evaluateCommandsEnabled() {
-  // ((ManualCondition) CommandRepository.instance().getDef("macrolist:remove").getEnableWhen())
+  // ((ManualCondition) CommandRepository.instance().getDef("macrolist:Remove").getEnableWhen())
   // .setValue2(selected >= 0);
-  // ((ManualCondition) CommandRepository.instance().getDef("macrolist:run").getEnableWhen())
+  // ((ManualCondition) CommandRepository.instance().getDef("macrolist:Run").getEnableWhen())
   // .setValue2(selected >= 0);
   // }
 

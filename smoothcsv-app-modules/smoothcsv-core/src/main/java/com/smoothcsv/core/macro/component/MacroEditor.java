@@ -53,17 +53,17 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     toolBar.setFloatable(false);
     add(toolBar, BorderLayout.NORTH);
 
-    toolBar.add("macro:open", AwesomeIconConstants.FA_FOLDER_OPEN_O,
+    toolBar.add("macro:Open", AwesomeIconConstants.FA_FOLDER_OPEN_O,
         CoreBundle.get("key.open") + "...");
-    toolBar.add("macro:save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save") + "...");
+    toolBar.add("macro:Save", AwesomeIconConstants.FA_SAVE, CoreBundle.get("key.save") + "...");
     toolBar.addSeparator();
-    JButton startRecordButton = toolBar.add("macro:toggle-recording-macro",
+    JButton startRecordButton = toolBar.add("macro:ToggleRecordingMacro",
         AwesomeIconConstants.FA_CIRCLE, CoreBundle.get("key.startRecordMacro"));
-    JButton stopRecordButton = toolBar.add("macro:toggle-recording-macro",
+    JButton stopRecordButton = toolBar.add("macro:ToggleRecordingMacro",
         AwesomeIconConstants.FA_STOP, CoreBundle.get("key.stopRecordMacro"));
     stopRecordButton.setVisible(false);
     toolBar.addSeparator();
-    toolBar.add("macro:run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.run"));
+    toolBar.add("macro:Run", AwesomeIconConstants.FA_PLAY, CoreBundle.get("key.run"));
 
     MacroRecorder.RECORDING
         .addValueChangedListener(new Consumer<Condition.ConditionValueChangeEvent>() {

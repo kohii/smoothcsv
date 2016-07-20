@@ -1,105 +1,105 @@
 File
-	New	app:new-file
-	New As...	app:new-file-as
-	Open...	app:open-file
-	Open As...	app:open-file-as
-#	Reopen	app:reopen
-	Save	app:save
-	Save As...	app:save-as
-	Save All	app:save-all
-	Close	app:close
-	Close All	app:close-all
+	New	app:NewFile
+	New As...	app:NewFileAs
+	Open...	app:OpenFile
+	Open As...	app:OpenFileAs
+#	Reopen	app:Reopen
+	Save	app:Save
+	Save As...	app:SaveAs
+	Save All	app:SaveAll
+	Close	app:Close
+	Close All	app:CloseAll
 	-
-	Properties...	csvsheet:show-properties
+	Properties...	csvsheet:ShowProperties
 
 Edit
-	Undo	grid:undo
-	Redo	grid:redo
+	Undo	grid:Undo
+	Redo	grid:Redo
 	-
-	Copy	grid:copy
-	Copy Without Meta Characters	grid:copy-without-meta-chars
-	Cut	grid:cut
-	Paste	grid:paste
+	Copy	grid:Copy
+	Copy Without Meta Characters	grid:CopyWithoutMetaChars
+	Cut	grid:Cut
+	Paste	grid:Paste
 	-
-	Copy Using File Format	grid:copy-using-file-format
-	Cut Using File Format	grid:cut-using-file-format
-	Paste Using File Format	grid:paste-using-file-format
+	Copy Using File Format	grid:CopyUsingFileFormat
+	Cut Using File Format	grid:CutUsingFileFormat
+	Paste Using File Format	grid:PasteUsingFileFormat
 	-
-	Copy As Markdown Table	grid:copy-as-markdown-table
-	Copy As HTML Table	grid:copy-as-html-table
+	Copy As Markdown Table	grid:CopyAsMarkdownTable
+	Copy As HTML Table	grid:CopyAsHtmlTable
 	-
-	Select All	grid:select-all
-	Select The Entire Row	grid:select-entire-row
-	Select The Entire Column	grid:select-entire-column
+	Select All	grid:SelectAll
+	Select The Entire Row	grid:SelectEntireRow
+	Select The Entire Column	grid:SelectEntireColumn
 	-
-	Clear	grid:clear
+	Clear	grid:Clear
 	-
-	Go To Line...	grid:go-to-line
+	Go To Line...	grid:GoToLine
 	-
-	Remove duplicate	grid:remove-duplicate
+	Remove duplicate	grid:RemoveDuplicate
 	-
 	Fill
-		Fill Down	grid:fill-down
-		Fill Right	grid:fill-right
-		Fill Up	grid:fill-up
-		Fill Left	grid:fill-left
+		Fill Down	grid:FillDown
+		Fill Right	grid:FillRight
+		Fill Up	grid:FillUp
+		Fill Left	grid:FillLeft
 	Convert
-		Upper Case	convert:upper-case
-		Lower Case	convert:lower-case
-		Swap Case	convert:swap-case
-		Title Case	convert:title-case
+		Upper Case	convert:UpperCase
+		Lower Case	convert:LowerCase
+		Swap Case	convert:SwapCase
+		Title Case	convert:TitleCase
 		-
-		Snake Case To Camel Case	convert:snake-case-to-camel-case
-		Camel Case To Snake Case	convert:camel-case-to-snake-case
+		Snake Case To Camel Case	convert:SnakeCaseToCamelCase
+		Camel Case To Snake Case	convert:CamelCaseToSnakeCase
 		-
-		Capitalize	convert:capitalize
-		Decapitalize	convert:decapitalize
+		Capitalize	convert:Capitalize
+		Decapitalize	convert:Decapitalize
 
 Grid
-	Insert Rows Above	grid:insert-rows-above
-	Insert Rows Below	grid:insert-rows-below
-	Delete Rows	grid:delete-rows
+	Insert Rows Above	grid:InsertRowsAbove
+	Insert Rows Below	grid:InsertRowsBelow
+	Delete Rows	grid:DeleteRows
 	-
-	Insert Columns Left	grid:insert-columns-left
-	Insert Columns Right	grid:insert-columns-right
-	Delete Columns	grid:delete-columns
+	Insert Columns Left	grid:InsertColumnsLeft
+	Insert Columns Right	grid:InsertColumnsRight
+	Delete Columns	grid:DeleteColumns
 	-
-	Delete Cell	grid:delete-cell
+	Delete Cell	grid:DeleteCell
 	-
-	Sort...	grid:sort
-	Sort Selected Rows...	grid:sort-selected-rows
-	Sort Selected Range...	grid:sort-selected-range
+	Sort...	grid:Sort
+	Sort Selected Rows...	grid:SortSelectedRows
+	Sort Selected Range...	grid:SortSelectedRange
 	-
-	Filter...	grid:filter
+	Filter...	grid:Filter
 	-
-	Toggle Use First Row As Header	grid:toggle-use-first-row-as-header
+	Toggle Use First Row As Header	grid:ToggleUseFirstRowAsHeader
 
 Find
-	Show Find And Replace Panel...	find:show
-	Find Next	find:next
-	Find Previous	find:previous
-	Replace Next	find:replace-next
-	Replace Previous	find:replace-previous
+	Show Find And Replace Panel...	find:Show
+	Find Next	find:Next
+	Find Previous	find:Previous
+	Replace Next	find:ReplaceNext
+	Replace Previous	find:ReplacePrevious
 
 View
-	Auto-Fit Column Width	grid:autofit-column-width
-	Auto-Fit Column Width To Selected Data	grid:autofit-column-width-to-selected-cell
+	Auto-Fit Column Width	grid:AutofitColumnWidth
+	Auto-Fit Column Width To Selected Data	grid:AutofitColumnWidthToSelectedCell
 	-
-	Previous Tab	view:previous-tab
-	Next Tab	view:next-tab
+	Previous Tab	view:PreviousTab
+	Next Tab	view:NextTab
 	-
-	Toggle Status Bar	view:toggle-status-bar
-	Toggle Tool Bar	view:toggle-tool-bar
-	Toggle Cell Value Panel	view:toggle-cell-value-panel
+	Toggle Status Bar	view:ToggleStatusBar
+	Toggle Tool Bar	view:ToggleToolBar
+	Toggle Cell Value Panel	view:ToggleCellValuePanel
 
 Tools
-	Toggle Command Palette...	app:toggle-command-palette
-#	SQL Tools...	app:show-sql-tools
+	Toggle Command Palette...	app:ToggleCommandPalette
+#	SQL Tools...	app:ShowSqlTools
 
 Macro
-	Toggle Macro Tools	macro:toggle-macro-tools
-	Start Record Macro	macro:toggle-recording-macro	!recording_macro
-	Stop Recording Macro	macro:toggle-recording-macro	recording_macro
-	Run Macro	macro:run
-	Edit Macro	macro:show-editor
-	Save Macro...	macro:save
+	Toggle Macro Tools	macro:ToggleMacroTools
+	Start Record Macro	macro:ToggleRecordingMacro	!recording_macro
+	Stop Recording Macro	macro:ToggleRecordingMacro	recording_macro
+	Run Macro	macro:Run
+	Edit Macro	macro:ShowEditor
+	Save Macro...	macro:Save

@@ -90,8 +90,8 @@ public class SqlTableList extends JPanel implements SmoothComponent, TreeWillExp
 
     SCToolBar toolBar = new SCToolBar();
     add(toolBar, BorderLayout.NORTH);
-    toolBar.add("sql:addTable", AwesomeIcon.FA_PLUS, "Add A New CSV File As Table");
-    toolBar.add("sql:removeTable", AwesomeIcon.FA_MINUS, "Remove The Selected CSV File As Table");
+    toolBar.add("sql:AddTable", AwesomeIcon.FA_PLUS, "Add A New CSV File As Table");
+    toolBar.add("sql:RemoveTable", AwesomeIcon.FA_MINUS, "Remove The Selected CSV File As Table");
 
     loadCsvSheetTables();
 

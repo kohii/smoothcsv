@@ -1,8 +1,8 @@
 Edit
 	日本語変換
-		半角 → 全角	convert:half-width-to-full-width
-		全角 → 半角	convert:full-width-to-half-width
-		ひらがな → カタカナ	convert:hiragana-to-katakana
-		カタカナ → ひらがな	convert:katakana-to-hiragana
-		ひらがな・カタカナ → ローマ字	convert:kana-to-latin
-		ローマ字 → カタカナ	convert:latin-to-katakana
+		半角 → 全角	convert:HalfWidthToFullWidth
+		全角 → 半角	convert:FullWidthToHalfWidth
+		ひらがな → カタカナ	convert:HiraganaToKatakana
+		カタカナ → ひらがな	convert:KatakanaToHiragana
+		ひらがな・カタカナ → ローマ字	convert:KanaToLatin
+		ローマ字 → カタカナ	convert:LatinToKatakana

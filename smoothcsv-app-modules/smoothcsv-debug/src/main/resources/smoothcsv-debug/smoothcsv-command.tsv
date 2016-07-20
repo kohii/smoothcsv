@@ -1,7 +1,7 @@
-debug:enable-watch-thread
-debug:print-focus-owner
-debug:print-keymap
-debug:print-component-tree
-debug:print-menu-component-tree
-debug:print-grid-data
-debug:print-conditions
+debug:EnableWatchThread
+debug:PrintFocusOwner
+debug:PrintKeymap
+debug:PrintComponentTree
+debug:PrintMenuComponentTree
+debug:PrintGridData
+debug:PrintConditions

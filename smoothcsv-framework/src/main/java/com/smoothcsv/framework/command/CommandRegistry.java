@@ -49,6 +49,20 @@ public final class CommandRegistry {
     commandDefs.put(id, new CommandDef(id, enableWhen, ref));
   }
 
+  public boolean runCommand(Class<? extends Command> commandClass) {
+    String className = commandClass.getName();
+    if (!className.startsWith("command.") || !className.endsWith("Command")) {
+      return false;
+    }
+    String id = className.substring("command.".length(), className.length() - "Command".length()).replace('.', ':');
+    CommandDef def = getDef(id);
+    if (def.isEnabled()) {
+      def.getCommand().execute();
+      return true;
+    }
+    return false;
+  }
+
   public boolean runCommand(String id) {
     CommandDef def = getDef(id);
     if (def.isEnabled()) {

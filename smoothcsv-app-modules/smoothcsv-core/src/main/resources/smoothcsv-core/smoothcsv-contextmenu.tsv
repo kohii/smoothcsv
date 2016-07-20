@@ -1,41 +1,41 @@
 grid
-	Copy	grid:copy
-	Cut	grid:cut
-	Paste	grid:paste
+	Copy	grid:Copy
+	Cut	grid:Cut
+	Paste	grid:Paste
 	-
-	Copy Using The File Format	grid:copy-using-file-format
-	Cut Using The File Format	grid:cut-using-file-format
-	Paste Using The File Format	grid:paste-using-file-format
+	Copy Using The File Format	grid:CopyUsingFileFormat
+	Cut Using The File Format	grid:CutUsingFileFormat
+	Paste Using The File Format	grid:PasteUsingFileFormat
 	-
-	Clear	grid:clear
-	Delete Cell	grid:delete-cell
+	Clear	grid:Clear
+	Delete Cell	grid:DeleteCell
 	-
-	Select All	grid:select-all
+	Select All	grid:SelectAll
 
 grid-rowheader
-	Copy	grid:copy
-	Cut	grid:cut
-	Paste	grid:paste
+	Copy	grid:Copy
+	Cut	grid:Cut
+	Paste	grid:Paste
 	-
-	Insert Rows Above	grid:insert-rows-above
-	Insert Rows Below	grid:insert-rows-below
-	Delete Rows	grid:delete-rows
+	Insert Rows Above	grid:InsertRowsAbove
+	Insert Rows Below	grid:InsertRowsBelow
+	Delete Rows	grid:DeleteRows
 
 grid-columnheader
-	Copy	grid:copy
-	Cut	grid:cut
-	Paste	grid:paste
+	Copy	grid:Copy
+	Cut	grid:Cut
+	Paste	grid:Paste
 	-
-	Insert Columns Left	grid:insert-columns-left
-	Insert Columns Right	grid:insert-columns-right
-	Delete Columns	grid:delete-columns
+	Insert Columns Left	grid:InsertColumnsLeft
+	Insert Columns Right	grid:InsertColumnsRight
+	Delete Columns	grid:DeleteColumns
 
 grid-cornerheader
-	Copy	grid:copy
-	Cut	grid:cut
-	Paste	grid:paste
+	Copy	grid:Copy
+	Cut	grid:Cut
+	Paste	grid:Paste
 
 tab
-	Close	app:close
-	Close Others	app:close-others
-	Close All	app:close-all
+	Close	app:Close
+	Close Others	app:CloseOthers
+	Close All	app:CloseAll

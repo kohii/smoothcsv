@@ -101,7 +101,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     toggleConsoleAlwaysVisibleBtn = new AwesomeIconToggleButton(AwesomeIconConstants.FA_TERMINAL);
     toggleConsoleAlwaysVisibleBtn.setToolTipText(CoreBundle.get("key.macro.toggleConsole"));
     toggleConsoleAlwaysVisibleBtn
-        .addActionListener(new CommandActionListener("macro:toggle-console"));
+        .addActionListener(new CommandActionListener("macro:ToggleConsole"));
     GridBagConstraints gbc_cosoleBtn = new GridBagConstraints();
     gbc_cosoleBtn.insets = new Insets(0, 5, 0, 15);
     gbc_cosoleBtn.anchor = GridBagConstraints.EAST;
@@ -116,7 +116,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     btnClose.setBorder(null);
     btnClose.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("macro:toggle-macro-tools");
+        CommandRegistry.instance().runCommand("macro:ToggleMacroTools");
       }
     });
     GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

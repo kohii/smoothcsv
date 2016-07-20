@@ -49,7 +49,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
     app.setAboutHandler(new AboutHandler() {
       @Override
       public void handleAbout(AboutEvent e) {
-        CommandRegistry.instance().runCommand("app:about");
+        CommandRegistry.instance().runCommand("app:About");
       }
     });
 
@@ -79,7 +79,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
     app.setPreferencesHandler(new PreferencesHandler() {
       @Override
       public void handlePreferences(PreferencesEvent e) {
-        CommandRegistry.instance().runCommand("app:show-settings");
+        CommandRegistry.instance().runCommand("app:ShowSettings");
       }
     });
 

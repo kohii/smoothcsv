@@ -99,23 +99,7 @@ public class CommandPalette extends JDialog {
         new ReadOnlyExTableCellValueExtracter<CommandDef>() {
           @Override
           public Object getValue(CommandDef rowData, ExTableColumn column, int rowIndex, int columnIndex) {
-            String commandId = rowData.getCommandId();
-            StringBuilder sb = new StringBuilder(commandId.length() + 6);
-            sb.append(Character.toUpperCase(commandId.charAt(0)));
-            for (int i = 1; i < commandId.length(); i++) {
-              char c = commandId.charAt(i);
-              if (c == ':') {
-                sb.append(c);
-                sb.append(' ');
-                sb.append(Character.toUpperCase(commandId.charAt(++i)));
-              } else if (c == '-') {
-                sb.append(' ');
-                sb.append(Character.toUpperCase(commandId.charAt(++i)));
-              } else {
-                sb.append(c);
-              }
-            }
-            return sb.toString();
+            return rowData.getDisplayName();
           }
         };
     columns.add(new ExTableColumn("command", commandValueExtracter));
@@ -232,9 +216,9 @@ public class CommandPalette extends JDialog {
       }
     });
 
-    // Enable "app:toggle-command-palette" command in this component.
+    // Enable "app:ToggleCommandPalette" command in this component.
     // TODO There should be any better way to achieve it.
-    String toggleCommandId = "app:toggle-command-palette";
+    String toggleCommandId = "app:ToggleCommandPalette";
     Command toggleCommand = CommandRegistry.instance().getCommandOrNull(toggleCommandId);
     if (toggleCommand != null) {
       im.put(CommandKeymap.getDefault().findKeyStroke(toggleCommandId), toggleCommandId);

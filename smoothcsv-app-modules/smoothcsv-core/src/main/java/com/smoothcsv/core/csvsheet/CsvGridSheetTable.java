@@ -158,7 +158,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           return false;
         }
         if (MacroRecorder.isRecording()) {
-          MacroRecorder.getInstance().recordCommand("grid:start-quick-edit");
+          MacroRecorder.getInstance().recordCommand("grid:StartQuickEdit");
         }
       }
       // pass the event to the cell editor.
@@ -246,7 +246,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
     CsvGridEditorComponent editorComponent = editQuickly();
     if (editorComponent != null) {
       if (MacroRecorder.isRecording()) {
-        MacroRecorder.getInstance().recordCommand("grid:start-quick-edit");
+        MacroRecorder.getInstance().recordCommand("grid:StartQuickEdit");
       }
       editorComponent.processInputMethodEvent(e);
     }

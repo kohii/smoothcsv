@@ -123,15 +123,15 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
     JPopupMenu popupMenu = new JPopupMenu();
 
     CommandMenuItem menuItemExpand = new CommandMenuItem(CoreBundle.get("key.expand"),
-        "value-panel:expand", null, AwesomeIcon.create(AwesomeIcon.FA_EXPAND), true, true);
+        "value_panel:Expand", null, AwesomeIcon.create(AwesomeIcon.FA_EXPAND), true, true);
     popupMenu.add(menuItemExpand);
 
     CommandMenuItem menuItemCompress = new CommandMenuItem(CoreBundle.get("key.compress"),
-        "value-panel:compress", null, AwesomeIcon.create(AwesomeIcon.FA_COMPRESS), true, true);
+        "value_panel:Compress", null, AwesomeIcon.create(AwesomeIcon.FA_COMPRESS), true, true);
     popupMenu.add(menuItemCompress);
 
     CommandMenuItem menuItemToggleFloating =
-        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value-panel:toggle-floating", null, null, true, true);
+        new CommandMenuItem(CoreBundle.get("key.toggleFloating"), "value_panel:ToggleFloating", null, null, true, true);
     popupMenu.add(menuItemToggleFloating);
 
     JToggleButton dropDownButton =

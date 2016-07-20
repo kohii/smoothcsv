@@ -30,6 +30,13 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import com.smoothcsv.swing.utils.SwingUtils;
+import command.find.CountCommand;
+import command.find.HideCommand;
+import command.find.NextCommand;
+import command.find.PreviousCommand;
+import command.find.ReplaceAllCommand;
+import command.find.ReplaceNextCommand;
+import command.find.ReplacePreviousCommand;
 import lombok.Getter;
 
 import java.awt.BorderLayout;
@@ -110,7 +117,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnClose.setBorder(null);
     btnClose.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:hide");
+        CommandRegistry.instance().runCommand(HideCommand.class);
       }
     });
     GridBagConstraints gbc_button = new GridBagConstraints();
@@ -133,7 +140,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     findWhatTextField.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:next");
+        CommandRegistry.instance().runCommand(NextCommand.class);
       }
     });
     JTextComponent findTextComp =
@@ -152,7 +159,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnFindPrevious.setToolTipText(CoreBundle.get("key.findPrev"));
     btnFindPrevious.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:previous");
+        CommandRegistry.instance().runCommand(PreviousCommand.class);
       }
     });
     GridBagConstraints gbc_btnFindPrevious = new GridBagConstraints();
@@ -166,7 +173,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnFindNext.setToolTipText(CoreBundle.get("key.findNext"));
     btnFindNext.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:next");
+        CommandRegistry.instance().runCommand(NextCommand.class);
       }
     });
     GridBagConstraints gbc_btnNext = new GridBagConstraints();
@@ -179,7 +186,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     countBtn.setFocusable(false);
     countBtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:count");
+        CommandRegistry.instance().runCommand(CountCommand.class);
       }
     });
     GridBagConstraints gbc_countBtn = new GridBagConstraints();
@@ -250,7 +257,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     replaceTextField.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:replace-next");
+        CommandRegistry.instance().runCommand(ReplaceNextCommand.class);
       }
     });
     JTextComponent replaceTextComp =
@@ -269,7 +276,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplacePrev.setToolTipText(CoreBundle.get("key.replacePrev"));
     btnReplacePrev.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:replace-previous");
+        CommandRegistry.instance().runCommand(ReplacePreviousCommand.class);
       }
     });
     GridBagConstraints gbc_btnReplace = new GridBagConstraints();
@@ -283,7 +290,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplaceNext.setToolTipText(CoreBundle.get("key.replaceNext"));
     btnReplaceNext.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:replace-next");
+        CommandRegistry.instance().runCommand(ReplaceNextCommand.class);
       }
     });
     GridBagConstraints gbc_btnReplaceAll = new GridBagConstraints();
@@ -296,7 +303,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     btnReplaceAll.setFocusable(false);
     btnReplaceAll.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        CommandRegistry.instance().runCommand("find:replace-all");
+        CommandRegistry.instance().runCommand(ReplaceAllCommand.class);
       }
     });
     GridBagConstraints gbcBtnReplace = new GridBagConstraints();

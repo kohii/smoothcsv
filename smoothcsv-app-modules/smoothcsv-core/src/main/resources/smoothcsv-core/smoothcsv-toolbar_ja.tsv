@@ -1,12 +1,12 @@
-app:new-file	fa:#f016	新規作成
-app:open-file	fa:#f115	開く...
-app:save	fa:#f0c7	保存
+app:NewFile	fa:#f016	新規作成
+app:OpenFile	fa:#f115	開く...
+app:Save	fa:#f0c7	保存
 -
-grid:copy	fa:#f0c5	コピー
-grid:cut	fa:#f0c4	切り取り
-grid:paste	fa:#f0ea	貼り付け
+grid:Copy	fa:#f0c5	コピー
+grid:Cut	fa:#f0c4	切り取り
+grid:Paste	fa:#f0ea	貼り付け
 -
-grid:undo	fa:#f0e2	元に戻す
-grid:redo	fa:#f01e	やり直す
+grid:Undo	fa:#f0e2	元に戻す
+grid:Redo	fa:#f01e	やり直す
 -
-find:show	fa:#f002	検索と置換
+find:Show	fa:#f002	検索と置換

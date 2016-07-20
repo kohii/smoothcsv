@@ -1,104 +1,104 @@
 ファイル
-	新規作成	app:new-file
-	条件を指定して新規作成...	app:new-file-as
-	開く...	app:open-file
-	条件を指定して開く...	app:open-file-as
-#	開き直す	app:reopen
-	上書き保存	app:save
-	名前をつけて保存...	app:save-as
-	すべて保存	app:save-all
-	閉じる	app:close
-	すべて閉じる	app:close-all
+	新規作成	app:NewFile
+	条件を指定して新規作成...	app:NewFileAs
+	開く...	app:OpenFile
+	条件を指定して開く...	app:OpenFileAs
+#	開き直す	app:Reopen
+	上書き保存	app:Save
+	名前をつけて保存...	app:SaveAs
+	すべて保存	app:SaveAll
+	閉じる	app:Close
+	すべて閉じる	app:CloseAll
 	-
-	プロパティ...	csvsheet:show-properties
+	プロパティ...	csvsheet:ShowProperties
 
 編集
-	元に戻す	grid:undo
-	やり直す	grid:redo
+	元に戻す	grid:Undo
+	やり直す	grid:Redo
 	-
-	コピー	grid:copy
-	区切り文字を付加せずにコピー	grid:copy-without-meta-chars
-	切り取り	grid:cut
-	貼り付け	grid:paste
-	クリア	grid:clear
+	コピー	grid:Copy
+	区切り文字を付加せずにコピー	grid:CopyWithoutMetaChars
+	切り取り	grid:Cut
+	貼り付け	grid:Paste
+	クリア	grid:Clear
 	-
-	ファイルの書式でコピー	grid:copy-using-file-format
-	ファイルの書式で切り取り	grid:cut-using-file-format
-	ファイルの書式で貼り付け	grid:paste-using-file-format
+	ファイルの書式でコピー	grid:CopyUsingFileFormat
+	ファイルの書式で切り取り	grid:CutUsingFileFormat
+	ファイルの書式で貼り付け	grid:PasteUsingFileFormat
 	-
-	マークダウンのテーブル形式でコピー	grid:copy-as-markdown-table
-	HTMLのテーブル形式でコピー	grid:copy-as-html-table
+	マークダウンのテーブル形式でコピー	grid:CopyAsMarkdownTable
+	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
 	-
-	すべて選択	grid:select-all
-	すべての行を選択	grid:select-entire-row
-	すべての列を選択	grid:select-entire-column
+	すべて選択	grid:SelectAll
+	すべての行を選択	grid:SelectEntireRow
+	すべての列を選択	grid:SelectEntireColumn
 	-
-	指定行に移動...	grid:go-to-line
+	指定行に移動...	grid:GoToLine
 	-
-	重複を削除	grid:remove-duplicate
+	重複を削除	grid:RemoveDuplicate
 	-
 	フィル
-		下方向にコピー	grid:fill-down
-		右方向にコピー	grid:fill-right
-		上方向にコピー	grid:fill-up
-		左方向にコピー	grid:fill-left
+		下方向にコピー	grid:FillDown
+		右方向にコピー	grid:FillRight
+		上方向にコピー	grid:FillUp
+		左方向にコピー	grid:FillLeft
 	変換
-		小文字→大文字	convert:upper-case
-		大文字→小文字	convert:lower-case
-		大文字と小文字を入れ替える	convert:swap-case
-		語頭だけを大文字にする	convert:title-case
+		小文字→大文字	convert:UpperCase
+		大文字→小文字	convert:LowerCase
+		大文字と小文字を入れ替える	convert:SwapCase
+		語頭だけを大文字にする	convert:TitleCase
 		-
-		スネークケース→キャメルケース	convert:snake-case-to-camel-case
-		キャメルケース→スネークケース	convert:camel-case-to-snake-case
+		スネークケース→キャメルケース	convert:SnakeCaseToCamelCase
+		キャメルケース→スネークケース	convert:CamelCaseToSnakeCase
 		-
-		キャピタライズ	convert:capitalize
-		デキャピタライズ	convert:decapitalize
+		キャピタライズ	convert:Capitalize
+		デキャピタライズ	convert:Decapitalize
 
 テーブル
-	上に行を挿入	grid:insert-rows-above
-	下に行を挿入	grid:insert-rows-below
-	行を削除	grid:delete-rows
+	上に行を挿入	grid:InsertRowsAbove
+	下に行を挿入	grid:InsertRowsBelow
+	行を削除	grid:DeleteRows
 	-
-	上に列を挿入	grid:insert-columns-left
-	下に列を挿入	grid:insert-columns-right
-	列を削除	grid:delete-columns
+	上に列を挿入	grid:InsertColumnsLeft
+	下に列を挿入	grid:InsertColumnsRight
+	列を削除	grid:DeleteColumns
 	-
-	セルを削除	grid:delete-cell
+	セルを削除	grid:DeleteCell
 	-
-	並べ替え...	grid:sort
-	選択した行を並べ替え...	grid:sort-selected-rows
-	選択範囲を並べ替え...	grid:sort-selected-range
+	並べ替え...	grid:Sort
+	選択した行を並べ替え...	grid:SortSelectedRows
+	選択範囲を並べ替え...	grid:SortSelectedRange
 	-
-	フィルタ...	grid:filter
+	フィルタ...	grid:Filter
 	-
-	1行目を列名として扱う	grid:toggle-use-first-row-as-header
+	1行目を列名として扱う	grid:ToggleUseFirstRowAsHeader
 
 検索	
-	検索・置換パネルを表示／非表示	find:show
-	次を検索	find:next
-	前を検索	find:previous
-	次を置換	find:replace-next
-	前を置換	find:replace-previous
+	検索・置換パネルを表示／非表示	find:Show
+	次を検索	find:Next
+	前を検索	find:Previous
+	次を置換	find:ReplaceNext
+	前を置換	find:ReplacePrevious
 
 表示
-	列幅を自動調整	grid:autofit-column-width
-	選択中のデータに合わせて列幅を自動調整	grid:autofit-column-width-to-selected-cell
+	列幅を自動調整	grid:AutofitColumnWidth
+	選択中のデータに合わせて列幅を自動調整	grid:AutofitColumnWidthToSelectedCell
 	-
-	前のタブ	view:previous-tab
-	次のタブ	view:next-tab
+	前のタブ	view:PreviousTab
+	次のタブ	view:NextTab
 	-
-	ステータスバーを表示／非表示	view:toggle-status-bar
-	ツールバーを表示／非表示	view:toggle-tool-bar
-	値バーを表示／非表示	view:toggle-cell-value-panel
+	ステータスバーを表示／非表示	view:ToggleStatusBar
+	ツールバーを表示／非表示	view:ToggleToolBar
+	値バーを表示／非表示	view:ToggleCellValuePanel
 
 ツール
-	コマンドパレットを表示／非表示...	app:toggle-command-palette
-#	SQLツール...	app:show-sql-tools
+	コマンドパレットを表示／非表示...	app:ToggleCommandPalette
+#	SQLツール...	app:ShowSqlTools
 
 マクロ
-	マクロツールを表示／非表示	macro:toggle-macro-tools
-	マクロ記録開始	macro:toggle-recording-macro	!recording_macro
-	マクロ記録終了	macro:toggle-recording-macro	recording_macro
-	マクロ実行	macro:run
-	マクロを編集	macro:show-editor
-	マクロを保存...	macro:save
+	マクロツールを表示／非表示	macro:ToggleMacroTools
+	マクロ記録開始	macro:ToggleRecordingMacro	!recording_macro
+	マクロ記録終了	macro:ToggleRecordingMacro	recording_macro
+	マクロ実行	macro:Run
+	マクロを編集	macro:ShowEditor
+	マクロを保存...	macro:Save

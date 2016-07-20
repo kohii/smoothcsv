@@ -40,7 +40,7 @@ import java.util.Locale;
 /**
  * @author kohii
  */
-public class ModuleEntryPointBase implements ModuleEntryPoint {
+public abstract class ModuleEntryPointBase implements ModuleEntryPoint {
 
   private static final String RESOURCE_NAME_KEYMAP = "smoothcsv-keymap";
   private static final String RESOURCE_NAME_MAIN_MENU = "smoothcsv-menubar";

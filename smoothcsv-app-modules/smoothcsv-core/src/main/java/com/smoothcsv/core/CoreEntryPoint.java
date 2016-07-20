@@ -43,6 +43,7 @@ import com.smoothcsv.framework.component.SCTabbedPaneUI;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
+import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.framework.preference.PrefPage;
 import com.smoothcsv.framework.preference.PreferenceManager;
 import com.smoothcsv.framework.setting.Session;
@@ -72,6 +73,17 @@ import static com.smoothcsv.framework.SCApplication.components;
  * @author kohii
  */
 public class CoreEntryPoint extends ModuleEntryPointBase {
+
+  @Override
+  public ModuleManifest getManifest() {
+    return ModuleManifest.builder()
+        .name("smoothcsv-core")
+        .author("kohii")
+        .supportedLanguages(new ModuleManifest.Language[]{
+            new ModuleManifest.Language("en", "English"),
+            new ModuleManifest.Language("ja", "日本語")})
+        .build();
+  }
 
   @Override
   public void activate() {

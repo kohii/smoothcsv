@@ -1,4 +1,4 @@
-Edit
+編集
 	日本語変換
 		半角 → 全角	convert:HalfWidthToFullWidth
 		全角 → 半角	convert:FullWidthToHalfWidth

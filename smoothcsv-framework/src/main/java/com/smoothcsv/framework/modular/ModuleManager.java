@@ -13,27 +13,19 @@
  */
 package com.smoothcsv.framework.modular;
 
-import com.smoothcsv.commons.exception.IORuntimeException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
+import java.util.ServiceLoader;
 
 /**
  * @author kohii
@@ -47,53 +39,14 @@ public class ModuleManager {
   public ModuleManager() {}
 
   public void readModuleManifestsFromClasspath() {
-    try {
-      Enumeration<URL> moduleManifestFiles =
-          getClass().getClassLoader().getResources("module.sc.properties");
-      while (moduleManifestFiles.hasMoreElements()) {
-        URL url = (URL) moduleManifestFiles.nextElement();
-        URI classpathRoot = url.toURI().resolve(".");
-        Properties properties = new Properties();
-        try (InputStream in = url.openStream()) {
-          properties.load(in);
-          String name = properties.getProperty("name");
-          String entryPoint = properties.getProperty("entryPoint");
-          String dependenciesStr = properties.getProperty("dependencies");
-          String supportedLanguagesStr = properties.getProperty("supportedLanguages");
-          String[] dependencies = null;
-          if (StringUtils.isNoneBlank(dependenciesStr)) {
-            dependencies = StringUtils.splitPreserveAllTokens(dependenciesStr, ",");
-          }
-          Language[] supportedLanguages = null;
-          if (StringUtils.isNotBlank(supportedLanguagesStr)) {
-            String[] supportedLanguageStrArray =
-                StringUtils.splitPreserveAllTokens(supportedLanguagesStr, ",");
-            supportedLanguages = new Language[supportedLanguageStrArray.length];
-            for (int i = 0; i < supportedLanguageStrArray.length; i++) {
-              String langStr = supportedLanguageStrArray[i];
-              int leftParenthesesIdx = langStr.indexOf('(');
-              String langId = langStr.substring(leftParenthesesIdx + 1, langStr.length() - 1);
-              String langName = langStr.substring(0, leftParenthesesIdx);
-              supportedLanguages[i] = new Language(langId, langName);
-            }
-          }
-
-          String author = properties.getProperty("author");
-          ModuleManifest manifest =
-              new ModuleManifest(name, entryPoint, dependencies, author, supportedLanguages);
-          registerModule(manifest, classpathRoot);
-        }
-      }
-      createLanguageList();
-    } catch (IOException e) {
-      throw new IORuntimeException(e);
-    } catch (URISyntaxException e) {
-      throw new UnexpectedException(e);
+    for (ModuleEntryPoint moduleEntryPoint : ServiceLoader.load(ModuleEntryPoint.class)) {
+      registerModule(moduleEntryPoint.getManifest(), moduleEntryPoint);
     }
+    createLanguageList();
   }
 
-  public void registerModule(ModuleManifest manifest, URI classpathRoot) {
-    modules.put(manifest.getName(), new Module(manifest, classpathRoot));
+  private void registerModule(ModuleManifest manifest, ModuleEntryPoint entryPoint) {
+    modules.put(manifest.getName(), new Module(manifest, entryPoint));
   }
 
   private void createLanguageList() {

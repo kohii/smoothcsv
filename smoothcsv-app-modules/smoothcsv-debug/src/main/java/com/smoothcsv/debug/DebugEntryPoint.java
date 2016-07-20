@@ -25,6 +25,7 @@ import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
+import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.util.DirectoryResolver;
 import org.slf4j.Logger;
@@ -43,6 +44,15 @@ import java.util.function.Consumer;
 public class DebugEntryPoint extends ModuleEntryPointBase {
 
   static Logger LOG = LoggerFactory.getLogger(DebugEntryPoint.class);
+
+  @Override
+  public ModuleManifest getManifest() {
+    return ModuleManifest.builder()
+        .name("smoothcsv-debug")
+        .author("kohii")
+        .dependencies(new String[]{"smoothcsv-core"})
+        .build();
+  }
 
   @Override
   public void activate() {

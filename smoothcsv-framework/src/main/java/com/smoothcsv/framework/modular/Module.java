@@ -13,16 +13,9 @@
  */
 package com.smoothcsv.framework.modular;
 
-import com.smoothcsv.commons.exception.IORuntimeException;
-import com.smoothcsv.framework.exception.SystemException;
-import com.smoothcsv.framework.util.MessageBundles;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 
 /**
  * @author kohii
@@ -38,21 +31,19 @@ public class Module {
   @Getter
   private final ModuleManifest manifest;
 
-  private ModuleEntryPoint entryPoint;
-
   @Getter
-  private URI classpathRoot;
+  private ModuleEntryPoint entryPoint;
 
   @Getter
   private int status = NOT_YET;
 
   /**
    * @param manifest
-   * @param classpathRoot2
+   * @param entryPoint
    */
-  public Module(ModuleManifest manifest, URI classpathRoot) {
+  public Module(ModuleManifest manifest, ModuleEntryPoint entryPoint) {
     this.manifest = manifest;
-    this.classpathRoot = classpathRoot;
+    this.entryPoint = entryPoint;
   }
 
   /**
@@ -60,32 +51,5 @@ public class Module {
    */
   void setStatus(int status) {
     this.status = status;
-  }
-
-  public ModuleEntryPoint getEntryPoint() {
-    if (entryPoint == null) {
-      try {
-        entryPoint = (ModuleEntryPoint) Class.forName(manifest.getEntryPoint()).newInstance();
-      } catch (ClassNotFoundException ex) {
-        LOG.warn("Module class not found. {}", manifest.getEntryPoint(), ex);
-        throw new SystemException(MessageBundles.getString("WSCC0006", manifest.getEntryPoint()),
-            ex);
-      } catch (InstantiationException | IllegalAccessException ex) {
-        LOG.error("Cannot instantate module. " + manifest.getEntryPoint(), ex);
-        throw new SystemException(MessageBundles.getString("WSCC0006", manifest.getEntryPoint()),
-            ex);
-      }
-    }
-    return entryPoint;
-  }
-
-  public URL getResource(String name) {
-    String path = name.startsWith("/") ? name.substring(1) : name;
-    URI uri = classpathRoot.resolve(path);
-    try {
-      return uri.toURL();
-    } catch (IOException e) {
-      throw new IORuntimeException(e);
-    }
   }
 }

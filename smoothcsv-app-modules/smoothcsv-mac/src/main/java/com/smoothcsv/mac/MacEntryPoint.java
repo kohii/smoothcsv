@@ -28,6 +28,7 @@ import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
+import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.OpenFileCommand;
 
@@ -37,6 +38,15 @@ import java.io.File;
  * @author Kohei Ishikawa
  */
 public class MacEntryPoint extends ModuleEntryPointBase {
+
+  @Override
+  public ModuleManifest getManifest() {
+    return ModuleManifest.builder()
+        .name("smoothcsv-mac")
+        .author("kohii")
+        .dependencies(new String[]{"smoothcsv-core"})
+        .build();
+  }
 
   @Override
   protected void activate() {

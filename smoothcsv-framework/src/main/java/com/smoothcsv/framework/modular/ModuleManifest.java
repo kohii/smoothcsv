@@ -15,26 +15,18 @@ package com.smoothcsv.framework.modular;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.Builder;
 
 /**
  * @author kohii
  */
 @Getter
+@Builder
 public class ModuleManifest {
   private final String name;
-  private final String entryPoint;
   private final String[] dependencies;
   private final String author;
   private final Language[] supportedLanguages;
-
-  public ModuleManifest(String name, String entryPoint, String[] dependencies, String author,
-                        Language[] supportedLanguages) {
-    this.name = name;
-    this.entryPoint = entryPoint;
-    this.dependencies = dependencies;
-    this.author = author;
-    this.supportedLanguages = supportedLanguages;
-  }
 
   @AllArgsConstructor
   @Getter

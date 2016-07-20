@@ -14,9 +14,19 @@
 package com.smoothcsv.ja;
 
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
+import com.smoothcsv.framework.modular.ModuleManifest;
 
 /**
  * @author kohii
  */
 public class JaEntryPoint extends ModuleEntryPointBase {
+  @Override
+  public ModuleManifest getManifest() {
+    return ModuleManifest.builder()
+        .name("smoothcsv-ja")
+        .author("kohii")
+        .dependencies(new String[]{"smoothcsv-core"})
+        .supportedLanguages(new ModuleManifest.Language[]{new ModuleManifest.Language("ja", "日本語")})
+        .build();
+  }
 }

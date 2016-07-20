@@ -18,6 +18,7 @@ package com.smoothcsv.framework.modular;
  */
 public interface ModuleEntryPoint {
 
-  void activate(ModuleManifest manifest);
+  ModuleManifest getManifest();
 
+  void activate(ModuleManifest manifest);
 }

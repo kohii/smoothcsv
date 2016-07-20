@@ -51,6 +51,9 @@ Edit
 		-
 		Snake Case To Camel Case	convert:snake-case-to-camel-case
 		Camel Case To Snake Case	convert:camel-case-to-snake-case
+		-
+		Capitalize	convert:capitalize
+		Decapitalize	convert:decapitalize
 
 Grid
 	Insert Rows Above	grid:insert-rows-above

@@ -180,6 +180,8 @@ convert:swap-case	not_editing_cell
 convert:title-case	not_editing_cell
 convert:snake-case-to-camel-case	not_editing_cell
 convert:camel-case-to-snake-case	not_editing_cell
+convert:capitalize	not_editing_cell
+convert:decapitalize	not_editing_cell
 
 view:previous-tab	available(csv-sheet)
 view:next-tab	available(csv-sheet)

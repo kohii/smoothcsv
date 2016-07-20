@@ -50,6 +50,9 @@
 		-
 		スネークケース→キャメルケース	convert:snake-case-to-camel-case
 		キャメルケース→スネークケース	convert:camel-case-to-snake-case
+		-
+		キャピタライズ	convert:capitalize
+		デキャピタライズ	convert:decapitalize
 
 テーブル
 	上に行を挿入	grid:insert-rows-above

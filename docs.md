@@ -22,14 +22,21 @@ Table of Contents
 
 ## Installation
 
+WIP
+
 ### Windows
 
+WIP
 
 ### OS X
+
+WIP
 
 --------------------------
 
 ## Usage
+
+WIP
 
 --------------------------
 

@@ -17,3 +17,10 @@ url: "http://smoothcsv.com" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
+
+gems:
+  # - jemoji
+  # - jekyll-mentions
+  # - jekyll-redirect-from
+  # - jekyll-sitemap
+  # - jekyll-feed

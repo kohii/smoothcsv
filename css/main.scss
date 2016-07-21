@@ -12,7 +12,7 @@ $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$spacing-unit:     30px;
+$spacing-unit:     22px;
 
 $text-color:       #111;
 $background-color: #fdfdfd;
@@ -57,14 +57,18 @@ h1, h2 {
 }
 
 h3, h4 {
-  margin-top: $spacing-unit / 2;
+  margin-top: $spacing-unit;
 }
 
 hr {
   margin: $spacing-unit 0;
 }
 
-h1 { font-size: 2.8rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.7rem; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.9rem; }
+h3 { font-size: 1.6rem; }
 h4 { font-size: 1.3rem; }
+
+.page-content {
+  min-height: 450px;
+}

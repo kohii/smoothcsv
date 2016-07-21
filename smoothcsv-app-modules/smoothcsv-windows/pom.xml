@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv-app-modules</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-Beta1</version>
   </parent>
   <artifactId>smoothcsv-windows</artifactId>
 </project>

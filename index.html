@@ -1,23 +1,107 @@
----
-layout: default
----
 
-<div class="home">
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
 
-  <h1 class="page-heading">Posts</h1>
+  <meta name="description" content="高機能CSVファイルエディター「SmoothCSV」のトップページです。" /><meta name="keywords" content="CSV,編集,CSVエディタ,SQL" /> <meta name="author" content="kohii" />
+  <meta name="copyright" content="(C)2012-2016 kohii" />
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="./images/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <title>
+    SmoothCSV </title>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" async="async">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44530382-1', 'smoothcsv.com');
+  ga('send', 'pageview');
+  </script>
+
+</head>
+<body>
+  <div id="mybody">
+    <header>
+      <div id="title">
+        <a href="./"><span>SmoothCSV</span></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a class="p" href="./">top</a></li>
+          <li><a  href="./product">product</a></li>
+          <li><a  href="./manual">manual</a></li>
+          <li><a  href="./support">support</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="content">
+            
+<h1>Welcome to SmoothCSV</h1>
+
+<h2>SmoothCSVとは</h2>
+<p class="parag">
+  SmoothCSVは高機能・高性能なCSVファイルエディターです。
+  さまざまな形式・文字コードのCSV／TSVファイルの編集をサポートします。
+  また、SQLによるデータ抽出などの便利な機能があります。
+</p>
+<h2>News</h2>
+<div class="parag">
+  <ul class="list">
+    <li>2015/01/25　Version1.0.7をリリースしました。</li>
+    <li>2014/09/10　Version1.0.6をリリースしました。</li>
+    <li>2014/01/26　Version1.0.5をリリースしました。</li>
+    <li>2014/01/10　Version1.0.4をリリースしました。</li>
+    <li>2013/12/14　Version1.0.3をリリースしました。</li>
+    <li>2013/12/14　<del>近いうちに</del><ins>そのうち</ins>オープンソース化する予定です。</li>
+    <li>2013/06/18　Version1.0.2をリリースしました。</li>
+    <li>2013/01/23　Version1.0.1をリリースしました。</li>
+    <li>2012/10/06　初版（インストーラ版、ZIP版）をリリースしました。</li>
+    <li>2012/08/27　初版（Beta11）をリリースしました。</li>
+    <li>2012/08/12　初版（Beta10）をリリースしました。</li>
+    <li>2012/08/06　初版（Beta9）をリリースしました。</li>
+    <li>2012/05/12　初版（Beta8）をリリースしました。</li>
+    <li>2012/04/17　初版（Beta7）をリリースしました。</li>
+    <li>2012/04/11　初版（Beta6）をリリースしました。</li>
+    <li>2012/04/08　初版（Beta5）をリリースしました。</li>
+    <li>2012/03/25　初版（Beta4）をリリースしました。</li>
+    <li>2012/03/20　初版（Beta3）をリリースしました。</li>
   </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
 </div>
+<h2>主な機能・特徴</h2>
+<div class="parag">
+  <ul class="list">
+    <li>多彩な文字コードをサポート（Shift_JIS,UTF-8,UTF-8N,EUC-JP,UTF-16,etc...）</li>
+    <li>多彩なCSV/TSVスタイルをサポート</li>
+    <li>Excelに近い使用感</li>
+    <li>列数が統一されていないCSVファイルの編集が可能</li>
+    <li>データに改行を含むCSVファイルの編集が可能</li>
+    <li>CSVファイルに対するSQL(SELECT文)の発行が可能</li>
+    <li>大容量のファイルも高速に開ける</li>
+    <li>タブ切り替え型のインターフェース</li>
+    <li>強力なマクロ機能およびキーマクロを搭載</li>
+    <li>CSVファイルのGREP検索</li>
+    <li>その他、ソートや検索・置換などの基本的な機能</li>
+  </ul>
+</div>
+<h2>Screenshots</h2>
+<div class="parag">
+  <a href="./images/Screenshots1.png" title="スクリーンショット１"><img src="./images/Screenshots1_thumb.png" alt="スクリーンショット１" height="166" width="215"></a>
+</div>
+    </div>
+    <footer>
+      <p id="copyright">Copyright (C) 2012-2016 kohii All Rights Reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

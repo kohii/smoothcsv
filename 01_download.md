@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Download
-permalink: /download/
+permalink: /2/download/
 ---
  
 Download

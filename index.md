@@ -1,5 +1,6 @@
 ---
 layout: default
+permalink: /2/
 ---
  
 # SmoothCSV 2 (alpha)
@@ -9,7 +10,7 @@ SmoothCSVは高機能・高性能なCSVファイルエディターです。
 ## 注意事項
 
 - アルファ版です
-- 現時点ではMac OSX版のみです。Windowsユーザーの方は<a href="./1/" target="_blank">旧SmoothCSV</a>をご利用ください
+- 現時点ではMac OSX版のみです。Windowsユーザーの方は<a href="//smoothcsv.com" target="_blank">旧SmoothCSV</a>をご利用ください
 - 旧バージョンのSmoothCSV（Windows版のみ）にあった機能でまだ実装していない機能も多くあります
 - まだ多くのバグが有ると思われます。注意して使用してください。
 
@@ -25,4 +26,4 @@ SmoothCSVは高機能・高性能なCSVファイルエディターです。
 
 <a href="https://github.com/kohii/smoothcsv" target="_blank">Githubリポジトリ</a>
 
-<a href="./1/" target="_blank">旧SmoothCSVはこちら</a>
+<a href="//smoothcsv.com" target="_blank">旧SmoothCSVはこちら</a>

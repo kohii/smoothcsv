@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Docs
-permalink: /docs/
+permalink: /2/docs/
 ---
  
 Docs
@@ -42,4 +42,4 @@ WIP
 
 ## Macro
 
-See [Macro](/macro/)
+See [Macro](../macro/)

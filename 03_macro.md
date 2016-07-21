@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Macro
-permalink: /macro/
+permalink: /2/macro/
 ---
  
 Macro

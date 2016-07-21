@@ -4,14 +4,14 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv-app-modules</artifactId>
-    <version>0.1.0-Beta1</version>
+    <version>2.0.0-Alpha1</version>
   </parent>
   <artifactId>smoothcsv-ja</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-core</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.ibm.icu</groupId>

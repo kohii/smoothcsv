@@ -18,4 +18,4 @@ cd ../smoothcsv-windows
 mvn clean install
 
 cd smoothcsv-launcher-win
-mvn package
+mvn clean package -Dsmoothcsv.fileVersion=0.1.0.1

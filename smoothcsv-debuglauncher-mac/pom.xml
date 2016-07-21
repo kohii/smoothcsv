@@ -4,34 +4,34 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv</artifactId>
-    <version>0.1.0-Beta1</version>
+    <version>2.0.0-Alpha1</version>
   </parent>
   <artifactId>smoothcsv-debuglauncher-mac</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-framework</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-core</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-debug</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-mac</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-ja</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
   </dependencies>
 </project>

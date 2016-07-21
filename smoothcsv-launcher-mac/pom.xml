@@ -4,33 +4,52 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv</artifactId>
-    <version>0.1.0-Beta1</version>
+    <version>2.0.0-Alpha1</version>
   </parent>
   <artifactId>smoothcsv-launcher-mac</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-framework</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-core</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-mac</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-ja</artifactId>
-      <version>0.1.0-Beta1</version>
+      <version>2.0.0-Alpha1</version>
     </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+          </transformers>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>sh.tak.appbundler</groupId>
         <artifactId>appbundle-maven-plugin</artifactId>
@@ -38,10 +57,10 @@
         <configuration>
           <mainClass>com.smoothcsv.SmoothCSV</mainClass>
           <jvmVersion>1.8+</jvmVersion>
-          <bundleName>SmoothCSV</bundleName>
+          <bundleName>SmoothCSV2</bundleName>
           <iconFile>SmoothCSV.icns</iconFile>
           <generateDiskImageFile>true</generateDiskImageFile>
-          <diskImageFile>${project.build.directory}/SmoothCSV-${project.version}.dmg</diskImageFile>
+          <diskImageFile>${project.build.directory}/SmoothCSV2-${project.version}.dmg</diskImageFile>
           <diskImageInternetEnable>true</diskImageInternetEnable>
         </configuration>
         <executions>

@@ -2,7 +2,7 @@
 layout: default
 ---
  
-# SmoothCSV 2
+# SmoothCSV 2 (alpha)
 
 SmoothCSVは高機能・高性能なCSVファイルエディターです。
 

@@ -4,47 +4,32 @@
 <!--  created with free sitemap generation system www.sitemapxml.jp  --> 
 <url>
   <loc>http://smoothcsv.com/</loc>
+  <changefreq>monthly</changefreq>
   <priority>1.0</priority>
-  <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://smoothcsv.com/download/</loc>
+  <loc>http://smoothcsv.com/product</loc>
+  <changefreq>monthly</changefreq>
   <priority>0.8</priority>
-  <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://smoothcsv.com/docs/</loc>
-  <priority>0.8</priority>
+  <loc>http://smoothcsv.com/manual</loc>
   <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>http://smoothcsv.com/macro/</loc>
-  <priority>0.8</priority>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>http://smoothcsv.com/macro_api/</loc>
   <priority>0.7</priority>
-  <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>http://smoothcsv.com/1/</loc>
-  <priority>0.2</priority>
+  <loc>http://smoothcsv.com/support</loc>
   <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
-  <loc>http://smoothcsv.com/1/product</loc>
-  <priority>0.2</priority>
+  <loc>http://smoothcsv.com/allrelease</loc>
   <changefreq>monthly</changefreq>
+  <priority>02</priority>
 </url>
 <url>
-  <loc>http://smoothcsv.com/1/manual</loc>
-  <priority>0.2</priority>
+  <loc>http://smoothcsv.com/2</loc>
   <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>http://smoothcsv.com/1/support</loc>
-  <priority>0.2</priority>
-  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
 </url>
 </urlset>

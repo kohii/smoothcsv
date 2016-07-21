@@ -6,7 +6,7 @@ import lombok.Getter;
 import javax.swing.JOptionPane;
 
 /**
- * @author kohei
+ * @author kohii
  */
 public class WindowImpl extends APIBase implements Window {
 

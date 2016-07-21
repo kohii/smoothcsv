@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ishikawa kohei
+ * @author kohii
  */
 public class RemoveDuplicateCommand extends GridCommand {
   @Override

@@ -35,7 +35,7 @@ import command.app.OpenFileCommand;
 import java.io.File;
 
 /**
- * @author Kohei Ishikawa
+ * @author Kohii
  */
 public class MacEntryPoint extends ModuleEntryPointBase {
 

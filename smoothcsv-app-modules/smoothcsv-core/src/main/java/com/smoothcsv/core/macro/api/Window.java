@@ -3,7 +3,7 @@ package com.smoothcsv.core.macro.api;
 /**
  * The window object represents the window of SmoothCSV application.
  *
- * @author kohei
+ * @author kohii
  */
 public interface Window {
 

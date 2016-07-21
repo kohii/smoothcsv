@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
+<url>
+  <loc>http://smoothcsv.com/</loc>
+  <priority>1.0</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/download/</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/docs/</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/macro/</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/macro_api/</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/1/</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/1/product</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/1/manual</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://smoothcsv.com/1/support</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+</url>
+</urlset>

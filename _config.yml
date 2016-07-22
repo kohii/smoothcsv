@@ -11,7 +11,7 @@ email: smoothcsv@hotmail.co.jp
 description: > # this means to ignore newlines until "baseurl:"
   SmoothCSV is a awesome CSV file editor.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://smoothcsv.com/" # the base hostname & protocol for your site
+url: "http://smoothcsv.com" # the base hostname & protocol for your site
 #twitter_username: 
 #github_username:  kohii
 

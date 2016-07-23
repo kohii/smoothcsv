@@ -40,6 +40,14 @@ public interface App {
   void create();
 
   /**
+   * Creates a new csvsheet with default properties and the specified number of rows and columns.
+   *
+   * @param rows    the number of rows for the csvsheet
+   * @param columns the number of columns for the csvsheet
+   */
+  void create(int rows, int columns);
+
+  /**
    * Creates a new csvsheet with the specified number of rows and columns and properties.
    *
    * @param rows       the number of rows for the csvsheet

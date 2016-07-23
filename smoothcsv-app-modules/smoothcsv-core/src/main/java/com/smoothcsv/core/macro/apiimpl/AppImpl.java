@@ -55,8 +55,13 @@ public class AppImpl extends APIBase implements App {
   }
 
   @Override
+  public void create(int rows, int columns) {
+    create(rows, columns, CsvProperties.defaultProperties());
+  }
+
+  @Override
   public void create(int rows, int columns, CsvProperties properties) {
-    new NewFileCommand().run(rows, columns, MacroUtils.toCsvMeta(properties));
+    NewFileCommand.run(rows, columns, MacroUtils.toCsvMeta(properties), SCTabbedPane.LAST);
   }
 
   @Override
@@ -66,7 +71,7 @@ public class AppImpl extends APIBase implements App {
 
   @Override
   public void open(String pathname, CsvProperties properties) {
-    new OpenFileCommand().run(new File(pathname), MacroUtils.toCsvMeta(properties), null);
+    OpenFileCommand.run(new File(pathname), MacroUtils.toCsvMeta(properties), null, SCTabbedPane.LAST);
   }
 
   @Override

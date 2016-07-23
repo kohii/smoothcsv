@@ -5,6 +5,8 @@ app:OpenFileAs
 app:Save	available(csv-sheet)
 app:SaveAs	available(csv-sheet)
 app:SaveAll	available(csv-sheet)
+app:Reopen	csvsheet_has_file
+app:ReopenAs	csvsheet_has_file
 app:Close	available(csv-sheet)
 app:CloseOthers	available(csv-sheet)
 app:CloseAll	available(csv-sheet)
@@ -15,8 +17,8 @@ app:ToggleCommandPalette
 app:ShowSqlTools
 app:ShowSettings
 
-grid:Undo	csv_sheet_can_undo
-grid:Redo	csv_sheet_can_redo
+grid:Undo	csvsheet_can_undo
+grid:Redo	csvsheet_can_redo
 grid:Copy	not_editing_cell
 grid:CopyWithoutMetaChars	not_editing_cell
 grid:Cut	not_editing_cell

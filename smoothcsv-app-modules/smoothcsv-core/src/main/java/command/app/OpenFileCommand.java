@@ -32,6 +32,7 @@ import com.smoothcsv.csv.reader.CsvReaderOptions;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.BaseTabView;
+import com.smoothcsv.framework.component.SCTabbedPane;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
@@ -64,22 +65,22 @@ public class OpenFileCommand extends Command {
 
   public void chooseAndOpenFile(File currentDir) {
     File file = chooseFile(currentDir);
-    run(file, HOW_TO_DETECT_PROPERTIES_MANUAL);
+    run(file, HOW_TO_DETECT_PROPERTIES_MANUAL, SCTabbedPane.LAST);
   }
 
   public void chooseAndOpenFile(File currentDir, String howToDetectProperties) {
     File file = chooseFile(currentDir);
-    run(file, howToDetectProperties);
+    run(file, howToDetectProperties, SCTabbedPane.LAST);
   }
 
   public void run(File file) {
     String howToDetectProperties =
         CoreSettings.getInstance().get(CoreSettings.HOW_TO_DETECT_PROPERTIES);
-    run(file, howToDetectProperties);
+    run(file, howToDetectProperties, SCTabbedPane.LAST);
   }
 
 
-  public void run(File file, String howToDetectProperties) {
+  public static void run(File file, String howToDetectProperties, int index) {
 
     List<BaseTabView<?>> views = SCApplication.components().getTabbedPane().getAllViews();
     for (BaseTabView<?> view : views) {
@@ -106,11 +107,7 @@ public class OpenFileCommand extends Command {
 
     CsvMeta properties;
     if (howToDetectProperties.equals(HOW_TO_DETECT_PROPERTIES_MANUAL)) {
-      ReadCsvPropertiesDialog dialog = new ReadCsvPropertiesDialog(null, "Open");
-      if (dialog.showDialog() != DialogOperation.OK) {
-        return;
-      }
-      properties = dialog.getCsvMeta();
+      properties = chooseProperties();
     } else if (howToDetectProperties.equals(HOW_TO_DETECT_PROPERTIES_AUTO)) {
       properties = CsvSheetSupport.getAutoDetectEnabledCsvMeta();
     } else {
@@ -171,18 +168,26 @@ public class OpenFileCommand extends Command {
       properties.setQuoteNotDetermined(false);
     }
 
-    run(file, properties, null);
+    run(file, properties, null, index);
   }
 
-  private CsvProperties escapeNull(CsvProperties p) {
+  public static CsvMeta chooseProperties() {
+    ReadCsvPropertiesDialog dialog = new ReadCsvPropertiesDialog(null, "Open");
+    if (dialog.showDialog() != DialogOperation.OK) {
+      throw new CancellationException();
+    }
+    return dialog.getCsvMeta();
+  }
+
+  private static CsvProperties escapeNull(CsvProperties p) {
     return p != null ? p : CsvSheetSupport.getDefaultCsvMeta();
   }
 
-  public void run(CsvSheetViewInfo viewInfo, CsvGridSheetModel model) {
+  public static void run(CsvSheetViewInfo viewInfo, CsvGridSheetModel model, int index) {
     try {
       SmoothComponentManager.startAdjustingComponents();
       CsvSheetView csvGridSheetView = new CsvSheetView(viewInfo, model);
-      SCApplication.components().getTabbedPane().addTab(csvGridSheetView);
+      SCApplication.components().getTabbedPane().addTab(csvGridSheetView, index);
     } finally {
       SmoothComponentManager.stopAdjustingComponents();
     }
@@ -192,10 +197,10 @@ public class OpenFileCommand extends Command {
     }
   }
 
-  public void run(File file, CsvMeta properties, CsvReaderOptions options) {
+  public static void run(File file, CsvMeta properties, CsvReaderOptions options, int index) {
     CsvSheetViewInfo viewInfo = new CsvSheetViewInfo(file, properties, options);
     CsvGridSheetModel model = CsvSheetSupport.createModelFromFile(file, properties, options);
-    run(viewInfo, model);
+    run(viewInfo, model, index);
   }
 
   private File chooseFile(File currentDir) {

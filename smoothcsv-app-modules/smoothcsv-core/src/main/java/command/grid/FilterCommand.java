@@ -22,6 +22,7 @@ import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.filter.FilterConditionGroup;
 import com.smoothcsv.core.filter.FilterConditions;
 import com.smoothcsv.core.filter.FilterDialog;
+import com.smoothcsv.framework.component.SCTabbedPane;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
@@ -99,7 +100,7 @@ public class FilterCommand extends GridCommand {
       CsvSheetViewInfo viewInfo =
           new CsvSheetViewInfo(null, CsvSheetSupport.getDefaultCsvMeta(), null);
       CsvGridSheetModel csvSheetModel = new CsvGridSheetModel(dataList);
-      new OpenFileCommand().run(viewInfo, csvSheetModel);
+      OpenFileCommand.run(viewInfo, csvSheetModel, SCTabbedPane.LAST);
     }
   }
 }

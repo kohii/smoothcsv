@@ -32,7 +32,7 @@ public class AppConditions {
 
   public static void createConditions() {
 
-    Conditions.register("csv_sheet_can_undo", new Condition() {
+    Conditions.register("csvsheet_can_undo", new Condition() {
       private SCListener<GridSheetUndoManager.StateChangeEvent> stateChangeListener =
           e -> revalidate();
 
@@ -64,7 +64,7 @@ public class AppConditions {
       }
     });
 
-    Conditions.register("csv_sheet_can_redo", new Condition() {
+    Conditions.register("csvsheet_can_redo", new Condition() {
       private SCListener<GridSheetUndoManager.StateChangeEvent> stateChangeListener =
           e -> revalidate();
 
@@ -96,7 +96,7 @@ public class AppConditions {
       }
     });
 
-    Conditions.register("csv_sheet_is_at_savepoint", new Condition() {
+    Conditions.register("csvsheet_is_at_savepoint", new Condition() {
       private SCListener<GridSheetUndoManager.StateChangeEvent> stateChangeListener =
           e -> revalidate();
 
@@ -128,7 +128,7 @@ public class AppConditions {
       }
     });
 
-    Conditions.register("csv_editor_has_file", new Condition() {
+    Conditions.register("csvsheet_has_file", new Condition() {
       private PropertyChangeListener filePropertyChangeListener = e -> revalidate();
 
       @Override

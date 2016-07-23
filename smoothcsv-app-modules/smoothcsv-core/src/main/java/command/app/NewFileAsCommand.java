@@ -19,6 +19,7 @@ import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.component.SCTabbedPane;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.SCBundle;
@@ -45,7 +46,7 @@ public class NewFileAsCommand extends Command {
       int row = dialog.getRowCount();
       int column = dialog.getColumnCount();
       CsvMeta csvMeta = dialog.getCsvMeta();
-      new NewFileCommand().run(row, column, csvMeta);
+      NewFileCommand.run(row, column, csvMeta, SCTabbedPane.LAST);
     }
   }
 }

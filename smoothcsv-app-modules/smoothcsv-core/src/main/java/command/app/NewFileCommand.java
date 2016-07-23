@@ -21,6 +21,7 @@ import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
+import com.smoothcsv.framework.component.SCTabbedPane;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.setting.Settings;
 
@@ -35,10 +36,10 @@ public class NewFileCommand extends Command {
     int rows = settings.getInteger(CoreSettings.DEFAULT_ROW_SIZE);
     int columns = settings.getInteger(CoreSettings.DEFAULT_COLUMN_SIZE);
     CsvMeta csvMeta = CsvSheetSupport.getDefaultCsvMeta();
-    run(rows, columns, csvMeta);
+    run(rows, columns, csvMeta, SCTabbedPane.LAST);
   }
 
-  public void run(int rows, int columns, CsvMeta csvMeta) {
+  public static void run(int rows, int columns, CsvMeta csvMeta, int index) {
     boolean isAdjusting = SmoothComponentManager.isAdjusting();
     try {
       if (!isAdjusting) {
@@ -47,7 +48,7 @@ public class NewFileCommand extends Command {
       CsvSheetViewInfo viewInfo = new CsvSheetViewInfo(null, csvMeta, null);
       CsvGridSheetModel model = CsvSheetSupport.createModel(rows, columns, csvMeta);
       CsvSheetView csvGridSheetView = new CsvSheetView(viewInfo, model);
-      SCApplication.components().getTabbedPane().addTab(csvGridSheetView);
+      SCApplication.components().getTabbedPane().addTab(csvGridSheetView, index);
     } finally {
       if (!isAdjusting) {
         SmoothComponentManager.stopAdjustingComponents();

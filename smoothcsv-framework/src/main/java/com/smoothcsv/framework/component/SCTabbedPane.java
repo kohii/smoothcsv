@@ -66,6 +66,8 @@ import javax.swing.event.ChangeListener;
 
 public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
 
+  public static final int LAST = Integer.MAX_VALUE;
+
   private static final long serialVersionUID = 8786435500332783844L;
 
   /**
@@ -171,8 +173,11 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
     return eventListenerSupport;
   }
 
-  public void addTab(BaseTabView<?> comp) {
-    addTab(comp.getViewInfo().getShortTitle(), null, comp, comp.getViewInfo().getFullTitle());
+  public void addTab(BaseTabView<?> comp, int index) {
+    if (index == LAST) {
+      index = getTabCount();
+    }
+    insertTab(comp.getViewInfo().getShortTitle(), null, comp, comp.getViewInfo().getFullTitle(), index);
 
     comp.requestFocusInWindow();
     setSelectedComponent(comp);

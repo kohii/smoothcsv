@@ -42,8 +42,20 @@ public class CloseCommand extends Command {
 
   public static void close(BaseTabView<?> view, boolean askToSave) {
     CsvSheetView csvSheetView = (CsvSheetView) view;
+    beforeClose(csvSheetView, askToSave);
+    SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();
+    try {
+      SmoothComponentManager.startAdjustingComponents();
+      tabbedPane.remove(csvSheetView);
+    } finally {
+      SmoothComponentManager.stopAdjustingComponents();
+    }
+  }
+
+  public static void beforeClose(CsvSheetView csvSheetView, boolean askToSave) {
     csvSheetView.getGridSheetPane().getTable().stopCellEditing();
-    if (askToSave && !csvSheetView.getGridSheetPane().getUndoManager().isSavepoint()) {
+
+    if (!csvSheetView.getGridSheetPane().getUndoManager().isSavepoint()) {
 
       DialogOperation option =
           MessageDialogs.confirm2("ISCA0002", csvSheetView.getViewInfo().getShortTitle());
@@ -56,13 +68,6 @@ public class CloseCommand extends Command {
       } else {
         throw new UnexpectedException();
       }
-    }
-    SCTabbedPane tabbedPane = SCApplication.components().getTabbedPane();
-    try {
-      SmoothComponentManager.startAdjustingComponents();
-      tabbedPane.remove(csvSheetView);
-    } finally {
-      SmoothComponentManager.stopAdjustingComponents();
     }
   }
 }

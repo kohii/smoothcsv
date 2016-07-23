@@ -24,8 +24,10 @@ public class EditTransaction implements Closeable {
   private boolean done = false;
 
   public EditTransaction(GridSheetUndoManager undoManager) {
-    this.undoManager = undoManager;
-    undoManager.startTransaction();
+    if (!undoManager.isTransactionStarted()) {
+      this.undoManager = undoManager;
+      undoManager.startTransaction();
+    }
   }
 
   @Override
@@ -37,12 +39,16 @@ public class EditTransaction implements Closeable {
   }
 
   public void commit() {
-    undoManager.stopTransaction();
+    if (undoManager != null) {
+      undoManager.stopTransaction();
+    }
     done = true;
   }
 
   public void rollback() {
-    undoManager.stopTransactionWithoutCollecting();
+    if (undoManager != null) {
+      undoManager.stopTransactionWithoutCollecting();
+    }
     done = true;
   }
 }

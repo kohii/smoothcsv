@@ -62,7 +62,8 @@ public class GridSheetUndoManager {
   @Setter
   private boolean collecting = true;
 
-  private int transactionStackCount = 0;
+  @Getter
+  private boolean transactionStarted;
 
   private ArrayList<GridSheetUndableEdit> edits;
 
@@ -82,7 +83,7 @@ public class GridSheetUndoManager {
       return;
     }
 
-    if (transactionStackCount != 0) {
+    if (transactionStarted) {
       edits.add(edit);
       return;
     }
@@ -113,7 +114,7 @@ public class GridSheetUndoManager {
     setCollecting(false);
     GridSheetEditContainer edit = undoStack.pollFirst();
     assert edit != null;
-    edit.undo((CsvGridSheetModel) gridSheetPane.getModel());
+    edit.undo(gridSheetPane.getModel());
     redoStack.addFirst(edit);
     setCollecting(true);
 
@@ -133,7 +134,7 @@ public class GridSheetUndoManager {
     setCollecting(false);
     GridSheetEditContainer edit = redoStack.pollFirst();
     assert edit != null;
-    edit.redo((CsvGridSheetModel) gridSheetPane.getModel());
+    edit.redo(gridSheetPane.getModel());
     undoStack.addFirst(edit);
     setCollecting(true);
 
@@ -143,24 +144,27 @@ public class GridSheetUndoManager {
   }
 
   public boolean canUndo() {
-    return collecting && transactionStackCount == 0 && !undoStack.isEmpty()
+    return collecting && !transactionStarted && !undoStack.isEmpty()
         && undoStack.getFirst() != START_POINT;
   }
 
   public boolean canRedo() {
-    return collecting && transactionStackCount == 0 && !redoStack.isEmpty();
+    return collecting && !transactionStarted && !redoStack.isEmpty();
   }
 
   void startTransaction() {
+    if (transactionStarted) {
+      throw new IllegalStateException("Already started transaction.");
+    }
     edits = new ArrayList<>();
-    transactionStackCount++;
+    transactionStarted = true;
   }
 
   void stopTransaction() {
-    if (transactionStackCount <= 0) {
-      throw new IllegalStateException();
+    if (!transactionStarted) {
+      throw new IllegalStateException("Has not started transaction.");
     }
-    transactionStackCount--;
+    transactionStarted = false;
     GridSheetSelectionSnapshot selection = gridSheetPane.getSelectionModel().exportSelection();
     GridSheetEditContainer editContainer = new MultiGridSheetEditContainer(selection,
         edits.toArray(new GridSheetUndableEdit[edits.size()]));
@@ -174,10 +178,10 @@ public class GridSheetUndoManager {
   }
 
   void stopTransactionWithoutCollecting() {
-    if (transactionStackCount <= 0) {
-      throw new IllegalStateException();
+    if (!transactionStarted) {
+      throw new IllegalStateException("Has not started transaction.");
     }
-    transactionStackCount--;
+    transactionStarted = false;
     edits = null;
   }
 

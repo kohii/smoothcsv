@@ -23,6 +23,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetHeaderCellRendererUI;
 import com.smoothcsv.core.csvsheet.CsvGridSheetTableUI;
 import com.smoothcsv.core.csvsheet.CsvSheetStatusLabel;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.core.menu.RecentlyOpenedFilesMenu;
 import com.smoothcsv.core.preference.EditorPrefPanel;
 import com.smoothcsv.core.preference.GeneralPrefPanel;
 import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
@@ -42,6 +43,7 @@ import com.smoothcsv.framework.component.SCTabbedPane.ViewChangeEvent;
 import com.smoothcsv.framework.component.SCTabbedPaneUI;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.event.SCListener;
+import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.framework.preference.PrefPage;
@@ -49,6 +51,7 @@ import com.smoothcsv.framework.preference.PreferenceManager;
 import com.smoothcsv.framework.setting.Session;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.InvocationUtils;
+import com.smoothcsv.swing.components.History;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.CloseAllCommand;
@@ -94,6 +97,12 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
       @Override
       public void call(ShutdownEvent event) {
         new CloseAllCommand().execute();
+
+        for (History history : History.getAllHistories()) {
+          if (!history.flushesAutomatically()) {
+            history.flush();
+          }
+        }
 
         Rectangle rectangle = components().getFrame().getBounds();
         Session session = Session.getSession();
@@ -142,6 +151,8 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         toolTipManager.setDismissDelay(100000);
         toolTipManager.setInitialDelay(200);
         toolTipManager.setReshowDelay(100);
+
+        MainMenuItems.instance().registerCustomMenu("[open_recent]", caption -> new RecentlyOpenedFilesMenu(caption));
       }
     });
 

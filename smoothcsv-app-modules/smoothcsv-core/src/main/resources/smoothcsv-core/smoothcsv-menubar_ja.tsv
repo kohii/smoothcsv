@@ -2,6 +2,7 @@
 	新規作成	app:NewFile
 	条件を指定して新規作成...	app:NewFileAs
 	開く...	app:OpenFile
+	最近開いたファイル	[open_recent]
 	条件を指定して開く...	app:OpenFileAs
 	上書き保存	app:Save
 	名前をつけて保存...	app:SaveAs

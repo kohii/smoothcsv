@@ -13,7 +13,9 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csv.CsvMeta;
+import com.smoothcsv.core.csv.RecentFilesHistory;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 import com.smoothcsv.framework.component.view.ViewInfo;
 
@@ -31,9 +33,9 @@ public class CsvSheetViewInfo extends ViewInfo {
   private CsvReaderOptions options;
 
   public CsvSheetViewInfo(File file, CsvMeta csvMeta, CsvReaderOptions options) {
-    this.file = file;
     this.csvMeta = csvMeta;
     this.options = options;
+    setFile(file);
   }
 
   public File getFile() {
@@ -44,6 +46,9 @@ public class CsvSheetViewInfo extends ViewInfo {
     File old = this.file;
     this.file = file;
     propertyChangeSupport.firePropertyChange("file", old, file);
+    if (file != null) {
+      RecentFilesHistory.getInstance().put(FileUtils.getCanonicalPath(file));
+    }
   }
 
   public CsvMeta getCsvMeta() {

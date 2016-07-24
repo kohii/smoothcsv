@@ -5,8 +5,8 @@ app:OpenFileAs
 app:Save	available(csv-sheet)
 app:SaveAs	available(csv-sheet)
 app:SaveAll	available(csv-sheet)
-app:Reopen	csvsheet_has_file
-app:ReopenAs	csvsheet_has_file
+app:Reload	csvsheet_has_file
+app:ReloadAs	csvsheet_has_file
 app:Close	available(csv-sheet)
 app:CloseOthers	available(csv-sheet)
 app:CloseAll	available(csv-sheet)

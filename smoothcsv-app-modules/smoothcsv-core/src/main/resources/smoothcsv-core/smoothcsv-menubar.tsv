@@ -3,12 +3,14 @@ File
 	New As...	app:NewFileAs
 	Open...	app:OpenFile
 	Open As...	app:OpenFileAs
-#	Reopen	app:Reopen
 	Save	app:Save
 	Save As...	app:SaveAs
 	Save All	app:SaveAll
 	Close	app:Close
 	Close All	app:CloseAll
+	-
+	Reload	app:Reload
+	Reload As...	app:ReloadAs
 	-
 	Properties...	csvsheet:ShowProperties
 

@@ -8,7 +8,7 @@ import com.smoothcsv.framework.SCApplication;
 /**
  * @author kohei
  */
-public class ReopenAsCommand extends CsvSheetCommandBase {
+public class ReloadAsCommand extends CsvSheetCommandBase {
 
   @Override
   public void run(CsvSheetView view) {

@@ -25,8 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @author kohii
@@ -52,6 +55,7 @@ public class MainMenuItems {
   }
 
   private List<ParentMenu> topLevelMenus = new ArrayList<>();
+  private Map<String, Function<String, IMenu>> customMenuMap = new HashMap<>();
 
   public void add(ParentMenu menu) {
     topLevelMenus.add(menu);
@@ -129,8 +133,16 @@ public class MainMenuItems {
             // top level menu
             throw new IllegalConfigException(resourceName);
           }
-          CommandMenuItem menuItem = new CommandMenuItem(caption, commandId, visibleWhen);
-          menuStack.getLast().add(menuItem);
+          if (commandId.startsWith("[")) {
+            Function<String, IMenu> menuFactory = customMenuMap.get(commandId);
+            if (menuFactory != null) {
+              menuStack.getLast().addChild(menuFactory.apply(caption));
+            } else {
+              // TODO
+            }
+          } else {
+            menuStack.getLast().addChild(new CommandMenuItem(caption, commandId, visibleWhen));
+          }
         } else {
           if (menuStack.isEmpty()) {
             // top level menu
@@ -150,5 +162,9 @@ public class MainMenuItems {
     } catch (IOException e) {
       throw new UnexpectedException(e);
     }
+  }
+
+  public void registerCustomMenu(String name, Function<String, IMenu> menuFactory) {
+    customMenuMap.put(name, menuFactory);
   }
 }

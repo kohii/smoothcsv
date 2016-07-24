@@ -52,7 +52,7 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
                          boolean enableAccelerator) {
     this.caption = caption;
     this.commandId = commandId;
-    setText(caption);
+    IMenu.setCaption(this, caption);
     if (icon != null) {
       setIcon(icon);
     }
@@ -90,23 +90,6 @@ public class CommandMenuItem extends JMenuItem implements ActionListener, IMenu 
       // In order to make the system menu bar's key binding disabled, do not register accelerator.
       // See SCMenuBar#add() for more details.
     }
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see javax.swing.AbstractButton#setText(java.lang.String)
-   */
-  @Override
-  public void setText(String text) {
-    int indexOfMnemonicKey = text.indexOf('&');
-    if (indexOfMnemonicKey >= 0) {
-      // TODO performance tuning using char array.
-      text = new StringBuilder(text).deleteCharAt(indexOfMnemonicKey).toString();
-      int mnemonic = text.charAt(indexOfMnemonicKey + 1);
-      setMnemonic(mnemonic);
-    }
-    super.setText(text);
   }
 
   @Override

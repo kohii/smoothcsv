@@ -14,6 +14,8 @@
 package com.smoothcsv.framework.menu;
 
 
+import javax.swing.JMenuItem;
+
 /**
  * @author kohii
  */
@@ -22,4 +24,17 @@ public interface IMenu {
   String getCaption();
 
   void setAcceleratorEnabled(boolean enabled);
+
+  default void onAddedToParent(IParentMenu parent) {}
+
+  static void setCaption(JMenuItem menu, String caption) {
+    int indexOfMnemonicKey = caption.indexOf('&');
+    if (indexOfMnemonicKey >= 0) {
+      // TODO performance tuning using char array.
+      caption = new StringBuilder(caption).deleteCharAt(indexOfMnemonicKey).toString();
+      int mnemonic = caption.charAt(indexOfMnemonicKey + 1);
+      menu.setMnemonic(mnemonic);
+    }
+    menu.setText(caption);
+  }
 }

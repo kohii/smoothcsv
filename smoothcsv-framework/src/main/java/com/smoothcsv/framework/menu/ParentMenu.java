@@ -15,6 +15,7 @@ package com.smoothcsv.framework.menu;
 
 import java.awt.Component;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  * @author kohii
@@ -26,24 +27,7 @@ public class ParentMenu extends JMenu implements IParentMenu {
 
   public ParentMenu(String caption) {
     this.caption = caption;
-    setText(caption);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see javax.swing.AbstractButton#setText(java.lang.String)
-   */
-  @Override
-  public void setText(String text) {
-    int indexOfMnemonicKey = text.indexOf('&');
-    if (indexOfMnemonicKey >= 0) {
-      // TODO performance tuning using char array.
-      text = new StringBuilder(text).deleteCharAt(indexOfMnemonicKey).toString();
-      int mnemonic = text.charAt(indexOfMnemonicKey + 1);
-      setMnemonic(mnemonic);
-    }
-    super.setText(text);
+    IMenu.setCaption(this, caption);
   }
 
   public String getCaption() {
@@ -51,13 +35,9 @@ public class ParentMenu extends JMenu implements IParentMenu {
   }
 
   @Override
-  public void add(ParentMenu menu) {
-    super.add(menu);
-  }
-
-  @Override
-  public void add(CommandMenuItem menu) {
-    super.add(menu);
+  public void addChild(IMenu menu) {
+    super.add((JMenuItem) menu);
+    menu.onAddedToParent(this);
   }
 
   @Override

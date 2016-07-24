@@ -14,6 +14,7 @@
 package com.smoothcsv.framework.menu;
 
 import java.awt.Component;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
@@ -26,15 +27,10 @@ public class ContextMenu extends JPopupMenu implements IParentMenu {
   }
 
   @Override
-  public void add(ParentMenu menu) {
-    super.add(menu);
+  public void addChild(IMenu menu) {
+    super.add((JMenuItem) menu);
+    menu.onAddedToParent(this);
   }
-
-  @Override
-  public void add(CommandMenuItem menu) {
-    super.add(menu);
-  }
-
 
   @Override
   public String getCaption() {

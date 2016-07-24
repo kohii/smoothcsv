@@ -17,9 +17,8 @@ package com.smoothcsv.framework.menu;
  * @author kohii
  */
 public interface IParentMenu extends IMenu {
-  void add(ParentMenu menu);
 
-  void add(CommandMenuItem menu);
+  void addChild(IMenu menu);
 
   void addSeparator();
 }

@@ -13,20 +13,14 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroInfo;
+import com.smoothcsv.core.macro.UserDefinedMacroList;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.exception.AbortionException;
-import com.smoothcsv.framework.exception.AppException;
-import com.smoothcsv.framework.io.ArrayCsvReader;
-import com.smoothcsv.framework.io.ArrayCsvWriter;
-import com.smoothcsv.framework.io.CsvSupport;
-import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import lombok.Getter;
 
@@ -41,15 +35,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -67,10 +52,6 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
 
   @Getter
   private SmoothComponentSupport componentSupport = new SmoothComponentSupport(this, "macro-list");
-
-  private File confFile =
-      new File(DirectoryResolver.instance().getSettingDirectory(), "macros.tsv");
-  private List<MacroInfo> macroInfoList = new ArrayList<>();
 
   private int selected = -1;
   private JPanel listBodyPanel;
@@ -134,7 +115,7 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     // "Select the next macro");
     // toolBar.add("macrolist:SelectPrevMacro", AwesomeIconConstants.FA_PLUS,
     // "Select the previous macro");
-    load();
+    render();
   }
 
   private void addKeyAction(KeyStroke keyStroke, Action action) {
@@ -143,13 +124,10 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     getInputMap().put(keyStroke, key);
   }
 
-  private void sortList() {
-    Collections.sort(macroInfoList);
-  }
-
   private void render() {
+    List<MacroInfo> macros = UserDefinedMacroList.getInstance().getMacroInfoList();
     listBodyPanel.removeAll();
-    for (MacroInfo macroInfo : macroInfoList) {
+    for (MacroInfo macroInfo : macros) {
       GridBagConstraints gbc = new GridBagConstraints();
       gbc.gridwidth = GridBagConstraints.REMAINDER;
       gbc.weightx = 1;
@@ -159,7 +137,7 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
         @Override
         public void mousePressed(MouseEvent e) {
           MacroListItemPanel item = (MacroListItemPanel) e.getComponent();
-          int index = macroInfoList.indexOf(item.getMacroInfo());
+          int index = macros.indexOf(item.getMacroInfo());
           if (selected == index) {
             return;
           }
@@ -175,14 +153,15 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     gbc.weighty = 1;
     listBodyPanel.add(new JLabel(), gbc);
 
-    if (macroInfoList.size() > 0) {
+    if (macros.size() > 0) {
       select(Math.max(selected, 0));
     }
     repaint();
   }
 
   public void selectNext(int direction) {
-    if ((direction < 0 && selected <= 0) || (direction > 0 && macroInfoList.size() - 1 <= selected)) {
+    if ((direction < 0 && selected <= 0) || (direction > 0
+        && UserDefinedMacroList.getInstance().getMacroInfoList().size() - 1 <= selected)) {
       throw new AbortionException();
     }
     select(selected + direction);
@@ -215,7 +194,7 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
     if (selected < 0) {
       return null;
     }
-    return macroInfoList.get(selected).getFile();
+    return UserDefinedMacroList.getInstance().getMacroInfoList().get(selected).getFile();
   }
 
   @Override
@@ -224,68 +203,20 @@ public class MacroListPanel extends JPanel implements SmoothComponent {
   }
 
   public void addMacroFiles(File... files) {
-    for (File file : files) {
-      if (!file.exists() || !file.isFile() || !file.canRead()) {
-        throw new AppException("WSCC0001", file);
-      }
-      boolean alreadyExists = false;
-      for (MacroInfo mi : macroInfoList) {
-        if (mi.getFile().equals(file)) {
-          alreadyExists = true;
-          break;
-        }
-      }
-      if (!alreadyExists) {
-        macroInfoList.add(new MacroInfo(file));
-      }
-    }
-    sortList();
+    UserDefinedMacroList.getInstance().add(files);
     render();
-    save();
   }
 
   public void removeSelectedMacro() {
     if (selected < 0) {
       throw new AbortionException();
     }
-    macroInfoList.remove(selected);
-    if (macroInfoList.isEmpty()) {
+    UserDefinedMacroList userDefinedMacroList = UserDefinedMacroList.getInstance();
+    userDefinedMacroList.remove(selected);
+    if (userDefinedMacroList.getMacroInfoList().isEmpty()) {
       selected = -1;
     } else {
-      selected = Math.min(selected, macroInfoList.size() - 1);
-    }
-    render();
-    save();
-  }
-
-  public void save() {
-    FileUtils.ensureWritable(confFile);
-    try (OutputStream os = new FileOutputStream(confFile);
-         ArrayCsvWriter writer =
-             new ArrayCsvWriter(new OutputStreamWriter(os, "UTF-8"), CsvSupport.TSV_PROPERTIES)) {
-      for (MacroInfo macroInfo : macroInfoList) {
-        writer.writeRow(new String[]{macroInfo.getFilePath()});
-      }
-    } catch (IOException e) {
-      throw new UnexpectedException(e);
-    }
-  }
-
-  public void load() {
-    macroInfoList.clear();
-    if (confFile.exists()) {
-      try (InputStream in = new FileInputStream(confFile);
-           ArrayCsvReader reader =
-               new ArrayCsvReader(new InputStreamReader(in, "UTF-8"), CsvSupport.TSV_PROPERTIES,
-                   CsvSupport.SKIP_EMPTYROW_OPTION, 2)) {
-        String[] rowData;
-        while ((rowData = reader.readRow()) != null) {
-          macroInfoList.add(new MacroInfo(rowData[0]));
-        }
-        sortList();
-      } catch (IOException e) {
-        throw new UnexpectedException(e);
-      }
+      selected = Math.min(selected, userDefinedMacroList.getMacroInfoList().size() - 1);
     }
     render();
   }

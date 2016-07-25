@@ -102,6 +102,8 @@ Tools
 Macro
 	Toggle Macro Tools	macro:ToggleMacroTools
 	Start/Stop Recording Macro	macro:ToggleRecordingMacro
-	Run Macro	macro:Run
 	Edit Macro	macro:ShowEditor
+	Run Macro	macro:Run
 	Save Macro...	macro:Save
+	-
+	User-defined Macros	[user_defined_macros]

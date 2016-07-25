@@ -101,6 +101,8 @@
 マクロ
 	マクロツールを表示／非表示	macro:ToggleMacroTools
 	マクロ記録開始／終了	macro:ToggleRecordingMacro
-	マクロ実行	macro:Run
 	マクロを編集	macro:ShowEditor
+	マクロ実行	macro:Run
 	マクロを保存...	macro:Save
+	-
+	ユーザー定義マクロ	[user_defined_macros]

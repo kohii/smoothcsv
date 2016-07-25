@@ -204,9 +204,10 @@ macro:ToggleMacroTools
 macro:ToggleRecordingMacro
 macro:ToggleConsole	available(macro-tools)
 macro:Open	!recording_macro
-macro:Save	!recording_macro
+macro:Save	available(macro-editor)
 macro:Run	!recording_macro
 macro:ShowEditor
+macro:ShowList
 macrolist:Add	available(macro-list)
 macrolist:Remove	available(macro-list)
 macrolist:Run	available(macro-list)

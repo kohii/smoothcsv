@@ -24,6 +24,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetTableUI;
 import com.smoothcsv.core.csvsheet.CsvSheetStatusLabel;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.menu.RecentlyOpenedFilesMenu;
+import com.smoothcsv.core.menu.UserDefinedMacrosMenu;
 import com.smoothcsv.core.preference.EditorPrefPanel;
 import com.smoothcsv.core.preference.GeneralPrefPanel;
 import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
@@ -153,6 +154,7 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         toolTipManager.setReshowDelay(20);
 
         MainMenuItems.instance().registerCustomMenu("[open_recent]", caption -> new RecentlyOpenedFilesMenu(caption));
+        MainMenuItems.instance().registerCustomMenu("[user_defined_macros]", caption -> new UserDefinedMacrosMenu(caption));
       }
     });
 

@@ -1,6 +1,7 @@
 package com.smoothcsv.core.menu;
 
-import command.app.OpenFileCommand;
+import com.smoothcsv.core.macro.Macro;
+import com.smoothcsv.core.macro.SCAppMacroRuntime;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -8,13 +9,13 @@ import java.io.IOException;
 import javax.swing.JMenuItem;
 
 /**
- * @author kohei
+ * @author kohii
  */
-public class OpenFileMenuItem extends JMenuItem {
+public class RunMacroMenuItem extends JMenuItem {
 
   private final File file;
 
-  public OpenFileMenuItem(File file) {
+  public RunMacroMenuItem(File file) {
     this.file = file;
 
     String pathname;
@@ -28,6 +29,7 @@ public class OpenFileMenuItem extends JMenuItem {
 
   @Override
   protected void fireActionPerformed(ActionEvent event) {
-    new OpenFileCommand().run(file);
+    Macro macro = new Macro(file);
+    SCAppMacroRuntime.getMacroRuntime().execute(macro);
   }
 }

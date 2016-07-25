@@ -63,8 +63,10 @@ public class SmoothCsvErrorHandler implements ErrorHandler {
           handleError(t);
         });
       }
-    } catch (RuntimeException e) {
-      e.printStackTrace();
+    } catch (Throwable e) {
+      try {
+        LOG.error("Error while handling an error!", t);
+      } catch (Throwable ignore) {}
     }
   }
 

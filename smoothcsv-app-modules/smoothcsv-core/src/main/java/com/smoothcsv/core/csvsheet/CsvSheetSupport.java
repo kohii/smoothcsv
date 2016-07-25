@@ -103,7 +103,10 @@ public class CsvSheetSupport {
       while ((r = reader.readRow()) != null) {
         data.add(r);
       }
-      CsvGridSheetModel gsm = new CsvGridSheetModel(data, data.size(), reader.getMaxColumnCount());
+      if (data.isEmpty()) {
+        data.add(new ArrayList<>());
+      }
+      CsvGridSheetModel gsm = new CsvGridSheetModel(data, data.size(), Math.max(1, reader.getMaxColumnCount()));
       if (csvMeta.isNewlineCharNotDetermined()) {
         if (reader.getFirstNewlineCharacter() != null) {
           csvMeta.setNewlineCharacter(reader.getFirstNewlineCharacter());

@@ -57,10 +57,10 @@ public class SmoothCsvErrorHandler implements ErrorHandler {
         LOG.debug("Error!", t);
       }
       if (SwingUtilities.isEventDispatchThread()) {
-        handlError(t);
+        handleError(t);
       } else {
         SwingUtilities.invokeLater(() -> {
-          handlError(t);
+          handleError(t);
         });
       }
     } catch (RuntimeException e) {
@@ -68,7 +68,7 @@ public class SmoothCsvErrorHandler implements ErrorHandler {
     }
   }
 
-  private void handlError(Throwable t) {
+  private void handleError(Throwable t) {
     if (t instanceof AppException) {
       AppException appException = (AppException) t;
       SwingUtils.beep();

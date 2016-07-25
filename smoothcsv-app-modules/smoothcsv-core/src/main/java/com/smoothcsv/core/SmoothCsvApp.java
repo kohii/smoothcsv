@@ -19,7 +19,6 @@ import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.support.CommandMapFactory;
 import com.smoothcsv.framework.error.ErrorHandlerFactory;
-import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
@@ -50,20 +49,17 @@ public class SmoothCsvApp extends SCApplication {
 
   @Override
   protected void handleArgs(String[] args) {
-    listeners().on(BeforeOpenWindowEvent.class, new SCListener<BeforeOpenWindowEvent>() {
-      @Override
-      public void call(BeforeOpenWindowEvent event) {
-        if (args == null || args.length == 0) {
-          new NewFileCommand().execute();
-        } else {
-          OpenFileCommand command = new OpenFileCommand();
-          for (String filepath : args) {
-            File f = new File(filepath);
-            if (f.isFile()) {
-              command.run(f);
-            } else if (f.isDirectory()) {
-              command.chooseAndOpenFile(f);
-            }
+    listeners().on(WindowOpendEvent.class, event -> {
+      if (args == null || args.length == 0) {
+        new NewFileCommand().execute();
+      } else {
+        OpenFileCommand command = new OpenFileCommand();
+        for (String filepath : args) {
+          File f = new File(filepath);
+          if (f.isFile()) {
+            command.run(f);
+          } else if (f.isDirectory()) {
+            command.chooseAndOpenFile(f);
           }
         }
       }

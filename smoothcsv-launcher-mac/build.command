@@ -15,4 +15,5 @@ cd ../smoothcsv
 mvn clean install
 
 cd smoothcsv-launcher-mac
+./create_icns.command
 mvn package appbundle:bundle

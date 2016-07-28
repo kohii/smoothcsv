@@ -19,6 +19,7 @@ url: "http://smoothcsv.com" # the base hostname & protocol for your site
 markdown: kramdown
 
 gems:
+  - jekyll-redirect-from
   # - jemoji
   # - jekyll-mentions
   # - jekyll-redirect-from

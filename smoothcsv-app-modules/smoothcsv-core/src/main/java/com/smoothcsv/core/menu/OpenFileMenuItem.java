@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.swing.JMenuItem;
 
 /**
- * @author kohei
+ * @author kohii
  */
 public class OpenFileMenuItem extends JMenuItem {
 

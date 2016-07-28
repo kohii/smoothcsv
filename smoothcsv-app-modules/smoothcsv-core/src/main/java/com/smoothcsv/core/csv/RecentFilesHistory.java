@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.io.File;
 
 /**
- * @author kohei
+ * @author kohii
  */
 public class RecentFilesHistory extends History {
 

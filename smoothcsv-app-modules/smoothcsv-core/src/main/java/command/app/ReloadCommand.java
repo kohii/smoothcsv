@@ -5,7 +5,7 @@ import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.framework.SCApplication;
 
 /**
- * @author kohei
+ * @author kohii
  */
 public class ReloadCommand extends CsvSheetCommandBase {
 

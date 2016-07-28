@@ -16,16 +16,22 @@ package com.smoothcsv.core.preference;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
+import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefSelectBox;
+import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.framework.util.SCBundle;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import com.smoothcsv.swing.icon.AwesomeIconConstants;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -37,46 +43,50 @@ public class GeneralPrefPanel extends JPanel {
 
   public GeneralPrefPanel() {
     setBorder(null);
-    GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.columnWidths = new int[]{0, 0, 0};
-    gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
-    gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-    gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-    setLayout(gridBagLayout);
+    setLayout(new BorderLayout());
+    add(new MainPanel(), BorderLayout.NORTH);
+  }
 
-    JLabel lblNewLabel = new JLabel(SCBundle.get("key.pref.language"));
-    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-    gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-    gbc_lblNewLabel.gridwidth = 2;
-    gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-    gbc_lblNewLabel.gridx = 0;
-    gbc_lblNewLabel.gridy = 0;
-    add(lblNewLabel, gbc_lblNewLabel);
+  private static class MainPanel extends JPanel {
+    public MainPanel() {
+      setBorder(null);
+      setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-    List<Language> langs =
-        SCApplication.getApplication().getModuleManager().getAvailableLanguages();
-    PrefSelectBox<Language> comboBox =
-        new PrefSelectBox<>(CoreSettings.getInstance(), CoreSettings.LANGUAGE, langs, "id", "name");
-    GridBagConstraints gbc_comboBox = new GridBagConstraints();
-    gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-    gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-    gbc_comboBox.gridx = 1;
-    gbc_comboBox.gridy = 1;
-    add(comboBox, gbc_comboBox);
+      JLabel langLabel = new PrefTitleLabel(SCBundle.get("key.pref.language"));
+      langLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+      add(langLabel);
 
-    JLabel restartMsgLabel = new JLabel(MessageBundles.getString("ISCA0011"));
-    restartMsgLabel.setVisible(false);
-    GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-    gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-    gbc_lblNewLabel_1.gridx = 1;
-    gbc_lblNewLabel_1.gridy = 2;
-    add(restartMsgLabel, gbc_lblNewLabel_1);
+      List<Language> langs = SCApplication.getApplication().getModuleManager().getAvailableLanguages();
+      PrefSelectBox<Language> comboBox =
+          new PrefSelectBox<>(CoreSettings.getInstance(), CoreSettings.LANGUAGE, langs, "id", "name");
+      comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+      add(comboBox);
 
-    comboBox.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent e) {
-        restartMsgLabel.setVisible(true);
-      }
-    });
+      JLabel restartMsgLabel = new JLabel(MessageBundles.getString("ISCA0011"));
+      restartMsgLabel.setIcon(AwesomeIcon.create(AwesomeIconConstants.FA_WARNING));
+      restartMsgLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+      restartMsgLabel.setVisible(false);
+      add(restartMsgLabel);
+
+      comboBox.addItemListener(new ItemListener() {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+          restartMsgLabel.setVisible(
+              !Locale.getDefault().getLanguage().equals(((Language) e.getItem()).getId()));
+        }
+      });
+
+      JLabel autoUpdateCheckLabel = new PrefTitleLabel(SCBundle.get("key.pref.autoUpdateCheck"));
+      autoUpdateCheckLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 2, 0));
+      autoUpdateCheckLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+      add(autoUpdateCheckLabel);
+
+      PrefCheckBox autoUpdateCheck = new PrefCheckBox(
+          CoreSettings.getInstance(),
+          CoreSettings.AUTO_UPDATE_CHECK,
+          SCBundle.get("key.pref.autoUpdateCheckMessage"));
+      autoUpdateCheck.setAlignmentX(Component.LEFT_ALIGNMENT);
+      add(autoUpdateCheck);
+    }
   }
 }

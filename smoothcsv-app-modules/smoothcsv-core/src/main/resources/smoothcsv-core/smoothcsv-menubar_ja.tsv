@@ -106,3 +106,6 @@
 	マクロを保存...	macro:Save
 	-
 	ユーザー定義マクロ	[user_defined_macros]
+
+ヘルプ
+	更新を確認...	app:CheckForUpdates

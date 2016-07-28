@@ -16,6 +16,7 @@ app:About
 app:ToggleCommandPalette
 app:ShowSqlTools
 app:ShowSettings
+app:CheckForUpdates
 
 grid:Undo	csvsheet_can_undo
 grid:Redo	csvsheet_can_redo

@@ -11,26 +11,24 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.smoothcsv.framework.preference;
+package com.smoothcsv.core.update;
 
-import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.border.Border;
+import com.smoothcsv.framework.setting.Settings;
+import lombok.Getter;
 
 /**
  * @author kohii
  */
-@SuppressWarnings("serial")
-public class PrefTitleLabel extends JLabel {
+public class UpdateSettings extends Settings {
 
-  private static Border border = BorderFactory.createEmptyBorder(10, 0, 2, 0);
+  public static final String LAST_CHOICE = "lastChoice";
+  public static final String LAST_VERSION = "lastVersion";
+  public static final String LAST_CHECKED = "lastChecked";
 
-  public PrefTitleLabel(String text) {
-    super(text);
+  @Getter
+  private static UpdateSettings instance = new UpdateSettings();
 
-    Font font = getFont();
-    setFont(font.deriveFont(font.getSize() * 1.2f));
-    setBorder(border);
+  private UpdateSettings() {
+    super("update");
   }
 }

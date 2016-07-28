@@ -105,12 +105,18 @@ public abstract class DialogBase extends JDialog {
     JPanel buttonPane = new JPanel();
     buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
+    boolean defaultButtonSet = false;
     for (int i = 0; i < actions.length; i++) {
       DialogOperationAction dialogOperationAction = actions[i];
-      JButton button = new JButton(dialogOperationAction);
-      buttonPane.add(button);
-      if (i == 0) {
-        setDefaultButton(button);
+      if (dialogOperationAction.getOperation().getCreateButton()) {
+        JButton button = new JButton(dialogOperationAction);
+        buttonPane.add(button);
+        if (!defaultButtonSet
+            && (dialogOperationAction.getOperation() == DialogOperation.OK
+            || dialogOperationAction.getOperation() == DialogOperation.YES)) {
+          setDefaultButton(button);
+          defaultButtonSet = true;
+        }
       }
     }
 
@@ -124,17 +130,7 @@ public abstract class DialogBase extends JDialog {
     for (int i = 0; i < actions.length; i++) {
       DialogOperationAction dialogOperationAction = actions[i];
       if (dialogOperationAction.operation == DialogOperation.CANCEL) {
-        getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-            .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
-        getRootPane().getActionMap().put("Cancel", dialogOperationAction);
-
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-          @Override
-          public void windowClosing(WindowEvent e) {
-            dialogOperationAction.actionPerformed(null);
-          }
-        });
+        setCloseAction(DialogOperation.CANCEL);
       }
     }
 
@@ -183,6 +179,31 @@ public abstract class DialogBase extends JDialog {
       setLocationRelativeTo(getParent());
     }
     super.setVisible(b);
+  }
+
+  protected void setCloseAction(DialogOperation operation) {
+    DialogOperationAction action = findAction(operation);
+
+    getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+        .put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Close");
+    getRootPane().getActionMap().put("Close", action);
+
+    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        action.actionPerformed(null);
+      }
+    });
+  }
+
+  protected DialogOperationAction findAction(DialogOperation dialogOperation) {
+    for (DialogOperationAction action : actions) {
+      if (action.getOperation().equals(dialogOperation)) {
+        return action;
+      }
+    }
+    throw new RuntimeException();
   }
 
   public DialogOperation showDialog() {

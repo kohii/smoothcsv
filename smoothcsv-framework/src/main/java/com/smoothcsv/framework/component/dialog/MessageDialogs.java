@@ -15,7 +15,6 @@ package com.smoothcsv.framework.component.dialog;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.HtmlUtils;
-import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.swing.utils.SwingUtils;
@@ -55,22 +54,6 @@ public class MessageDialogs {
     }
     JOptionPane.showMessageDialog(parentComponent, msg(msg), SCApplication.getApplication()
         .getName(), messageType);
-  }
-
-  /**
-   * @param parentComponent
-   * @param msg
-   * @deprecated
-   */
-  public static void showMessageString(Component parentComponent, String... msg) {
-    StringBuilder sb = new StringBuilder();
-    for (String string : msg) {
-      sb.append(string).append(NewlineCharacter.DEFAULT);
-    }
-    if (parentComponent == null) {
-      // parentComponent = SCApplication.components().getFrame();
-    }
-    JOptionPane.showMessageDialog(parentComponent, msg(sb.toString()));
   }
 
   public static boolean confirm(String msgId, Object... args) {

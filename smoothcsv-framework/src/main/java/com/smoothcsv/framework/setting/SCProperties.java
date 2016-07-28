@@ -32,6 +32,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -48,7 +49,7 @@ public class SCProperties {
   private Properties data;
 
   private boolean dirty = false;
-  private boolean saveImmedisately = true;
+  private boolean saveImmediately = true;
 
   private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
@@ -61,9 +62,9 @@ public class SCProperties {
     return dirty;
   }
 
-  public void setSaveImmedisately(boolean saveImmedisately) {
-    this.saveImmedisately = saveImmedisately;
-    if (saveImmedisately) {
+  public void setSaveImmediately(boolean saveImmediately) {
+    this.saveImmediately = saveImmediately;
+    if (saveImmediately) {
       store();
     }
   }
@@ -107,6 +108,25 @@ public class SCProperties {
 
   public Integer getInteger(String key, Integer defaultValue) {
     Integer value = getInteger(key);
+    return value == null ? defaultValue : value;
+  }
+
+  public Long getLong(String key) {
+    String value = get(key);
+    if (StringUtils.isEmpty(value)) {
+      return null;
+    }
+    try {
+      return Long.valueOf(value);
+    } catch (RuntimeException e) {
+      data.remove(key);
+      String defaultVal = getDefault(key);
+      return StringUtils.isEmpty(defaultVal) ? null : Long.valueOf(defaultVal);
+    }
+  }
+
+  public Long getLong(String key, Long defaultValue) {
+    Long value = getLong(key);
     return value == null ? defaultValue : value;
   }
 
@@ -155,21 +175,21 @@ public class SCProperties {
       String key = entry.getKey();
       String value = entry.getValue() == null ? NULL_VALUE : entry.getValue().toString();
       String old = (String) data.put(key, value);
-      if (value != old || (value != null && !value.equals(old))) {
+      if (!Objects.equals(value, old) || !value.equals(old)) {
         propertyChangeSupport.firePropertyChange(key, old, value);
         dirty = true;
       }
     }
-    if (saveImmedisately) {
+    if (saveImmediately) {
       store();
     }
   }
 
   public String save(String key, String value) {
     String old = (String) data.put(key, value == null ? NULL_VALUE : value);
-    if (value != old || (value != null && !value.equals(old))) {
+    if (!Objects.equals(value, old) || (value != null && !value.equals(old))) {
       dirty = true;
-      if (saveImmedisately) {
+      if (saveImmediately) {
         store();
       }
       propertyChangeSupport.firePropertyChange(key, old, value);

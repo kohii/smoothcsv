@@ -26,12 +26,22 @@ public class DialogOperation {
   public static final DialogOperation CANCEL = new DialogOperation(SCBundle.get("key.cancel"));
 
   private String text;
+  private final boolean createButton;
 
   public DialogOperation(String text) {
+    this(text, true);
+  }
+
+  public DialogOperation(String text, boolean createButton) {
     this.text = text;
+    this.createButton = createButton;
   }
 
   public String getText() {
     return text;
+  }
+
+  public boolean getCreateButton() {
+    return createButton;
   }
 }

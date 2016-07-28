@@ -25,6 +25,7 @@ public class CoreSettings extends Settings {
   public static final String STATUSBAR_VISIBLE = "statusbarVisible";
   public static final String TOOLBAR_VISIBLE = "toolbarVisible";
   public static final String VALUE_PANEL_VISIBLE = "valuePanelVisible";
+  public static final String AUTO_UPDATE_CHECK = "autoUpdateCheck";
   public static final String ALERT_ON_OPENING_HUGE_FILE = "alertOnOpeningHugeFile";
   public static final String ALERT_THRESHOLD = "alertThreshold";
   public static final String HOW_TO_DETECT_PROPERTIES = "howToDetectProperties";

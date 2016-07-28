@@ -107,3 +107,6 @@ Macro
 	Save Macro...	macro:Save
 	-
 	User-defined Macros	[user_defined_macros]
+
+Help
+	Check For Updates...	app:CheckForUpdates

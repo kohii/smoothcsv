@@ -41,6 +41,10 @@ public class Session {
     return properties.getInteger(key, defaultValue);
   }
 
+  public Long getLong(String key, Long defaultValue) {
+    return properties.getLong(key, defaultValue);
+  }
+
   public Boolean getBoolean(String key, Boolean defaultValue) {
     return properties.getBoolean(key, defaultValue);
   }

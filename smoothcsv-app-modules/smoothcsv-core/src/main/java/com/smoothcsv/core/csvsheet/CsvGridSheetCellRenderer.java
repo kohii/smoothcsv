@@ -16,6 +16,7 @@ package com.smoothcsv.core.csvsheet;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
+import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
 
 import java.awt.Color;
@@ -42,6 +43,7 @@ public class CsvGridSheetCellRenderer extends JLabel implements GridSheetCellRen
 
   public CsvGridSheetCellRenderer() {
     setOpaque(true);
+    SwingUtils.disableHtml(this);
     setBorder(noFocusBorder);
     setName("Grid.cellRenderer");
     setBackground(Color.WHITE);

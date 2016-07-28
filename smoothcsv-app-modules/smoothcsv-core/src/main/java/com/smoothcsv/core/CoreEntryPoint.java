@@ -13,7 +13,6 @@
  */
 package com.smoothcsv.core;
 
-import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.CoreSessionKeys;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellRendererUI;
@@ -25,9 +24,6 @@ import com.smoothcsv.core.csvsheet.CsvSheetStatusLabel;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.menu.RecentlyOpenedFilesMenu;
 import com.smoothcsv.core.menu.UserDefinedMacrosMenu;
-import com.smoothcsv.core.preference.EditorPrefPanel;
-import com.smoothcsv.core.preference.GeneralPrefPanel;
-import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.framework.SCApplication;
@@ -47,8 +43,6 @@ import com.smoothcsv.framework.event.SCListener;
 import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.modular.ModuleManifest;
-import com.smoothcsv.framework.preference.PrefPage;
-import com.smoothcsv.framework.preference.PreferenceManager;
 import com.smoothcsv.framework.setting.Session;
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.InvocationUtils;
@@ -62,8 +56,6 @@ import java.awt.Component;
 import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.util.HashMap;
 import javax.swing.LayoutFocusTraversalPolicy;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
@@ -172,24 +164,7 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
                 }
               }
             });
-        InvocationUtils.runAsync(new Runnable() {
-          @Override
-          public void run() {
-            PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("key.pref.title.general", GeneralPrefPanel.class));
-            PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("key.pref.title.editor", EditorPrefPanel.class));
-            PreferenceManager.getInstance()
-                .addPrefPage(new PrefPage("key.pref.title.keyBindings", KeyBindingsPrefPanel.class));
-
-            // Execute JsonUtils.stringify() so that it can perform faster next time
-            try {
-              JsonUtils.stringify(new HashMap<Object, Object>());
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          }
-        });
+        InvocationUtils.runAsync(new AfterStartupTask());
       }
     });
 

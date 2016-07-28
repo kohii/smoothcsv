@@ -42,7 +42,7 @@ public class Settings extends SCProperties {
   protected Settings(String name) {
     super(new File(DirectoryResolver.instance().getSettingDirectory(), name.concat(SUFFIX)));
     this.name = name;
-    setSaveImmedisately(true);
+    setSaveImmediately(true);
     load();
   }
 

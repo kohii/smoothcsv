@@ -3,6 +3,7 @@ language=<NULL>
 statusbarVisible=true
 toolbarVisible=true
 valuePanelVisible=true
+autoUpdateCheck=true
 
 # --File--
 alertOnOpeningHugeFile=true

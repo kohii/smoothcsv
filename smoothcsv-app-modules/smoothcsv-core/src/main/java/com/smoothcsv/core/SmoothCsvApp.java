@@ -56,10 +56,10 @@ public class SmoothCsvApp extends SCApplication {
         OpenFileCommand command = new OpenFileCommand();
         for (String filepath : args) {
           File f = new File(filepath);
-          if (f.isFile()) {
-            command.run(f);
-          } else if (f.isDirectory()) {
+          if (f.isDirectory()) {
             command.chooseAndOpenFile(f);
+          } else {
+            command.run(f);
           }
         }
       }

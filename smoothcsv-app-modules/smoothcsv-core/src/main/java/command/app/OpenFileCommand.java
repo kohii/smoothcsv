@@ -18,6 +18,7 @@ import com.smoothcsv.commons.exception.IORuntimeException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.commons.utils.CharsetUtils.CharsetInfo;
+import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.component.ReadCsvPropertiesDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvFileChooser;
@@ -81,6 +82,10 @@ public class OpenFileCommand extends Command {
 
 
   public static void run(File file, String howToDetectProperties, int index) {
+
+    if (!file.exists() || !file.isFile()) {
+      throw new AppException("WSCA0012", FileUtils.getCanonicalPath(file));
+    }
 
     List<BaseTabView<?>> views = SCApplication.components().getTabbedPane().getAllViews();
     for (BaseTabView<?> view : views) {

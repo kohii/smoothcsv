@@ -18,6 +18,10 @@ body
 	ctrl+shift+q	macro:Run
 	shortcut+e	value_panel:Focus,valuePanel
 
+@mac body
+	alt+cmd+right	view:NextTab
+	alt+cmd+left	view:PreviousTab
+
 csv-sheet
 	shortcut+f	find:Show
 	shortcut+rightbracket	value_panel:Expand

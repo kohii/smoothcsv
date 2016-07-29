@@ -118,7 +118,8 @@ public class SCTabbedPaneUI extends BasicTabbedPaneUI {
 
     if (isSelected) {
       g2D.setColor(selectedColor);
-      g2D.drawLine(x - 2, y + h, x + w + 2, y + h);
+      g2D.fillRect(x + 1, y + h - 2, w, 2);
+      g2D.fillRect(x - 1, y + h - 1, w + 2, 3);
     }
 
     // g2D.fill(shape);

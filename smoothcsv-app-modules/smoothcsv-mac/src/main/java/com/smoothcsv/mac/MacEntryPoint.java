@@ -33,6 +33,7 @@ import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.OpenFileCommand;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author Kohii
@@ -78,13 +79,20 @@ public class MacEntryPoint extends ModuleEntryPointBase {
       }
     });
 
-    // TODO
-    // app.setOpenURIHandler(new OpenURIHandler() {
-    // @Override
-    // public void openURI(OpenURIEvent e) {
-    //
-    // }
-    // });
+    app.setOpenFileHandler(new OpenFilesHandler() {
+      @Override
+      public void openFiles(OpenFilesEvent openFilesEvent) {
+        List<File> files = openFilesEvent.getFiles();
+        OpenFileCommand command = new OpenFileCommand();
+        for (File f : files) {
+          if (f.isDirectory()) {
+            command.chooseAndOpenFile(f);
+          } else {
+            command.run(f);
+          }
+        }
+      }
+    });
 
     app.setPreferencesHandler(new PreferencesHandler() {
       @Override

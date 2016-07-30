@@ -35,6 +35,7 @@ public class DirectoryResolver {
   private static final String TEMPORARY_DIRECTORY_NAME = "tmp";
   private static final String MODULE_DIRECTORY_NAME = "modules";
   private static final String MACRO_DIRECTORY_NAME = "macro";
+  private static final String BACKUP_DIRECTORY_NAME = "backup";
 
   private static DirectoryResolver instance;
 
@@ -73,6 +74,8 @@ public class DirectoryResolver {
   private File moduleJarDirectory;
 
   private File macroFileDirectory;
+
+  private File backupDirectory;
 
   public DirectoryResolver() {}
 
@@ -120,6 +123,14 @@ public class DirectoryResolver {
       FileUtils.ensureDirectoryExists(macroFileDirectory);
     }
     return macroFileDirectory;
+  }
+
+  public File getBackupDirectory() {
+    if (backupDirectory == null) {
+      backupDirectory = new File(getAppDataDirectory(), BACKUP_DIRECTORY_NAME);
+      FileUtils.ensureDirectoryExists(backupDirectory);
+    }
+    return backupDirectory;
   }
 
   // protected File getUserDataDirectory() {

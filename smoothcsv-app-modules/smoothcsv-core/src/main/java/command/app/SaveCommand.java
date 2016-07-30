@@ -16,8 +16,11 @@ package command.app;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.CsvSheetCommandBase;
 import com.smoothcsv.core.csv.CsvMeta;
+import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
 import java.io.File;
@@ -42,7 +45,15 @@ public class SaveCommand extends CsvSheetCommandBase {
 
   public static void save(CsvSheetView view, File file) {
     view.getGridSheetPane().stopCellEditingIfEditing();
-    CsvMeta csvMeta = view.getViewInfo().getCsvMeta();
+    CsvSheetViewInfo vi = view.getViewInfo();
+    boolean backuped = false;
+    if (file.equals(vi.getFile())) {
+      CoreSettings settings = CoreSettings.getInstance();
+      if (settings.getBoolean(CoreSettings.AUTO_BACKUP_ON_REPLACE)) {
+        backuped = FileBackupService.getInstance().backup(file, false) != null;
+      }
+    }
+    CsvMeta csvMeta = vi.getCsvMeta();
     try (SmoothCsvWriter writer =
              new SmoothCsvWriter(
                  new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()), csvMeta)) {
@@ -56,7 +67,19 @@ public class SaveCommand extends CsvSheetCommandBase {
         writer.setWriteLineSeparater(false);
         writer.writeRow(model.getRowDataAt(rowCount - 1));
       }
-    } catch (IOException e) {
+    } catch (IOException | RuntimeException e) {
+      try {
+        if (backuped) {
+          File lastBackup = FileBackupService.getInstance().getLastBackup(file);
+          if (lastBackup != null && lastBackup.exists()) {
+            if (file.exists()) {
+              file.delete();
+            }
+            lastBackup.renameTo(file);
+          }
+        }
+      } catch (RuntimeException ignore) {
+      }
       throw new UnexpectedException(e);
     }
     view.getViewInfo().setFile(file);

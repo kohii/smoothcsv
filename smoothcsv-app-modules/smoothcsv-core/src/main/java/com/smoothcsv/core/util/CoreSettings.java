@@ -47,6 +47,7 @@ public class CoreSettings extends Settings {
       "maxColumnWidthPerWindowWhenAutoFitting";
   public static final String QUOTE_RULE_FOR_COPYING = "quoteRuleForCopying";
   public static final String PASTE_REPEATEDLY = "pasteRepeatedly";
+  public static final String AUTO_BACKUP_ON_REPLACE = "autoBackupOnReplace";
 
 
   @Getter

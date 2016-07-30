@@ -29,3 +29,6 @@ maxColumnWidthPerWindowWhenAutoFitting=70
 # --Copy&Paste--
 quoteRuleForCopying=QUOTES_IF_NECESSARY
 pasteRepeatedly=true
+
+# --Others--
+autoBackupOnReplace=true

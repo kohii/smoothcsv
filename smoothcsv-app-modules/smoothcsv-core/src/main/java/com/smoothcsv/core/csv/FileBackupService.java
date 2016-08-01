@@ -11,10 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author kohii
@@ -25,8 +21,7 @@ public class FileBackupService {
   @Getter
   private static FileBackupService instance = new FileBackupService();
 
-  private static ExecutorService executor = new ThreadPoolExecutor(1, 30, 0L, TimeUnit.MILLISECONDS,
-      new LinkedBlockingQueue<>());
+  private Thread deleteDuplicateThread;
 
   public File backup(File file, boolean copy) {
     try {
@@ -43,25 +38,33 @@ public class FileBackupService {
         }
       }
 
-      // Delete the backup if it's same as last backup (Async)
-      // FIXME don't block!
-      executor.submit(new Runnable() {
-        @Override
-        public void run() {
-          File dir = getBackupFileDirectory(file);
-          File lastBackupFile = FileUtils.getLatestFileFromDir(dir, backupFile);
-          if (lastBackupFile == null) {
-            return;
-          }
-          try {
-            if (org.apache.commons.io.FileUtils.contentEquals(lastBackupFile, backupFile)) {
-              backupFile.delete();
-            }
-          } catch (IOException e) {
-            log.error("", e);
-          }
+      synchronized (this) {
+
+        if (deleteDuplicateThread != null) {
+          deleteDuplicateThread.join();
         }
-      });
+
+        // Delete the backup if it's same as last backup (Async)
+        deleteDuplicateThread = new Thread(new Runnable() {
+          @Override
+          public void run() {
+            File dir = getBackupFileDirectory(file);
+            File lastBackupFile = FileUtils.getLatestFileFromDir(dir, backupFile);
+            if (lastBackupFile == null) {
+              return;
+            }
+            try {
+              if (org.apache.commons.io.FileUtils.contentEquals(lastBackupFile, backupFile)) {
+                backupFile.delete();
+              }
+            } catch (IOException e) {
+              log.error("", e);
+            }
+          }
+        });
+        deleteDuplicateThread.start();
+      }
+
       return backupFile;
     } catch (Exception e) {
       log.error("", e);

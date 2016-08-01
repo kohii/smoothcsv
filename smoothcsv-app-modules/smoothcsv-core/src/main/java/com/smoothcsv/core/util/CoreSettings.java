@@ -47,8 +47,11 @@ public class CoreSettings extends Settings {
       "maxColumnWidthPerWindowWhenAutoFitting";
   public static final String QUOTE_RULE_FOR_COPYING = "quoteRuleForCopying";
   public static final String PASTE_REPEATEDLY = "pasteRepeatedly";
-  public static final String AUTO_BACKUP_ON_REPLACE = "autoBackupOnReplace";
-
+  public static final String AUTO_BACKUP_ON_OVERWRITE = "autoBackupOnOverwrite";
+  public static final String NO_BACKUP_IF_SAME = "noBackupIfSame";
+  public static final String DELETE_BACKUP_ON_EXIT = "deleteBackupOnExit";
+  public static final String DELETE_OLD_BACKUPS = "deleteOldBackups";
+  public static final String DELETE_BACKUP_N_HOURS_AGO = "deleteBackupNHoursAgo";
 
   @Getter
   private static CoreSettings instance = new CoreSettings();

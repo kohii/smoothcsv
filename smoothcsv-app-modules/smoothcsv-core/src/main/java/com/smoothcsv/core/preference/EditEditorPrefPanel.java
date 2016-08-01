@@ -20,12 +20,16 @@ import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
 import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
+import com.smoothcsv.framework.preference.PrefUtils;
 import com.smoothcsv.framework.util.SCBundle;
+import com.smoothcsv.swing.components.ExLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -34,7 +38,6 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class EditEditorPrefPanel extends JPanel {
-  private PrefTextField textField;
 
   public EditEditorPrefPanel() {
     setBorder(null);
@@ -127,7 +130,7 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblTheMaximumNumber.gridy = 9;
     add(lblTheMaximumNumber, gbc_lblTheMaximumNumber);
 
-    textField = new PrefTextField(CoreSettings.getInstance(), CoreSettings.SIZE_OF_UNDOING,
+    PrefTextField textField = new PrefTextField(CoreSettings.getInstance(), CoreSettings.SIZE_OF_UNDOING,
         PrefTextField.Type.NUMERIC, 2);
     textField.addValidator(PrefTextValidator.NOT_NULL);
     GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -139,8 +142,86 @@ public class EditEditorPrefPanel extends JPanel {
     add(textField, gbc_textField);
     textField.setColumns(10);
 
-    // PrefButtonGroup<String> buttonGroup =
-    // new PrefButtonGroup<String>("file.howToDetectProperties", rdbtnNewRadioButton,
-    // rdbtnNewRadioButton_1, rdbtnNewRadioButton_2);
+    JLabel lblBackup = new PrefTitleLabel(SCBundle.get("key.pref.backup"));
+    GridBagConstraints gbc_lblBackup = new GridBagConstraints();
+    gbc_lblBackup.insets = new Insets(0, 0, 5, 0);
+    gbc_lblBackup.gridwidth = 3;
+    gbc_lblBackup.anchor = GridBagConstraints.WEST;
+    gbc_lblBackup.gridx = 0;
+    gbc_lblBackup.gridy = 11;
+    add(lblBackup, gbc_lblBackup);
+
+    PrefCheckBox chk_autoBackupOnReplace =
+        new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.AUTO_BACKUP_ON_OVERWRITE,
+            SCBundle.get("key.pref.autoBackupOnOverwrite"));
+    GridBagConstraints gbc_chk_autoBackupOnReplace = new GridBagConstraints();
+    gbc_chk_autoBackupOnReplace.anchor = GridBagConstraints.WEST;
+    gbc_chk_autoBackupOnReplace.gridwidth = 2;
+    gbc_chk_autoBackupOnReplace.gridx = 1;
+    gbc_chk_autoBackupOnReplace.gridy = 12;
+    add(chk_autoBackupOnReplace, gbc_chk_autoBackupOnReplace);
+
+    PrefCheckBox chk_noBackupIfSame =
+        new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.NO_BACKUP_IF_SAME,
+            SCBundle.get("key.pref.noBackupIfSame"));
+    GridBagConstraints gbc_chk_noBackupIfSame = new GridBagConstraints();
+    gbc_chk_noBackupIfSame.insets = new Insets(0, 15, 5, 0);
+    gbc_chk_noBackupIfSame.anchor = GridBagConstraints.WEST;
+    gbc_chk_noBackupIfSame.gridwidth = 2;
+    gbc_chk_noBackupIfSame.gridx = 1;
+    gbc_chk_noBackupIfSame.gridy = 13;
+    add(chk_noBackupIfSame, gbc_chk_noBackupIfSame);
+
+    PrefCheckBox chk_deleteBackupOnExit =
+        new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.DELETE_BACKUP_ON_EXIT,
+            SCBundle.get("key.pref.deleteBackupsOnExit"));
+    GridBagConstraints gbc_chk_deleteBackupOnExit = new GridBagConstraints();
+    gbc_chk_deleteBackupOnExit.insets = new Insets(0, 0, 5, 0);
+    gbc_chk_deleteBackupOnExit.anchor = GridBagConstraints.WEST;
+    gbc_chk_deleteBackupOnExit.gridwidth = 2;
+    gbc_chk_deleteBackupOnExit.gridx = 1;
+    gbc_chk_deleteBackupOnExit.gridy = 14;
+    add(chk_deleteBackupOnExit, gbc_chk_deleteBackupOnExit);
+
+    PrefCheckBox chk_deleteOldBackups =
+        new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.DELETE_OLD_BACKUPS,
+            SCBundle.get("key.pref.deleteOldBackups"));
+    GridBagConstraints gbc_chk_deleteOldBackups = new GridBagConstraints();
+    gbc_chk_deleteOldBackups.anchor = GridBagConstraints.WEST;
+    gbc_chk_deleteOldBackups.gridwidth = 2;
+    gbc_chk_deleteOldBackups.gridx = 1;
+    gbc_chk_deleteOldBackups.gridy = 15;
+    add(chk_deleteOldBackups, gbc_chk_deleteOldBackups);
+
+    PrefTextField txtBackupDeleteBefore = new PrefTextField(CoreSettings.getInstance(),
+        CoreSettings.DELETE_BACKUP_N_HOURS_AGO,
+        PrefTextField.Type.NUMERIC, 3);
+    txtBackupDeleteBefore.addValidator(PrefTextValidator.MORE_THAN_ZERO);
+    ExLabel lblNewLabel_1 =
+        new ExLabel(SCBundle.get("key.pref.deleteBackupsNHoursAgo"), txtBackupDeleteBefore);
+    GridBagConstraints gbc_txtBackupDeleteBefore = new GridBagConstraints();
+    gbc_txtBackupDeleteBefore.insets = new Insets(0, 20, 5, 5);
+    gbc_txtBackupDeleteBefore.anchor = GridBagConstraints.WEST;
+    gbc_txtBackupDeleteBefore.gridwidth = 2;
+    gbc_txtBackupDeleteBefore.gridx = 1;
+    gbc_txtBackupDeleteBefore.gridy = 16;
+    add(lblNewLabel_1, gbc_txtBackupDeleteBefore);
+
+    chk_autoBackupOnReplace.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        chk_noBackupIfSame.setEnabled(chk_autoBackupOnReplace.isSelected());
+      }
+    });
+    PrefUtils.invokeItemStateChanged(chk_autoBackupOnReplace);
+
+    chk_deleteOldBackups.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        txtBackupDeleteBefore.setEnabled(chk_autoBackupOnReplace.isSelected()
+            && chk_deleteOldBackups.isSelected());
+      }
+    });
+    PrefUtils.invokeItemStateChanged(chk_deleteOldBackups);
   }
 }

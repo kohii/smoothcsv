@@ -20,7 +20,6 @@ import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
-import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
 import java.io.File;
@@ -48,10 +47,7 @@ public class SaveCommand extends CsvSheetCommandBase {
     CsvSheetViewInfo vi = view.getViewInfo();
     boolean backuped = false;
     if (file.equals(vi.getFile())) {
-      CoreSettings settings = CoreSettings.getInstance();
-      if (settings.getBoolean(CoreSettings.AUTO_BACKUP_ON_REPLACE)) {
-        backuped = FileBackupService.getInstance().backup(file, false) != null;
-      }
+      backuped = FileBackupService.getInstance().backup(file, false) != null;
     }
     CsvMeta csvMeta = vi.getCsvMeta();
     try (SmoothCsvWriter writer =

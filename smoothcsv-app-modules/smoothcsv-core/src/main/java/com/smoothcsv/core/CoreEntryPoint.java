@@ -15,6 +15,7 @@ package com.smoothcsv.core;
 
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.CoreSessionKeys;
+import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellRendererUI;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetColumnHeaderUI;
@@ -95,6 +96,12 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
           if (!history.flushesAutomatically()) {
             history.flush();
           }
+        }
+
+        if (CoreSettings.getInstance().getBoolean(CoreSettings.DELETE_BACKUP_ON_EXIT, false)) {
+          FileBackupService.getInstance().deleteAll();
+        } else {
+          FileBackupService.getInstance().deleteOldBackups();
         }
 
         Rectangle rectangle = components().getFrame().getBounds();

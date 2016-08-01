@@ -29,8 +29,8 @@ public class ShowSettingsCommand extends Command {
     if (view != null) {
       view.getGridSheetPane().stopCellEditingIfEditing();
     }
-    PreferencesDialog dialog = new PreferencesDialog("Preferenes");
-    dialog.setSize(700, 600);
+    PreferencesDialog dialog = new PreferencesDialog("Preferences");
+    dialog.setSize(750, 600);
     dialog.setLocationRelativeTo(SCApplication.components().getFrame());
     dialog.setVisible(true);
   }

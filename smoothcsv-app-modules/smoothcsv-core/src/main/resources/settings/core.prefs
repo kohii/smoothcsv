@@ -31,4 +31,8 @@ quoteRuleForCopying=QUOTES_IF_NECESSARY
 pasteRepeatedly=true
 
 # --Others--
-autoBackupOnReplace=true
+autoBackupOnOverwrite=true
+noBackupIfSame=true
+deleteBackupOnExit=false
+deleteOldBackups=true
+deleteBackupNHoursAgo=24

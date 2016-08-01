@@ -1,6 +1,7 @@
 package com.smoothcsv.core;
 
 import com.smoothcsv.commons.utils.JsonUtils;
+import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.preference.EditorPrefPanel;
 import com.smoothcsv.core.preference.GeneralPrefPanel;
 import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
@@ -29,6 +30,8 @@ public class AfterStartupTask implements Runnable {
     try {
       JsonUtils.stringify(new HashMap<>());
     } catch (IOException ignore) {}
+
+    FileBackupService.getInstance().deleteOldBackups();
 
     CheckForUpdatesCommand.run(false);
   }

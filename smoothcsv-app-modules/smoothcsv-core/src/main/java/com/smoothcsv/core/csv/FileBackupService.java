@@ -2,15 +2,18 @@ package com.smoothcsv.core.csv;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.FileUtils;
+import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.util.DigestUtils;
 import com.smoothcsv.framework.util.DirectoryResolver;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author kohii
@@ -24,6 +27,10 @@ public class FileBackupService {
   private Thread deleteDuplicateThread;
 
   public File backup(File file, boolean copy) {
+    CoreSettings settings = CoreSettings.getInstance();
+    if (!settings.getBoolean(CoreSettings.AUTO_BACKUP_ON_OVERWRITE)) {
+      return null;
+    }
     try {
       File backupFile = createBackupFile(file, file.lastModified());
       if (backupFile.exists()) {
@@ -37,6 +44,7 @@ public class FileBackupService {
           return null;
         }
       }
+      file.setLastModified(System.currentTimeMillis());
 
       synchronized (this) {
 
@@ -44,31 +52,86 @@ public class FileBackupService {
           deleteDuplicateThread.join();
         }
 
-        // Delete the backup if it's same as last backup (Async)
-        deleteDuplicateThread = new Thread(new Runnable() {
-          @Override
-          public void run() {
-            File dir = getBackupFileDirectory(file);
-            File lastBackupFile = FileUtils.getLatestFileFromDir(dir, backupFile);
-            if (lastBackupFile == null) {
-              return;
-            }
-            try {
-              if (org.apache.commons.io.FileUtils.contentEquals(lastBackupFile, backupFile)) {
-                backupFile.delete();
+        if (settings.getBoolean(CoreSettings.NO_BACKUP_IF_SAME)) {
+          // Delete the backup if it's same as last backup (Async)
+          deleteDuplicateThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+              File dir = getBackupFileDirectory(file);
+              File lastBackupFile = FileUtils.getLatestFileFromDir(dir, backupFile);
+              if (lastBackupFile == null) {
+                return;
               }
-            } catch (IOException e) {
-              log.error("", e);
+              try {
+                if (org.apache.commons.io.FileUtils.contentEquals(lastBackupFile, backupFile)) {
+                  backupFile.delete();
+                }
+              } catch (IOException e) {
+                log.error("", e);
+              }
             }
-          }
-        });
-        deleteDuplicateThread.start();
+          });
+          deleteDuplicateThread.start();
+        }
       }
+
+      deleteOldBackups();
 
       return backupFile;
     } catch (Exception e) {
       log.error("", e);
       return null;
+    }
+  }
+
+
+  public void deleteAll() {
+    File[] dirs = DirectoryResolver.instance().getBackupDirectory().listFiles(new FileFilter() {
+      @Override
+      public boolean accept(File f) {
+        return f.isDirectory();
+      }
+    });
+
+    for (File dir : dirs) {
+      try {
+        org.apache.commons.io.FileUtils.deleteDirectory(dir);
+      } catch (IOException e) {
+        log.error("", e);
+      }
+    }
+  }
+
+  public void deleteOldBackups() {
+    CoreSettings settings = CoreSettings.getInstance();
+    if (!settings.getBoolean(CoreSettings.DELETE_OLD_BACKUPS)) {
+      return;
+    }
+    int hours = settings.getInteger(CoreSettings.DELETE_BACKUP_N_HOURS_AGO, 24);
+    deleteBackupsBefore(hours);
+  }
+
+  public void deleteBackupsBefore(int hours) {
+    long threshold = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(hours);
+    File[] dirs = DirectoryResolver.instance().getBackupDirectory().listFiles(new FileFilter() {
+      @Override
+      public boolean accept(File f) {
+        return f.isDirectory();
+      }
+    });
+    for (File dir : dirs) {
+      dir.listFiles(new FileFilter() {
+        @Override
+        public boolean accept(File f) {
+          if (f.lastModified() < threshold) {
+            f.delete();
+          }
+          return false;
+        }
+      });
+      if (dir.list().length == 0) {
+        dir.delete();
+      }
     }
   }
 

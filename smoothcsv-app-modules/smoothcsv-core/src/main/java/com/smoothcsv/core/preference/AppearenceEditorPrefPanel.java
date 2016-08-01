@@ -60,6 +60,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
         CoreSettings.SHOW_EOL, SCBundle.get("key.pref.appearance.showEOL"));
     chckbxShowEOL.addItemListener(repaintFunc);
     GridBagConstraints gbc_chckbxShowEOL = new GridBagConstraints();
+    gbc_chckbxShowEOL.insets = new Insets(0, 10, 0, 0);
     gbc_chckbxShowEOL.gridwidth = 3;
     gbc_chckbxShowEOL.anchor = GridBagConstraints.WEST;
     gbc_chckbxShowEOL.gridx = 1;
@@ -70,6 +71,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
         CoreSettings.SHOW_EOF, SCBundle.get("key.pref.appearance.showEOF"));
     chckbxShowEOF.addItemListener(repaintFunc);
     GridBagConstraints gbc_chckbxShowEOF = new GridBagConstraints();
+    gbc_chckbxShowEOF.insets = new Insets(0, 10, 0, 0);
     gbc_chckbxShowEOF.gridwidth = 3;
     gbc_chckbxShowEOF.anchor = GridBagConstraints.WEST;
     gbc_chckbxShowEOF.gridx = 1;
@@ -89,7 +91,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
         CoreSettings.AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE,
         SCBundle.get("key.pref.autofitAfterOpening"));
     GridBagConstraints gbc_chckbxAutofitColumnWidth = new GridBagConstraints();
-    gbc_chckbxAutofitColumnWidth.insets = new Insets(0, 0, 5, 0);
+    gbc_chckbxAutofitColumnWidth.insets = new Insets(0, 10, 5, 0);
     gbc_chckbxAutofitColumnWidth.anchor = GridBagConstraints.WEST;
     gbc_chckbxAutofitColumnWidth.gridwidth = 3;
     gbc_chckbxAutofitColumnWidth.gridx = 1;
@@ -100,6 +102,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
         CoreSettings.AUTO_FIT_COLUMN_WIDTH_WITH_LIMITED_ROW_SIZE,
         SCBundle.get("key.pref.limitRowsToScan"));
     GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
+    gbc_chckbxNewCheckBox_1.insets = new Insets(0, 10, 5, 0);
     gbc_chckbxNewCheckBox_1.anchor = GridBagConstraints.WEST;
     gbc_chckbxNewCheckBox_1.gridwidth = 3;
     gbc_chckbxNewCheckBox_1.gridx = 1;
@@ -112,8 +115,8 @@ public class AppearenceEditorPrefPanel extends JPanel {
     ExLabel lblNewLabel =
         new ExLabel(SCBundle.get("key.pref.limitRowsToScan.numRows"), txtRowsToScan);
     GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+    gbc_lblNewLabel.insets = new Insets(0, 15, 5, 0);
     gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-    gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
     gbc_lblNewLabel.gridx = 2;
     gbc_lblNewLabel.gridy = 6;
     add(lblNewLabel, gbc_lblNewLabel);
@@ -121,6 +124,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
     PrefCheckBox chckbxSetTheMaximum = new PrefCheckBox(CoreSettings.getInstance(),
         CoreSettings.LIMIT_WIDTH_WHEN_AUTO_FITTING, SCBundle.get("key.pref.setMaxColumnWidth"));
     GridBagConstraints gbc_chckbxSetTheMaximum = new GridBagConstraints();
+    gbc_chckbxSetTheMaximum.insets = new Insets(0, 10, 5, 0);
     gbc_chckbxSetTheMaximum.gridwidth = 3;
     gbc_chckbxSetTheMaximum.anchor = GridBagConstraints.WEST;
     gbc_chckbxSetTheMaximum.gridx = 1;
@@ -134,8 +138,8 @@ public class AppearenceEditorPrefPanel extends JPanel {
     ExLabel lblNewLabel_1 =
         new ExLabel(SCBundle.get("key.pref.maxColumnWidthPerWindow"), txtColWidth);
     GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+    gbc_lblNewLabel_1.insets = new Insets(0, 10, 5, 5);
     gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-    gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
     gbc_lblNewLabel_1.gridx = 2;
     gbc_lblNewLabel_1.gridy = 8;
     add(lblNewLabel_1, gbc_lblNewLabel_1);

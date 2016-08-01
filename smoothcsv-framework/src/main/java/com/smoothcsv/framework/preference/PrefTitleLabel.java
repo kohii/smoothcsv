@@ -24,13 +24,13 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class PrefTitleLabel extends JLabel {
 
-  private static Border border = BorderFactory.createEmptyBorder(10, 0, 2, 0);
+  private static Border border = BorderFactory.createEmptyBorder(14, 0, 2, 0);
 
   public PrefTitleLabel(String text) {
     super(text);
 
     Font font = getFont();
-    setFont(font.deriveFont(font.getSize() * 1.2f));
+    setFont(font.deriveFont(font.getSize() * 1.26f));
     setBorder(border);
   }
 }

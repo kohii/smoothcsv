@@ -78,7 +78,7 @@ public class EditEditorPrefPanel extends JPanel {
     ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_4 =
         new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.NO_QUOTE, SCBundle.get("key.pref.noQuote"));
     GridBagConstraints gbc_rdbtnNewRadioButton_4 = new GridBagConstraints();
-    gbc_rdbtnNewRadioButton_4.insets = new Insets(0, 0, 5, 0);
+    gbc_rdbtnNewRadioButton_4.insets = new Insets(0, 0, 10, 0);
     gbc_rdbtnNewRadioButton_4.gridwidth = 2;
     gbc_rdbtnNewRadioButton_4.anchor = GridBagConstraints.WEST;
     gbc_rdbtnNewRadioButton_4.gridx = 1;
@@ -102,7 +102,7 @@ public class EditEditorPrefPanel extends JPanel {
         new PrefCheckBox(CoreSettings.getInstance(), CoreSettings.PASTE_REPEATEDLY,
             SCBundle.get("key.pref.fillWhenPastingSingleCell"));
     GridBagConstraints gbc_rdbtnNewRadioButton_5 = new GridBagConstraints();
-    gbc_rdbtnNewRadioButton_5.insets = new Insets(0, 0, 5, 0);
+    gbc_rdbtnNewRadioButton_5.insets = new Insets(0, 0, 10, 0);
     gbc_rdbtnNewRadioButton_5.anchor = GridBagConstraints.WEST;
     gbc_rdbtnNewRadioButton_5.gridwidth = 2;
     gbc_rdbtnNewRadioButton_5.gridx = 1;
@@ -131,7 +131,7 @@ public class EditEditorPrefPanel extends JPanel {
         PrefTextField.Type.NUMERIC, 2);
     textField.addValidator(PrefTextValidator.NOT_NULL);
     GridBagConstraints gbc_textField = new GridBagConstraints();
-    gbc_textField.insets = new Insets(0, 0, 5, 0);
+    gbc_textField.insets = new Insets(0, 10, 5, 0);
     gbc_textField.anchor = GridBagConstraints.WEST;
     gbc_textField.gridwidth = 2;
     gbc_textField.gridx = 1;

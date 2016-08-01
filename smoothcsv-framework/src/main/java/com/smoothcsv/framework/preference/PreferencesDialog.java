@@ -91,7 +91,7 @@ public class PreferencesDialog extends DialogBase {
 
     titleLabel = new JLabel();
     Font font = titleLabel.getFont();
-    titleLabel.setFont(font.deriveFont(font.getSize() * 1.4f));
+    titleLabel.setFont(font.deriveFont(font.getSize() * 1.44f));
     titleLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
     titlePanel.add(titleLabel);
 
@@ -101,6 +101,7 @@ public class PreferencesDialog extends DialogBase {
 
     JSplitPane splitPane =
         new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sideScrollPane, mainScrollPane);
+    splitPane.setBorder(null);
     getContentPanel().add(splitPane);
 
     sideBar.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

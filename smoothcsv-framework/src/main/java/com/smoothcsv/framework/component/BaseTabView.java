@@ -17,6 +17,7 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.component.view.ViewInfo;
+import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
 
 import java.awt.BorderLayout;
@@ -109,6 +110,7 @@ public abstract class BaseTabView<T extends ViewInfo> extends JPanel implements 
     public SCTabComponent() {
       super(new BorderLayout());
       closeButton = new JButton(CloseTabIcon.INSTANCE);
+      SwingUtils.removeButtonDecoration(closeButton);
       closeButton.setRolloverIcon(HoveredCloseTabIcon.INSTANCE);
       tabTitle = new JLabel();
       tabTitle.setMinimumSize(new Dimension(30, 10));
@@ -118,9 +120,6 @@ public abstract class BaseTabView<T extends ViewInfo> extends JPanel implements 
       setOpaque(false);
       // setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
 
-      // button.setBorderPainted(false);
-      // button.setFocusPainted(false);
-      // button.setContentAreaFilled(false);
       closeButton.setFocusable(false);
       closeButton.setBorder(BorderFactory.createEmptyBorder());
       closeButton.addActionListener(new ActionListener() {

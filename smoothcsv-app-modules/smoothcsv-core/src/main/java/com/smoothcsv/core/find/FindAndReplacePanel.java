@@ -112,6 +112,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     setLayout(gridBagLayout);
 
     JButton btnClose = new JButton(AwesomeIcon.create(AwesomeIconConstants.FA_TIMES_CIRCLE));
+    SwingUtils.removeButtonDecoration(btnClose);
     btnClose.setFocusable(false);
     btnClose.setToolTipText(CoreBundle.get("key.close"));
     btnClose.setBorder(null);

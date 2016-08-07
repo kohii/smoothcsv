@@ -27,6 +27,7 @@ import com.smoothcsv.swing.components.AwesomeIconToggleButton;
 import com.smoothcsv.swing.components.ExSplitPane;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
+import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
 
 import java.awt.BorderLayout;
@@ -99,6 +100,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
     headerPanel.add(tabbedPane.getTabLabelsPanel(), gbc_lblNewLabel);
 
     toggleConsoleAlwaysVisibleBtn = new AwesomeIconToggleButton(AwesomeIconConstants.FA_TERMINAL);
+    SwingUtils.removeButtonDecoration(toggleConsoleAlwaysVisibleBtn);
     toggleConsoleAlwaysVisibleBtn.setToolTipText(CoreBundle.get("key.macro.toggleConsole"));
     toggleConsoleAlwaysVisibleBtn
         .addActionListener(new CommandActionListener("macro:ToggleConsole"));
@@ -111,6 +113,7 @@ public class MacroToolsPanel extends JPanel implements SmoothComponent {
 
     JButton btnClose =
         new AwesomeIconButton(AwesomeIcon.create(AwesomeIconConstants.FA_TIMES_CIRCLE));
+    SwingUtils.removeButtonDecoration(btnClose);
     btnClose.setFocusable(false);
     btnClose.setToolTipText(CoreBundle.get("key.close"));
     btnClose.setBorder(null);

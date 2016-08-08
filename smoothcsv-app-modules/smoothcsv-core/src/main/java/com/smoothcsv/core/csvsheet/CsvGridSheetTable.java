@@ -16,6 +16,7 @@ package com.smoothcsv.core.csvsheet;
 import com.smoothcsv.commons.constants.Direction;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
 import com.smoothcsv.core.macro.MacroRecorder;
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
@@ -141,10 +142,22 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           editor == null ? null : (CsvGridEditorComponent) editor.getEditorComponent();
       if (editorComponent == null) {
 
-        if (e == null || e.getID() != KeyEvent.KEY_PRESSED
-            || e.getKeyChar() == KeyEvent.CHAR_UNDEFINED) {
-          return false;
+        if (Env.getOS() == Env.OS_WINDOWS) {
+          if (e == null || e.getID() != KeyEvent.KEY_TYPED
+              || e.getKeyChar() == KeyEvent.CHAR_UNDEFINED
+              || e.isActionKey()
+              || e.getKeyCode() == KeyEvent.VK_ENTER
+              || e.getKeyCode() == KeyEvent.VK_TAB
+              || e.getKeyCode() == KeyEvent.VK_DELETE) {
+            return false;
+          }
+        } else {
+          if (e == null || e.getID() != KeyEvent.KEY_PRESSED
+              || e.getKeyChar() == KeyEvent.CHAR_UNDEFINED) {
+            return false;
+          }
         }
+
         if (e.isAltDown() || e.isAltGraphDown() || e.isControlDown() || e.isMetaDown()) {
           return false;
         }
@@ -239,6 +252,9 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
   @Override
   protected void processInputMethodEvent(InputMethodEvent e) {
     super.processInputMethodEvent(e);
+    if (Env.getOS() == Env.OS_WINDOWS) {
+      return;
+    }
 
     if (!e.isConsumed()) {
       // Try to install the editor
@@ -270,10 +286,9 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
   }
 
   public InputMethodRequests getInputMethodRequests() {
-    // CsvGridEditorComponent editorComponent = (CsvGridEditorComponent) getEditorComponent();
-    // if (editorComponent != null) {
-    // return editorComponent.getInputMethodRequests();
-    // }
+    if (Env.getOS() == Env.OS_WINDOWS) {
+      return super.getInputMethodRequests();
+    }
 
     if (inputMethodRequestsHandler == null) {
       inputMethodRequestsHandler = new InputMethodRequests() {

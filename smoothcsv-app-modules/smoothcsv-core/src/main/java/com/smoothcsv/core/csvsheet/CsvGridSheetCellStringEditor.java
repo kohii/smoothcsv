@@ -24,6 +24,7 @@ import lombok.Setter;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 /**
  * @author kohii
@@ -43,6 +44,7 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
   public boolean prepare(GridSheetTable table, Object value, boolean isSelected, int row,
                          int column) {
     CsvGridSheetCellValuePanel.getInstance().getUndoManager().discardAllEdits();
+    ((CsvGridEditorComponent) getEditorComponent()).setIgnoreNextKeyEvent(false);
     return true;
   }
 
@@ -56,6 +58,12 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
     private boolean quickEdit = false;
 
+    /**
+     * HACK: We want to ignore key events after InputMethodEvent handled by GridSheetTable
+     * in order to avoid inserting unnecessary characters when using Live Conversion.
+     */
+    private boolean ignoreNextKeyEvent = false;
+
     @Getter
     @Setter
     private boolean keyRecording;
@@ -64,6 +72,14 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
       super("cell-editor");
       setDocument(CsvGridSheetCellValuePanel.getInstance().getTextArea().getDocument());
       setFont(SCAppearanceManager.getInlineCelleditorFont());
+    }
+
+    void ignoreNextKeyEvent() {
+      setIgnoreNextKeyEvent(true);
+    }
+
+    void setIgnoreNextKeyEvent(boolean ignoreNextKeyEvent) {
+      this.ignoreNextKeyEvent = ignoreNextKeyEvent;
     }
 
     /**
@@ -99,6 +115,20 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     }
 
     @Override
+    protected void processKeyEvent(KeyEvent e) {
+      if (ignoreNextKeyEvent) {
+        SwingUtilities.invokeLater(new Runnable() {
+          @Override
+          public void run() {
+            setIgnoreNextKeyEvent(false);
+          }
+        });
+      } else {
+        super.processKeyEvent(e);
+      }
+    }
+
+    @Override
     protected void processInputMethodEvent(InputMethodEvent e) {
       super.processInputMethodEvent(e);
     }
@@ -112,39 +142,6 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     public void requestFocus() {
       // TODO Auto-generated method stub
       super.requestFocus();
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.JComponent#requestFocus(boolean)
-     */
-    @Override
-    public boolean requestFocus(boolean temporary) {
-      // TODO Auto-generated method stub
-      return super.requestFocus(temporary);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.JComponent#requestFocusInWindow(boolean)
-     */
-    @Override
-    protected boolean requestFocusInWindow(boolean temporary) {
-      // TODO Auto-generated method stub
-      return super.requestFocusInWindow(temporary);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.JComponent#requestFocusInWindow()
-     */
-    @Override
-    public boolean requestFocusInWindow() {
-      // TODO Auto-generated method stub
-      return super.requestFocusInWindow();
     }
   }
 }

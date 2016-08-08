@@ -244,6 +244,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
       // Try to install the editor
       CsvGridEditorComponent editorComponent = editQuickly();
       if (editorComponent != null) {
+        editorComponent.ignoreNextKeyEvent();
         if (MacroRecorder.isRecording()) {
           MacroRecorder.getInstance().recordCommand("grid:StartQuickEdit");
         }
@@ -300,8 +301,7 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           if (getCellEditor() == null) {
             return null;
           }
-          return getCellEditor().getEditorComponent().getInputMethodRequests().getLocationOffset(x,
-              y);
+          return getCellEditor().getEditorComponent().getInputMethodRequests().getLocationOffset(x, y);
         }
 
         @Override

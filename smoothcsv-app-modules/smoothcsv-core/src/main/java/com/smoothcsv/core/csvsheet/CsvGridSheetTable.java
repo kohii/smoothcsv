@@ -146,9 +146,9 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
           if (e == null || e.getID() != KeyEvent.KEY_TYPED
               || e.getKeyChar() == KeyEvent.CHAR_UNDEFINED
               || e.isActionKey()
-              || e.getKeyCode() == KeyEvent.VK_ENTER
-              || e.getKeyCode() == KeyEvent.VK_TAB
-              || e.getKeyCode() == KeyEvent.VK_DELETE) {
+              || e.getKeyChar() == KeyEvent.VK_ENTER
+              || e.getKeyChar() == KeyEvent.VK_TAB
+              || e.getKeyChar() == KeyEvent.VK_DELETE) {
             return false;
           }
         } else {

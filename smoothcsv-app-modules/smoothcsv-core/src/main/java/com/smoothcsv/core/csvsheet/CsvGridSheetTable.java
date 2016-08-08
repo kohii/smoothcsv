@@ -57,16 +57,12 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
     public String toString() {
       return "\n";
     }
-
-    ;
   };
 
   public static final Object END_OF_FILE = new Object() {
     public String toString() {
       return "[EOF]";
     }
-
-    ;
   };
 
   @Getter
@@ -242,13 +238,18 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
 
   @Override
   protected void processInputMethodEvent(InputMethodEvent e) {
-    // Try to install the editor
-    CsvGridEditorComponent editorComponent = editQuickly();
-    if (editorComponent != null) {
-      if (MacroRecorder.isRecording()) {
-        MacroRecorder.getInstance().recordCommand("grid:StartQuickEdit");
+    super.processInputMethodEvent(e);
+
+    if (!e.isConsumed()) {
+      // Try to install the editor
+      CsvGridEditorComponent editorComponent = editQuickly();
+      if (editorComponent != null) {
+        if (MacroRecorder.isRecording()) {
+          MacroRecorder.getInstance().recordCommand("grid:StartQuickEdit");
+        }
+        editorComponent.processInputMethodEvent(e);
       }
-      editorComponent.processInputMethodEvent(e);
+      e.consume();
     }
   }
 

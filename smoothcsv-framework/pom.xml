@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv</artifactId>
-    <version>2.0.0-alpha2</version>
+    <version>2.0.0-alpha3</version>
   </parent>
   <artifactId>smoothcsv-framework</artifactId>
   <dependencies>

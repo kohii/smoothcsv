@@ -13,6 +13,7 @@
  */
 package com.smoothcsv.core.component;
 
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.swing.components.LinkLabel;
 import com.smoothcsv.swing.utils.SwingUtils;
@@ -74,7 +75,12 @@ public class AboutDialog extends JDialog {
     gbc_lblAppname.gridy = 0;
     getContentPane().add(lblAppname, gbc_lblAppname);
 
-    JLabel lblVersion = new JLabel("Version " + bundle.getString("version.name"));
+    String version = "Version " + bundle.getString("version.name");
+    if (Env.isDebug()) {
+      version += " (debug)";
+    }
+
+    JLabel lblVersion = new JLabel(version);
     GridBagConstraints gbc_lblVersion = new GridBagConstraints();
     gbc_lblVersion.anchor = GridBagConstraints.WEST;
     gbc_lblVersion.insets = new Insets(0, 0, 5, 0);

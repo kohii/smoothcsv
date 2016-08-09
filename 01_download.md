@@ -2,12 +2,23 @@
 layout: default
 title: Download
 permalink: /2/download/
+redirect_from: /download/latest
 ---
  
-Download
+Download SmoothCSV
 ====
-<br>
-<a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha2" target="_blank">Download SmoothCSV 2 (Github)</a>
+
+
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-alpha3/SmoothCSV-2.0.0-alpha3.dmg"
+   target="_blank"
+    style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
+    DOWNLOAD (Mac OSX)
+</a><br>
+<a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha3" target="_blank">Changelog</a>
+
+- Version: v2.0.0-alpha3
+- Released: 2016/08/09
+
 <br><br>
 
 ## 動作環境
@@ -19,10 +30,6 @@ Java （バージョン8以上）がインストールされたMac OSXのみで�
 
 このソフトを利用した際に発生したいかなる損害についても、 作者はこれを補償、修正する義務を負いません。
 
-## 既知の問題
+## その他
 
-以下の問題があります
-
-- ライブ変換を使用してセルの値の編集を開始することができない
-- 日本語変換時に矢印キーを押下すると文字の挿入される位置がずれる（Swingの問題）
-- その他バグは多くあります。注意して使用してください。
+Alpha版ですので注意して使用してください。

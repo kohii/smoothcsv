@@ -31,13 +31,13 @@ Edit
 	Copy As Markdown Table	grid:CopyAsMarkdownTable
 	Copy As HTML Table	grid:CopyAsHtmlTable
 	-
+	Edit Selected Range As Text...	grid:EditSelectedRangeAsText
+	-
 	Select All	grid:SelectAll
 	Select The Entire Row	grid:SelectEntireRow
 	Select The Entire Column	grid:SelectEntireColumn
 	-
 	Clear	grid:Clear
-	-
-	Go To Line...	grid:GoToLine
 	-
 	Remove duplicate	grid:RemoveDuplicate
 	-
@@ -83,6 +83,8 @@ Find
 	Find Previous	find:Previous
 	Replace Next	find:ReplaceNext
 	Replace Previous	find:ReplacePrevious
+	-
+	Go To Line...	grid:GoToLine
 
 View
 	Auto-Fit Column Width	grid:AutofitColumnWidth

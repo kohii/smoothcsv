@@ -69,6 +69,7 @@ grid
 	pagedown	grid:PageDown
 	shift+pageup	grid:SelectPageUp
 	shift+pagedown	grid:SelectPageDown
+	shortcut+t	grid:EditSelectedRangeAsText
 
 @mac grid
 	cmd+left	grid:MoveToFirstColumn

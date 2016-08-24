@@ -32,11 +32,11 @@
 	マークダウンのテーブル形式でコピー	grid:CopyAsMarkdownTable
 	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
 	-
+	選択範囲をテキストとして編集...	grid:EditSelectedRangeAsText
+	-
 	すべて選択	grid:SelectAll
 	すべての行を選択	grid:SelectEntireRow
 	すべての列を選択	grid:SelectEntireColumn
-	-
-	指定行に移動...	grid:GoToLine
 	-
 	重複を削除	grid:RemoveDuplicate
 	-
@@ -82,6 +82,8 @@
 	前を検索	find:Previous
 	次を置換	find:ReplaceNext
 	前を置換	find:ReplacePrevious
+	-
+	指定行に移動...	grid:GoToLine
 
 表示
 	列幅を自動調整	grid:AutofitColumnWidth

@@ -95,6 +95,7 @@ grid:ToggleUseFirstRowAsHeader	available(csv-sheet)
 grid:Focus	available(csv-sheet)
 grid:Filter	available(csv-sheet)
 grid:RemoveDuplicate	not_editing_cell
+grid:EditSelectedRangeAsText	not_editing_cell
 
 cell_editor:Undo	available(cell-editor)
 cell_editor:Redo	available(cell-editor)

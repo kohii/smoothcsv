@@ -28,8 +28,6 @@ import com.smoothcsv.swing.components.ExRadioButton;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -207,21 +205,11 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_txtBackupDeleteBefore.gridy = 16;
     add(lblNewLabel_1, gbc_txtBackupDeleteBefore);
 
-    chk_autoBackupOnReplace.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent e) {
-        chk_noBackupIfSame.setEnabled(chk_autoBackupOnReplace.isSelected());
-      }
-    });
+    chk_autoBackupOnReplace.onChange(e -> chk_noBackupIfSame.setEnabled(chk_autoBackupOnReplace.isSelected()));
     PrefUtils.invokeItemStateChanged(chk_autoBackupOnReplace);
 
-    chk_deleteOldBackups.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent e) {
-        txtBackupDeleteBefore.setEnabled(chk_autoBackupOnReplace.isSelected()
-            && chk_deleteOldBackups.isSelected());
-      }
-    });
+    chk_deleteOldBackups.onChange(e -> txtBackupDeleteBefore.setEnabled(chk_autoBackupOnReplace.isSelected()
+        && chk_deleteOldBackups.isSelected()));
     PrefUtils.invokeItemStateChanged(chk_deleteOldBackups);
   }
 }

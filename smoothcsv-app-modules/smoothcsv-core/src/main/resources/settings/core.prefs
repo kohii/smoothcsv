@@ -18,6 +18,12 @@ valuePanelHeight=2
 showEOL=false
 showEOF=true
 
+# --TextArea--
+textArea.showEOL=true
+textArea.showTab=true
+textArea.showSpace=false
+textArea.wrap=true
+
 # --Autofit--
 autoFitColumnWidthAfterOpeningFile=true
 autoFitColumnWidthAfterEditingCell=true

@@ -35,6 +35,10 @@ public class CoreSettings extends Settings {
   public static final String VALUE_PANEL_HEIGHT = "valuePanelHeight";
   public static final String SHOW_EOL = "showEOL";
   public static final String SHOW_EOF = "showEOF";
+  public static final String TEXT_AREA_SHOW_EOL = "textArea.showEOL";
+  public static final String TEXT_AREA_SHOW_TAB = "textArea.showTab";
+  public static final String TEXT_AREA_SHOW_SPACE = "textArea.showSpace";
+  public static final String TEXT_AREA_WRAP = "textArea.wrap";
   public static final String AUTO_FIT_COLUMN_WIDTH_AFTER_OPENING_FILE =
       "autoFitColumnWidthAfterOpeningFile";
   public static final String AUTO_FIT_COLUMN_WIDTH_AFTER_EDITING_CELL =

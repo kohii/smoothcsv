@@ -13,7 +13,7 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.core.celleditor.SCTextArea;
+import com.smoothcsv.core.celleditor.SCTextPane;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
@@ -23,8 +23,9 @@ import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.SCContentPane;
 import com.smoothcsv.framework.component.SCToolBar;
-import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.menu.CommandMenuItem;
+import com.smoothcsv.swing.components.text.EditorPanel;
+import com.smoothcsv.swing.components.text.ExTextPaneConfig;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import command.grid.StartEditCommand;
 import command.grid.StopEditCommand;
@@ -62,6 +63,9 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   @Getter
   private static CsvGridSheetCellValuePanel instance = new CsvGridSheetCellValuePanel();
 
+  @Getter
+  private final EditorPanel editorPanel;
+
   private JDialog dialog;
 
   @Getter
@@ -79,15 +83,22 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   private CsvGridSheetCellValuePanel() {
     setLayout(new BorderLayout());
     setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, UIConstants.getDefaultBorderColor()));
-    JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+    textArea = new ValuePanelTextArea(this, CsvSheetTextPaneConfig.getInstance());
+    editorPanel = new EditorPanel(textArea);
+    add(editorPanel);
+
+    JScrollPane scrollPane = editorPanel.getScrollPane();
     scrollPane.setBorder(
         BorderFactory.createMatteBorder(0, 1, 0, 0, UIConstants.getDefaultBorderColor()));
 
-    textArea = new ValuePanelTextArea(this);
+    scrollPane.setHorizontalScrollBarPolicy(
+        CsvSheetTextPaneConfig.getInstance().isWordWrap()
+            ? JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+            : JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+    );
+
     textArea.setBorder(null);
-    textArea.setLineWrap(true);
-    scrollPane.setViewportView(textArea);
 
     add(scrollPane);
 
@@ -100,7 +111,6 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
         undoManager.addEdit(e.getEdit());
       }
     });
-
 
     textArea.addFocusListener(this);
 
@@ -270,7 +280,7 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
   public void focusLost(FocusEvent e) {
   }
 
-  public static class ValuePanelTextArea extends SCTextArea implements SmoothComponent {
+  public static class ValuePanelTextArea extends SCTextPane {
 
     @Getter
     @Setter
@@ -279,10 +289,14 @@ public class CsvGridSheetCellValuePanel extends JPanel implements FocusListener,
     @Getter
     private final CsvGridSheetCellValuePanel valuePanel;
 
-    public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel) {
-      super("value-panel");
+    @Getter
+    private final ExTextPaneConfig config;
+
+    public ValuePanelTextArea(CsvGridSheetCellValuePanel valuePanel, ExTextPaneConfig config) {
+      super("value-panel", config);
       setFont(SCAppearanceManager.getCelleditorFont());
       this.valuePanel = valuePanel;
+      this.config = config;
     }
 
     @Override

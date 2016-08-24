@@ -17,6 +17,9 @@ import com.smoothcsv.framework.setting.Settings;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 import javax.swing.JCheckBox;
 
 /**
@@ -24,6 +27,8 @@ import javax.swing.JCheckBox;
  */
 @SuppressWarnings("serial")
 public class PrefCheckBox extends JCheckBox {
+
+  private List<Consumer<Boolean>> listeners = new ArrayList<>();
 
   public PrefCheckBox(Settings settings, String prefKey, String text) {
     super(text);
@@ -35,7 +40,14 @@ public class PrefCheckBox extends JCheckBox {
       @Override
       public void itemStateChanged(ItemEvent e) {
         settings.save(prefKey, isSelected());
+        for (Consumer<Boolean> listener : listeners) {
+          listener.accept(isSelected());
+        }
       }
     });
+  }
+
+  public void onChange(Consumer<Boolean> listener) {
+    listeners.add(listener);
   }
 }

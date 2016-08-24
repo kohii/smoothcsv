@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.core.preference;
 
+import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
+import com.smoothcsv.core.csvsheet.CsvSheetTextPaneConfig;
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.preference.PrefCheckBox;
@@ -25,9 +27,10 @@ import com.smoothcsv.swing.components.ExLabel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ItemListener;
+import java.util.function.Consumer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * @author kohii
@@ -37,7 +40,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
 
   public AppearenceEditorPrefPanel() {
 
-    ItemListener repaintFunc = e -> SCApplication.components().getFrame().repaint();
+    Consumer<Boolean> repaintFunc = e -> SCApplication.components().getFrame().repaint();
 
     setBorder(null);
     GridBagLayout gridBagLayout = new GridBagLayout();
@@ -58,7 +61,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
 
     PrefCheckBox chckbxShowEOL = new PrefCheckBox(CoreSettings.getInstance(),
         CoreSettings.SHOW_EOL, SCBundle.get("key.pref.appearance.showEOL"));
-    chckbxShowEOL.addItemListener(repaintFunc);
+    chckbxShowEOL.onChange(repaintFunc);
     GridBagConstraints gbc_chckbxShowEOL = new GridBagConstraints();
     gbc_chckbxShowEOL.insets = new Insets(0, 10, 0, 0);
     gbc_chckbxShowEOL.gridwidth = 3;
@@ -69,7 +72,7 @@ public class AppearenceEditorPrefPanel extends JPanel {
 
     PrefCheckBox chckbxShowEOF = new PrefCheckBox(CoreSettings.getInstance(),
         CoreSettings.SHOW_EOF, SCBundle.get("key.pref.appearance.showEOF"));
-    chckbxShowEOF.addItemListener(repaintFunc);
+    chckbxShowEOF.onChange(repaintFunc);
     GridBagConstraints gbc_chckbxShowEOF = new GridBagConstraints();
     gbc_chckbxShowEOF.insets = new Insets(0, 10, 0, 0);
     gbc_chckbxShowEOF.gridwidth = 3;
@@ -143,5 +146,68 @@ public class AppearenceEditorPrefPanel extends JPanel {
     gbc_lblNewLabel_1.gridx = 2;
     gbc_lblNewLabel_1.gridy = 8;
     add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+    JLabel lblTextArea = new PrefTitleLabel(SCBundle.get("key.pref.textArea"));
+    GridBagConstraints gbc_lblTextArea = new GridBagConstraints();
+    gbc_lblTextArea.insets = new Insets(10, 0, 5, 0);
+    gbc_lblTextArea.gridwidth = 4;
+    gbc_lblTextArea.anchor = GridBagConstraints.WEST;
+    gbc_lblTextArea.gridx = 0;
+    gbc_lblTextArea.gridy = 9;
+    add(lblTextArea, gbc_lblTextArea);
+
+    Consumer<Boolean> repaintTextAreaFunc = selected -> {
+      CsvSheetTextPaneConfig.getInstance().loadFromPreferences();
+      SCApplication.components().getFrame().repaint();
+    };
+
+    PrefCheckBox chkTextAreaShowEOL = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.TEXT_AREA_SHOW_EOL, SCBundle.get("key.pref.textArea.showEOL"));
+    chkTextAreaShowEOL.onChange(repaintTextAreaFunc);
+    GridBagConstraints gbc_chkTextAreaShowEOL = new GridBagConstraints();
+    gbc_chkTextAreaShowEOL.insets = new Insets(0, 10, 0, 0);
+    gbc_chkTextAreaShowEOL.gridwidth = 3;
+    gbc_chkTextAreaShowEOL.anchor = GridBagConstraints.WEST;
+    gbc_chkTextAreaShowEOL.gridx = 1;
+    gbc_chkTextAreaShowEOL.gridy = 10;
+    add(chkTextAreaShowEOL, gbc_chkTextAreaShowEOL);
+
+    PrefCheckBox chkTextAreaShowTab = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.TEXT_AREA_SHOW_TAB, SCBundle.get("key.pref.textArea.showTab"));
+    chkTextAreaShowTab.onChange(repaintTextAreaFunc);
+    GridBagConstraints gbc_chkTextAreaShowTab = new GridBagConstraints();
+    gbc_chkTextAreaShowTab.insets = new Insets(0, 10, 0, 0);
+    gbc_chkTextAreaShowTab.gridwidth = 3;
+    gbc_chkTextAreaShowTab.anchor = GridBagConstraints.WEST;
+    gbc_chkTextAreaShowTab.gridx = 1;
+    gbc_chkTextAreaShowTab.gridy = 11;
+    add(chkTextAreaShowTab, gbc_chkTextAreaShowTab);
+
+    PrefCheckBox chkTextAreaShowSpace = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.TEXT_AREA_SHOW_SPACE, SCBundle.get("key.pref.textArea.showSpace"));
+    chkTextAreaShowSpace.onChange(repaintTextAreaFunc);
+    GridBagConstraints gbc_chkTextAreaShowSpace = new GridBagConstraints();
+    gbc_chkTextAreaShowSpace.insets = new Insets(0, 10, 0, 0);
+    gbc_chkTextAreaShowSpace.gridwidth = 3;
+    gbc_chkTextAreaShowSpace.anchor = GridBagConstraints.WEST;
+    gbc_chkTextAreaShowSpace.gridx = 1;
+    gbc_chkTextAreaShowSpace.gridy = 12;
+    add(chkTextAreaShowSpace, gbc_chkTextAreaShowSpace);
+
+    PrefCheckBox chkTextAreaWrap = new PrefCheckBox(CoreSettings.getInstance(),
+        CoreSettings.TEXT_AREA_WRAP, SCBundle.get("key.pref.textArea.wrap"));
+    chkTextAreaWrap.onChange(selected -> {
+      CsvGridSheetCellValuePanel.getInstance().getEditorPanel().getScrollPane().setHorizontalScrollBarPolicy(
+          selected ? JScrollPane.HORIZONTAL_SCROLLBAR_NEVER : JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+      );
+      repaintTextAreaFunc.accept(selected);
+    });
+    GridBagConstraints gbc_chkTextAreaWrap = new GridBagConstraints();
+    gbc_chkTextAreaWrap.insets = new Insets(0, 10, 0, 0);
+    gbc_chkTextAreaWrap.gridwidth = 3;
+    gbc_chkTextAreaWrap.anchor = GridBagConstraints.WEST;
+    gbc_chkTextAreaWrap.gridx = 1;
+    gbc_chkTextAreaWrap.gridy = 13;
+    add(chkTextAreaWrap, gbc_chkTextAreaWrap);
   }
 }

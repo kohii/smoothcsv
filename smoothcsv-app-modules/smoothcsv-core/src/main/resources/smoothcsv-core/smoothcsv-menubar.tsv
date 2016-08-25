@@ -30,6 +30,7 @@ Edit
 	-
 	Copy As Markdown Table	grid:CopyAsMarkdownTable
 	Copy As HTML Table	grid:CopyAsHtmlTable
+	Copy As JSON	grid:CopyAsJson
 	-
 	Edit Selected Range As Text...	grid:EditSelectedRangeAsText
 	-

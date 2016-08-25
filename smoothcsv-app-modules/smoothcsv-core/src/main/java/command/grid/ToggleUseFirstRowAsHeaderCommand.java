@@ -26,7 +26,7 @@ public class ToggleUseFirstRowAsHeaderCommand extends GridCommand {
   public void run(CsvGridSheetPane gridSheetPane) {
     gridSheetPane.stopCellEditingIfEditing();
     CsvGridSheetModel model = gridSheetPane.getModel();
-    boolean oldVal = model.useFirstRowAsHeader();
+    boolean oldVal = model.usesFirstRowAsHeader();
     model.setUseFirstRowAsHeader(!oldVal);
   }
 }

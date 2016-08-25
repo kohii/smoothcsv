@@ -31,6 +31,7 @@
 	-
 	マークダウンのテーブル形式でコピー	grid:CopyAsMarkdownTable
 	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
+	JSON形式でコピー	grid:CopyAsJson
 	-
 	選択範囲をテキストとして編集...	grid:EditSelectedRangeAsText
 	-

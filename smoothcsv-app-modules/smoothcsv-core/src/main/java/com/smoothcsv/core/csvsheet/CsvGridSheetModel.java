@@ -286,7 +286,7 @@ public class CsvGridSheetModel extends GridSheetModel {
     return super.getColumnName(column);
   }
 
-  public boolean useFirstRowAsHeader() {
+  public boolean usesFirstRowAsHeader() {
     return useFirstRowAsHeader;
   }
 

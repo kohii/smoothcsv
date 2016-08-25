@@ -22,11 +22,11 @@ public class ToggleHeaderRowEdit implements GridSheetUndableEdit {
 
   @Override
   public void undo(CsvGridSheetModel model) {
-    model.setUseFirstRowAsHeader(!model.useFirstRowAsHeader());
+    model.setUseFirstRowAsHeader(!model.usesFirstRowAsHeader());
   }
 
   @Override
   public void redo(CsvGridSheetModel model) {
-    model.setUseFirstRowAsHeader(!model.useFirstRowAsHeader());
+    model.setUseFirstRowAsHeader(!model.usesFirstRowAsHeader());
   }
 }

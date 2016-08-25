@@ -29,6 +29,7 @@ grid:CutUsingFileFormat	not_editing_cell
 grid:PasteUsingFileFormat	not_editing_cell
 grid:CopyAsMarkdownTable	not_editing_cell
 grid:CopyAsHtmlTable	not_editing_cell
+grid:CopyAsJson	not_editing_cell
 grid:Clear	not_editing_cell
 grid:DeleteCell	not_editing_cell
 grid:InsertCell	not_editing_cell

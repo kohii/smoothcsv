@@ -13,20 +13,18 @@
  */
 package command.grid;
 
-import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.utils.ClipboardUtils;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author kohii
  */
-public class CopyAsMarkdownTableCommand extends GridCommand {
+public class CopyAsJsonCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
@@ -37,57 +35,53 @@ public class CopyAsMarkdownTableCommand extends GridCommand {
 
     List<List<Object>> data = CopyAsHtmlTableCommand.getSelectedData(gridSheetPane);
 
-    List<Integer> textWidths = new ArrayList<>();
-    for (List<Object> rowData : data) {
-      for (int i = 0; i < rowData.size(); i++) {
-        int w = StringUtils.textWidth((String) rowData.get(i));
-        if (textWidths.size() <= i) {
-          textWidths.add(w);
-        } else {
-          textWidths.set(i, Math.max(textWidths.get(i), w));
-        }
-      }
-    }
-
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
         .getNewlineCharacter().stringValue();
 
+    List<Object> headerData = data.get(0);
+
+    final String indent = "  ";
+
     StringBuilder sb = new StringBuilder();
-    int colSize = textWidths.size();
-    for (int i = 0; i < data.size(); i++) {
+    sb.append('[');
+    for (int i = 1; i < data.size(); i++) {
+      if (i > 1) {
+        sb.append(", ");
+      }
+
       List<Object> rowData = data.get(i);
-      int ln = rowData.size();
-      sb.append('|');
 
-      for (int j = 0; j < colSize; j++) {
-        String val = j < ln ? (String) rowData.get(j) : "";
-        int textW = StringUtils.textWidth(val);
-        int colW = textWidths.get(j);
-        sb.append(' ').append(val);
-        if (textW < colW) {
-          char[] pad = new char[colW - textW];
-          Arrays.fill(pad, ' ');
-          sb.append(pad);
+      sb.append('{').append(lineSep);
+      for (int j = 0; j < headerData.size(); j++) {
+        if (j > 0) {
+          sb.append(',').append(lineSep);
         }
-        sb.append(' ');
-        sb.append('|');
-      }
-      sb.append(lineSep);
-
-      if (i == 0) {
-        sb.append('|');
-        for (int j = 0; j < colSize; j++) {
-          sb.append(' ');
-          char[] line = new char[textWidths.get(j)];
-          Arrays.fill(line, '-');
-          sb.append(line);
-          sb.append(' ');
-          sb.append('|');
+        sb.append(indent);
+        if (headerData.get(j) != null) {
+          sb.append('"').append(escapeJson(headerData.get(j).toString())).append('"');
+        } else {
+          sb.append("null");
         }
-        sb.append(lineSep);
+        sb.append(": ");
+        if (rowData.get(j) != null) {
+          String value = rowData.get(j).toString();
+          if (com.smoothcsv.commons.utils.StringUtils.isDecimal(value)) {
+            sb.append(value);
+          } else {
+            sb.append('"').append(escapeJson(value)).append('"');
+          }
+        } else {
+          sb.append("null");
+        }
       }
+      sb.append(lineSep).append('}');
     }
+    sb.append(']');
 
     ClipboardUtils.writeText(sb.toString());
+  }
+
+  private static String escapeJson(String s) {
+    return StringUtils.replace(s, "\"", "\\\"");
   }
 }

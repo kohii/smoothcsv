@@ -15,6 +15,7 @@ package command.grid;
 
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
+import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.utils.ClipboardUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -29,6 +30,11 @@ public class CopyAsHtmlTableCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
+
+    if (gridSheetPane.getSelectionModel().isAdditionallySelected()) {
+      throw new AppException("WSCA0004");
+    }
+
     List<List<Object>> data = getSelectedData(gridSheetPane);
 
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
@@ -77,29 +83,21 @@ public class CopyAsHtmlTableCommand extends GridCommand {
 
     List<List<Object>> ret = new ArrayList<>();
 
-    List<Object> headerData = new ArrayList<>();
-    for (int columnIndex = minC; columnIndex <= maxC; columnIndex++) {
-      if (!selectionModel.isColumnSelected(columnIndex)) {
-        continue;
-      }
-      headerData.add(gridSheetPane.getModel().getColumnName(columnIndex));
-    }
-
-    ret.add(headerData);
-
-    for (int rowIndex = minR; rowIndex <= maxR; rowIndex++) {
-      if (!selectionModel.isRowSelected(rowIndex)) {
-        continue;
-      }
-      List<Object> values = new ArrayList<>(maxC - minC + 1);
+    if (gridSheetPane.getModel().usesFirstRowAsHeader()) {
+      List<Object> headerData = new ArrayList<>();
       for (int columnIndex = minC; columnIndex <= maxC; columnIndex++) {
-        if (!selectionModel.isCellSelected(rowIndex, columnIndex)) {
+        if (!selectionModel.isColumnSelected(columnIndex)) {
           continue;
         }
+        headerData.add(gridSheetPane.getModel().getColumnName(columnIndex));
+      }
+      ret.add(headerData);
+    }
+
+    for (int rowIndex = minR; rowIndex <= maxR; rowIndex++) {
+      List<Object> values = new ArrayList<>(maxC - minC + 1);
+      for (int columnIndex = minC; columnIndex <= maxC; columnIndex++) {
         Object value = gridSheetPane.getValueAt(rowIndex, columnIndex);
-        if (value == null) {
-          break;
-        }
         values.add(value);
       }
       ret.add(values);

@@ -7,6 +7,11 @@ grid
 	Cut Using The File Format	grid:CutUsingFileFormat
 	Paste Using The File Format	grid:PasteUsingFileFormat
 	-
+	Copy As Markdown Table	grid:CopyAsMarkdownTable
+	Copy As HTML Table	grid:CopyAsHtmlTable
+	Copy As JSON	grid:CopyAsJson
+	Copy As JavaScript Object Array	grid:CopyAsJavaScriptData
+	-
 	Clear	grid:Clear
 	Delete Cell	grid:DeleteCell
 	-

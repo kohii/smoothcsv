@@ -7,6 +7,11 @@ grid
 	ファイルの書式で切り取り	grid:CutUsingFileFormat
 	ファイルの書式で貼り付け	grid:PasteUsingFileFormat
 	-
+	マークダウンのテーブル形式でコピー	grid:CopyAsMarkdownTable
+	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
+	JSON形式でコピー	grid:CopyAsJson
+	JavaScriptのオブジェクト配列としてコピー	grid:CopyAsJavaScriptData
+	-
 	クリア	grid:Clear
 	セルを除去	grid:DeleteCell
 	-

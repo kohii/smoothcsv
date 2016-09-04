@@ -16,8 +16,8 @@ Download SmoothCSV
 </a><br>
 <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha4" target="_blank">Changelog</a>
 
-- Version: v2.0.0-alpha3
-- Released: 2016/08/09
+- Version: v2.0.0-alpha4
+- Released: 2016/09/04
 
 <br><br>
 

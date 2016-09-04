@@ -18,8 +18,12 @@ url: "http://smoothcsv.com" # the base hostname & protocol for your site
 # Build settings
 markdown: kramdown
 
+languages: ["en", "ja"]
+exclude_from_localizations: ["javascript", "images", "css", "download", "macro_api", "manuals", "v1"]
+
 gems:
   - jekyll-redirect-from
+  - jekyll-multiple-languages-plugin
   # - jemoji
   # - jekyll-mentions
   # - jekyll-redirect-from

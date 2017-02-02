@@ -1,9 +1,9 @@
 package com.smoothcsv.core.macro.apiimpl;
 
+import javax.swing.JOptionPane;
+
 import com.smoothcsv.core.macro.api.Window;
 import lombok.Getter;
-
-import javax.swing.JOptionPane;
 
 /**
  * @author kohii

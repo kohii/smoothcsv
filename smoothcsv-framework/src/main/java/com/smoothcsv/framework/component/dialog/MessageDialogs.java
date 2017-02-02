@@ -13,14 +13,15 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
+import java.awt.Component;
+
+import javax.swing.JOptionPane;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.HtmlUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.swing.utils.SwingUtils;
-
-import java.awt.Component;
-import javax.swing.JOptionPane;
 
 /**
  * @author kohii

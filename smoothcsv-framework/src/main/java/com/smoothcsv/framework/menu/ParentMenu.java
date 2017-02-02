@@ -14,6 +14,7 @@
 package com.smoothcsv.framework.menu;
 
 import java.awt.Component;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 

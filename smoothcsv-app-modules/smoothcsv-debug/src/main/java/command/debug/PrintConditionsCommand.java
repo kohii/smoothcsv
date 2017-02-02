@@ -13,12 +13,12 @@
  */
 package command.debug;
 
+import java.util.Set;
+
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.condition.Conditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
 
 /**
  * @author kohii

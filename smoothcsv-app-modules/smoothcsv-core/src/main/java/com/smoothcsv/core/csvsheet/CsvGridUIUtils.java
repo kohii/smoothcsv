@@ -13,12 +13,13 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.csv.NewlineCharacter;
-import sun.swing.SwingUtilities2;
-
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+
 import javax.swing.JComponent;
+
+import com.smoothcsv.csv.NewlineCharacter;
+import sun.swing.SwingUtilities2;
 
 /**
  * @author kohii

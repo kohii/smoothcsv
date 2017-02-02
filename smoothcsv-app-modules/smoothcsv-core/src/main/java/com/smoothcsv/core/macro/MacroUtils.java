@@ -13,15 +13,15 @@
  */
 package com.smoothcsv.core.macro;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.macro.api.CsvProperties;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.csv.NewlineCharacter;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
 
 /**
  * @author kohii

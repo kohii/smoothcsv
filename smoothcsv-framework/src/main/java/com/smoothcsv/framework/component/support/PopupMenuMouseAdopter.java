@@ -13,12 +13,13 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import com.smoothcsv.framework.menu.ContextMenu;
-import com.smoothcsv.framework.menu.ContextMenuManager;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComponent;
+
+import com.smoothcsv.framework.menu.ContextMenu;
+import com.smoothcsv.framework.menu.ContextMenuManager;
 
 public abstract class PopupMenuMouseAdopter extends MouseAdapter {
 

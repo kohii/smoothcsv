@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.framework.preference;
 
+import javax.swing.JPanel;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.swing.JPanel;
 
 /**
  * @author kohii

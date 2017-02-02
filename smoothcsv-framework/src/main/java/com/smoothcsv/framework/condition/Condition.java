@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.framework.condition;
 
-import com.smoothcsv.framework.event.SCEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import com.smoothcsv.framework.event.SCEvent;
 
 /**
  * @author kohii

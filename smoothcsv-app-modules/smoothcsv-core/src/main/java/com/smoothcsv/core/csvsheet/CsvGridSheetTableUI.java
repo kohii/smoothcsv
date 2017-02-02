@@ -13,12 +13,13 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.swing.gridsheet.ui.GridSheetTableNoActionUI;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
+
+import com.smoothcsv.swing.gridsheet.ui.GridSheetTableNoActionUI;
 
 public class CsvGridSheetTableUI extends GridSheetTableNoActionUI {
 

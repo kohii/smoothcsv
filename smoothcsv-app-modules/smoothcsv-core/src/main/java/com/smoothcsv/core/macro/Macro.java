@@ -13,14 +13,14 @@
  */
 package com.smoothcsv.core.macro;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.framework.exception.AppException;
 import lombok.Getter;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Script;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Macro {
 

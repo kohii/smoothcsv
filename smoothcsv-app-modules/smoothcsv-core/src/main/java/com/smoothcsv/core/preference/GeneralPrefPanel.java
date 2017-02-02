@@ -13,6 +13,18 @@
  */
 package com.smoothcsv.core.preference;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+import java.util.Locale;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.modular.ModuleManifest.Language;
@@ -23,17 +35,6 @@ import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.List;
-import java.util.Locale;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

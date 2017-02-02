@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.filter;
 
+import java.util.List;
+
 import com.smoothcsv.commons.constants.OperatorSymbol;
 import com.smoothcsv.csv.NewlineCharacter;
-
-import java.util.List;
 
 /**
  * @author kohii

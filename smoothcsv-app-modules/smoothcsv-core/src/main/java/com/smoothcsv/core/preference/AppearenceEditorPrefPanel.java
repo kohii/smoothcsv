@@ -13,6 +13,15 @@
  */
 package com.smoothcsv.core.preference;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.function.Consumer;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
 import com.smoothcsv.core.csvsheet.CsvSheetTextPaneConfig;
 import com.smoothcsv.core.util.CoreSettings;
@@ -23,14 +32,6 @@ import com.smoothcsv.framework.preference.PrefTextValidator;
 import com.smoothcsv.framework.preference.PrefTitleLabel;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExLabel;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.function.Consumer;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  * @author kohii

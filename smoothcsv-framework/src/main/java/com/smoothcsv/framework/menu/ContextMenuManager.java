@@ -13,6 +13,15 @@
  */
 package com.smoothcsv.framework.menu;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.component.support.SmoothComponent;
@@ -21,14 +30,6 @@ import com.smoothcsv.framework.io.CsvSupport;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.selector.SelectorFactory;
 import lombok.Getter;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 
 /**
  * @author kohii

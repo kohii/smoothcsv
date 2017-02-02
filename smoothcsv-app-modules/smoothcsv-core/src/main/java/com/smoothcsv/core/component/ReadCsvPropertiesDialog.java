@@ -14,6 +14,7 @@
 package com.smoothcsv.core.component;
 
 import java.awt.Dialog;
+
 import javax.swing.JPanel;
 
 /**

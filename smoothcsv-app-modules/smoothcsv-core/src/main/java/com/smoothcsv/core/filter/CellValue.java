@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.core.filter;
 
+import java.util.List;
+
 import com.smoothcsv.core.find.Regex;
 import com.smoothcsv.framework.util.SCBundle;
 import lombok.Getter;
-
-import java.util.List;
 
 /**
  * @author kohii

@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.core.csv;
 
-import com.smoothcsv.core.util.CoreBundle;
-import com.smoothcsv.framework.component.dialog.DialogBase;
-import com.smoothcsv.framework.component.dialog.DialogOperation;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Frame;
@@ -25,6 +21,7 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,6 +32,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.framework.component.dialog.DialogOperation;
 
 /**
  * @author kohii

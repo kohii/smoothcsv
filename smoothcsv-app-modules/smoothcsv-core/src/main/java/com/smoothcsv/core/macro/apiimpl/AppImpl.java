@@ -13,6 +13,9 @@
  */
 package com.smoothcsv.core.macro.apiimpl;
 
+import java.io.File;
+import java.util.ResourceBundle;
+
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.macro.MacroUtils;
 import com.smoothcsv.core.macro.api.App;
@@ -25,9 +28,6 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
 import lombok.Getter;
-
-import java.io.File;
-import java.util.ResourceBundle;
 
 /**
  * @author kohii

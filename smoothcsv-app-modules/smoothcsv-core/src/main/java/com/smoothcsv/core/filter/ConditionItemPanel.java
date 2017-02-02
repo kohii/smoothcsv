@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.core.filter;
 
-import com.smoothcsv.core.find.Regex;
-import com.smoothcsv.framework.component.dialog.MessageDialogs;
-import com.smoothcsv.framework.util.SCBundle;
-import com.smoothcsv.swing.components.RegulatedTextField;
-import com.smoothcsv.swing.icon.AwesomeIcon;
-import org.apache.commons.lang3.StringUtils;
-
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.GridBagConstraints;
@@ -31,6 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -38,6 +32,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import com.smoothcsv.core.find.Regex;
+import com.smoothcsv.framework.component.dialog.MessageDialogs;
+import com.smoothcsv.framework.util.SCBundle;
+import com.smoothcsv.swing.components.RegulatedTextField;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import org.apache.commons.lang3.StringUtils;
 
 public class ConditionItemPanel extends JPanel {
 

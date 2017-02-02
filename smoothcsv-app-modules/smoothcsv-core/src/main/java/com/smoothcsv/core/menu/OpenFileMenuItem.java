@@ -1,11 +1,12 @@
 package com.smoothcsv.core.menu;
 
-import command.app.OpenFileCommand;
-
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JMenuItem;
+
+import command.app.OpenFileCommand;
 
 /**
  * @author kohii

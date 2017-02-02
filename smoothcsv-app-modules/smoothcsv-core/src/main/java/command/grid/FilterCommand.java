@@ -13,6 +13,9 @@
  */
 package command.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
@@ -27,9 +30,6 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import command.app.OpenFileCommand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author kohii

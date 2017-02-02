@@ -1,10 +1,10 @@
 package com.smoothcsv.core.csv;
 
+import java.io.File;
+
 import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.components.History;
 import lombok.Getter;
-
-import java.io.File;
 
 /**
  * @author kohii

@@ -13,13 +13,13 @@
  */
 package com.smoothcsv.core.sql.model;
 
+import java.io.File;
+import java.util.List;
+
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author kohii

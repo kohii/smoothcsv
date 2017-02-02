@@ -13,12 +13,12 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.awt.Component;
+import java.awt.Font;
+
 import com.smoothcsv.core.util.SCAppearanceManager;
 import com.smoothcsv.swing.gridsheet.AbstractGridSheetHeaderComponent;
 import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetHeaderCellRenderer;
-
-import java.awt.Component;
-import java.awt.Font;
 
 /**
  * @author kohii

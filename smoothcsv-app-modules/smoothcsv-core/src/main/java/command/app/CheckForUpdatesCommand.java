@@ -13,6 +13,17 @@
  */
 package command.app;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.update.UpdateInfoDialog;
@@ -23,16 +34,6 @@ import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.util.MessageBundles;
 import org.codehaus.jackson.type.TypeReference;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  * @author kohii

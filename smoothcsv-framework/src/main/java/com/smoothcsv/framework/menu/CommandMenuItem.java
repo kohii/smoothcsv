@@ -13,19 +13,20 @@
  */
 package com.smoothcsv.framework.menu;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.function.Consumer;
+
+import javax.swing.Icon;
+import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.function.Consumer;
-import javax.swing.Icon;
-import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
 
 /**
  * @author kohii

@@ -13,6 +13,12 @@
  */
 package com.smoothcsv.core.sql.component;
 
+import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
+import java.util.EventObject;
+import java.util.List;
+
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
@@ -27,12 +33,6 @@ import com.smoothcsv.swing.gridsheet.event.GridSheetSelectionListener;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
-
-import java.awt.BorderLayout;
-import java.awt.event.MouseEvent;
-import java.util.Arrays;
-import java.util.EventObject;
-import java.util.List;
 
 /**
  * @author kohii

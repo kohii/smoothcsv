@@ -1,12 +1,12 @@
 package command.grid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author kohii

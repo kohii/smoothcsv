@@ -13,23 +13,24 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import com.smoothcsv.commons.utils.ArrayUtils;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.SCContentPane;
-import com.smoothcsv.framework.component.dialog.DialogBase;
-import com.smoothcsv.swing.utils.SwingUtils;
-
 import java.awt.Container;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+
 import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+
+import com.smoothcsv.commons.utils.ArrayUtils;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.SCContentPane;
+import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii

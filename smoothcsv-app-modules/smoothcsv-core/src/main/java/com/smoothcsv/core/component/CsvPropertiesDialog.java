@@ -13,6 +13,18 @@
  */
 package com.smoothcsv.core.component;
 
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
@@ -21,17 +33,6 @@ import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.RegulatedTextField;
-
-import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

@@ -13,6 +13,12 @@
  */
 package command.grid;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JScrollPane;
+import javax.swing.text.BadLocationException;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetTextPaneConfig;
@@ -24,11 +30,6 @@ import com.smoothcsv.framework.util.KeyStrokeUtils;
 import com.smoothcsv.swing.components.text.EditorPanel;
 import com.smoothcsv.swing.components.text.ExTextPane;
 import com.smoothcsv.swing.utils.SwingUtils;
-
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.JScrollPane;
-import javax.swing.text.BadLocationException;
 
 /**
  * @author kohii

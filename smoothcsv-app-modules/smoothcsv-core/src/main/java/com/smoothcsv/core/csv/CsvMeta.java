@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.core.csv;
 
+import java.nio.charset.Charset;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.csv.CsvProperties;
@@ -21,8 +23,6 @@ import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.util.SCBundle;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.nio.charset.Charset;
 
 /**
  * @author kohii

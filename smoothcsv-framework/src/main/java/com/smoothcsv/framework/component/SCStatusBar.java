@@ -13,15 +13,12 @@
  */
 package com.smoothcsv.framework.component;
 
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import lombok.Getter;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -29,6 +26,10 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import lombok.Getter;
 
 public class SCStatusBar extends JPanel implements SmoothComponent {
 

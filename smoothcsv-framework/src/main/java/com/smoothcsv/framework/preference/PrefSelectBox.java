@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.framework.preference;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.BeanUtils;
-import com.smoothcsv.framework.setting.Settings;
-
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -24,10 +20,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Objects;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.commons.utils.BeanUtils;
+import com.smoothcsv.framework.setting.Settings;
 
 /**
  * @author kohii

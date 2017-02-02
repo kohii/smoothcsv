@@ -13,19 +13,20 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.core.util.CoreSettings;
-import sun.swing.SwingUtilities2;
-
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
+
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.text.View;
+
+import com.smoothcsv.core.util.CoreSettings;
+import sun.swing.SwingUtilities2;
 
 /**
  * @author kohii

@@ -13,6 +13,11 @@
  */
 package command.grid;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
@@ -26,11 +31,6 @@ import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.utils.ClipboardUtils;
-
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author kohii

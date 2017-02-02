@@ -13,6 +13,13 @@
  */
 package com.smoothcsv.core.preference;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.csv.CsvQuoteApplyRule;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
@@ -24,12 +31,6 @@ import com.smoothcsv.framework.preference.PrefUtils;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

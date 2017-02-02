@@ -13,13 +13,13 @@
  */
 package com.smoothcsv.core.command;
 
+import javax.swing.JComponent;
+
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentManager;
 import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.selector.SelectorFactory;
-
-import javax.swing.JComponent;
 
 /**
  * @author kohii

@@ -13,10 +13,10 @@
  */
 package command.cell_editor;
 
+import javax.swing.text.BadLocationException;
+
 import com.smoothcsv.core.command.VisibleComponentCommandBase;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
-
-import javax.swing.text.BadLocationException;
 
 /**
  * @author kohii

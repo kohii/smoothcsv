@@ -13,13 +13,13 @@
  */
 package command.grid;
 
+import java.util.Arrays;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
-
-import java.util.Arrays;
 
 /**
  * @author kohii

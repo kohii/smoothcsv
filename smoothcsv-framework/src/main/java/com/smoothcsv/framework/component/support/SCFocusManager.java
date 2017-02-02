@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import lombok.Getter;
-
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.beans.PropertyChangeEvent;
@@ -22,6 +20,8 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import lombok.Getter;
 
 /**
  * @author kohii

@@ -13,9 +13,9 @@
  */
 package com.smoothcsv.core.find;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.regex.Matcher;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author kohii

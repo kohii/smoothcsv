@@ -13,14 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.framework.event.EventListenerSupport;
-import com.smoothcsv.framework.event.EventListenerSupportImpl;
-import com.smoothcsv.framework.event.SCEvent;
-import com.smoothcsv.swing.components.AwesomeIconButton;
-import com.smoothcsv.swing.icon.AwesomeIcon;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,12 +23,21 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+
+import com.smoothcsv.framework.event.EventListenerSupport;
+import com.smoothcsv.framework.event.EventListenerSupportImpl;
+import com.smoothcsv.framework.event.SCEvent;
+import com.smoothcsv.swing.components.AwesomeIconButton;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author kohii

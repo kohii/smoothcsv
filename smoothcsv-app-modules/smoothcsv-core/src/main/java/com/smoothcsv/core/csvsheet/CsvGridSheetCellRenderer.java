@@ -13,17 +13,18 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
-
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JLabel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 /**
  * @author kohii

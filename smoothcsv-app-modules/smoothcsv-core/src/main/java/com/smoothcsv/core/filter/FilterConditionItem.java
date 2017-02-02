@@ -13,13 +13,13 @@
  */
 package com.smoothcsv.core.filter;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import com.smoothcsv.core.find.Regex;
 import com.smoothcsv.framework.util.SCBundle;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * @author kohii

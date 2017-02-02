@@ -13,14 +13,14 @@
  */
 package com.smoothcsv.core.sort;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @author kohii

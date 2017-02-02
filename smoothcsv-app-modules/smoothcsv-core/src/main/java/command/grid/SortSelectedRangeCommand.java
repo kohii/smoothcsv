@@ -13,6 +13,9 @@
  */
 package command.grid;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.sort.SortCriteria;
@@ -20,9 +23,6 @@ import com.smoothcsv.core.sort.SortCriteriasDialog.ColumnInfo;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.swing.gridsheet.model.CellRect;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author kohii

@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.framework.event;
 
+import java.util.function.Supplier;
+
 import com.smoothcsv.commons.collections.ArrayMap;
 import com.smoothcsv.commons.data.KeyValue;
-
-import java.util.function.Supplier;
 
 /**
  * @author kohii

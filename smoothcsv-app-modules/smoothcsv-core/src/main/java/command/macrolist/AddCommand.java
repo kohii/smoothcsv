@@ -13,15 +13,16 @@
  */
 package command.macrolist;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.VisibleComponentCommandBase;
 import com.smoothcsv.core.macro.component.JsFileChooser;
 import com.smoothcsv.core.macro.component.MacroListPanel;
 import com.smoothcsv.framework.component.dialog.BasicFileChooser;
-
-import java.io.File;
-import javax.swing.JFileChooser;
 
 /**
  * @author kohii

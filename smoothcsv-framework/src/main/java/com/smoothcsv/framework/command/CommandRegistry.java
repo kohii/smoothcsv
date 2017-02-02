@@ -13,10 +13,6 @@
  */
 package com.smoothcsv.framework.command;
 
-import com.smoothcsv.commons.utils.StringUtils;
-import com.smoothcsv.framework.condition.Condition;
-import com.smoothcsv.framework.exception.CommandNotFoundException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.smoothcsv.commons.utils.StringUtils;
+import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.framework.exception.CommandNotFoundException;
 
 /**
  * @author kohii

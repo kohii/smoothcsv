@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.core.condition;
 
+import java.beans.PropertyChangeListener;
+
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.macro.MacroRecorder;
@@ -22,8 +24,6 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Conditions;
 import com.smoothcsv.framework.event.SCListener;
-
-import java.beans.PropertyChangeListener;
 
 /**
  * @author kohii

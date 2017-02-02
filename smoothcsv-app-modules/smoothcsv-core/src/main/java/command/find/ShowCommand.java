@@ -13,6 +13,9 @@
  */
 package command.find;
 
+import javax.swing.JComponent;
+import javax.swing.text.JTextComponent;
+
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
@@ -20,9 +23,6 @@ import com.smoothcsv.core.find.FindAndReplacePanel;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
-
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
 
 /**
  * @author kohii

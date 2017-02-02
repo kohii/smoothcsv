@@ -13,10 +13,10 @@
  */
 package command.grid;
 
+import javax.swing.JComponent;
+
 import com.smoothcsv.core.command.GridCommand;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
-
-import javax.swing.JComponent;
 
 /**
  * @author kohii

@@ -13,6 +13,11 @@
  */
 package com.smoothcsv.framework.modular;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Locale;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.framework.Env;
@@ -31,11 +36,6 @@ import com.smoothcsv.framework.selector.CssSelector;
 import com.smoothcsv.framework.selector.SelectorFactory;
 import com.smoothcsv.framework.util.MessageBundles;
 import com.smoothcsv.framework.util.SCBundle;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Locale;
 
 /**
  * @author kohii

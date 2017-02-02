@@ -13,11 +13,6 @@
  */
 package com.smoothcsv.core.component;
 
-import com.smoothcsv.framework.Env;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.swing.components.LinkLabel;
-import com.smoothcsv.swing.utils.SwingUtils;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -25,6 +20,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
+
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -32,6 +28,11 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
+
+import com.smoothcsv.framework.Env;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.swing.components.LinkLabel;
+import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii

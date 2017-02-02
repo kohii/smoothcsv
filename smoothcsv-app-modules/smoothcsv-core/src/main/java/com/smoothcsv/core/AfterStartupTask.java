@@ -1,5 +1,8 @@
 package com.smoothcsv.core;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import com.smoothcsv.commons.utils.JsonUtils;
 import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.preference.EditorPrefPanel;
@@ -8,9 +11,6 @@ import com.smoothcsv.core.preference.KeyBindingsPrefPanel;
 import com.smoothcsv.framework.preference.PrefPage;
 import com.smoothcsv.framework.preference.PreferenceManager;
 import command.app.CheckForUpdatesCommand;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * @author kohii

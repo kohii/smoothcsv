@@ -13,17 +13,18 @@
  */
 package com.smoothcsv.core.menu;
 
+import java.awt.Component;
+
+import javax.swing.JMenu;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
 import com.smoothcsv.core.macro.MacroInfo;
 import com.smoothcsv.core.macro.UserDefinedMacroList;
 import com.smoothcsv.framework.menu.CommandMenuItem;
 import com.smoothcsv.framework.menu.IMenu;
 import com.smoothcsv.framework.menu.IParentMenu;
 import com.smoothcsv.framework.util.SCBundle;
-
-import java.awt.Component;
-import javax.swing.JMenu;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 /**
  * @author kohii

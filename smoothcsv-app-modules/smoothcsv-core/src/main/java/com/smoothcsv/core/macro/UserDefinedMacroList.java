@@ -1,13 +1,5 @@
 package com.smoothcsv.core.macro;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.FileUtils;
-import com.smoothcsv.framework.exception.AppException;
-import com.smoothcsv.framework.io.ArrayCsvReader;
-import com.smoothcsv.framework.io.ArrayCsvWriter;
-import com.smoothcsv.framework.io.CsvSupport;
-import com.smoothcsv.framework.util.DirectoryResolver;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,6 +12,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.commons.utils.FileUtils;
+import com.smoothcsv.framework.exception.AppException;
+import com.smoothcsv.framework.io.ArrayCsvReader;
+import com.smoothcsv.framework.io.ArrayCsvWriter;
+import com.smoothcsv.framework.io.CsvSupport;
+import com.smoothcsv.framework.util.DirectoryResolver;
 
 /**
  * @author kohii

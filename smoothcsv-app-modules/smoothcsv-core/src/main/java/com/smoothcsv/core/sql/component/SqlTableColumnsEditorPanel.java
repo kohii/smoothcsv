@@ -13,12 +13,6 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import com.smoothcsv.core.sql.model.SqlColumnInfo;
-import com.smoothcsv.core.sql.model.SqlTableInfo;
-import com.smoothcsv.swing.table.ExTable;
-import com.smoothcsv.swing.table.ExTableColumn;
-import com.smoothcsv.swing.table.ExTableModel;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -26,11 +20,18 @@ import java.sql.JDBCType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+
+import com.smoothcsv.core.sql.model.SqlColumnInfo;
+import com.smoothcsv.core.sql.model.SqlTableInfo;
+import com.smoothcsv.swing.table.ExTable;
+import com.smoothcsv.swing.table.ExTableColumn;
+import com.smoothcsv.swing.table.ExTableModel;
 
 /**
  * @author kohii

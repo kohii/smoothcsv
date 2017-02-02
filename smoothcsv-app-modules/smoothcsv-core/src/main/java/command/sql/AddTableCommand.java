@@ -13,6 +13,10 @@
  */
 package command.sql;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.command.SqlTableListCommandBase;
@@ -20,9 +24,6 @@ import com.smoothcsv.core.csvsheet.CsvFileChooser;
 import com.smoothcsv.core.sql.component.SqlTableList;
 import com.smoothcsv.core.sql.model.SqlCsvFileTables;
 import com.smoothcsv.framework.exception.AppException;
-
-import java.io.File;
-import javax.swing.JFileChooser;
 
 /**
  * @author kohii

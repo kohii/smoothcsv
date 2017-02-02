@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.find;
 
-import lombok.Getter;
-
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import lombok.Getter;
 
 /**
  * @author kohii

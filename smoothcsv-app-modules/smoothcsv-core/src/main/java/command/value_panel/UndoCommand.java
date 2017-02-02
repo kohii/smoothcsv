@@ -13,10 +13,10 @@
  */
 package command.value_panel;
 
+import javax.swing.undo.UndoManager;
+
 import com.smoothcsv.core.command.ValuePanelCommandBase;
 import com.smoothcsv.core.csvsheet.CsvGridSheetCellValuePanel;
-
-import javax.swing.undo.UndoManager;
 
 /**
  * @author kohii

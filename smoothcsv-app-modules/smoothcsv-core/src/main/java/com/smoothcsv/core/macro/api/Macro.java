@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.macro.api;
 
+import java.io.File;
+
 import com.smoothcsv.core.macro.SCAppMacroRuntime;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
-
-import java.io.File;
 
 /**
  * Represents a macro.

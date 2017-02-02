@@ -13,12 +13,13 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.SCTabbedPane;
-
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.SCTabbedPane;
 
 /**
  * @author kohii

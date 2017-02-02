@@ -13,6 +13,22 @@
  */
 package com.smoothcsv.core.sort;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.dialog.DialogBase;
@@ -25,21 +41,6 @@ import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 
 /**
  * @author kohii

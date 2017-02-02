@@ -13,27 +13,13 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import com.smoothcsv.commons.utils.ArrayUtils;
-import com.smoothcsv.core.constants.UIConstants;
-import com.smoothcsv.core.csvsheet.CsvSheetView;
-import com.smoothcsv.core.sql.model.SqlColumnInfo;
-import com.smoothcsv.core.sql.model.SqlCsvFileTableInfo;
-import com.smoothcsv.core.sql.model.SqlCsvFileTables;
-import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
-import com.smoothcsv.core.sql.model.SqlTableInfo;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.SCToolBar;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.swing.icon.AwesomeIcon;
-import lombok.Getter;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.function.BiConsumer;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JPanel;
@@ -49,6 +35,21 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+
+import com.smoothcsv.commons.utils.ArrayUtils;
+import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.csvsheet.CsvSheetView;
+import com.smoothcsv.core.sql.model.SqlColumnInfo;
+import com.smoothcsv.core.sql.model.SqlCsvFileTableInfo;
+import com.smoothcsv.core.sql.model.SqlCsvFileTables;
+import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
+import com.smoothcsv.core.sql.model.SqlTableInfo;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.SCToolBar;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import lombok.Getter;
 
 /**
  * @author kohii

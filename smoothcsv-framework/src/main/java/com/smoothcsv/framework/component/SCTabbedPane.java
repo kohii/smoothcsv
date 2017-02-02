@@ -13,15 +13,6 @@
  */
 package com.smoothcsv.framework.component;
 
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.framework.component.view.ViewInfo;
-import com.smoothcsv.framework.event.EventListenerSupport;
-import com.smoothcsv.framework.event.EventListenerSupportImpl;
-import com.smoothcsv.framework.event.SCEvent;
-import lombok.Getter;
-
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
@@ -55,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -63,6 +55,15 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.framework.component.view.ViewInfo;
+import com.smoothcsv.framework.event.EventListenerSupport;
+import com.smoothcsv.framework.event.EventListenerSupportImpl;
+import com.smoothcsv.framework.event.SCEvent;
+import lombok.Getter;
 
 public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
 

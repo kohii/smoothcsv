@@ -13,6 +13,25 @@
  */
 package com.smoothcsv.core.component;
 
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.io.File;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JDialog;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.commons.utils.CollectionUtils;
@@ -29,24 +48,6 @@ import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 import com.smoothcsv.swing.components.History;
-
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ItemEvent;
-import java.io.File;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JDialog;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 /**
  * @author kohii2

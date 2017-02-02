@@ -13,6 +13,9 @@
  */
 package com.smoothcsv.core.macro.bridge;
 
+import java.lang.reflect.Array;
+import java.util.IllegalFormatException;
+
 import com.smoothcsv.core.component.SmoothCsvComponentManager;
 import com.smoothcsv.framework.SCApplication;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +23,6 @@ import org.mozilla.javascript.BaseFunction;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeJavaArray;
 import org.mozilla.javascript.ScriptRuntime;
-
-import java.lang.reflect.Array;
-import java.util.IllegalFormatException;
 
 /**
  * @author kohii

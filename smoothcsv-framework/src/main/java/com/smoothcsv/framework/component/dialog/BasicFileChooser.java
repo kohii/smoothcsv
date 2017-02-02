@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
-import com.smoothcsv.framework.SCApplication;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.HeadlessException;
@@ -24,6 +22,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.ActionMap;
@@ -36,6 +35,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.smoothcsv.framework.SCApplication;
 
 public class BasicFileChooser extends JFileChooser {
 

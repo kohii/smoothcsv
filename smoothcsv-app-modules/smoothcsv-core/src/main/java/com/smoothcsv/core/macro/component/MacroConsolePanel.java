@@ -13,12 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.core.constants.UIConstants;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.swing.components.LineBreakableTextField;
-import lombok.Getter;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -31,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.function.Consumer;
+
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -43,6 +38,12 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+
+import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.swing.components.LineBreakableTextField;
+import lombok.Getter;
 
 /**
  * @author kohii

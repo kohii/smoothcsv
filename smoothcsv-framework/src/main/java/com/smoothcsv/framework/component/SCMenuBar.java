@@ -13,16 +13,17 @@
  */
 package com.smoothcsv.framework.component;
 
-import com.smoothcsv.framework.Env;
-import com.smoothcsv.framework.menu.IMenu;
-
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
+import com.smoothcsv.framework.Env;
+import com.smoothcsv.framework.menu.IMenu;
 
 /**
  * @author kohii

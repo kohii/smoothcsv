@@ -13,6 +13,13 @@
  */
 package com.smoothcsv.core.macro.component;
 
+import java.awt.BorderLayout;
+import java.util.function.Consumer;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
@@ -26,12 +33,6 @@ import lombok.Getter;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
-
-import java.awt.BorderLayout;
-import java.util.function.Consumer;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

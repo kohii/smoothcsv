@@ -13,6 +13,20 @@
  */
 package com.smoothcsv.core.macro.component;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JToggleButton;
+
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.ConsoleInputHandler;
 import com.smoothcsv.core.macro.component.SimpleTabbedPane.TabChangeEvent;
@@ -29,19 +43,6 @@ import com.smoothcsv.swing.icon.AwesomeIcon;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JToggleButton;
 
 /**
  * @author kohii

@@ -13,12 +13,12 @@
  */
 package com.smoothcsv.framework.component.support;
 
-import com.smoothcsv.framework.selector.CssSelector;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import com.smoothcsv.framework.selector.CssSelector;
+import lombok.Getter;
 
 /**
  * @author kohii

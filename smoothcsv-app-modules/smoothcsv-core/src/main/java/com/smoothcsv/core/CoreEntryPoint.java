@@ -13,6 +13,19 @@
  */
 package com.smoothcsv.core;
 
+import static com.smoothcsv.framework.SCApplication.components;
+
+import java.awt.Component;
+import java.awt.Rectangle;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.LayoutFocusTraversalPolicy;
+import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+
 import com.smoothcsv.core.condition.AppConditions;
 import com.smoothcsv.core.constants.CoreSessionKeys;
 import com.smoothcsv.core.csv.FileBackupService;
@@ -52,18 +65,6 @@ import com.smoothcsv.swing.gridsheet.GridSheetUtils;
 import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.CloseAllCommand;
 import command.app.OpenFileCommand;
-
-import java.awt.Component;
-import java.awt.Rectangle;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.LayoutFocusTraversalPolicy;
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-
-import static com.smoothcsv.framework.SCApplication.components;
 
 
 /**

@@ -14,6 +14,7 @@
 package com.smoothcsv.framework.preference;
 
 import java.awt.Font;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;

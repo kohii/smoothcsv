@@ -1,5 +1,15 @@
 package com.smoothcsv.core.update;
 
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.net.URI;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.smoothcsv.core.util.AppUtils;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.dialog.DialogBase;
@@ -8,15 +18,6 @@ import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.PlainLabel;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-
-import java.awt.BorderLayout;
-import java.awt.Desktop;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.net.URI;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

@@ -13,10 +13,10 @@
  */
 package com.smoothcsv.core.macro;
 
+import java.util.function.Consumer;
+
 import com.smoothcsv.core.macro.bridge.ConsoleBridge;
 import org.mozilla.javascript.NativeJavaObject;
-
-import java.util.function.Consumer;
 
 /**
  * @author kohii

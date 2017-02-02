@@ -13,6 +13,15 @@
  */
 package com.smoothcsv.framework;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.Thread.UncaughtExceptionHandler;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.framework.component.ComponentManager;
@@ -31,14 +40,6 @@ import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.menu.ToolBarItems;
 import com.smoothcsv.framework.modular.ModuleManager;
 import com.smoothcsv.framework.setting.Session;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.lang.Thread.UncaughtExceptionHandler;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 
 /**

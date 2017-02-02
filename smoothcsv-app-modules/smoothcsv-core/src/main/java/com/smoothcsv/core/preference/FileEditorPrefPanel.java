@@ -13,6 +13,19 @@
  */
 package com.smoothcsv.core.preference;
 
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.smoothcsv.commons.utils.HtmlUtils;
 import com.smoothcsv.core.component.CsvPropertiesDialog;
 import com.smoothcsv.core.csv.CsvMeta;
@@ -30,18 +43,6 @@ import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.framework.util.SCBundle;
 import com.smoothcsv.swing.components.ExLabel;
 import com.smoothcsv.swing.components.ExRadioButton;
-
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  * @author kohii

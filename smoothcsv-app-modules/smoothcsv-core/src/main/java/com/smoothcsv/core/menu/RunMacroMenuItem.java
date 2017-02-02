@@ -1,12 +1,13 @@
 package com.smoothcsv.core.menu;
 
-import com.smoothcsv.core.macro.Macro;
-import com.smoothcsv.core.macro.SCAppMacroRuntime;
-
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JMenuItem;
+
+import com.smoothcsv.core.macro.Macro;
+import com.smoothcsv.core.macro.SCAppMacroRuntime;
 
 /**
  * @author kohii

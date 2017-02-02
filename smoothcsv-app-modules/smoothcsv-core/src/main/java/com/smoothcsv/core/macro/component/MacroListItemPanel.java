@@ -13,19 +13,20 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.core.macro.MacroInfo;
-import com.smoothcsv.framework.util.MessageBundles;
-import com.smoothcsv.swing.icon.AwesomeIcon;
-import lombok.Getter;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.io.File;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.smoothcsv.core.macro.MacroInfo;
+import com.smoothcsv.framework.util.MessageBundles;
+import com.smoothcsv.swing.icon.AwesomeIcon;
+import lombok.Getter;
 
 /**
  * @author kohii

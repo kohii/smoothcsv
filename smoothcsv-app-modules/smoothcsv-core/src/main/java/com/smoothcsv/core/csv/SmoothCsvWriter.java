@@ -13,13 +13,13 @@
  */
 package com.smoothcsv.core.csv;
 
+import java.io.Writer;
+import java.util.List;
+
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.csv.writer.AbstractCsvWriter;
 import com.smoothcsv.csv.writer.CsvWriterOptions;
 import lombok.Setter;
-
-import java.io.Writer;
-import java.util.List;
 
 /**
  * @author kohii

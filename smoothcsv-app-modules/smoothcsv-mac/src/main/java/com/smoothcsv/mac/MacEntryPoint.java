@@ -13,6 +13,9 @@
  */
 package com.smoothcsv.mac;
 
+import java.io.File;
+import java.util.List;
+
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.OpenFilesEvent;
@@ -31,9 +34,6 @@ import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.OpenFileCommand;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author Kohii

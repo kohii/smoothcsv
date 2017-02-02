@@ -13,21 +13,6 @@
  */
 package com.smoothcsv.core.csvsheet;
 
-import com.smoothcsv.commons.constants.Direction;
-import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
-import com.smoothcsv.core.macro.MacroRecorder;
-import com.smoothcsv.framework.Env;
-import com.smoothcsv.framework.component.support.SCFocusManager;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
-import com.smoothcsv.swing.gridsheet.GridSheetPane;
-import com.smoothcsv.swing.gridsheet.GridSheetTable;
-import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
-import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
-import command.grid.FillSeriesCommand;
-import lombok.Getter;
-
 import java.awt.AWTEvent;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -43,10 +28,26 @@ import java.text.AttributedCharacterIterator.Attribute;
 import java.text.AttributedString;
 import java.util.EventObject;
 import java.util.HashMap;
+
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.UIDefaults;
 import javax.swing.event.ChangeEvent;
+
+import com.smoothcsv.commons.constants.Direction;
+import com.smoothcsv.core.csvsheet.CsvGridSheetCellStringEditor.CsvGridEditorComponent;
+import com.smoothcsv.core.macro.MacroRecorder;
+import com.smoothcsv.framework.Env;
+import com.smoothcsv.framework.component.support.SCFocusManager;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
+import com.smoothcsv.swing.gridsheet.GridSheetPane;
+import com.smoothcsv.swing.gridsheet.GridSheetTable;
+import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
+import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
+import command.grid.FillSeriesCommand;
+import lombok.Getter;
 
 /**
  * @author kohii

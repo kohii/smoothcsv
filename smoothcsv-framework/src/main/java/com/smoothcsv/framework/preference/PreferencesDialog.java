@@ -13,11 +13,6 @@
  */
 package com.smoothcsv.framework.preference;
 
-import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.dialog.DialogBase;
-import com.smoothcsv.framework.util.SCBundle;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -27,6 +22,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -38,6 +34,11 @@ import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.component.dialog.DialogBase;
+import com.smoothcsv.framework.util.SCBundle;
 
 /**
  * @author kohii

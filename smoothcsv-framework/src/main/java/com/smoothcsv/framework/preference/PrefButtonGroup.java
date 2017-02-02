@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.framework.preference;
 
+import java.util.Objects;
+
 import com.smoothcsv.framework.setting.Settings;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
-
-import java.util.Objects;
 
 /**
  * @author kohii

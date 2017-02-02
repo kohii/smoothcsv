@@ -13,16 +13,17 @@
  */
 package com.smoothcsv.framework.component.dialog;
 
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.swing.components.RegulatedTextField;
-
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.swing.components.RegulatedTextField;
 
 public class NumberInputDialog extends DialogBase {
 

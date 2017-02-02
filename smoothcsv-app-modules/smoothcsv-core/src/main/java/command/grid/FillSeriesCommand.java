@@ -13,6 +13,10 @@
  */
 package command.grid;
 
+import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.smoothcsv.commons.constants.Direction;
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.command.GridCommand;
@@ -21,10 +25,6 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
 import org.apache.commons.lang3.ArrayUtils;
-
-import java.math.BigDecimal;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author kohii

@@ -13,12 +13,6 @@
  */
 package com.smoothcsv.core.filter;
 
-import com.smoothcsv.commons.constants.OperatorSymbol;
-import com.smoothcsv.core.filter.FilterConditionPanel.OperatorSymbolTreeNode;
-import com.smoothcsv.framework.component.dialog.DialogOperation;
-import com.smoothcsv.framework.util.SCBundle;
-import com.smoothcsv.swing.utils.JTreeUtils;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -48,6 +42,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -64,6 +59,12 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+
+import com.smoothcsv.commons.constants.OperatorSymbol;
+import com.smoothcsv.core.filter.FilterConditionPanel.OperatorSymbolTreeNode;
+import com.smoothcsv.framework.component.dialog.DialogOperation;
+import com.smoothcsv.framework.util.SCBundle;
+import com.smoothcsv.swing.utils.JTreeUtils;
 
 /**
  * @author kohii

@@ -13,12 +13,13 @@
  */
 package com.smoothcsv.framework.component;
 
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-
 import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 
 /**
  * @author kohii

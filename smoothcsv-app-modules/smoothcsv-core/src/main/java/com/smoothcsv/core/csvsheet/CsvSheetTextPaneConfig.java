@@ -1,10 +1,10 @@
 package com.smoothcsv.core.csvsheet;
 
+import java.awt.Color;
+
 import com.smoothcsv.core.util.CoreSettings;
 import com.smoothcsv.swing.components.text.ExTextPaneConfig;
 import lombok.Getter;
-
-import java.awt.Color;
 
 /**
  * @author kohii

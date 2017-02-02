@@ -13,11 +13,12 @@
  */
 package com.smoothcsv.core.constants;
 
-import lombok.Getter;
-
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.JPanel;
+
+import lombok.Getter;
 
 /**
  * @author kohii

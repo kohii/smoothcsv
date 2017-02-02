@@ -13,6 +13,13 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
 import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
@@ -40,13 +47,6 @@ import com.smoothcsv.swing.gridsheet.renderer.GridSheetHeaderRenderer;
 import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 /**
  * @author kohii

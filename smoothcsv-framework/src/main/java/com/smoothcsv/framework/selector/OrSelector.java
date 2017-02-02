@@ -13,11 +13,11 @@
  */
 package com.smoothcsv.framework.selector;
 
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import lombok.EqualsAndHashCode;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author kohii

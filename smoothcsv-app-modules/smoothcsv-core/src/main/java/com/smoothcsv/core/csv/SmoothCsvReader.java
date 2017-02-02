@@ -13,16 +13,16 @@
  */
 package com.smoothcsv.core.csv;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.csv.reader.CsvReaderOptions;
 import com.smoothcsv.csv.reader.DefaultCsvReader;
 import lombok.Getter;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author kohii

@@ -13,15 +13,16 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.io.File;
+import java.util.function.Function;
+
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.constants.CoreSessionKeys;
 import com.smoothcsv.framework.component.dialog.BasicFileChooser;
 import com.smoothcsv.framework.setting.Session;
-
-import java.io.File;
-import java.util.function.Function;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CsvFileChooser extends BasicFileChooser {
 

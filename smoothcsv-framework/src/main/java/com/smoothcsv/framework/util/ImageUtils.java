@@ -15,6 +15,7 @@ package com.smoothcsv.framework.util;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 /**

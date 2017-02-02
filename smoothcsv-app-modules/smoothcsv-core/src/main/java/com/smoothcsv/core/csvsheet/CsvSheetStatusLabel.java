@@ -13,6 +13,11 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.JLabel;
+
 import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
@@ -25,10 +30,6 @@ import com.smoothcsv.swing.gridsheet.event.GridSheetFocusEvent;
 import com.smoothcsv.swing.gridsheet.event.GridSheetFocusListener;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import command.csvsheet.ShowPropertiesCommand;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.JLabel;
 
 /**
  * @author kohii

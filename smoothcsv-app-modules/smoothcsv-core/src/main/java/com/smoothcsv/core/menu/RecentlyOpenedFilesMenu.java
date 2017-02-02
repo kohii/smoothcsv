@@ -13,14 +13,15 @@
  */
 package com.smoothcsv.core.menu;
 
-import com.smoothcsv.core.csv.RecentFilesHistory;
-import com.smoothcsv.framework.menu.IMenu;
-import com.smoothcsv.framework.menu.IParentMenu;
-
 import java.io.File;
+
 import javax.swing.JMenu;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
+import com.smoothcsv.core.csv.RecentFilesHistory;
+import com.smoothcsv.framework.menu.IMenu;
+import com.smoothcsv.framework.menu.IParentMenu;
 
 /**
  * @author kohii

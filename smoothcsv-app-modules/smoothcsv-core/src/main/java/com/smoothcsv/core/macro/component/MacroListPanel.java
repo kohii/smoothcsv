@@ -13,17 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import com.smoothcsv.core.constants.UIConstants;
-import com.smoothcsv.core.macro.MacroInfo;
-import com.smoothcsv.core.macro.UserDefinedMacroList;
-import com.smoothcsv.core.util.CoreBundle;
-import com.smoothcsv.framework.component.SCToolBar;
-import com.smoothcsv.framework.component.support.SmoothComponent;
-import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.framework.exception.AbortionException;
-import com.smoothcsv.swing.icon.AwesomeIconConstants;
-import lombok.Getter;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -36,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -43,6 +33,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+
+import com.smoothcsv.core.constants.UIConstants;
+import com.smoothcsv.core.macro.MacroInfo;
+import com.smoothcsv.core.macro.UserDefinedMacroList;
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.component.SCToolBar;
+import com.smoothcsv.framework.component.support.SmoothComponent;
+import com.smoothcsv.framework.component.support.SmoothComponentSupport;
+import com.smoothcsv.framework.exception.AbortionException;
+import com.smoothcsv.swing.icon.AwesomeIconConstants;
+import lombok.Getter;
 
 /**
  * @author kohii

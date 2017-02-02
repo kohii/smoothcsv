@@ -13,13 +13,14 @@
  */
 package com.smoothcsv.framework.util;
 
-import com.smoothcsv.commons.utils.StringUtils;
-
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.StringTokenizer;
+
 import javax.swing.KeyStroke;
+
+import com.smoothcsv.commons.utils.StringUtils;
 
 /**
  * @author kohii

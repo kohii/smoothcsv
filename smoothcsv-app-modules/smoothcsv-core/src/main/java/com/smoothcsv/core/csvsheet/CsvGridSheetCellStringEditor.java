@@ -13,6 +13,12 @@
  */
 package com.smoothcsv.core.csvsheet;
 
+import java.awt.event.InputMethodEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+
 import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.SCAppearanceManager;
@@ -20,11 +26,6 @@ import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.awt.event.InputMethodEvent;
-import java.awt.event.KeyEvent;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 
 /**
  * @author kohii

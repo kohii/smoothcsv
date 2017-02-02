@@ -13,9 +13,9 @@
  */
 package com.smoothcsv.core.sql.component;
 
-import com.smoothcsv.core.sql.model.SqlTableInfo;
-
 import javax.swing.JPanel;
+
+import com.smoothcsv.core.sql.model.SqlTableInfo;
 
 /**
  * @author kohii

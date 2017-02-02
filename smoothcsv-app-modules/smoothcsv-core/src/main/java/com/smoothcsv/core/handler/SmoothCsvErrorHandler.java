@@ -13,6 +13,9 @@
  */
 package com.smoothcsv.core.handler;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.IgnorableException;
 import com.smoothcsv.commons.utils.ThrowableUtils;
@@ -30,9 +33,6 @@ import com.smoothcsv.swing.utils.SwingUtils;
 import org.mozilla.javascript.RhinoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  * @author kohii

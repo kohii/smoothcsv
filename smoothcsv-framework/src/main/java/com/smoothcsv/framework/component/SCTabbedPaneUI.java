@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.framework.component;
 
-import com.smoothcsv.swing.utils.SwingUtils;
-
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -23,10 +21,13 @@ import java.awt.Insets;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+
+import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii

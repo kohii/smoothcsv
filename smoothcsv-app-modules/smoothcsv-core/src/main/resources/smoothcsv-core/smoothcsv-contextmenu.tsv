@@ -11,6 +11,7 @@ grid
 	Copy As HTML Table	grid:CopyAsHtmlTable
 	Copy As JSON	grid:CopyAsJson
 	Copy As JavaScript Object Array	grid:CopyAsJavaScriptData
+	Copy As SQL INSERT	grid:CopyAsSqlInsert
 	-
 	Clear	grid:Clear
 	Delete Cell	grid:DeleteCell

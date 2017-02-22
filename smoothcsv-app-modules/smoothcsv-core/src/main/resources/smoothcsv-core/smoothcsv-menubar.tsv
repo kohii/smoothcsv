@@ -28,10 +28,12 @@ Edit
 	Cut Using File Format	grid:CutUsingFileFormat
 	Paste Using File Format	grid:PasteUsingFileFormat
 	-
-	Copy As Markdown Table	grid:CopyAsMarkdownTable
-	Copy As HTML Table	grid:CopyAsHtmlTable
-	Copy As JSON	grid:CopyAsJson
-	Copy As JavaScript Object Array	grid:CopyAsJavaScriptData
+	Copy As...
+		Markdown Table	grid:CopyAsMarkdownTable
+		HTML Table	grid:CopyAsHtmlTable
+		JSON	grid:CopyAsJson
+		JavaScript Object Array	grid:CopyAsJavaScriptData
+		SQL INSERT	grid:CopyAsSqlInsert
 	-
 	Edit Selected Range As Text...	grid:EditSelectedRangeAsText
 	-

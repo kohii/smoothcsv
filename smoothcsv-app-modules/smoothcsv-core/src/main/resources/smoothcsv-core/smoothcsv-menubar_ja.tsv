@@ -29,10 +29,12 @@
 	ファイルの書式で切り取り	grid:CutUsingFileFormat
 	ファイルの書式で貼り付け	grid:PasteUsingFileFormat
 	-
-	マークダウンのテーブル形式でコピー	grid:CopyAsMarkdownTable
-	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
-	JSON形式でコピー	grid:CopyAsJson
-	JavaScriptのオブジェクト配列としてコピー	grid:CopyAsJavaScriptData
+	形式を指定してコピー...
+		マークダウンのテーブル形式	grid:CopyAsMarkdownTable
+		HTMLのテーブル形式	grid:CopyAsHtmlTable
+		JSON形式	grid:CopyAsJson
+		JavaScriptのオブジェクト配列	grid:CopyAsJavaScriptData
+		SQLのINSERT文	grid:CopyAsSqlInsert
 	-
 	選択範囲をテキストとして編集...	grid:EditSelectedRangeAsText
 	-

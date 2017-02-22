@@ -11,6 +11,7 @@ grid
 	HTMLのテーブル形式でコピー	grid:CopyAsHtmlTable
 	JSON形式でコピー	grid:CopyAsJson
 	JavaScriptのオブジェクト配列としてコピー	grid:CopyAsJavaScriptData
+	SQLのINSERT文としてコピー	grid:CopyAsSqlInsert
 	-
 	クリア	grid:Clear
 	セルを除去	grid:DeleteCell

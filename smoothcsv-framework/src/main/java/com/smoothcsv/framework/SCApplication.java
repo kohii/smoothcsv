@@ -15,6 +15,7 @@ package com.smoothcsv.framework;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 import javax.swing.JFrame;
@@ -40,6 +41,7 @@ import com.smoothcsv.framework.menu.MainMenuItems;
 import com.smoothcsv.framework.menu.ToolBarItems;
 import com.smoothcsv.framework.modular.ModuleManager;
 import com.smoothcsv.framework.setting.Session;
+import lombok.Getter;
 
 
 /**
@@ -69,6 +71,11 @@ public abstract class SCApplication {
 
   private final long startTime;
 
+  private String[] filesToBeOpendOnReady;
+
+  @Getter
+  private boolean ready = false;
+
   public SCApplication(String applicationName, int os, boolean debug) {
     Env.init(os, debug);
     startTime = System.currentTimeMillis();
@@ -86,7 +93,10 @@ public abstract class SCApplication {
 
   public final void launch(String[] args) {
     start();
-    handleArgs(args);
+
+    if (args.length > 0) {
+      filesToBeOpendOnReady = args;
+    }
   }
 
   public void start() {
@@ -203,6 +213,17 @@ public abstract class SCApplication {
       @Override
       public void windowOpened(WindowEvent e) {
         SmoothComponentManager.stopAdjustingComponents();
+
+        ready = true;
+        if (filesToBeOpendOnReady != null && filesToBeOpendOnReady.length > 0) {
+          File[] files = new File[filesToBeOpendOnReady.length];
+          for (int i = 0; i < files.length; i++) {
+            files[i] = new File(filesToBeOpendOnReady[i]);
+          }
+          filesToBeOpendOnReady = null;
+          requestOpenFiles(files);
+        }
+
         listeners().invokeListeners(new WindowOpendEvent());
       }
     });
@@ -230,7 +251,7 @@ public abstract class SCApplication {
     return new ModuleManager();
   }
 
-  protected abstract void handleArgs(String[] args);
+  public abstract void requestOpenFiles(File[] files);
 
   // events ----------------------
   public static class AfterCreateGuiEvent implements SCEvent {

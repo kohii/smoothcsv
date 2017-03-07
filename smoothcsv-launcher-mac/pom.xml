@@ -57,11 +57,12 @@
           <plugin>
             <groupId>sh.tak.appbundler</groupId>
             <artifactId>appbundle-maven-plugin</artifactId>
-            <version>1.1.0</version>
+            <version>1.2.0</version>
             <configuration>
               <mainClass>com.smoothcsv.SmoothCSV</mainClass>
               <jvmVersion>1.8+</jvmVersion>
               <bundleName>SmoothCSV</bundleName>
+              <dictionaryFile>SmoothCSVInfo.plist.template</dictionaryFile>
               <iconFile>SmoothCSV.icns</iconFile>
               <generateDiskImageFile>true</generateDiskImageFile>
               <includeApplicationsSymlink>true</includeApplicationsSymlink>

@@ -14,7 +14,6 @@
 package com.smoothcsv.mac;
 
 import java.io.File;
-import java.util.List;
 
 import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
@@ -33,7 +32,6 @@ import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.modular.ModuleEntryPointBase;
 import com.smoothcsv.framework.modular.ModuleManifest;
 import com.smoothcsv.swing.utils.SwingUtils;
-import command.app.OpenFileCommand;
 
 /**
  * @author Kohii
@@ -68,29 +66,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
     app.setOpenFileHandler(new OpenFilesHandler() {
       @Override
       public void openFiles(OpenFilesEvent e) {
-        OpenFileCommand command = new OpenFileCommand();
-        for (File f : e.getFiles()) {
-          if (f.isFile()) {
-            command.run(f);
-          } else if (f.isDirectory()) {
-            command.chooseAndOpenFile(f);
-          }
-        }
-      }
-    });
-
-    app.setOpenFileHandler(new OpenFilesHandler() {
-      @Override
-      public void openFiles(OpenFilesEvent openFilesEvent) {
-        List<File> files = openFilesEvent.getFiles();
-        OpenFileCommand command = new OpenFileCommand();
-        for (File f : files) {
-          if (f.isDirectory()) {
-            command.chooseAndOpenFile(f);
-          } else {
-            command.run(f);
-          }
-        }
+        SCApplication.getApplication().requestOpenFiles(e.getFiles().toArray(new File[e.getFiles().size()]));
       }
     });
 

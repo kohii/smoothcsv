@@ -17,6 +17,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
+
 import com.smoothcsv.core.component.SmoothCsvComponentManager;
 import com.smoothcsv.core.handler.SmoothCsvErrorHandler;
 import com.smoothcsv.core.util.CoreSettings;
@@ -35,6 +37,14 @@ public class SmoothCsvApp extends SCApplication {
   public SmoothCsvApp(int os, boolean debug) {
     super("SmoothCSV", os, debug);
     ErrorHandlerFactory.setErrorHandler(new SmoothCsvErrorHandler());
+
+    listeners().on(WindowOpendEvent.class, event -> {
+      SwingUtilities.invokeLater(() -> {
+        if (components().getTabbedPane().getTabCount() == 0) {
+          new NewFileCommand().execute();
+        }
+      });
+    });
   }
 
   @Override
@@ -48,22 +58,23 @@ public class SmoothCsvApp extends SCApplication {
   }
 
   @Override
-  protected void handleArgs(String[] args) {
-    listeners().on(WindowOpendEvent.class, event -> {
-      if (args == null || args.length == 0) {
-        new NewFileCommand().execute();
+  public void requestOpenFiles(File[] files) {
+    if (isReady()) {
+      openFiles(files);
+    } else {
+      listeners().on(WindowOpendEvent.class, event -> openFiles(files));
+    }
+  }
+
+  private void openFiles(File[] files) {
+    OpenFileCommand command = new OpenFileCommand();
+    for (File f : files) {
+      if (f.isFile()) {
+        command.run(f);
       } else {
-        OpenFileCommand command = new OpenFileCommand();
-        for (String filepath : args) {
-          File f = new File(filepath);
-          if (f.isDirectory()) {
-            command.chooseAndOpenFile(f);
-          } else {
-            command.run(f);
-          }
-        }
+        command.chooseAndOpenFile(f);
       }
-    });
+    }
   }
 
   @Override

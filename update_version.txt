@@ -1,0 +1,5 @@
+mvn versions:set -DnewVersion=${version}
+mvn versions:commit
+
+git tag v${version}
+git push origin --tags

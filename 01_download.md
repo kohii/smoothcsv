@@ -9,15 +9,15 @@ Download SmoothCSV
 ====
 
 
-<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-alpha4/SmoothCSV-2.0.0-alpha5.dmg"
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-alpha5/SmoothCSV-2.0.0-alpha5.dmg"
     target="_blank"
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
     DOWNLOAD (Mac OSX)
 </a><br>
 <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha5" target="_blank">Changelog</a>
 
-- Version: v2.0.0-alpha4
-- Released: 2016/09/04
+- Version: v2.0.0-alpha5
+- Released: 2017/03/07
 
 <br><br>
 

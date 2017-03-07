@@ -14,12 +14,12 @@ Download SmoothCSV
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
     DOWNLOAD (Mac OSX)
 </a><br>
-<a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha5" target="_blank">Changelog</a>
 
 - Version: v2.0.0-alpha5
 - Released: 2017/03/07
+- <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha5" target="_blank">Changelog</a>
 
-<br><br>
+<br>
 
 ## 動作環境
 

@@ -28,11 +28,11 @@ There are basically 2 ways to create macros.
 You can use the following global variables.
 
 - `App`  
-  The instance of [App](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/App.html). This represents the application itself.
+  The instance of [App](/macro_api/com/smoothcsv/core/macro/api/App.html). This represents the application itself.
 - `Clipboard`  
-  The instance of [Clipboard](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Clipboard.html).
+  The instance of [Clipboard](/macro_api/com/smoothcsv/core/macro/api/Clipboard.html).
 - `Window`  
-  The instance of [Window](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Window.html).
+  The instance of [Window](/macro_api/com/smoothcsv/core/macro/api/Window.html).
 - `CsvProperties`  
   A class that represents CSV Properties.
 - `Macro`  

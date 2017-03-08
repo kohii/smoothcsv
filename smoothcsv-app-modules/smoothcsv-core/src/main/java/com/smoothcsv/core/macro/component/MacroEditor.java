@@ -13,13 +13,6 @@
  */
 package com.smoothcsv.core.macro.component;
 
-import java.awt.BorderLayout;
-import java.util.function.Consumer;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.util.CoreBundle;
@@ -30,9 +23,21 @@ import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import lombok.Getter;
+import org.fife.rsta.ac.LanguageSupport;
+import org.fife.rsta.ac.js.JavaScriptCompletionProvider;
+import org.fife.rsta.ac.js.JavaScriptLanguageSupport;
+import org.fife.rsta.ac.js.SourceCompletionProvider;
+import org.fife.rsta.ac.js.engine.RhinoJavaScriptEngine;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.mozilla.javascript.Context;
+
+import java.awt.BorderLayout;
+import java.util.function.Consumer;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  * @author kohii
@@ -78,9 +83,12 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     textArea = new RSyntaxTextArea();
     // textArea.setWrapStyleWord(true);
     // textArea.setLineWrap(true);
-    textArea.setTabSize(4);
+    textArea.setTabSize(2);
     textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
-    // textArea.setCodeFoldingEnabled(true);
+    textArea.setCodeFoldingEnabled(true);
+    textArea.setMarkOccurrences(true);
+    textArea.setTabsEmulated(true);
+    installAutoComplete(textArea);
 
     RTextScrollPane scrollPane = new RTextScrollPane(textArea);
     scrollPane.setBorder(
@@ -88,8 +96,46 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     add(scrollPane, BorderLayout.CENTER);
   }
 
+  private void installAutoComplete(RSyntaxTextArea textArea) {
+
+    SmoothCSVJavaScriptLanguageSupport languageSupport = new SmoothCSVJavaScriptLanguageSupport();
+    languageSupport.setLanguageVersion(Context.VERSION_ES6);
+    languageSupport.setAutoActivationEnabled(true);
+    languageSupport.setAutoActivationDelay(600);
+    languageSupport.setParameterAssistanceEnabled(true);
+    languageSupport.setClient(true);
+
+    languageSupport.install(textArea);
+  }
+
+
   @Override
   public boolean requestFocusInWindow() {
     return textArea.requestFocusInWindow();
+  }
+
+  static class SmoothCSVJavaScriptLanguageSupport extends JavaScriptLanguageSupport {
+
+    @Override
+    protected JavaScriptCompletionProvider createJavaScriptCompletionProvider() {
+      return new JavaScriptCompletionProvider(new SmoothCSVSourceCompletionProvider(), getJarManager(), this);
+    }
+
+    @Override
+    public void install(RSyntaxTextArea textArea) {
+      //remove javascript support and replace with Rhino support
+      LanguageSupport support = (LanguageSupport) textArea.getClientProperty("org.fife.rsta.ac.LanguageSupport");
+      if (support != null) {
+        support.uninstall(textArea);
+      }
+      super.install(textArea);
+    }
+  }
+
+  static class SmoothCSVSourceCompletionProvider extends SourceCompletionProvider {
+
+    public SmoothCSVSourceCompletionProvider() {
+      super(RhinoJavaScriptEngine.RHINO_ENGINE, false);
+    }
   }
 }

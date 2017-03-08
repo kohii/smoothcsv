@@ -13,11 +13,6 @@
  */
 package com.smoothcsv.core.macro;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.List;
-
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.macro.apiimpl.AppImpl;
 import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
@@ -36,6 +31,11 @@ import org.mozilla.javascript.commonjs.module.provider.SoftCachingModuleScriptPr
 import org.mozilla.javascript.commonjs.module.provider.UrlModuleSourceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 
 public class MacroRuntime {
 
@@ -57,7 +57,7 @@ public class MacroRuntime {
     LOG.debug("Start MacroRuntime {}", this);
 
     context = Context.enter();
-    context.setLanguageVersion(Context.VERSION_1_8);
+    context.setLanguageVersion(Context.VERSION_ES6);
     context.setWrapFactory(new SCWrapFactory());
     globalScope = new ImporterTopLevel(context);
     // try {

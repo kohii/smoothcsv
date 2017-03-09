@@ -13,6 +13,16 @@
  */
 package com.smoothcsv.core.macro.component;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.text.JTextComponent;
+
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
 import com.smoothcsv.core.macro.MacroRuntime;
@@ -27,6 +37,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.fife.rsta.ac.LanguageSupport;
 import org.fife.rsta.ac.java.buildpath.ClasspathLibraryInfo;
+import org.fife.rsta.ac.java.buildpath.ClasspathSourceLocation;
 import org.fife.rsta.ac.js.JavaScriptCompletionProvider;
 import org.fife.rsta.ac.js.JavaScriptLanguageSupport;
 import org.fife.rsta.ac.js.PreProcessingScripts;
@@ -37,14 +48,6 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.mozilla.javascript.Context;
-
-import java.awt.BorderLayout;
-import java.io.IOException;
-import java.util.function.Consumer;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.text.JTextComponent;
 
 /**
  * @author kohii
@@ -102,6 +105,10 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     scrollPane.setBorder(
         BorderFactory.createMatteBorder(1, 0, 0, 0, UIConstants.getDefaultBorderColor()));
     add(scrollPane, BorderLayout.CENTER);
+
+    MacroRecorder.setMacroAppendListener(lines -> {
+      textArea.setText(String.join("\n", lines));
+    });
   }
 
   private void installAutoComplete(RSyntaxTextArea textArea) {
@@ -109,24 +116,26 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     SmoothCSVJavaScriptLanguageSupport languageSupport = new SmoothCSVJavaScriptLanguageSupport();
     languageSupport.setLanguageVersion(Context.VERSION_ES6);
     languageSupport.setAutoActivationEnabled(true);
-    languageSupport.setAutoActivationDelay(600);
+    languageSupport.setAutoActivationDelay(300);
     languageSupport.setParameterAssistanceEnabled(true);
     languageSupport.setClient(true);
 
     try {
       languageSupport.getJarManager().addClassFileSource(new ClasspathLibraryInfo(
-          new String[]{
+          Arrays.asList(
               com.smoothcsv.core.macro.api.App.class.getName(),
               com.smoothcsv.core.macro.api.CellEditor.class.getName(),
               com.smoothcsv.core.macro.api.CellVisitor.class.getName(),
               com.smoothcsv.core.macro.api.Clipboard.class.getName(),
               com.smoothcsv.core.macro.api.Command.class.getName(),
+              com.smoothcsv.core.macro.api.Console.class.getName(),
               com.smoothcsv.core.macro.api.CsvProperties.class.getName(),
               com.smoothcsv.core.macro.api.CsvSheet.class.getName(),
               com.smoothcsv.core.macro.api.Macro.class.getName(),
               com.smoothcsv.core.macro.api.Range.class.getName(),
               com.smoothcsv.core.macro.api.Window.class.getName()
-          }
+          ),
+          new ClasspathSourceLocation()
       ));
     } catch (IOException e) {
       log.warn("can't load macro api classes for auto completion", e);
@@ -145,7 +154,10 @@ public class MacroEditor extends JPanel implements SmoothComponent {
 
     @Override
     protected JavaScriptCompletionProvider createJavaScriptCompletionProvider() {
-      return new JavaScriptCompletionProvider(new SmoothCSVSourceCompletionProvider(), getJarManager(), this);
+      SmoothCSVSourceCompletionProvider sourceCompletionProvider = new SmoothCSVSourceCompletionProvider();
+      JavaScriptCompletionProvider provider = new JavaScriptCompletionProvider(sourceCompletionProvider, getJarManager(), this);
+      provider.setAutoActivationRules(true, ".");
+      return provider;
     }
 
     @Override
@@ -165,6 +177,7 @@ public class MacroEditor extends JPanel implements SmoothComponent {
 
     public SmoothCSVSourceCompletionProvider() {
       super(RhinoJavaScriptEngine.RHINO_ENGINE, false);
+      setAutoActivationRules(true, ".");
     }
 
     @Override

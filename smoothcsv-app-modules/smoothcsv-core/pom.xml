@@ -54,6 +54,10 @@
         <directory>src/main/resources</directory>
         <filtering>true</filtering>
       </resource>
+      <resource>
+        <directory>src/main/java/com/smoothcsv/core/macro/api</directory>
+        <targetPath>com/smoothcsv/core/macro/api</targetPath>
+      </resource>
     </resources>
   </build>
 </project>

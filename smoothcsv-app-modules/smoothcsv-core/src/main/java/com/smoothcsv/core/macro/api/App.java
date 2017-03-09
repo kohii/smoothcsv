@@ -13,6 +13,9 @@
  */
 package com.smoothcsv.core.macro.api;
 
+import java.io.File;
+import java.util.ResourceBundle;
+
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.macro.MacroUtils;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
@@ -23,13 +26,8 @@ import com.smoothcsv.framework.component.SCTabbedPane;
 import command.app.NewFileCommand;
 import command.app.OpenFileCommand;
 
-import java.io.File;
-import java.util.ResourceBundle;
-
 /**
  * This class represents the SmoothCSV application itself.
- *
- * @author kohii
  */
 public class App extends APIBase {
 

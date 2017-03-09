@@ -7,3 +7,4 @@ Command = Packages.com.smoothcsv.core.macro.api.Command;
 CsvProperties = Packages.com.smoothcsv.core.macro.api.CsvProperties;
 Macro = Packages.com.smoothcsv.core.macro.api.Macro;
 Window = Packages.com.smoothcsv.core.macro.api.Window;
+console = new Packages.com.smoothcsv.core.macro.api.Console();

@@ -16,9 +16,6 @@ package com.smoothcsv.core.macro.api;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
 import com.smoothcsv.framework.command.CommandRegistry;
 
-/**
- * @author kohii
- */
 public class Command extends APIBase {
 
   private Command() {}

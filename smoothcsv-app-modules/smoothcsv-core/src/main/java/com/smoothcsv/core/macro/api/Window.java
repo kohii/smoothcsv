@@ -1,13 +1,11 @@
 package com.smoothcsv.core.macro.api;
 
-import com.smoothcsv.core.macro.apiimpl.APIBase;
-
 import javax.swing.JOptionPane;
+
+import com.smoothcsv.core.macro.apiimpl.APIBase;
 
 /**
  * The window object represents the window of SmoothCSV application.
- *
- * @author kohii
  */
 public class Window extends APIBase {
 

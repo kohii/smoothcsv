@@ -16,9 +16,6 @@ package com.smoothcsv.core.macro.api;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
 import com.smoothcsv.swing.utils.ClipboardUtils;
 
-/**
- * @author kohii
- */
 public class Clipboard extends APIBase {
 
   private Clipboard() {}

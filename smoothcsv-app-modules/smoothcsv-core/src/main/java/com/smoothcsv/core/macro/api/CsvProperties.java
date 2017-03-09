@@ -21,8 +21,6 @@ import com.smoothcsv.csv.NewlineCharacter;
 
 /**
  * A class representing CSV properties such as delimiter, quote, and so on.
- *
- * @author kohii
  */
 public class CsvProperties extends APIBase {
 

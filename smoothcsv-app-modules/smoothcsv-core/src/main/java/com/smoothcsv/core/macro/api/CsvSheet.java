@@ -15,8 +15,6 @@ package com.smoothcsv.core.macro.api;
 
 /**
  * Represents a CSV sheet in SmoothCSV.
- *
- * @author kohii
  */
 public interface CsvSheet {
 

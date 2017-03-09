@@ -15,8 +15,6 @@ package com.smoothcsv.core.macro.api;
 
 /**
  * Callback function for {@link Range#forEach(CellVisitor)}.
- *
- * @author kohii
  */
 public interface CellVisitor {
 

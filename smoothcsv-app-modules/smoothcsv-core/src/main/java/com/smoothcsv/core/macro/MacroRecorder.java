@@ -14,6 +14,9 @@
 package com.smoothcsv.core.macro;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Consumer;
 
 import com.smoothcsv.csv.NewlineCharacter;
 import com.smoothcsv.framework.command.Command;
@@ -21,6 +24,7 @@ import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.ManualCondition;
 import command.app.ToggleCommandPaletteCommand;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -35,6 +39,9 @@ public class MacroRecorder {
 
   private static MacroRecorder instance;
 
+  @Setter
+  private static Consumer<List<String>> macroAppendListener;
+
   public static void start() {
     if (instance != null || recording) {
       throw new IllegalStateException();
@@ -42,6 +49,8 @@ public class MacroRecorder {
     instance = new MacroRecorder();
     recording = true;
     RECORDING.setValueManually(true);
+
+    macroAppendListener.accept(Collections.emptyList());
   }
 
 
@@ -76,20 +85,27 @@ public class MacroRecorder {
       return;
     }
     completeKeyTyping();
-    lines.add("Command.run('" + commandId + "');");
+    collectLine("Command.run('" + commandId + "');");
   }
 
   public void recordMacroExecution(String pathname) {
     completeKeyTyping();
-    lines.add("new Macro(new java.io.File('" + StringEscapeUtils.escapeEcmaScript(pathname)
+    collectLine("new Macro(new java.io.File('" + StringEscapeUtils.escapeEcmaScript(pathname)
         + "')).execute();");
   }
 
   private void completeKeyTyping() {
     if (keyTyped.length() != 0) {
-      lines.add("App.getActiveCellEditor().type('"
+      collectLine("App.getActiveCellEditor().type('"
           + StringEscapeUtils.escapeEcmaScript(keyTyped.toString()) + "');");
       keyTyped.setLength(0);
+    }
+  }
+
+  private void collectLine(String line) {
+    lines.add(line);
+    if (macroAppendListener != null) {
+      macroAppendListener.accept(lines);
     }
   }
 

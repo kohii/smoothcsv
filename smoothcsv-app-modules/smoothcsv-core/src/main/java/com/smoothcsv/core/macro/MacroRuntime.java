@@ -13,6 +13,8 @@
  */
 package com.smoothcsv.core.macro;
 
+import java.io.IOException;
+
 import com.smoothcsv.commons.exception.UnexpectedException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -21,20 +23,8 @@ import org.mozilla.javascript.ImporterTopLevel;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.commonjs.module.ModuleScriptProvider;
-import org.mozilla.javascript.commonjs.module.Require;
-import org.mozilla.javascript.commonjs.module.RequireBuilder;
-import org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider;
-import org.mozilla.javascript.commonjs.module.provider.SoftCachingModuleScriptProvider;
-import org.mozilla.javascript.commonjs.module.provider.UrlModuleSourceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.List;
 
 public class MacroRuntime {
 
@@ -59,22 +49,22 @@ public class MacroRuntime {
     context.setLanguageVersion(Context.VERSION_ES6);
     context.setWrapFactory(new SCWrapFactory());
     globalScope = new ImporterTopLevel(context);
-    // try {
-    List<URI> paths;
-    try {
-      paths = Collections.singletonList(this.getClass().getResource("/macro/console.js").toURI());
-    } catch (URISyntaxException e) {
-      throw new UnexpectedException(e);
-    }
-    ModuleSourceProvider sourceProvider = new UrlModuleSourceProvider(paths, null);
-    ModuleScriptProvider scriptProvider = new SoftCachingModuleScriptProvider(sourceProvider);
-    RequireBuilder builder = new RequireBuilder();
-    builder.setModuleScriptProvider(scriptProvider);
-    builder.setSandboxed(false);
-    Require require = builder.createRequire(context, globalScope);
 
-    require.install(globalScope);
-    loadScriptToGlobalVariable("console", "console");
+//    List<URI> paths;
+//    try {
+//      paths = Collections.singletonList(this.getClass().getResource("/macro/console.js").toURI());
+//    } catch (URISyntaxException e) {
+//      throw new UnexpectedException(e);
+//    }
+//    ModuleSourceProvider sourceProvider = new UrlModuleSourceProvider(paths, null);
+//    ModuleScriptProvider scriptProvider = new SoftCachingModuleScriptProvider(sourceProvider);
+//    RequireBuilder builder = new RequireBuilder();
+//    builder.setModuleScriptProvider(scriptProvider);
+//    builder.setSandboxed(false);
+//    Require require = builder.createRequire(context, globalScope);
+//
+//    require.install(globalScope);
+//    loadScriptToGlobalVariable("console", "console");
     context.evaluateString(globalScope, getInitScript(), "init.js", 1, null);
     started = true;
   }

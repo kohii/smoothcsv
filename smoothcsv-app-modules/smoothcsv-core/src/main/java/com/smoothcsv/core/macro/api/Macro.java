@@ -20,8 +20,6 @@ import com.smoothcsv.core.macro.apiimpl.APIBase;
 
 /**
  * Represents a macro.
- *
- * @author kohii
  */
 public class Macro extends APIBase {
 

@@ -161,15 +161,19 @@ public class MacroEditor extends JPanel implements SmoothComponent {
 
   static class SmoothCSVSourceCompletionProvider extends SourceCompletionProvider {
 
+    private boolean initialized = false;
+
     public SmoothCSVSourceCompletionProvider() {
       super(RhinoJavaScriptEngine.RHINO_ENGINE, false);
     }
 
     @Override
     public String getAlreadyEnteredText(JTextComponent comp) {
-      PreProcessingScripts pps = new PreProcessingScripts(this);
-      pps.parseScript(MacroRuntime.getInitScript(), new TypeDeclarationOptions("init.js", false, true));
-      setPreProcessingScripts(pps);
+      if (!initialized) {
+        PreProcessingScripts pps = new PreProcessingScripts(this);
+        pps.parseScript(MacroRuntime.getInitScript(), new TypeDeclarationOptions("init.js", false, true));
+        setPreProcessingScripts(pps);
+      }
 
       return super.getAlreadyEnteredText(comp);
     }

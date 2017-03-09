@@ -13,22 +13,31 @@
  */
 package com.smoothcsv.core.macro.api;
 
+import com.smoothcsv.core.macro.apiimpl.APIBase;
+import com.smoothcsv.swing.utils.ClipboardUtils;
+
 /**
  * @author kohii
  */
-public interface Clipboard {
+public class Clipboard extends APIBase {
+
+  private Clipboard() {}
 
   /**
    * Returns the content in the clipboard as plain text.
    *
    * @return the content in the clipboard
    */
-  String readText();
+  public static String readText() {
+    return ClipboardUtils.readText();
+  }
 
   /**
    * Writes the text into the clipboard as plain text.
    *
    * @param text the text
    */
-  void writeText(String text);
+  public static void writeText(String text) {
+    ClipboardUtils.writeText(text);
+  }
 }

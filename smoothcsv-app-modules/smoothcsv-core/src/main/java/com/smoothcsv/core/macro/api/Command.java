@@ -13,10 +13,15 @@
  */
 package com.smoothcsv.core.macro.api;
 
+import com.smoothcsv.core.macro.apiimpl.APIBase;
+import com.smoothcsv.framework.command.CommandRegistry;
+
 /**
  * @author kohii
  */
-public interface Command {
+public class Command extends APIBase {
+
+  private Command() {}
 
   /**
    * Runs the given command.
@@ -24,5 +29,7 @@ public interface Command {
    * @param id the command id to run
    * @return true if the command was successfully executed
    */
-  boolean run(String id);
+  public static boolean run(String id) {
+    return CommandRegistry.instance().runCommand(id);
+  }
 }

@@ -15,6 +15,7 @@ package com.smoothcsv.core.macro.component;
 
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.macro.MacroRecorder;
+import com.smoothcsv.core.macro.MacroRuntime;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
@@ -23,10 +24,14 @@ import com.smoothcsv.framework.condition.Condition;
 import com.smoothcsv.framework.condition.Condition.ConditionValueChangeEvent;
 import com.smoothcsv.swing.icon.AwesomeIconConstants;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.fife.rsta.ac.LanguageSupport;
+import org.fife.rsta.ac.java.buildpath.ClasspathLibraryInfo;
 import org.fife.rsta.ac.js.JavaScriptCompletionProvider;
 import org.fife.rsta.ac.js.JavaScriptLanguageSupport;
+import org.fife.rsta.ac.js.PreProcessingScripts;
 import org.fife.rsta.ac.js.SourceCompletionProvider;
+import org.fife.rsta.ac.js.ast.TypeDeclarationOptions;
 import org.fife.rsta.ac.js.engine.RhinoJavaScriptEngine;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
@@ -34,15 +39,18 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.mozilla.javascript.Context;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.util.function.Consumer;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.text.JTextComponent;
 
 /**
  * @author kohii
  */
 @SuppressWarnings("serial")
+@Slf4j
 public class MacroEditor extends JPanel implements SmoothComponent {
 
   @Getter
@@ -105,6 +113,25 @@ public class MacroEditor extends JPanel implements SmoothComponent {
     languageSupport.setParameterAssistanceEnabled(true);
     languageSupport.setClient(true);
 
+    try {
+      languageSupport.getJarManager().addClassFileSource(new ClasspathLibraryInfo(
+          new String[]{
+              com.smoothcsv.core.macro.api.App.class.getName(),
+              com.smoothcsv.core.macro.api.CellEditor.class.getName(),
+              com.smoothcsv.core.macro.api.CellVisitor.class.getName(),
+              com.smoothcsv.core.macro.api.Clipboard.class.getName(),
+              com.smoothcsv.core.macro.api.Command.class.getName(),
+              com.smoothcsv.core.macro.api.CsvProperties.class.getName(),
+              com.smoothcsv.core.macro.api.CsvSheet.class.getName(),
+              com.smoothcsv.core.macro.api.Macro.class.getName(),
+              com.smoothcsv.core.macro.api.Range.class.getName(),
+              com.smoothcsv.core.macro.api.Window.class.getName()
+          }
+      ));
+    } catch (IOException e) {
+      log.warn("can't load macro api classes for auto completion", e);
+    }
+
     languageSupport.install(textArea);
   }
 
@@ -136,6 +163,15 @@ public class MacroEditor extends JPanel implements SmoothComponent {
 
     public SmoothCSVSourceCompletionProvider() {
       super(RhinoJavaScriptEngine.RHINO_ENGINE, false);
+    }
+
+    @Override
+    public String getAlreadyEnteredText(JTextComponent comp) {
+      PreProcessingScripts pps = new PreProcessingScripts(this);
+      pps.parseScript(MacroRuntime.getInitScript(), new TypeDeclarationOptions("init.js", false, true));
+      setPreProcessingScripts(pps);
+
+      return super.getAlreadyEnteredText(comp);
     }
   }
 }

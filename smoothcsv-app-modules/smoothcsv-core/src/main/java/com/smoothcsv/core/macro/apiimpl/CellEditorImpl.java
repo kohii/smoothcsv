@@ -13,13 +13,13 @@
  */
 package com.smoothcsv.core.macro.apiimpl;
 
-import javax.swing.text.JTextComponent;
-
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.macro.api.CellEditor;
 import com.smoothcsv.core.macro.api.CsvSheet;
 import com.smoothcsv.swing.gridsheet.GridSheetCellEditor;
 import com.smoothcsv.swing.utils.SwingUtils;
+
+import javax.swing.text.JTextComponent;
 
 /**
  * @author kohii
@@ -28,7 +28,7 @@ public class CellEditorImpl implements CellEditor {
 
   private CsvSheet parent;
 
-  CellEditorImpl(CsvSheet csvSheet) {
+  public CellEditorImpl(CsvSheet csvSheet) {
     this.parent = csvSheet;
   }
 

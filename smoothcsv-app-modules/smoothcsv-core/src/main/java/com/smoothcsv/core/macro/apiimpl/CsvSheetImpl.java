@@ -13,8 +13,6 @@
  */
 package com.smoothcsv.core.macro.apiimpl;
 
-import java.io.File;
-
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
@@ -34,6 +32,8 @@ import command.grid.RedoCommand;
 import command.grid.UndoCommand;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+
 /**
  * @author kohii
  */
@@ -45,7 +45,7 @@ public class CsvSheetImpl extends APIBase implements CsvSheet {
     return (CsvSheetView) SCApplication.components().getTabbedPane().getViewById(id);
   }
 
-  CsvSheetImpl(int csvSheetViewId) {
+  public CsvSheetImpl(int csvSheetViewId) {
     id = csvSheetViewId;
   }
 

@@ -14,10 +14,8 @@
 package com.smoothcsv.core.macro;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.core.macro.apiimpl.AppImpl;
-import com.smoothcsv.core.macro.apiimpl.ClipboardImpl;
-import com.smoothcsv.core.macro.apiimpl.CommandImpl;
-import com.smoothcsv.core.macro.apiimpl.WindowImpl;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ImporterTopLevel;
 import org.mozilla.javascript.Script;
@@ -32,9 +30,10 @@ import org.mozilla.javascript.commonjs.module.provider.UrlModuleSourceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MacroRuntime {
@@ -63,7 +62,7 @@ public class MacroRuntime {
     // try {
     List<URI> paths;
     try {
-      paths = Arrays.asList(this.getClass().getResource("/macro/console.js").toURI());
+      paths = Collections.singletonList(this.getClass().getResource("/macro/console.js").toURI());
     } catch (URISyntaxException e) {
       throw new UnexpectedException(e);
     }
@@ -74,24 +73,9 @@ public class MacroRuntime {
     builder.setSandboxed(false);
     Require require = builder.createRequire(context, globalScope);
 
-    // Finally, if you want to execute a top-level module, do this:
-    // require.requireMain(context, "mainModuleId");
-
-    // Or, if you just want require() in your top level scope, but want to run
-    // some script manually, then just do:
     require.install(globalScope);
-    globalScope.defineProperty("global", globalScope, ScriptableObject.READONLY);
-    loadScriptToGlobalVariable("App", AppImpl.getInstance());
-    loadScriptToGlobalVariable("Clipboard", ClipboardImpl.getInstance());
-    loadScriptToGlobalVariable("Command", CommandImpl.getInstance());
-    loadScriptToGlobalVariable("Macro", com.smoothcsv.core.macro.api.Macro.class);
-    loadScriptToGlobalVariable("CsvProperties", com.smoothcsv.core.macro.api.CsvProperties.class);
-    loadScriptToGlobalVariable("Window", WindowImpl.getInstance());
     loadScriptToGlobalVariable("console", "console");
-    // } catch (URISyntaxException e) {
-    // throw new UnexpectedException(e);
-    // }
-    // initBuiltinVariables();
+    context.evaluateString(globalScope, getInitScript(), "init.js", 1, null);
     started = true;
   }
 
@@ -142,5 +126,13 @@ public class MacroRuntime {
 
   public boolean isMacroExecuting() {
     return macroExecuting;
+  }
+
+  public static String getInitScript() {
+    try {
+      return StringUtils.join(IOUtils.readLines(MacroRuntime.class.getResourceAsStream("/macro/init.js"), "utf8"), '\n');
+    } catch (IOException e) {
+      throw new UnexpectedException(e);
+    }
   }
 }

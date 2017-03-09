@@ -168,6 +168,8 @@ public class MacroEditor extends JPanel implements SmoothComponent {
         support.uninstall(textArea);
       }
       super.install(textArea);
+
+      getAutoCompletionFor(textArea).setAutoCompleteSingleChoices(false);
     }
   }
 

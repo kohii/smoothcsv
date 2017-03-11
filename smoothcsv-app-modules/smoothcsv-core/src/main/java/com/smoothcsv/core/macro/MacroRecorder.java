@@ -96,7 +96,7 @@ public class MacroRecorder {
 
   private void completeKeyTyping() {
     if (keyTyped.length() != 0) {
-      collectLine("App.getActiveCellEditor().type('"
+      collectLine("App.getActiveCellEditor(true).type('"
           + StringEscapeUtils.escapeEcmaScript(keyTyped.toString()) + "');");
       keyTyped.setLength(0);
     }

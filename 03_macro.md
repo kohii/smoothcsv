@@ -27,17 +27,17 @@ There are basically 2 ways to create macros.
 
 You can use the following global variables.
 
-- `App`  
-  The instance of [App](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/App.html). This represents the application itself.
-- `Clipboard`  
-  The instance of [Clipboard](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Clipboard.html).
-- `Window`  
-  The instance of [Window](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Window.html).
-- `CsvProperties`  
+- [App](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/App.html) (class)  
+  A class that represents the application itself.
+- [Clipboard](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Clipboard.html) (class)  
+  A class that provides static methods to access the OS's clipboard.
+- [Window](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Window.html) (class)  
+  A class that provides static methods to show dialogs.
+- [CsvProperties](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/CsvProperties.html) (class)  
   A class that represents CSV Properties.
-- `Macro`  
+- [Macro](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Macro.html) (class)  
   A class which encapsulates macro script. You can call another macro from a main macro through this class.
-- `console`  
+- `console` (the instance of [Console](http://127.0.0.1:4000/macro_api/com/smoothcsv/core/macro/api/Console.html))  
   A object which is very similar to browsers' console API. `console` has a method `log` that outputs its arguments to SmoothCSV's console.
 
 Global scope itself can be accessed by the name `global`.

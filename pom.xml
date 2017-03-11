@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.smoothcsv</groupId>
   <artifactId>smoothcsv</artifactId>
-  <version>2.0.0-alpha5</version>
+  <version>2.0.0-alpha6</version>
   <packaging>pom</packaging>
   <modules>
     <module>smoothcsv-framework</module>

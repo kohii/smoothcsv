@@ -16,6 +16,7 @@ package command.grid;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
@@ -82,13 +83,18 @@ public class PasteCommand extends GridCommand {
 
   public static void paste(CsvGridSheetPane gridSheetPane, PasteRange range, List<List<?>> values,
                            boolean doNotChangeSelection) {
-    int leftTopRow = range.getRow();
-    int leftTopColumn = range.getColumn();
-    int rowSize = gridSheetPane.getRowCount();
-    int columnSize = gridSheetPane.getColumnCount();
 
     try (EditTransaction tran = gridSheetPane.transaction()) {
 
+      int leftTopRow = range.getRow();
+      int leftTopColumn = range.getColumn();
+      int rowSize = gridSheetPane.getRowCount();
+      int columnSize = gridSheetPane.getColumnCount();
+
+      if (leftTopRow + values.size() > rowSize) {
+        gridSheetPane.addRow(leftTopRow + values.size() - rowSize);
+      }
+ 
       int currentRow = leftTopRow;
       int pastedRowCount = 0;
       int pastedColumnCount = 0;
@@ -99,12 +105,6 @@ public class PasteCommand extends GridCommand {
           int appendCol = (leftTopColumn + len) - columnSize;
           gridSheetPane.addColumn(appendCol);
           columnSize += appendCol;
-        }
-
-        if (rowSize <= currentRow) {
-          int appendRow = currentRow - rowSize + 1;
-          gridSheetPane.addRow(appendRow);
-          rowSize += appendRow;
         }
 
         for (int j = 0; j < len; j++) {
@@ -141,7 +141,11 @@ public class PasteCommand extends GridCommand {
     try (SmoothCsvReader csvReader = new SmoothCsvReader(new StringReader(text), csvMeta)) {
       List<String> rowData;
       while ((rowData = csvReader.readRow()) != null) {
-        data.add(rowData);
+        if (rowData.isEmpty()) {
+          data.add(Collections.singletonList(""));
+        } else {
+          data.add(rowData);
+        }
       }
     } catch (IOException e) {
       throw new UnexpectedException(e);

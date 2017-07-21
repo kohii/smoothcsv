@@ -111,6 +111,7 @@ grid:not(:editing)
 	delete	grid:Clear
 	shortcut+backspace	grid:DeleteCell
 	shortcut+colon	grid:InsertCell
+	backspace	grid:Clear
 
 cell-editor
 	escape	grid:CancelEdit

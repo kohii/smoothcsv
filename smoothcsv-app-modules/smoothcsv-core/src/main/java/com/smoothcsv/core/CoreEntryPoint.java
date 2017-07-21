@@ -150,7 +150,7 @@ public class CoreEntryPoint extends ModuleEntryPointBase {
         SCAppearanceManager.init();
         ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setDismissDelay(100000);
-        toolTipManager.setInitialDelay(100);
+        toolTipManager.setInitialDelay(20);
         toolTipManager.setReshowDelay(20);
 
         MainMenuItems.instance().registerCustomMenu("[open_recent]", caption -> new RecentlyOpenedFilesMenu(caption));

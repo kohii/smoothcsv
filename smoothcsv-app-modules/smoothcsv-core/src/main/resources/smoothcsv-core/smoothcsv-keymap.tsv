@@ -52,8 +52,6 @@ grid
 	shortcut+shift+end	grid:SelectToLastCell
 	tab	grid:MoveRightInActiveRange
 	shift+tab	grid:MoveLeftInActiveRange
-	enter	grid:MoveDownInActiveRange
-	shift+enter	grid:MoveUpInActiveRange
 	shortcut+l	grid:FillLeft
 	shortcut+r	grid:FillRight
 	shortcut+u	grid:FillUp
@@ -100,6 +98,7 @@ grid
 	ctrl+shift+down	grid:SelectToBottomEdgeOfDataRegion
 
 grid:not(:editing)
+	enter	grid:StartEdit
 	shortcut+z	grid:Undo
 	shortcut+y	grid:Redo
 	shortcut+c	grid:Copy
@@ -116,6 +115,7 @@ grid:not(:editing)
 cell-editor
 	escape	grid:CancelEdit
 	enter	grid:MoveDownInActiveRange
+	shift+enter	grid:MoveUpInActiveRange
 	shortcut+z	cell_editor:Undo
 	shortcut+y	cell_editor:Redo
 	alt+enter	cell_editor:InsertBreak

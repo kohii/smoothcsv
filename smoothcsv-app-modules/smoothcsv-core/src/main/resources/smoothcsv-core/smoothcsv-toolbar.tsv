@@ -1,6 +1,7 @@
 app:NewFile	fa:#f016	New
 app:OpenFile	fa:#f115	Open...
 app:Save	fa:#f0c7	Save
+csvsheet:ShowProperties	fa:#f02b	Properties...
 -
 grid:Copy	fa:#f0c5	Copy
 grid:Cut	fa:#f0c4	Cut
@@ -10,3 +11,7 @@ grid:Undo	fa:#f0e2	Undo
 grid:Redo	fa:#f01e	Redo
 -
 find:Show	fa:#f002	Find And Replace
+grid:Sort	fa:#f15d	Sort...
+grid:AutofitColumnWidth	fa:#f07e	Auto-Fit Column Width
+-
+app:ShowSettings	fa:#f013	Preferences...

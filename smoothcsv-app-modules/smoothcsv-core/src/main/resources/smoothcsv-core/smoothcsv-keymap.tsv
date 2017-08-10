@@ -26,6 +26,7 @@ csv-sheet
 	shortcut+f	find:Show
 	shortcut+rightbracket	value_panel:Expand
 	shortcut+leftbracket	value_panel:Compress
+	f5	app:Reload
 
 grid
 	f2	grid:StartEdit

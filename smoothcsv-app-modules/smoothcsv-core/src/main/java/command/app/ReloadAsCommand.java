@@ -16,6 +16,8 @@ public class ReloadAsCommand extends CsvSheetCommandBase {
     CloseCommand.beforeClose(view, true);
     CsvMeta properties = OpenFileCommand.chooseProperties();
 
+    OpenFileCommand.determineCsvMetaContent(view.getViewInfo().getFile(), properties);
+
     CloseCommand.close(view, false);
     OpenFileCommand.run(view.getViewInfo().getFile(), properties, view.getViewInfo().getOptions(), pos);
   }

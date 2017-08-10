@@ -120,6 +120,12 @@ public class OpenFileCommand extends Command {
       properties = CsvSheetSupport.getDefaultCsvMeta();
     }
 
+    determineCsvMetaContent(file, properties);
+
+    run(file, properties, null, index);
+  }
+
+  static void determineCsvMetaContent(File file, CsvMeta properties) {
     if (properties.isCharsetNotDetermined()) {
       // detect charset
       CharsetInfo ci = CharsetUtils.detect(file, 4000);
@@ -173,8 +179,6 @@ public class OpenFileCommand extends Command {
       properties.setDelimiterNotDetermined(false);
       properties.setQuoteNotDetermined(false);
     }
-
-    run(file, properties, null, index);
   }
 
   public static CsvMeta chooseProperties() {

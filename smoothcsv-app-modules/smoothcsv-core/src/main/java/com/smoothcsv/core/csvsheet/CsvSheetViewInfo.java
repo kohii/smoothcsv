@@ -18,7 +18,7 @@ import java.io.File;
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.RecentFilesHistory;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.reader.CsvReadOption;
 import com.smoothcsv.framework.component.view.ViewInfo;
 
 /**
@@ -30,9 +30,9 @@ public class CsvSheetViewInfo extends ViewInfo {
 
   private CsvMeta csvMeta;
 
-  private CsvReaderOptions options;
+  private CsvReadOption options;
 
-  public CsvSheetViewInfo(File file, CsvMeta csvMeta, CsvReaderOptions options) {
+  public CsvSheetViewInfo(File file, CsvMeta csvMeta, CsvReadOption options) {
     this.csvMeta = csvMeta;
     this.options = options;
     setFile(file);
@@ -61,12 +61,12 @@ public class CsvSheetViewInfo extends ViewInfo {
     propertyChangeSupport.firePropertyChange("csvMeta", old, csvMeta);
   }
 
-  public CsvReaderOptions getOptions() {
+  public CsvReadOption getOptions() {
     return options;
   }
 
-  public void setOptions(CsvReaderOptions options) {
-    CsvReaderOptions old = this.options;
+  public void setOptions(CsvReadOption options) {
+    CsvReadOption old = this.options;
     this.options = options;
     propertyChangeSupport.firePropertyChange("options", old, options);
   }

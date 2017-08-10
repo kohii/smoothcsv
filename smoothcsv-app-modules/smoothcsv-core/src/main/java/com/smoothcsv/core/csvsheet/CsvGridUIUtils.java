@@ -18,7 +18,7 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
 import sun.swing.SwingUtilities2;
 
 /**
@@ -26,7 +26,7 @@ import sun.swing.SwingUtilities2;
  */
 public class CsvGridUIUtils {
 
-  static void paintNewlineChar(JComponent comp, Graphics g, int x, int y, NewlineCharacter newlineCharacter) {
+  static void paintNewlineChar(JComponent comp, Graphics g, int x, int y, LineSeparator lineSeparator) {
 
     FontMetrics fm = SwingUtilities2.getFontMetrics(comp, g);
     int height = fm.getHeight();
@@ -38,7 +38,7 @@ public class CsvGridUIUtils {
     int left;
     int right;
 
-    switch (newlineCharacter) {
+    switch (lineSeparator) {
       case LF:
         top = y + height / 5;
         int middle = x + 1 + arrowWidth;
@@ -73,7 +73,7 @@ public class CsvGridUIUtils {
 
         break;
       default:
-        throw new IllegalArgumentException(newlineCharacter.toString());
+        throw new IllegalArgumentException(lineSeparator.toString());
     }
   }
 }

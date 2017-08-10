@@ -17,7 +17,7 @@ import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
 
 /**
  * A class representing CSV properties such as delimiter, quote, and so on.
@@ -39,9 +39,9 @@ public class CsvProperties extends APIBase {
    */
   public static final int QUOTES_IF_NECESSARY = 3;
 
-  public static final String CR = NewlineCharacter.CR.stringValue();
-  public static final String LF = NewlineCharacter.LF.stringValue();
-  public static final String CRLF = NewlineCharacter.CRLF.stringValue();
+  public static final String CR = LineSeparator.CR.stringValue();
+  public static final String LF = LineSeparator.LF.stringValue();
+  public static final String CRLF = LineSeparator.CRLF.stringValue();
 
   /**
    * Creates default CsvProperties.
@@ -76,7 +76,7 @@ public class CsvProperties extends APIBase {
     this.escape = String.valueOf(csvMeta.getEscape());
     this.charset = csvMeta.getCharset().toString();
     this.hasBOM = csvMeta.hasBom();
-    this.newlineCharacter = csvMeta.getNewlineCharacter().stringValue();
+    this.newlineCharacter = csvMeta.getLineSeparator().stringValue();
     switch (csvMeta.getQuoteOption()) {
       case NO_QUOTE:
         this.quoteOption = NO_QUOTE;
@@ -215,7 +215,7 @@ public class CsvProperties extends APIBase {
   public void setNewlineCharacter(String newlineCharacter) {
     if (!CR.equals(newlineCharacter) && !LF.equals(newlineCharacter)
         && !CRLF.equals(newlineCharacter)) {
-      throw new IllegalArgumentException("newlineCharacter:" + newlineCharacter);
+      throw new IllegalArgumentException("lineSeparator:" + newlineCharacter);
     }
     this.newlineCharacter = newlineCharacter;
   }

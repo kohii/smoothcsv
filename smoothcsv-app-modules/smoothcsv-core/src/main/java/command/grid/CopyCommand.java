@@ -24,8 +24,8 @@ import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
-import com.smoothcsv.csv.writer.CsvWriterOptions;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
+import com.smoothcsv.csv.writer.CsvWriteOption;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.utils.ClipboardUtils;
 
@@ -44,7 +44,7 @@ public class CopyCommand extends GridCommand {
 
   @Override
   public void run(CsvGridSheetPane gridSheetPane) {
-    CsvQuoteApplyRule quoteRule = CsvQuoteApplyRule
+    QuoteApplyRule quoteRule = QuoteApplyRule
         .valueOf(CoreSettings.getInstance().get(CoreSettings.QUOTE_RULE_FOR_COPYING));
     singleTsvMeta.setQuoteOption(quoteRule);
     String text = copy(gridSheetPane, singleTsvMeta);
@@ -62,8 +62,7 @@ public class CopyCommand extends GridCommand {
     maxC = Math.min(maxC, gridSheetPane.getColumnCount() - 1);
 
     StringWriter sw = new StringWriter();
-    CsvWriterOptions opt = new CsvWriterOptions();
-    opt.setQuoteOption(csvMeta.getQuoteOption());
+    CsvWriteOption opt = CsvWriteOption.of(csvMeta.getQuoteOption());
     try (SmoothCsvWriter writer = new SmoothCsvWriter(sw, csvMeta, opt)) {
 
       for (int rowIndex = minR; rowIndex <= maxR; rowIndex++) {
@@ -82,7 +81,7 @@ public class CopyCommand extends GridCommand {
           values.add(value);
         }
         if (maxR == rowIndex) {
-          writer.setWriteLineSeparater(false);
+          writer.setWriteLineSeparator(false);
         }
         writer.writeRow(values);
       }

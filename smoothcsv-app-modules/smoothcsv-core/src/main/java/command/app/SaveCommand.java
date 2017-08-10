@@ -25,6 +25,7 @@ import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.csv.writer.CsvWriteOption;
 import com.smoothcsv.swing.gridsheet.model.GridSheetModel;
 
 /**
@@ -52,7 +53,9 @@ public class SaveCommand extends CsvSheetCommandBase {
     CsvMeta csvMeta = vi.getCsvMeta();
     try (SmoothCsvWriter writer =
              new SmoothCsvWriter(
-                 new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()), csvMeta)) {
+                 new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()),
+                 csvMeta,
+                 CsvWriteOption.of(csvMeta.getQuoteOption()))) {
       GridSheetModel model = view.getGridSheetPane().getModel();
       int rowCount = model.getRowCount();
       if (rowCount > 0) {
@@ -60,7 +63,7 @@ public class SaveCommand extends CsvSheetCommandBase {
         for (int rowIndex = 0; rowIndex < rowCount - 1; rowIndex++) {
           writer.writeRow(model.getRowDataAt(rowIndex));
         }
-        writer.setWriteLineSeparater(false);
+        writer.setWriteLineSeparator(false);
         writer.writeRow(model.getRowDataAt(rowCount - 1));
       }
     } catch (IOException | RuntimeException e) {

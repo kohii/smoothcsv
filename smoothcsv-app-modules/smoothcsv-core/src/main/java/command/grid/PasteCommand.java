@@ -27,7 +27,7 @@ import com.smoothcsv.core.csv.SmoothCsvReader;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
 import com.smoothcsv.swing.gridsheet.model.CellConsumer;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
@@ -44,7 +44,7 @@ public class PasteCommand extends GridCommand {
     singleTsvMeta.setDelimiter('\t');
     singleTsvMeta.setEscape('\0');
     singleTsvMeta.setQuote('"');
-    singleTsvMeta.setQuoteOption(CsvQuoteApplyRule.QUOTES_ALL);
+    singleTsvMeta.setQuoteOption(QuoteApplyRule.QUOTES_ALL);
   }
 
   @Override
@@ -94,7 +94,7 @@ public class PasteCommand extends GridCommand {
       if (leftTopRow + values.size() > rowSize) {
         gridSheetPane.addRow(leftTopRow + values.size() - rowSize);
       }
- 
+
       int currentRow = leftTopRow;
       int pastedRowCount = 0;
       int pastedColumnCount = 0;
@@ -138,7 +138,7 @@ public class PasteCommand extends GridCommand {
 
   private static List<List<?>> parse(String text, CsvMeta csvMeta) {
     List<List<?>> data = new ArrayList<>();
-    try (SmoothCsvReader csvReader = new SmoothCsvReader(new StringReader(text), csvMeta)) {
+    try (SmoothCsvReader csvReader = new SmoothCsvReader(new StringReader(text), csvMeta.toCsvProperties())) {
       List<String> rowData;
       while ((rowData = csvReader.readRow()) != null) {
         if (rowData.isEmpty()) {

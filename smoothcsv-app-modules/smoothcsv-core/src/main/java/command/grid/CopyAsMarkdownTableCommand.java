@@ -50,7 +50,7 @@ public class CopyAsMarkdownTableCommand extends GridCommand {
     }
 
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
-        .getNewlineCharacter().stringValue();
+        .getLineSeparator().stringValue();
 
     StringBuilder sb = new StringBuilder();
     int colSize = textWidths.size();

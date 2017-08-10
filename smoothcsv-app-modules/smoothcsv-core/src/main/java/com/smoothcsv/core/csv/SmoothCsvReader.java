@@ -18,9 +18,9 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.smoothcsv.csv.CsvProperties;
-import com.smoothcsv.csv.NewlineCharacter;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.prop.CsvProperties;
+import com.smoothcsv.csv.prop.LineSeparator;
+import com.smoothcsv.csv.reader.CsvReadOption;
 import com.smoothcsv.csv.reader.DefaultCsvReader;
 import lombok.Getter;
 
@@ -30,15 +30,15 @@ import lombok.Getter;
 public class SmoothCsvReader extends DefaultCsvReader {
 
   @Getter
-  private NewlineCharacter firstNewlineCharacter;
-  private NewlineCharacter lastNewlineCharacter;
+  private LineSeparator firstLineSeparator;
+  private LineSeparator lastLineSeparator;
 
   /**
    * @param in
    * @param properties
    * @param options
    */
-  public SmoothCsvReader(Reader in, CsvProperties properties, CsvReaderOptions options) {
+  public SmoothCsvReader(Reader in, CsvProperties properties, CsvReadOption options) {
     super(in, properties, options);
   }
 
@@ -59,19 +59,19 @@ public class SmoothCsvReader extends DefaultCsvReader {
 
   @Override
   protected void handleLineSeparator(List<String> row, int rowIndex,
-                                     NewlineCharacter newlineCharacter) {
-    if (firstNewlineCharacter == null) {
-      firstNewlineCharacter = newlineCharacter;
+                                     LineSeparator lineSeparator) {
+    if (firstLineSeparator == null) {
+      firstLineSeparator = lineSeparator;
     }
-    lastNewlineCharacter = newlineCharacter;
+    lastLineSeparator = lineSeparator;
   }
 
   @Override
   public List<String> readRow() throws IOException {
     List<String> list = super.readRow();
     if (list == null) {
-      if (lastNewlineCharacter != null) {
-        lastNewlineCharacter = null;
+      if (lastLineSeparator != null) {
+        lastLineSeparator = null;
         return new ArrayList<>();
       }
     }

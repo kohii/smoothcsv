@@ -41,7 +41,7 @@ public class CopyWithoutMetaCharsCommand extends GridCommand {
 
     final String lineSeparator = gridSheetPane.getCsvSheetView()
         .getViewInfo().getCsvMeta()
-        .getNewlineCharacter().stringValue();
+        .getLineSeparator().stringValue();
 
     StringBuilder sb = new StringBuilder();
 

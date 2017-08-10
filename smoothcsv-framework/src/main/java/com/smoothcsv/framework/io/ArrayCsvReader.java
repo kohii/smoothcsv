@@ -15,9 +15,9 @@ package com.smoothcsv.framework.io;
 
 import java.io.Reader;
 
-import com.smoothcsv.csv.CsvProperties;
+import com.smoothcsv.csv.prop.CsvProperties;
 import com.smoothcsv.csv.reader.AbstractCsvReader;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.reader.CsvReadOption;
 
 /**
  * @author kohii
@@ -31,11 +31,11 @@ public class ArrayCsvReader extends AbstractCsvReader<String[]> {
   }
 
   public ArrayCsvReader(Reader in, CsvProperties properties, int length) {
-    super(in, properties, CsvReaderOptions.DEFAULT);
+    super(in, properties, CsvReadOption.DEFAULT);
     this.length = length;
   }
 
-  public ArrayCsvReader(Reader in, CsvProperties properties, CsvReaderOptions options, int length) {
+  public ArrayCsvReader(Reader in, CsvProperties properties, CsvReadOption options, int length) {
     super(in, properties, options);
     this.length = length;
   }

@@ -13,21 +13,17 @@
  */
 package com.smoothcsv.framework.io;
 
-import com.smoothcsv.csv.CsvProperties;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.prop.CsvProperties;
+import com.smoothcsv.csv.reader.CsvReadOption;
 
 /**
  * @author kohii
  */
 public class CsvSupport {
 
-  public static final CsvProperties TSV_PROPERTIES = new CsvProperties.ImmutableCsvProperties('\t',
-      '\0', '\0');
+  public static final CsvProperties TSV_PROPERTIES = CsvProperties.of('\t');
 
-  public static final CsvReaderOptions SKIP_EMPTYROW_OPTION = new CsvReaderOptions();
-
-  static {
-    SKIP_EMPTYROW_OPTION.setSkipEmptyLines(true);
-    SKIP_EMPTYROW_OPTION.setSkipCommentLines(true);
-  }
+  public static final CsvReadOption SKIP_EMPTYROW_OPTION = CsvReadOption.DEFAULT
+      .withSkipEmptyLines(true)
+      .withSkipCommentLines(true);
 }

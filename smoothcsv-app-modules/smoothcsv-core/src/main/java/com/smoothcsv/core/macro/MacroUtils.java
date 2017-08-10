@@ -20,8 +20,8 @@ import java.nio.charset.Charset;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.macro.api.CsvProperties;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
+import com.smoothcsv.csv.prop.LineSeparator;
 
 /**
  * @author kohii
@@ -35,17 +35,17 @@ public class MacroUtils {
     csvMeta.setEscape(prop.getEscape().charAt(0));
     csvMeta.setCharset(Charset.forName(prop.getCharset()));
     csvMeta.setHasBom(prop.hasBOM());
-    csvMeta.setNewlineCharacter(NewlineCharacter.of(prop.getNewlineCharacter()));
-    CsvQuoteApplyRule quoteApplyRule;
+    csvMeta.setLineSeparator(LineSeparator.of(prop.getNewlineCharacter()));
+    QuoteApplyRule quoteApplyRule;
     switch (prop.getQuoteOption()) {
       case CsvProperties.NO_QUOTE:
-        quoteApplyRule = CsvQuoteApplyRule.NO_QUOTE;
+        quoteApplyRule = QuoteApplyRule.NO_QUOTE;
         break;
       case CsvProperties.QUOTES_ALL:
-        quoteApplyRule = CsvQuoteApplyRule.QUOTES_ALL;
+        quoteApplyRule = QuoteApplyRule.QUOTES_ALL;
         break;
       case CsvProperties.QUOTES_IF_NECESSARY:
-        quoteApplyRule = CsvQuoteApplyRule.QUOTES_IF_NECESSARY;
+        quoteApplyRule = QuoteApplyRule.QUOTES_IF_NECESSARY;
         break;
       default:
         throw new IllegalStateException("" + prop.getQuoteOption());

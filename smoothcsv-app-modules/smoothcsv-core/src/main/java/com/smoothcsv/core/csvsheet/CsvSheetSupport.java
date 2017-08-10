@@ -25,7 +25,7 @@ import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.commons.utils.SerializeUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.SmoothCsvReader;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.reader.CsvReadOption;
 import com.smoothcsv.framework.util.DirectoryResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,15 +89,15 @@ public class CsvSheetSupport {
   }
 
   public static CsvGridSheetModel createModelFromFile(File file, CsvMeta csvMeta,
-                                                      CsvReaderOptions options) {
+                                                      CsvReadOption options) {
 
     if (options == null) {
-      options = CsvReaderOptions.DEFAULT;
+      options = CsvReadOption.DEFAULT;
     }
 
     try (SmoothCsvReader reader =
              new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getCharset()),
-                 csvMeta, options)) {
+                 csvMeta.toCsvProperties(), options)) {
       List<List> data = new ArrayList<>();
       List r;
       while ((r = reader.readRow()) != null) {
@@ -108,8 +108,8 @@ public class CsvSheetSupport {
       }
       CsvGridSheetModel gsm = new CsvGridSheetModel(data, data.size(), Math.max(1, reader.getMaxColumnCount()));
       if (csvMeta.isNewlineCharNotDetermined()) {
-        if (reader.getFirstNewlineCharacter() != null) {
-          csvMeta.setNewlineCharacter(reader.getFirstNewlineCharacter());
+        if (reader.getFirstLineSeparator() != null) {
+          csvMeta.setLineSeparator(reader.getFirstLineSeparator());
         }
         csvMeta.setNewlineCharNotDetermined(false);
       }

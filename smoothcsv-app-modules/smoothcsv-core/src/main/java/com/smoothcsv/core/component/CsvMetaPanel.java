@@ -39,8 +39,8 @@ import com.smoothcsv.core.csv.AvailableCharsetDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.core.util.CsvPropertySettings;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.exception.AppException;
@@ -80,7 +80,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private ExButtonGroup<Integer> escapeType;
-  private ExButtonGroup<CsvQuoteApplyRule> quoteType;
+  private ExButtonGroup<QuoteApplyRule> quoteType;
 
   private Object oldEncoding = null;
   private Object oldQuoteChar;
@@ -245,7 +245,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     gridBagConstraints_5.gridy = 8;
     gridBagConstraints_5.anchor = java.awt.GridBagConstraints.WEST;
     add(quoteTypeLabel, gridBagConstraints_5);
-    quoteAll = new ExRadioButton(CsvQuoteApplyRule.QUOTES_ALL);
+    quoteAll = new ExRadioButton(QuoteApplyRule.QUOTES_ALL);
 
     quoteAll.setText(CoreBundle.get("key.quoteRule.all")); // NOI18N
     quoteAll.setLabel(CoreBundle.get("key.quoteRule.all")); // NOI18N
@@ -261,7 +261,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     gridBagConstraints_8.gridwidth = 4;
     gridBagConstraints_8.anchor = java.awt.GridBagConstraints.WEST;
     add(quoteAll, gridBagConstraints_8);
-    quoteWhenNeeded = new ExRadioButton<>(CsvQuoteApplyRule.QUOTES_IF_NECESSARY);
+    quoteWhenNeeded = new ExRadioButton<>(QuoteApplyRule.QUOTES_IF_NECESSARY);
 
     quoteWhenNeeded.setText(CoreBundle.get("key.quoteRule.needed")); // NOI18N
     quoteWhenNeeded.setActionCommand(CoreBundle.get("key.quoteRule.needed")); // NOI18N
@@ -421,7 +421,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     escapeType.addSelectionListener((radio) -> {
       updateFormEnabled();
     });
-    quoteType = new ExButtonGroup<CsvQuoteApplyRule>(quoteAll, quoteWhenNeeded, quoteRuleMacro);
+    quoteType = new ExButtonGroup<QuoteApplyRule>(quoteAll, quoteWhenNeeded, quoteRuleMacro);
 
     updateFormEnabled();
 
@@ -486,7 +486,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private Object[] createNewlineCharItems() {
-    NewlineCharacter[] newlines = NewlineCharacter.values();
+    LineSeparator[] newlines = LineSeparator.values();
     if (autoDeterminedOptionEnabled) {
       List<Object> newlineCharItems = new ArrayList<>();
       newlineCharItems.add(AUTO);
@@ -562,7 +562,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (csvMeta.isNewlineCharNotDetermined()) {
       newlineCharacter.setSelectedItem(AUTO);
     } else {
-      newlineCharacter.setSelectedItem(csvMeta.getNewlineCharacter());
+      newlineCharacter.setSelectedItem(csvMeta.getLineSeparator());
     }
   }
 
@@ -592,11 +592,11 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (AUTO.equals(quote)) {
       csvMeta.setQuoteNotDetermined(true);
     } else if (quote.equals(NONE)) {
-      csvMeta.setQuoteOption(CsvQuoteApplyRule.NO_QUOTE);
+      csvMeta.setQuoteOption(QuoteApplyRule.NO_QUOTE);
       csvMeta.setQuote('\0');
     } else if (quote instanceof Character) {
       csvMeta.setQuote((Character) quote);
-      CsvQuoteApplyRule quoteRule = quoteType.getSelectedValue();
+      QuoteApplyRule quoteRule = quoteType.getSelectedValue();
       csvMeta.setQuoteOption(quoteRule);
       QUOTE_HISTORY.put(quote.toString());
 
@@ -616,7 +616,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (AUTO.equals(newline)) {
       csvMeta.setNewlineCharNotDetermined(true);
     } else {
-      csvMeta.setNewlineCharacter((NewlineCharacter) newline);
+      csvMeta.setLineSeparator((LineSeparator) newline);
     }
   }
 
@@ -853,12 +853,12 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private javax.swing.JPanel jPanel1;
   private javax.swing.JComboBox newlineCharacter;
   private javax.swing.JLabel newlineCharacterLabel;
-  private ExRadioButton<CsvQuoteApplyRule> quoteAll;
+  private ExRadioButton<QuoteApplyRule> quoteAll;
   private javax.swing.JComboBox quoteChar;
   private javax.swing.JLabel quoteLabel;
-  private ExRadioButton<CsvQuoteApplyRule> quoteRuleMacro;
+  private ExRadioButton<QuoteApplyRule> quoteRuleMacro;
   private javax.swing.JLabel quoteTypeLabel;
-  private ExRadioButton<CsvQuoteApplyRule> quoteWhenNeeded;
+  private ExRadioButton<QuoteApplyRule> quoteWhenNeeded;
   private javax.swing.JLabel separatorLabel;
   private GridBagConstraints gridBagConstraints_1;
   private GridBagConstraints gridBagConstraints_2;

@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.ManualCondition;
@@ -111,7 +111,7 @@ public class MacroRecorder {
 
   private Macro createMacro() {
     completeKeyTyping();
-    return new Macro(String.join(NewlineCharacter.DEFAULT.stringValue(),
+    return new Macro(String.join(LineSeparator.DEFAULT.stringValue(),
         lines.toArray(new String[lines.size()])));
   }
 }

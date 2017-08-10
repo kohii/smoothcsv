@@ -101,7 +101,7 @@ public class CsvSheetStatusLabel implements Runnable, PropertyChangeListener,
       return;
     }
     charsetLabel.setText(CharsetUtils.getDisplayName(csvMeta.getCharset(), csvMeta.hasBom()));
-    lfLabel.setText(csvMeta.getNewlineCharacter().toString());
+    lfLabel.setText(csvMeta.getLineSeparator().toString());
 
     StringBuilder sb = new StringBuilder();
     sb.append(CoreBundle.get("key.delimiterChar"));

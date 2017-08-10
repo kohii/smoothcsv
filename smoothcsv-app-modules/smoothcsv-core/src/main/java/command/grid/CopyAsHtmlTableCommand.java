@@ -38,7 +38,7 @@ public class CopyAsHtmlTableCommand extends GridCommand {
     List<List<Object>> data = getSelectedData(gridSheetPane);
 
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
-        .getNewlineCharacter().stringValue();
+        .getLineSeparator().stringValue();
     final String indent = "\t";
 
     StringBuilder sb = new StringBuilder();

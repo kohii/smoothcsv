@@ -17,48 +17,40 @@ import java.nio.charset.Charset;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
-import com.smoothcsv.csv.CsvProperties;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.CsvProperties;
+import com.smoothcsv.csv.prop.LineSeparator;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
+import com.smoothcsv.csv.prop.QuoteEscapeRule;
 import com.smoothcsv.framework.util.SCBundle;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @author kohii
  */
-public class CsvMeta extends CsvProperties implements Cloneable {
+@Data
+public class CsvMeta implements Cloneable {
 
-  @Getter
-  @Setter
+  private char delimiter = ',';
+
+  private char quote = '"';
+
+  private char escape = '\0';
+
   private transient boolean charsetNotDetermined = false;
 
-  @Getter
-  @Setter
   private transient boolean delimiterNotDetermined = false;
 
-  @Getter
-  @Setter
   private transient boolean quoteNotDetermined = false;
 
-  @Getter
-  @Setter
   private transient boolean newlineCharNotDetermined = false;
 
-  @Setter
-  @Getter
   private Charset charset = CharsetUtils.getDefaultCharset();
 
-  @Setter
   private boolean hasBom = false;
 
-  @Setter
-  @Getter
-  private CsvQuoteApplyRule quoteOption = CsvQuoteApplyRule.QUOTES_ALL;
+  private QuoteApplyRule quoteOption = QuoteApplyRule.QUOTES_ALL;
 
-  @Setter
-  @Getter
-  private NewlineCharacter newlineCharacter = NewlineCharacter.DEFAULT;
+  private LineSeparator lineSeparator = LineSeparator.DEFAULT;
 
   public boolean hasBom() {
     return hasBom;
@@ -85,7 +77,7 @@ public class CsvMeta extends CsvProperties implements Cloneable {
     StringBuilder sb = new StringBuilder();
     appendKeyValue(sb, SCBundle.get("key.encoding"),
         CharsetUtils.getDisplayName(getCharset(), hasBom()));
-    appendKeyValue(sb, SCBundle.get("key.newlineCharacter"), getNewlineCharacter().toString());
+    appendKeyValue(sb, SCBundle.get("key.newlineCharacter"), this.getLineSeparator().toString());
     appendKeyValue(sb, SCBundle.get("key.delimiterChar"), getDelimiter());
     appendKeyValue(sb, SCBundle.get("key.quoteChar"), getQuote());
     if (getEscape() != '\0') {
@@ -122,5 +114,15 @@ public class CsvMeta extends CsvProperties implements Cloneable {
       sb.append('[').append(value).append(']');
     }
     sb.append('\n');
+  }
+
+  public CsvProperties toCsvProperties() {
+    return CsvProperties.of(
+        delimiter,
+        quote,
+        escape == '\0'
+            ? QuoteEscapeRule.repeatQuoteChar()
+            : QuoteEscapeRule.escapeWith(escape)
+    );
   }
 }

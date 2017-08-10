@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.csv.CsvQuoteApplyRule;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
 import com.smoothcsv.framework.preference.PrefButtonGroup;
 import com.smoothcsv.framework.preference.PrefCheckBox;
 import com.smoothcsv.framework.preference.PrefTextField;
@@ -57,8 +57,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_lblEdit.gridy = 0;
     add(lblEdit, gbc_lblEdit);
 
-    ExRadioButton<CsvQuoteApplyRule> radioButton =
-        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.QUOTES_ALL, SCBundle.get("key.pref.quoteAll"));
+    ExRadioButton<QuoteApplyRule> radioButton =
+        new ExRadioButton<QuoteApplyRule>(QuoteApplyRule.QUOTES_ALL, SCBundle.get("key.pref.quoteAll"));
     GridBagConstraints gbc_radioButton = new GridBagConstraints();
     gbc_radioButton.gridwidth = 2;
     gbc_radioButton.anchor = GridBagConstraints.WEST;
@@ -67,8 +67,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_radioButton.gridy = 1;
     add(radioButton, gbc_radioButton);
 
-    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_3 = new ExRadioButton<>(
-        CsvQuoteApplyRule.QUOTES_IF_NECESSARY, SCBundle.get("key.pref.quoteIfNecessary"));
+    ExRadioButton<QuoteApplyRule> rdbtnNewRadioButton_3 = new ExRadioButton<>(
+        QuoteApplyRule.QUOTES_IF_NECESSARY, SCBundle.get("key.pref.quoteIfNecessary"));
     GridBagConstraints gbc_rdbtnNewRadioButton_3 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_3.gridwidth = 2;
     gbc_rdbtnNewRadioButton_3.anchor = GridBagConstraints.WEST;
@@ -77,8 +77,8 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_3.gridy = 2;
     add(rdbtnNewRadioButton_3, gbc_rdbtnNewRadioButton_3);
 
-    ExRadioButton<CsvQuoteApplyRule> rdbtnNewRadioButton_4 =
-        new ExRadioButton<CsvQuoteApplyRule>(CsvQuoteApplyRule.NO_QUOTE, SCBundle.get("key.pref.noQuote"));
+    ExRadioButton<QuoteApplyRule> rdbtnNewRadioButton_4 =
+        new ExRadioButton<QuoteApplyRule>(QuoteApplyRule.NO_QUOTE, SCBundle.get("key.pref.noQuote"));
     GridBagConstraints gbc_rdbtnNewRadioButton_4 = new GridBagConstraints();
     gbc_rdbtnNewRadioButton_4.insets = new Insets(0, 0, 10, 0);
     gbc_rdbtnNewRadioButton_4.gridwidth = 2;
@@ -87,7 +87,7 @@ public class EditEditorPrefPanel extends JPanel {
     gbc_rdbtnNewRadioButton_4.gridy = 3;
     add(rdbtnNewRadioButton_4, gbc_rdbtnNewRadioButton_4);
 
-    new PrefButtonGroup<CsvQuoteApplyRule>(CoreSettings.getInstance(),
+    new PrefButtonGroup<QuoteApplyRule>(CoreSettings.getInstance(),
         CoreSettings.QUOTE_RULE_FOR_COPYING, radioButton, rdbtnNewRadioButton_3,
         rdbtnNewRadioButton_4);
 

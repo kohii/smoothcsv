@@ -36,7 +36,7 @@ public class CopyAsJavaScriptDataCommand extends GridCommand {
     List<List<Object>> data = CopyAsHtmlTableCommand.getSelectedData(gridSheetPane);
 
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
-        .getNewlineCharacter().stringValue();
+        .getLineSeparator().stringValue();
 
     List<Object> headerData = data.get(0);
 

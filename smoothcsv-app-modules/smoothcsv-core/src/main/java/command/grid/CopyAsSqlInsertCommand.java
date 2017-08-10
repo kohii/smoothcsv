@@ -35,7 +35,7 @@ public class CopyAsSqlInsertCommand extends GridCommand {
     List<List<Object>> data = CopyAsHtmlTableCommand.getSelectedData(gridSheetPane);
 
     final String lineSep = gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta()
-        .getNewlineCharacter().stringValue();
+        .getLineSeparator().stringValue();
     final String indent = "  ";
 
     StringBuilder sb = new StringBuilder();

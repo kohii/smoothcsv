@@ -16,9 +16,9 @@ package com.smoothcsv.core.csv;
 import java.io.Writer;
 import java.util.List;
 
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
 import com.smoothcsv.csv.writer.AbstractCsvWriter;
-import com.smoothcsv.csv.writer.CsvWriterOptions;
+import com.smoothcsv.csv.writer.CsvWriteOption;
 import lombok.Setter;
 
 /**
@@ -27,31 +27,31 @@ import lombok.Setter;
 public class SmoothCsvWriter extends AbstractCsvWriter<List<Object>> {
 
   @Setter
-  private boolean writeLineSeparater = true;
-  private NewlineCharacter newlineCharacter;
+  private boolean writeLineSeparator = true;
+  private LineSeparator lineSeparator;
 
   /**
    * @param out
-   * @param properties
+   * @param csvMeta
    * @param options
    */
-  public SmoothCsvWriter(Writer out, CsvMeta properties, CsvWriterOptions options) {
-    super(out, properties, options);
-    this.newlineCharacter = properties.getNewlineCharacter();
+  public SmoothCsvWriter(Writer out, CsvMeta csvMeta, CsvWriteOption options) {
+    super(out, csvMeta.toCsvProperties(), options);
+    this.lineSeparator = csvMeta.getLineSeparator();
   }
 
   /**
    * @param out
-   * @param properties
+   * @param csvMeta
    */
-  public SmoothCsvWriter(Writer out, CsvMeta properties) {
-    super(out, properties);
-    this.newlineCharacter = properties.getNewlineCharacter();
+  public SmoothCsvWriter(Writer out, CsvMeta csvMeta) {
+    super(out, csvMeta.toCsvProperties());
+    this.lineSeparator = csvMeta.getLineSeparator();
   }
 
   @Override
   protected Object extractLineSeparator(List<Object> row, int rowIndex) {
-    return writeLineSeparater ? newlineCharacter.stringValue() : "";
+    return writeLineSeparator ? lineSeparator.stringValue() : "";
   }
 
   @Override

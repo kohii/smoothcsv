@@ -16,7 +16,7 @@ package com.smoothcsv.core.filter;
 import java.util.List;
 
 import com.smoothcsv.commons.constants.OperatorSymbol;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.LineSeparator;
 
 /**
  * @author kohii
@@ -77,18 +77,18 @@ public class FilterConditionGroup {
 
     StringBuilder ret = new StringBuilder();
     if (depth != 0) {
-      ret.append('(').append(NewlineCharacter.DEFAULT.stringValue());
+      ret.append('(').append(LineSeparator.DEFAULT.stringValue());
     }
     for (int i = 0; i < filterConditionGroups.length; i++) {
       if (i != 0) {
-        ret.append(NewlineCharacter.DEFAULT.stringValue());
+        ret.append(LineSeparator.DEFAULT.stringValue());
         ret.append(indent).append(operatorSymbol);
-        ret.append(NewlineCharacter.DEFAULT.stringValue());
+        ret.append(LineSeparator.DEFAULT.stringValue());
       }
       FilterConditionGroup group = filterConditionGroups[i];
       ret.append(indent).append(group.toString(depth + 1));
     }
-    ret.append(NewlineCharacter.DEFAULT.stringValue());
+    ret.append(LineSeparator.DEFAULT.stringValue());
     if (depth != 0) {
       ret.append(getIndentText(depth - 1)).append(')');
     }

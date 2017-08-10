@@ -36,9 +36,9 @@ import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
 import com.smoothcsv.core.util.CoreSettings;
-import com.smoothcsv.csv.CsvProperties;
 import com.smoothcsv.csv.detector.CsvPropertiesDetectorImpl;
-import com.smoothcsv.csv.reader.CsvReaderOptions;
+import com.smoothcsv.csv.prop.CsvProperties;
+import com.smoothcsv.csv.reader.CsvReadOption;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.BaseTabView;
@@ -145,27 +145,27 @@ public class OpenFileCommand extends Command {
               properties.setDelimiter('\t');
               CsvProperties p = detector.detectProperties(s, properties.getDelimiter());
               p = escapeNull(p);
-              properties.setQuote(p.getQuote());
+              properties.setQuote(p.getQuoteChar());
             } else if (StringUtils.endsWithIgnoreCase(file.getName(), ".csv")) {
               properties.setDelimiter(',');
               CsvProperties p = detector.detectProperties(s, properties.getDelimiter());
               p = escapeNull(p);
 
-              properties.setQuote(p.getQuote());
+              properties.setQuote(p.getQuoteChar());
             } else {
               CsvProperties p = detector.detectProperties(s);
               p = escapeNull(p);
               properties.setDelimiter(p.getDelimiter());
-              properties.setQuote(p.getQuote());
+              properties.setQuote(p.getQuoteChar());
             }
           } else {
             CsvProperties p = detector.detectProperties(s, properties.getDelimiter());
             p = escapeNull(p);
-            properties.setQuote(p.getQuote());
+            properties.setQuote(p.getQuoteChar());
           }
         } else {
           properties.setDelimiter(CsvProperties.DEFAULT.getDelimiter());
-          properties.setQuote(CsvProperties.DEFAULT.getQuote());
+          properties.setQuote(CsvProperties.DEFAULT.getQuoteChar());
         }
       } catch (IOException e) {
         throw new IORuntimeException(e);
@@ -186,7 +186,7 @@ public class OpenFileCommand extends Command {
   }
 
   private static CsvProperties escapeNull(CsvProperties p) {
-    return p != null ? p : CsvSheetSupport.getDefaultCsvMeta();
+    return p != null ? p : CsvSheetSupport.getDefaultCsvMeta().toCsvProperties();
   }
 
   public static void run(CsvSheetViewInfo viewInfo, CsvGridSheetModel model, int index) {
@@ -203,7 +203,7 @@ public class OpenFileCommand extends Command {
     }
   }
 
-  public static void run(File file, CsvMeta properties, CsvReaderOptions options, int index) {
+  public static void run(File file, CsvMeta properties, CsvReadOption options, int index) {
     CsvSheetViewInfo viewInfo = new CsvSheetViewInfo(file, properties, options);
     CsvGridSheetModel model = CsvSheetSupport.createModelFromFile(file, properties, options);
     run(viewInfo, model, index);

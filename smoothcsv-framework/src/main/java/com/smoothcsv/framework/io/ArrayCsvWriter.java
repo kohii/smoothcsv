@@ -15,10 +15,10 @@ package com.smoothcsv.framework.io;
 
 import java.io.Writer;
 
-import com.smoothcsv.csv.CsvProperties;
-import com.smoothcsv.csv.NewlineCharacter;
+import com.smoothcsv.csv.prop.CsvProperties;
+import com.smoothcsv.csv.prop.LineSeparator;
 import com.smoothcsv.csv.writer.AbstractCsvWriter;
-import com.smoothcsv.csv.writer.CsvWriterOptions;
+import com.smoothcsv.csv.writer.CsvWriteOption;
 
 /**
  * @author kohii
@@ -30,12 +30,12 @@ public class ArrayCsvWriter extends AbstractCsvWriter<String[]> {
   }
 
   public ArrayCsvWriter(Writer out, CsvProperties properties) {
-    super(out, properties, CsvWriterOptions.DEFAULT);
+    super(out, properties, CsvWriteOption.DEFAULT);
   }
 
   @Override
   protected Object extractLineSeparator(String[] row, int rowIndex) {
-    return NewlineCharacter.DEFAULT.stringValue();
+    return LineSeparator.DEFAULT.stringValue();
   }
 
   @Override

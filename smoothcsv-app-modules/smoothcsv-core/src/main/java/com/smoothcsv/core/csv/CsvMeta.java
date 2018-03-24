@@ -52,8 +52,14 @@ public class CsvMeta implements Cloneable {
 
   private LineSeparator lineSeparator = LineSeparator.DEFAULT;
 
+  private boolean appendsNewLineAtEOF;
+
   public boolean hasBom() {
     return hasBom;
+  }
+
+  public boolean appendsNewLineAtEOF() {
+    return appendsNewLineAtEOF;
   }
 
   @Override

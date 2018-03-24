@@ -88,7 +88,8 @@ public class CsvSheetSupport {
     return new File(DirectoryResolver.instance().getSettingDirectory(), "DefaultCsvMeta");
   }
 
-  public static CsvGridSheetModel createModelFromFile(File file, CsvMeta csvMeta,
+  public static CsvGridSheetModel createModelFromFile(File file,
+                                                      CsvMeta csvMeta,
                                                       CsvReadOption options) {
 
     if (options == null) {
@@ -105,6 +106,11 @@ public class CsvSheetSupport {
       }
       if (data.isEmpty()) {
         data.add(new ArrayList<>());
+      } else {
+        if (data.size() > 1 && data.get(data.size() - 1).size() == 0) {
+          csvMeta.setAppendsNewLineAtEOF(true);
+          data.remove(data.size() - 1);
+        }
       }
       CsvGridSheetModel gsm = new CsvGridSheetModel(data, data.size(), Math.max(1, reader.getMaxColumnCount()));
       if (csvMeta.isNewlineCharNotDetermined()) {

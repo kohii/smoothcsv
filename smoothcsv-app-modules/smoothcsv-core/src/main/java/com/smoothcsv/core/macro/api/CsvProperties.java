@@ -59,6 +59,7 @@ public class CsvProperties extends APIBase {
   private boolean hasBOM;
   private String newlineCharacter;
   private int quoteOption;
+  private boolean appendsNewLineAtEOF;
 
   /**
    * Creates CsvProperties.
@@ -90,6 +91,7 @@ public class CsvProperties extends APIBase {
       default:
         throw new IllegalArgumentException();
     }
+    this.appendsNewLineAtEOF = csvMeta.appendsNewLineAtEOF();
   }
 
   /**
@@ -252,5 +254,23 @@ public class CsvProperties extends APIBase {
       throw new IllegalArgumentException("quoteOption:" + quoteOption);
     }
     this.quoteOption = quoteOption;
+  }
+
+  /**
+   * Returns whether the file has a newline at end of file or not
+   *
+   * @return true if the file has a newline at end of file, otherwise false.
+   */
+  public boolean appendsNewLineAtEOF() {
+    return appendsNewLineAtEOF;
+  }
+
+  /**
+   * Sets whether the file has a newline at end of file or not
+   *
+   * @param appendsNewLineAtEOF true if the file has a newline at end of file, otherwise false.
+   */
+  public void setAppendsNewLineAtEOF(boolean appendsNewLineAtEOF) {
+    this.appendsNewLineAtEOF = appendsNewLineAtEOF;
   }
 }

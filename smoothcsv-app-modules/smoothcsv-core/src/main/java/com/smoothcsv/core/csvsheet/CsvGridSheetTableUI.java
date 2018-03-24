@@ -60,20 +60,28 @@ public class CsvGridSheetTableUI extends GridSheetTableNoActionUI {
 
       g.setColor(gridSheetPane.getNewlineCharColor());
 
-      Rectangle lineFeedCharRect = table.getCellRect(rMin, cMax, false);
-      lineFeedCharRect.height -= cellMargin;
-      lineFeedCharRect.x += lineFeedCharRect.width + cellMargin;
-      lineFeedCharRect.width = gridSheetPane.getNewlineCharacterRectWidth();
-      for (int row = rMin; row <= rMax; row++) {
-        int rowHeight = gridSheetPane.getRow(row).getHeight();
-        lineFeedCharRect.height = rowHeight - cellMargin;
-        paintEndOfLine(g, lineFeedCharRect, row);
-        lineFeedCharRect.y += rowHeight;
+      if (!gridSheetPane.getCsvSheetView().getViewInfo().getCsvMeta().appendsNewLineAtEOF()) {
+        Rectangle lineFeedCharRect = table.getCellRect(rMin, cMax, false);
+        lineFeedCharRect.height -= cellMargin;
+        lineFeedCharRect.x += lineFeedCharRect.width + cellMargin;
+        lineFeedCharRect.width = gridSheetPane.getNewlineCharacterRectWidth();
+        for (int row = rMin; row <= rMax; row++) {
+          int rowHeight = gridSheetPane.getRow(row).getHeight();
+          lineFeedCharRect.height = rowHeight - cellMargin;
+          paintEndOfLine(g, lineFeedCharRect, row, getGridSheetPane().getColumnCount());
+          lineFeedCharRect.y += rowHeight;
+        }
+      } else {
+        int rowCount = gridSheetPane.getRowCount();
+        if (rMax == rowCount - 1) {
+          Rectangle lineFeedCharRect = table.getCellRect(rowCount, 0, false);
+          paintEndOfLine(g, lineFeedCharRect, getGridSheetPane().getRowCount(), 0);
+        }
       }
     }
   }
 
-  private void paintEndOfLine(Graphics g, Rectangle cellRect, int rowIndex) {
-    super.paintCell(g, cellRect, rowIndex, getGridSheetPane().getColumnCount());
+  private void paintEndOfLine(Graphics g, Rectangle cellRect, int rowIndex, int columnIndex) {
+    super.paintCell(g, cellRect, rowIndex, columnIndex);
   }
 }

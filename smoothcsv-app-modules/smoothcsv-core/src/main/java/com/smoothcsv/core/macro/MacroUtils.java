@@ -51,6 +51,7 @@ public class MacroUtils {
         throw new IllegalStateException("" + prop.getQuoteOption());
     }
     csvMeta.setQuoteOption(quoteApplyRule);
+    csvMeta.setAppendsNewLineAtEOF(prop.appendsNewLineAtEOF());
     return csvMeta;
   }
 

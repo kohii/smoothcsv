@@ -214,8 +214,16 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
     if (value != null) {
       return value;
     }
-    if (modelColumnIndex == model.getColumnCountAt(row)) {
-      if (modelRowIndex == model.getRowCount() - 1) {
+    if (!getGridSheetPane().getCsvSheetView().getViewInfo().getCsvMeta().appendsNewLineAtEOF()) {
+      if (modelColumnIndex == model.getColumnCountAt(row)) {
+        if (modelRowIndex == model.getRowCount() - 1) {
+          return END_OF_FILE;
+        } else {
+          return END_OF_LINE;
+        }
+      }
+    } else {
+      if (modelRowIndex == model.getRowCount()) {
         return END_OF_FILE;
       } else {
         return END_OF_LINE;

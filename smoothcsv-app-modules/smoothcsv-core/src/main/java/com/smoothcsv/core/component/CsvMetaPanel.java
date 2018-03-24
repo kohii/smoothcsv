@@ -134,11 +134,12 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     charsetLabel = new javax.swing.JLabel();
     separatorLabel = new javax.swing.JLabel();
     dummy = new javax.swing.JLabel();
+    appendsNewLineAtEOF = new javax.swing.JCheckBox();
 
     GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0};
     gridBagLayout.rowWeights =
-        new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+        new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
     setLayout(gridBagLayout);
 
     encoding.setModel(new javax.swing.DefaultComboBoxModel(createEncodingItems()));
@@ -379,6 +380,15 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     gridBagConstraints_15.gridy = 3;
     gridBagConstraints_15.gridwidth = 3;
     add(dummy, gridBagConstraints_15);
+
+    appendsNewLineAtEOF.setText(CoreBundle.get("key.appendsNewLineAtEOF")); // NOI18N
+    gridBagConstraints_18 = new java.awt.GridBagConstraints();
+    gridBagConstraints_18.gridwidth = 2;
+    gridBagConstraints_18.gridx = 0;
+    gridBagConstraints_18.gridy = 13;
+    gridBagConstraints_18.anchor = GridBagConstraints.NORTHWEST;
+    gridBagConstraints_18.insets = new Insets(5, 0, 0, 0);
+    add(appendsNewLineAtEOF, gridBagConstraints_18);
   }// </editor-fold>//GEN-END:initComponents
 
   private void customizeComponents() {
@@ -434,6 +444,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       newlineCharacter.setVisible(false);
       quoteRuleMacro.setVisible(false);
       dummy.setVisible(false);
+      appendsNewLineAtEOF.setVisible(false);
       // dummy2.setVisible(false);
     }
   }
@@ -564,6 +575,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     } else {
       newlineCharacter.setSelectedItem(csvMeta.getLineSeparator());
     }
+
+    appendsNewLineAtEOF.setSelected(csvMeta.appendsNewLineAtEOF());
   }
 
   public void save(CsvMeta csvMeta) {
@@ -618,6 +631,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     } else {
       csvMeta.setLineSeparator((LineSeparator) newline);
     }
+
+    csvMeta.setAppendsNewLineAtEOF(appendsNewLineAtEOF.isSelected());
   }
 
   public void validateInput() {
@@ -860,6 +875,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private javax.swing.JLabel quoteTypeLabel;
   private ExRadioButton<QuoteApplyRule> quoteWhenNeeded;
   private javax.swing.JLabel separatorLabel;
+  private javax.swing.JCheckBox appendsNewLineAtEOF;
   private GridBagConstraints gridBagConstraints_1;
   private GridBagConstraints gridBagConstraints_2;
   private GridBagConstraints gridBagConstraints_3;
@@ -876,6 +892,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private GridBagConstraints gridBagConstraints_14;
   private GridBagConstraints gridBagConstraints_15;
   private GridBagConstraints gridBagConstraints_17;
+  private GridBagConstraints gridBagConstraints_18;
   // End of variables declaration//GEN-END:variables
 
 }

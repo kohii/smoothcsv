@@ -248,8 +248,17 @@ public class CsvGridSheetPane extends GridSheetPane {
     return super.getTotalColumnWidth() + getNewlineCharacterRectWidth();
   }
 
+  @Override
+  public int getTotalRowHeight() {
+    return super.getTotalRowHeight() + getNewlineCharacterRectHeight();
+  }
+
   public int getNewlineCharacterRectWidth() {
     return newlineCharsVisible ? 50 : 0;
+  }
+
+  public int getNewlineCharacterRectHeight() {
+    return newlineCharsVisible ? lineHeight : 0;
   }
 
   public int getColumnCountAt(int rowIndex) {

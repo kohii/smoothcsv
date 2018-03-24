@@ -39,6 +39,7 @@ public class ShowPropertiesCommand extends Command {
     DialogOperation opt = propDialog.showDialog();
     if (opt == DialogOperation.OK) {
       viewInfo.setCsvMeta(propDialog.getCsvMeta());
+      view.repaint();
     } else if (opt == DialogOperation.CANCEL) {
       // do nothing
     } else {

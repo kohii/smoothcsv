@@ -7,6 +7,11 @@
     <version>2.0.0-alpha7</version>
   </parent>
   <artifactId>smoothcsv-launcher-mac</artifactId>
+
+  <properties>
+    <jreName>jdk1.8.0_112.jdk</jreName>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
@@ -70,6 +75,7 @@
             <configuration>
               <mainClass>com.smoothcsv.SmoothCSV</mainClass>
               <jvmVersion>1.8+</jvmVersion>
+              <jrePath>/Library/Java/JavaVirtualMachines/${jreName}</jrePath>
               <bundleName>SmoothCSV</bundleName>
               <dictionaryFile>SmoothCSVInfo.plist.template</dictionaryFile>
               <iconFile>SmoothCSV.icns</iconFile>

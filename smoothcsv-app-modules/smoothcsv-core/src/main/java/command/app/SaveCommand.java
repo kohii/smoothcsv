@@ -63,7 +63,7 @@ public class SaveCommand extends CsvSheetCommandBase {
         for (int rowIndex = 0; rowIndex < rowCount - 1; rowIndex++) {
           writer.writeRow(model.getRowDataAt(rowIndex));
         }
-        writer.setWriteLineSeparator(false);
+        writer.setWriteLineSeparator(csvMeta.appendsNewLineAtEOF());
         writer.writeRow(model.getRowDataAt(rowCount - 1));
       }
     } catch (IOException | RuntimeException e) {

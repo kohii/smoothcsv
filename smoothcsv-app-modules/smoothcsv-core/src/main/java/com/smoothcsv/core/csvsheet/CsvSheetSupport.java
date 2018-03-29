@@ -62,7 +62,8 @@ public class CsvSheetSupport {
     defaultCsvMeta = csvMeta;
     try {
       SerializeUtils.serialize(getDefaultCsvMetaFile(), csvMeta);
-    } catch (Exception ignore) {
+    } catch (Exception e) {
+      LOG.warn("", e);
     }
   }
 

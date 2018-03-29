@@ -13,6 +13,7 @@
  */
 package com.smoothcsv.core.csv;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
@@ -28,7 +29,7 @@ import lombok.Data;
  * @author kohii
  */
 @Data
-public class CsvMeta implements Cloneable {
+public class CsvMeta implements Cloneable, Serializable {
 
   private char delimiter = ',';
 
@@ -44,7 +45,7 @@ public class CsvMeta implements Cloneable {
 
   private transient boolean newlineCharNotDetermined = false;
 
-  private Charset charset = CharsetUtils.getDefaultCharset();
+  private String charsetName = CharsetUtils.getDefaultCharset().name();
 
   private boolean hasBom = false;
 
@@ -60,6 +61,14 @@ public class CsvMeta implements Cloneable {
 
   public boolean appendsNewLineAtEOF() {
     return appendsNewLineAtEOF;
+  }
+
+  public Charset getCharset() {
+    return Charset.forName(charsetName);
+  }
+
+  public void setCharset(Charset charset) {
+    this.charsetName = charset.name();
   }
 
   @Override
@@ -88,6 +97,9 @@ public class CsvMeta implements Cloneable {
     appendKeyValue(sb, SCBundle.get("key.quoteChar"), getQuote());
     if (getEscape() != '\0') {
       appendKeyValue(sb, SCBundle.get("key.escapeChar"), getEscape());
+    }
+    if (appendsNewLineAtEOF()) {
+      sb.append(SCBundle.get("key.appendsNewLineAtEOF")).append('\n');
     }
     return sb.toString();
   }

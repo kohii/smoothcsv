@@ -16,7 +16,7 @@ defaultColumnSize=5
 sizeOfUndoing=35
 valuePanelHeight=2
 showEOL=false
-showEOF=true
+showEOF=false
 
 # --TextArea--
 textArea.showEOL=true

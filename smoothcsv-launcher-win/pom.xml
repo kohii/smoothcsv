@@ -4,29 +4,29 @@
   <parent>
     <groupId>com.smoothcsv</groupId>
     <artifactId>smoothcsv</artifactId>
-    <version>2.0.0-alpha9</version>
+    <version>2.0.0-alpha10</version>
   </parent>
   <artifactId>smoothcsv-launcher-win</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-framework</artifactId>
-      <version>2.0.0-alpha9</version>
+      <version>2.0.0-alpha10</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-core</artifactId>
-      <version>2.0.0-alpha9</version>
+      <version>2.0.0-alpha10</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-windows</artifactId>
-      <version>2.0.0-alpha9</version>
+      <version>2.0.0-alpha10</version>
     </dependency>
     <dependency>
       <groupId>com.smoothcsv</groupId>
       <artifactId>smoothcsv-ja</artifactId>
-      <version>2.0.0-alpha9</version>
+      <version>2.0.0-alpha10</version>
     </dependency>
   </dependencies>
 
@@ -79,7 +79,7 @@
                     <fileVersion>${smoothcsv.fileVersion}</fileVersion>
                     <txtFileVersion>${project.version}</txtFileVersion>
                     <fileDescription>CSV file editor</fileDescription>
-                    <copyright>Copyright (C) 2016 kohii All Rights Reserved.</copyright>
+                    <copyright>Copyright (C) 2018 kohii All Rights Reserved.</copyright>
                     <productVersion>${smoothcsv.fileVersion}</productVersion>
                     <txtProductVersion>${project.version}</txtProductVersion>
                     <productName>SmoothCSV</productName>

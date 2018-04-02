@@ -68,7 +68,7 @@ public class CsvMeta implements Cloneable, Serializable {
   }
 
   public void setCharset(Charset charset) {
-    this.charsetName = charset.name();
+    this.charsetName = charset == null ? null : charset.name();
   }
 
   @Override

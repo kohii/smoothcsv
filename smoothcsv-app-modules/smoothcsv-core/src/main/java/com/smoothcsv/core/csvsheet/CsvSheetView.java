@@ -29,6 +29,8 @@ import javax.swing.JButton;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.find.FindAndReplacePanel;
+import com.smoothcsv.core.util.CoreBundle;
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.component.BaseTabView;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.gridsheet.event.GridSheetFocusEvent;
@@ -52,18 +54,7 @@ public class CsvSheetView extends BaseTabView<CsvSheetViewInfo> {
     PropertyChangeListener filePropListener = new PropertyChangeListener() {
       @Override
       public void propertyChange(PropertyChangeEvent evt) {
-        File file = viewInfo.getFile();
-        if (file != null) {
-          viewInfo.setShortTitle(file.getName());
-          try {
-            viewInfo.setFullTitle(file.getCanonicalPath());
-          } catch (IOException e) {
-            viewInfo.setFullTitle(file.getName());
-          }
-        } else {
-          viewInfo.setShortTitle("untitled");
-          viewInfo.setFullTitle("untitled");
-        }
+        updateTitle();
       }
     };
     viewInfo.getPropertyChangeSupport().addPropertyChangeListener("file", filePropListener);
@@ -77,7 +68,38 @@ public class CsvSheetView extends BaseTabView<CsvSheetViewInfo> {
       } else {
         closeButton.setIcon(DirtyCloseTabIcon.INSTANCE);
       }
+
+      if (Env.getOS() == Env.OS_WINDOWS) {
+        updateTitle();
+      }
     });
+  }
+
+  private void updateTitle() {
+    CsvSheetViewInfo viewInfo = getViewInfo();
+    File file = viewInfo.getFile();
+    String shortTitle;
+    String fullTitle;
+    if (file != null) {
+      shortTitle = file.getName();
+      try {
+        fullTitle = file.getCanonicalPath();
+      } catch (IOException e) {
+        fullTitle = shortTitle;
+      }
+    } else {
+      shortTitle = fullTitle = CoreBundle.get("key.untitled");
+    }
+
+    if (Env.getOS() == Env.OS_WINDOWS) {
+      if (!gridSheetPane.getUndoManager().isSavepoint()) {
+        fullTitle += " *";
+      }
+      fullTitle += " - SmoothCSV";
+    }
+
+    viewInfo.setShortTitle(shortTitle);
+    viewInfo.setFullTitle(fullTitle);
   }
 
   @Override

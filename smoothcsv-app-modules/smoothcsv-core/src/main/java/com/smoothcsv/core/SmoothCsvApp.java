@@ -81,10 +81,14 @@ public class SmoothCsvApp extends SCApplication {
   protected void setupLanguageSetting() {
     List<Language> langs = getModuleManager().getAvailableLanguages();
     String langSetting = CoreSettings.getInstance().get(CoreSettings.LANGUAGE);
+    if (langSetting == null) {
+      langSetting = Locale.getDefault().getLanguage();
+    }
     String languageToUse = null;
     for (Language lang : langs) {
       if (lang.getId().equals(langSetting)) {
         languageToUse = langSetting;
+        break;
       }
     }
     if (languageToUse == null) {

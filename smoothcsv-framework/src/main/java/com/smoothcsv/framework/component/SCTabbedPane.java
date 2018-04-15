@@ -56,6 +56,7 @@ import javax.swing.UIDefaults;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
@@ -103,6 +104,10 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
           setToolTipTextAt(i, fullTitle);
           break;
         }
+      }
+
+      if (Env.getOS() == Env.OS_WINDOWS) {
+        fullTitle += " - " + SCApplication.getApplication().getName();
       }
       SCApplication.components().getFrame().setTitle(fullTitle);
     }

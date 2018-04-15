@@ -95,7 +95,6 @@ public class CsvSheetView extends BaseTabView<CsvSheetViewInfo> {
       if (!gridSheetPane.getUndoManager().isSavepoint()) {
         fullTitle += " *";
       }
-      fullTitle += " - SmoothCSV";
     }
 
     viewInfo.setShortTitle(shortTitle);

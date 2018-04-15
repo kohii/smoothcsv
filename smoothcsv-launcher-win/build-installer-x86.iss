@@ -25,7 +25,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\SmoothCSV 2
 DisableProgramGroupPage=yes
 OutputDir=target/
-OutputBaseFilename=smoothscv-setup-{#MyAppVersion}-{#OsType}
+OutputBaseFilename=smoothscv-setup-{#MyAppVersion}-windows-{#OsType}
 Compression=lzma
 SolidCompression=yes
 

@@ -113,8 +113,7 @@ public abstract class DialogBase extends JDialog {
         JButton button = new JButton(dialogOperationAction);
         buttonPane.add(button);
         if (!defaultButtonSet
-            && (dialogOperationAction.getOperation() == DialogOperation.OK
-            || dialogOperationAction.getOperation() == DialogOperation.YES)) {
+            && isDefaultButton(dialogOperationAction.getOperation())) {
           setDefaultButton(button);
           defaultButtonSet = true;
         }
@@ -148,6 +147,10 @@ public abstract class DialogBase extends JDialog {
       actions[i] = new DialogOperationAction(operations[i]);
     }
     return actions;
+  }
+
+  protected boolean isDefaultButton(DialogOperation dialogOperation) {
+    return dialogOperation == DialogOperation.OK || dialogOperation == DialogOperation.YES;
   }
 
   public DialogOperation getSelectedOperation() {

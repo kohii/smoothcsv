@@ -102,4 +102,9 @@ public class UpdateInfoDialog extends DialogBase {
     settings.save(UpdateSettings.LAST_VERSION, newVersion);
     return true;
   }
+
+  @Override
+  protected boolean isDefaultButton(DialogOperation dialogOperation) {
+    return dialogOperation == DOWNLOAD;
+  }
 }

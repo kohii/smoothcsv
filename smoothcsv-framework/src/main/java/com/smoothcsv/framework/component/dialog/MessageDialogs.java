@@ -51,7 +51,7 @@ public class MessageDialogs {
       SwingUtils.beep();
     }
     if (parentComponent == null) {
-      // parentComponent = SCApplication.components().getFrame();
+      parentComponent = SCApplication.components().getFrame();
     }
     JOptionPane.showMessageDialog(parentComponent, msg(msg), SCApplication.getApplication()
         .getName(), messageType);
@@ -68,7 +68,7 @@ public class MessageDialogs {
     }
     String message = MessageBundles.getString(msgId, args);
     if (parentComponent == null) {
-      // parentComponent = SCApplication.components().getFrame();
+      parentComponent = SCApplication.components().getFrame();
     }
     int ret =
         JOptionPane.showConfirmDialog(parentComponent, msg(message), SCApplication.getApplication()
@@ -88,7 +88,7 @@ public class MessageDialogs {
     }
     String message = MessageBundles.getString(msgId, args);
     if (parentComponent == null) {
-      // parentComponent = SCApplication.components().getFrame();
+      parentComponent = SCApplication.components().getFrame();
     }
     int ret =
         JOptionPane.showConfirmDialog(parentComponent, msg(message), SCApplication.getApplication()
@@ -118,7 +118,7 @@ public class MessageDialogs {
     }
     String message = MessageBundles.getString(msgId, args);
     if (parentComponent == null) {
-      // parentComponent = SCApplication.components().getFrame();
+      parentComponent = SCApplication.components().getFrame();
     }
     String ret =
         JOptionPane.showInputDialog(parentComponent, msg(message), SCApplication.getApplication()

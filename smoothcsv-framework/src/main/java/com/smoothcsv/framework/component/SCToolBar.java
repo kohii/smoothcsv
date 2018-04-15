@@ -32,6 +32,7 @@ import com.smoothcsv.framework.command.CommandDef;
 import com.smoothcsv.framework.command.CommandKeymap;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.condition.Condition;
+import com.smoothcsv.framework.util.KeyStrokeUtils;
 import com.smoothcsv.swing.icon.AwesomeIcon;
 
 public class SCToolBar extends JToolBar {
@@ -92,9 +93,16 @@ public class SCToolBar extends JToolBar {
         setEnabled(enableCondition.getValue());
       }
       putValue(Action.SMALL_ICON, icon);
-      putValue(Action.SHORT_DESCRIPTION, caption);
 
       KeyStroke key = CommandKeymap.getDefault().findKeyStroke(commandId);
+
+      if (caption != null) {
+        if (key != null) {
+          caption += " (" + KeyStrokeUtils.getKeyStrokeText(key) + ")";
+        }
+        putValue(Action.SHORT_DESCRIPTION, caption);
+      }
+
       putValue(Action.ACCELERATOR_KEY, key);
     }
 

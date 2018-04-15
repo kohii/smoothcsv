@@ -21,6 +21,8 @@ body
 @mac body
 	alt+cmd+right	view:NextTab
 	alt+cmd+left	view:PreviousTab
+	cmd+comma	app:ShowSettings
+
 
 csv-sheet
 	shortcut+f	find:Show
@@ -246,6 +248,7 @@ value-panel
 	alt+delete	value_panel:DeleteNextWord
 	cmd+backspace	value_panel:DeleteToBeginningOfLine
 	cmd+delete	value_panel:DeleteToEndOfLine
+	cmd+shift+z	value_panel:Redo
 
 @win value-panel
 	home	value_panel:MoveToBeginningOfLine

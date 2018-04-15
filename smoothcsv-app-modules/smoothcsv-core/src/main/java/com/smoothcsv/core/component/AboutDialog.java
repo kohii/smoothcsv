@@ -54,7 +54,7 @@ public class AboutDialog extends JDialog {
     getContentPane().setLayout(gridBagLayout);
     getRootPane().setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-    ImageIcon imageIcon = SwingUtils.getImageIcon("/img/appicon.png");
+    ImageIcon imageIcon = SwingUtils.getImageIcon("/img/app/icon_128x128.png");
     Image image = imageIcon.getImage();
     Image newimg = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
     imageIcon = new ImageIcon(newimg);

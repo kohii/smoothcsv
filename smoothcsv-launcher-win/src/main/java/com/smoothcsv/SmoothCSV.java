@@ -29,7 +29,7 @@ public class SmoothCSV {
     application.listeners().on(SCApplication.AfterCreateGuiEvent.class, new SCListener<SCApplication.AfterCreateGuiEvent>() {
       @Override
       public void call(SCApplication.AfterCreateGuiEvent event) {
-        application.components().getFrame().setIconImage(SwingUtils.getImageIcon("/appicon48.png").getImage());
+        application.components().getFrame().setIconImage(SwingUtils.getImageIcon("/img/app/icon_32x32@2x.png").getImage());
       }
     });
     application.launch(args);

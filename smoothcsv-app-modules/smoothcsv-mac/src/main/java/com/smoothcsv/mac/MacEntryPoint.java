@@ -62,7 +62,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
       }
     });
 
-    app.setDockIconImage(SwingUtils.getImage("/img/appicon.png"));
+    app.setDockIconImage(SwingUtils.getImage("/img/app/icon_512x512@2x.png"));
     app.setOpenFileHandler(new OpenFilesHandler() {
       @Override
       public void openFiles(OpenFilesEvent e) {

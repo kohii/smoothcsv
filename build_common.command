@@ -1,6 +1,5 @@
 cd `dirname $0`
-
-cd ..
+set -eu
 
 cd ../smoothcsv-rw
 mvn clean install
@@ -13,8 +12,3 @@ mvn clean install
 
 cd ../smoothcsv
 mvn clean install
-
-cd smoothcsv-launcher-mac
-mvn clean
-./create_icns.command
-mvn package appbundle:bundle -Pmac

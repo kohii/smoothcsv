@@ -71,7 +71,7 @@
                 <mainClass>com.smoothcsv.SmoothCSV</mainClass>
               </classPath>
               <jre>
-                <minVersion>1.8.0</minVersion>
+                <path>jre</path>
               </jre>
               <icon>src/main/resources/app.ico</icon>
               <versionInfo>

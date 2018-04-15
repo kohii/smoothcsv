@@ -11,4 +11,4 @@ cd ../smoothcsv-swing
 mvn clean install
 
 cd ../smoothcsv
-mvn clean install
+mvn clean install -pl "!smoothcsv-launcher-mac,!smoothcsv-debuglauncher-mac,!smoothcsv-launcher-win"

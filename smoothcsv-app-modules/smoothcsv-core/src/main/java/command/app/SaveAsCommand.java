@@ -24,6 +24,7 @@ import com.smoothcsv.core.command.CsvSheetCommandBase;
 import com.smoothcsv.core.csvsheet.CsvFileChooser;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.exception.AppException;
 
 /**
@@ -44,7 +45,7 @@ public class SaveAsCommand extends CsvSheetCommandBase {
 
     File file = viewInfo.getFile();
     if (file == null) {
-      String name = "untitled";
+      String name = CoreBundle.get("key.untitled");
       switch (viewInfo.getCsvMeta().getDelimiter()) {
         case ',':
           name += ".csv";

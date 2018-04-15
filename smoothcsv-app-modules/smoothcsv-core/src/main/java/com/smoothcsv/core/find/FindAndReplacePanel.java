@@ -17,7 +17,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -46,6 +45,7 @@ import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.CommandRegistry;
 import com.smoothcsv.framework.component.BaseTabView;
+import com.smoothcsv.framework.component.SCToolbarToggleButton;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.framework.util.DirectoryResolver;
@@ -210,8 +210,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
 
     // toolBar.addSeparator();
 
-    btnCaseSensitive = new JToggleButton("Aa");
-    btnCaseSensitive.setFocusable(false);
+    btnCaseSensitive = new SCToolbarToggleButton("Aa");
     btnCaseSensitive.setToolTipText(CoreBundle.get("key.caseSensitive"));
     btnCaseSensitive.addChangeListener(new ChangeListener() {
       @Override
@@ -221,8 +220,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     });
     toolBar.add(btnCaseSensitive);
 
-    btnRegex = new JToggleButton(".*");
-    btnRegex.setFocusable(false);
+    btnRegex = new SCToolbarToggleButton(".*");
     btnRegex.setToolTipText(CoreBundle.get("key.regex"));
     btnRegex.addChangeListener(new ChangeListener() {
       @Override
@@ -232,8 +230,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
     });
     toolBar.add(btnRegex);
 
-    btnWhole = new JToggleButton("“”");
-    btnWhole.setFocusable(false);
+    btnWhole = new SCToolbarToggleButton("“”");
     btnWhole.setToolTipText(CoreBundle.get("key.matchWholeCell"));
     btnWhole.addChangeListener(new ChangeListener() {
       @Override
@@ -326,8 +323,7 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
 
     // toolBar_1.addSeparator();
 
-    btnPreserveCase = new JToggleButton("A=A");
-    btnPreserveCase.setFocusable(false);
+    btnPreserveCase = new SCToolbarToggleButton("A=A");
     btnPreserveCase.setToolTipText(CoreBundle.get("key.preserveCase"));
     btnPreserveCase.addChangeListener(new ChangeListener() {
       @Override
@@ -336,13 +332,6 @@ public class FindAndReplacePanel extends JPanel implements SmoothComponent,
       }
     });
     toolBar_1.add(btnPreserveCase);
-
-    Font f = btnCaseSensitive.getFont();
-    Font font = new Font(Font.MONOSPACED, Font.PLAIN, f.getSize());
-    btnCaseSensitive.setFont(font);
-    btnRegex.setFont(font);
-    btnWhole.setFont(font);
-    btnPreserveCase.setFont(font);
 
     JPanel panel = new JPanel();
     FlowLayout flowLayout = (FlowLayout) panel.getLayout();

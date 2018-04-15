@@ -81,7 +81,7 @@
               <iconFile>SmoothCSV.icns</iconFile>
               <generateDiskImageFile>true</generateDiskImageFile>
               <includeApplicationsSymlink>true</includeApplicationsSymlink>
-              <diskImageFile>${project.build.directory}/SmoothCSV-${project.version}.dmg</diskImageFile>
+              <diskImageFile>${project.build.directory}/smoothxac-${project.version}-macos.dmg</diskImageFile>
               <diskImageInternetEnable>true</diskImageInternetEnable>
             </configuration>
             <executions>

@@ -28,6 +28,7 @@ OutputDir=target/
 OutputBaseFilename=smoothscv-setup-{#MyAppVersion}-{#OsType}
 Compression=lzma
 SolidCompression=yes
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

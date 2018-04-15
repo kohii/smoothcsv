@@ -3,16 +3,15 @@ layout: default
 permalink: /2/
 ---
  
-# SmoothCSV 2 (alpha)
+# SmoothCSV 2 (Beta)
 
 SmoothCSVは高機能・高性能なCSVファイルエディターです。
 
 ## 注意事項
 
-- アルファ版です
-- 現時点ではMac OS X版のみです。Windowsユーザーの方は<a href="//smoothcsv.com" target="_blank">旧SmoothCSV</a>をご利用ください
+- Beta版です
 - 旧バージョンのSmoothCSV（Windows版のみ）にあった機能でまだ実装していない機能も多くあります
-- まだ多くのバグが有ると思われます。注意して使用してください。
+- まだ多少のバグが有ると思われます。注意して使用してください。
 
 
 ## 免責事項

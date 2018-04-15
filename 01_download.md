@@ -9,18 +9,27 @@ Download SmoothCSV
 ====
 
 
-<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-alpha10/SmoothCSV-2.0.0-alpha10.dmg"
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothcsv-2.0.0-beta1-macos.dmg"
     target="_blank"
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
-    DOWNLOAD (Mac OS X)
-</a><br>
+    DOWNLOAD (macOS)
+</a>
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothscv-setup-2.0.0-beta1-windows-x64.exe"
+    target="_blank"
+    style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
+    DOWNLOAD (Windows 64bit)
+</a>
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothscv-setup-2.0.0-beta1-windows-x86.exe"
+    target="_blank"
+    style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
+    DOWNLOAD (Windows 32bit)
+</a>
 
-- Version: v2.0.0-alpha10
-- Released: 2018/04/03
-- <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-alpha10" target="_blank">Changelog</a>
+- Version: v2.0.0-beta1
+- Released: 2018/04/15
+- <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-beta1" target="_blank">Changelog</a>
 
 <br>
-
 
 ## 免責事項
 
@@ -28,4 +37,4 @@ Download SmoothCSV
 
 ## その他
 
-Alpha版ですので注意して使用してください。
+Beta版なので注意して使用してください。

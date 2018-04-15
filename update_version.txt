@@ -1,5 +1,8 @@
 mvn versions:set -DnewVersion=${version}
 mvn versions:commit
 
+git add .
+git commit -m "Update version to ${version}"
+
 git tag v${version}
 git push origin --tags

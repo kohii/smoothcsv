@@ -23,13 +23,22 @@ import com.smoothcsv.framework.preference.PreferencesDialog;
  */
 public class ShowSettingsCommand extends Command {
 
+  private PreferencesDialog dialog;
+
   @Override
   public void run() {
     CsvSheetView view = (CsvSheetView) SCApplication.components().getTabbedPane().getSelectedView();
     if (view != null) {
       view.getGridSheetPane().stopCellEditingIfEditing();
     }
-    PreferencesDialog dialog = new PreferencesDialog("Preferences");
+    if (dialog == null) {
+      dialog = new PreferencesDialog("Preferences");
+    } else {
+      if (dialog.isVisible()) {
+        return;
+      }
+    }
+
     dialog.setSize(750, 600);
     dialog.setLocationRelativeTo(SCApplication.components().getFrame());
     dialog.setVisible(true);

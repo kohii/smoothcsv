@@ -102,7 +102,7 @@
 
 ツール
 	コマンドパレットを表示／非表示...	app:ToggleCommandPalette
-#	SQLツール...	app:ShowSqlTools
+	SQLツール...	app:ShowSqlTools
 
 マクロ
 	マクロツールを表示／非表示	macro:ToggleMacroTools

@@ -13,10 +13,8 @@
  */
 package command.app;
 
-import java.lang.ref.SoftReference;
-
 import com.smoothcsv.core.sql.component.SqlToolsDialog;
-import com.smoothcsv.framework.Env;
+import com.smoothcsv.core.sql.model.SqlTableDefinitions;
 import com.smoothcsv.framework.command.Command;
 
 /**
@@ -24,30 +22,15 @@ import com.smoothcsv.framework.command.Command;
  */
 public class ShowSqlToolsCommand extends Command {
 
-  private static SoftReference<SqlToolsDialog> cache;
-
+  private static SqlToolsDialog dialog;
 
   @Override
   public void run() {
-    SqlToolsDialog dialog = getDialog();
-    dialog.setVisible(true);
-  }
+    SqlTableDefinitions.getInstance().reloadAllCsvSheets();
 
-  private static synchronized SqlToolsDialog getDialog() {
-    if (Env.isDebug()) {
-      return new SqlToolsDialog();
+    if (dialog == null) {
+      dialog = new SqlToolsDialog();
     }
-    if (cache == null) {
-      SqlToolsDialog instance = new SqlToolsDialog();
-      cache = new SoftReference<>(instance);
-      return instance;
-    } else {
-      SqlToolsDialog instance = cache.get();
-      if (instance == null) {
-        instance = new SqlToolsDialog();
-        cache = new SoftReference<>(instance);
-      }
-      return instance;
-    }
+    dialog.setVisible(true);
   }
 }

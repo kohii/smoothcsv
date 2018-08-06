@@ -51,7 +51,7 @@ public class MessageDialogs {
       SwingUtils.beep();
     }
     if (parentComponent == null) {
-      parentComponent = SCApplication.components().getFrame();
+      parentComponent = SwingUtils.getFrontWindow();
     }
     JOptionPane.showMessageDialog(parentComponent, msg(msg), SCApplication.getApplication()
         .getName(), messageType);
@@ -68,7 +68,7 @@ public class MessageDialogs {
     }
     String message = MessageBundles.getString(msgId, args);
     if (parentComponent == null) {
-      parentComponent = SCApplication.components().getFrame();
+      parentComponent = SwingUtils.getFrontWindow();;
     }
     int ret =
         JOptionPane.showConfirmDialog(parentComponent, msg(message), SCApplication.getApplication()
@@ -132,11 +132,11 @@ public class MessageDialogs {
   }
 
   private static int getMessageType(String msgId) {
-    if (msgId.startsWith("msg.info")) {
+    if (msgId.startsWith("I")) {
       return JOptionPane.INFORMATION_MESSAGE;
-    } else if (msgId.startsWith("msg.warn")) {
+    } else if (msgId.startsWith("W")) {
       return JOptionPane.WARNING_MESSAGE;
-    } else if (msgId.startsWith("msg.error")) {
+    } else if (msgId.startsWith("E")) {
       return JOptionPane.ERROR_MESSAGE;
     }
     return JOptionPane.INFORMATION_MESSAGE;

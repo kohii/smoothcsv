@@ -572,7 +572,7 @@ class DnDTree extends JTree implements DragSourceListener, DropTargetListener, D
 
   private void rejectDrag(DropTargetDragEvent dtde) {
     dtde.rejectDrag();
-    dropTargetNode = null; // dropTargetNode(flag)をnullにして
+    dropTargetNode = null;
     repaint();
   }
 

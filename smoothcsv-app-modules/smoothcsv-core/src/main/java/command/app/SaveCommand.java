@@ -23,6 +23,7 @@ import com.smoothcsv.core.command.CsvSheetCommandBase;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.FileBackupService;
 import com.smoothcsv.core.csv.SmoothCsvWriter;
+import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
 import com.smoothcsv.csv.writer.CsvWriteOption;
@@ -57,6 +58,10 @@ public class SaveCommand extends CsvSheetCommandBase {
                  csvMeta,
                  CsvWriteOption.of(csvMeta.getQuoteOption()))) {
       GridSheetModel model = view.getGridSheetPane().getModel();
+      if (((CsvGridSheetModel) model).usesFirstRowAsHeader()) {
+          writer.writeRow(model.getColumnNames());
+      }
+
       int rowCount = model.getRowCount();
       if (rowCount > 0) {
         int columnCount = model.getColumnCount();

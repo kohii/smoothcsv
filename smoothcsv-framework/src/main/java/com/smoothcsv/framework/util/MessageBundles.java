@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import com.smoothcsv.commons.exception.UnexpectedException;
+
 /**
  * @author kohii
  */
@@ -39,23 +41,23 @@ public class MessageBundles {
 
   public static String getString(String key) {
     for (String bundleName : bundleNames) {
-      ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
-      if (bundle != null) {
-        try {
-          return bundle.getString(key);
-        } catch (MissingResourceException e) {
-          // ignore
+      try {
+        ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
+        if (bundle != null) {
+          try {
+            return bundle.getString(key);
+          } catch (MissingResourceException e) {
+            // ignore
+          }
         }
+      } catch (MissingResourceException ignored) {
       }
     }
-    return null;
+    throw new UnexpectedException("message not found for key: " + key);
   }
 
   public static String getString(String key, Object... args) {
     String string = getString(key);
-    if (string != null) {
-      return MessageFormat.format(string, args);
-    }
-    return null;
+    return MessageFormat.format(string, args);
   }
 }

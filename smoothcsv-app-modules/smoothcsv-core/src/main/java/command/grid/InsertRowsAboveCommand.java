@@ -33,7 +33,6 @@ public class InsertRowsAboveCommand extends GridCommand {
 
   public void run(CsvGridSheetPane gridSheetPane, int[] selectedRowIndices) {
     gridSheetPane.stopCellEditingIfEditing();
-    ;
 
     GridSheetModel model = gridSheetPane.getModel();
 

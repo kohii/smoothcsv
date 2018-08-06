@@ -35,6 +35,8 @@ grid-columnheader
 	Insert Columns Left	grid:InsertColumnsLeft
 	Insert Columns Right	grid:InsertColumnsRight
 	Delete Columns	grid:DeleteColumns
+	-
+	Toggle Use First Row As Header	grid:ToggleUseFirstRowAsHeader
 
 grid-cornerheader
 	Copy	grid:Copy

@@ -35,6 +35,8 @@ grid-columnheader
 	左に列を挿入	grid:InsertColumnsLeft
 	右に列を挿入	grid:InsertColumnsRight
 	列を削除	grid:DeleteColumns
+	-
+	1行目を列名として扱う	grid:ToggleUseFirstRowAsHeader
 
 grid-cornerheader
 	コピー	grid:Copy

@@ -277,5 +277,5 @@ macro-list
 	delete	macrolist:Remove
 	shortcut+enter	macrolist:Run
 
-#sql-editor
-#	shortcut+enter	sql:Run
+sql-editor
+	alt+enter	sql:Run

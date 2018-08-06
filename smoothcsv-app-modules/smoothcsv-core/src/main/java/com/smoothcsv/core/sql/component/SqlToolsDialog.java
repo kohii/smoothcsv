@@ -18,9 +18,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -33,7 +35,6 @@ import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import lombok.Getter;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 /**
  * @author kohii
@@ -41,12 +42,14 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 @SuppressWarnings("serial")
 public class SqlToolsDialog extends DialogBase {
 
-  private RSyntaxTextArea textArea;
+  private SqlEditor sqlEditor;
   private SqlTableList tableListPanel;
   private JTabbedPane tabbedPane;
   private SqlTableColumnsEditorPanel tableColumnsEditorPanel;
   private SqlCsvPropertiesPanel csvPropertiesPanel;
   private SqlTablePreviewPanel tablePreviewPanel;
+
+  private boolean initialized = false;
 
   public SqlToolsDialog() {
     super(SCApplication.components().getFrame(), "SQL");
@@ -55,13 +58,11 @@ public class SqlToolsDialog extends DialogBase {
 
     JSplitPane splitPane = new JSplitPane();
     splitPane.setDividerSize(5);
-    splitPane.setFocusable(false);
     splitPane.setBorder(null);
     getContentPanel().add(splitPane, BorderLayout.CENTER);
 
     JSplitPane leftSplitPane = new JSplitPane();
     leftSplitPane.setDividerSize(5);
-    leftSplitPane.setFocusable(false);
     leftSplitPane.setBorder(null);
     leftSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     splitPane.setLeftComponent(leftSplitPane);
@@ -72,10 +73,18 @@ public class SqlToolsDialog extends DialogBase {
     tableListPanel.setSelectionChangeListener((oldTableInfo, newTableInfo) -> {
       adjustTableDetailsPanel(newTableInfo);
     });
+    tableListPanel.setTableNameInsertButtonListener(tableName -> {
+      sqlEditor.getTextArea().replaceSelection("`" + tableName + "`");
+      sqlEditor.getTextArea().requestFocusInWindow();
+    });
     leftSplitPane.setTopComponent(tableListPanel);
 
     {
       tableColumnsEditorPanel = new SqlTableColumnsEditorPanel();
+      tableColumnsEditorPanel.setColumnNameInsertButtonListener(columnName -> {
+        sqlEditor.getTextArea().replaceSelection("`" + columnName + "`");
+        sqlEditor.getTextArea().requestFocusInWindow();
+      });
 
       csvPropertiesPanel = new SqlCsvPropertiesPanel();
 
@@ -98,7 +107,7 @@ public class SqlToolsDialog extends DialogBase {
       leftSplitPane.setBottomComponent(tabbedPane);
     }
 
-    SqlEditor sqlEditor = new SqlEditor();
+    sqlEditor = new SqlEditor(this);
     sqlEditor.setBorder(
         BorderFactory.createMatteBorder(0, 1, 0, 0, UIConstants.getDefaultBorderColor()));
     splitPane.setRightComponent(sqlEditor);
@@ -108,14 +117,42 @@ public class SqlToolsDialog extends DialogBase {
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentShown(ComponentEvent componentEvent) {
-        splitPane.setResizeWeight(0);
-        splitPane.setDividerLocation(0.35);
-        leftSplitPane.setResizeWeight(0.5);
-        leftSplitPane.setDividerLocation(0.5);
 
-        removeComponentListener(this);
+        tableListPanel.stopEditiong();
+        tableListPanel.loadCsvSheetTables();
+
+        if (!initialized) {
+          splitPane.setResizeWeight(0);
+          splitPane.setDividerLocation(0.35);
+          leftSplitPane.setResizeWeight(0.5);
+          leftSplitPane.setDividerLocation(0.4);
+
+          // hack: avoid dialog not focusable
+          JDialog dummyDialog = new JDialog(SqlToolsDialog.this, true);
+          dummyDialog.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+              dummyDialog.setVisible(false);
+            }
+          });
+          dummyDialog.setVisible(true);
+
+          initialized = true;
+        }
+
+        SwingUtilities.invokeLater(new Runnable() {
+          @Override
+          public void run() {
+            sqlEditor.requestFocusTextAreaInWindow();
+          }
+        });
       }
     });
+  }
+
+  public void stopTableNameEdition() {
+    tableListPanel.stopEditiong();
+    tableColumnsEditorPanel.stopEditiong();
   }
 
   @Override

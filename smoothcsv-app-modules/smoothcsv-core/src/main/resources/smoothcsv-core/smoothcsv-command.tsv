@@ -217,9 +217,7 @@ macrolist:Add	available(macro-list)
 macrolist:Remove	available(macro-list)
 macrolist:Run	available(macro-list)
 
-#sql:Run
-#sql:Open
-#sql:Save
+sql:Run	available(sql-editor)
 #sql:NextSql
 #sql:PreviousSql
 #sql:ShowSqlHistory

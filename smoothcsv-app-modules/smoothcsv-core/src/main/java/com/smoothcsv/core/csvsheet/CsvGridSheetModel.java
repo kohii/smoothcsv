@@ -73,11 +73,34 @@ public class CsvGridSheetModel extends GridSheetModel {
   }
 
   /**
+   * @param dataList
+   * @param rowCount
+   * @param columnCount
+   */
+  public CsvGridSheetModel(List<List> dataList,
+                           int rowCount,
+                           int columnCount,
+                           List columnNames) {
+    super(dataList, rowCount, columnCount);
+    this.useFirstRowAsHeader = true;
+    for (int i = 0; i < columnCount; i++) {
+      GridSheetColumn col = getColumn(i);
+      col.setName(ObjectUtils.toString(columnNames.get(i)));
+    }
+  }
+
+  /**
    * @param index
+   * @param columnIds
    * @param data
    */
-  public void insertColumn(int index, Object[][] data) {
-    insertColumn(index, data.length);
+  public void insertColumn(int index, long[] columnIds, Object[][] data) {
+    GridSheetColumn[] columns = new GridSheetColumn[columnIds.length];
+    for (int i = 0; i < columns.length; i++) {
+      columns[i] = createDefaultColumn(columnIds[i]);
+    }
+    insertColumn(index, columns);
+
     for (int i = 0; i < data.length; i++) {
       Object[] columnData = data[i];
       for (int j = 0; j < columnData.length; j++) {
@@ -158,11 +181,13 @@ public class CsvGridSheetModel extends GridSheetModel {
 
   @Override
   protected void fireColumnsDeleted(int index, GridSheetColumn[] columnsRemoved) {
+    long[] columnIds = new long[columnsRemoved.length];
     Object[][] data = new Object[columnsRemoved.length][];
     for (int i = 0; i < columnsRemoved.length; i++) {
+      columnIds[i] = columnsRemoved[i].getId();
       data[i] = getColumnDataAt(index + i);
     }
-    collectEdit(new DeleteColumnsEdit(index, data));
+    collectEdit(new DeleteColumnsEdit(index, columnIds, data));
     super.fireColumnsDeleted(index, columnsRemoved);
   }
 

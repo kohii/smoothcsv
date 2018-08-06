@@ -15,10 +15,8 @@ package command.debug;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Window;
 
-import javax.swing.JPanel;
-
-import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 
 /**
@@ -28,15 +26,23 @@ public class PrintComponentTreeCommand extends Command {
 
   @Override
   public void run() {
-    Container comp = (JPanel) SCApplication.components().getFrame().getContentPane();
-    print(comp, 0);
+    Window[] windows = Window.getWindows();
+    for (Window window : windows) {
+      if (!window.isVisible()) {
+        continue;
+      }
+      print(window, 0);
+    }
   }
 
   void print(Component comp, int depth) {
     for (int i = 0; i < depth; i++) {
       System.out.print("  ");
     }
-    System.out.println(comp.getClass() + "" + comp.getFont());
+    System.out.println(comp.getClass()
+        + " {visible: " + comp.isVisible()
+        + ", focusable: " + comp.isFocusable()
+        + "}");
     if (comp instanceof Container) {
       Component[] children = ((Container) comp).getComponents();
       for (Component component : children) {

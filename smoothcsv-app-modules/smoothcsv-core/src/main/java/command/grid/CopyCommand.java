@@ -69,7 +69,7 @@ public class CopyCommand extends GridCommand {
         if (!selectionModel.isRowSelected(rowIndex)) {
           continue;
         }
-        List<Object> values = new ArrayList<>(maxC - minC + 1);
+        List<String> values = new ArrayList<>(maxC - minC + 1);
         for (int columnIndex = minC; columnIndex <= maxC; columnIndex++) {
           if (!selectionModel.isCellSelected(rowIndex, columnIndex)) {
             continue;
@@ -78,7 +78,7 @@ public class CopyCommand extends GridCommand {
           if (value == null) {
             break;
           }
-          values.add(value);
+          values.add(value.toString());
         }
         if (maxR == rowIndex) {
           writer.setWriteLineSeparator(false);

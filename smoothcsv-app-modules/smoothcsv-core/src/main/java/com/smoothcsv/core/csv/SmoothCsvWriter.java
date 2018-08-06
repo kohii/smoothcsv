@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * @author kohii
  */
-public class SmoothCsvWriter extends AbstractCsvWriter<List<Object>> {
+public class SmoothCsvWriter extends AbstractCsvWriter<List<String>> {
 
   @Setter
   private boolean writeLineSeparator = true;
@@ -50,18 +50,18 @@ public class SmoothCsvWriter extends AbstractCsvWriter<List<Object>> {
   }
 
   @Override
-  protected Object extractLineSeparator(List<Object> row, int rowIndex) {
+  protected Object extractLineSeparator(List<String> row, int rowIndex) {
     return writeLineSeparator ? lineSeparator.stringValue() : "";
   }
 
   @Override
-  protected String extractValue(List<Object> row, int rowIndex, int columnIndex) {
+  protected String extractValue(List<String> row, int rowIndex, int columnIndex) {
     Object value = row.get(columnIndex);
     return value == null ? "" : value.toString();
   }
 
   @Override
-  protected int extractColumnSize(List<Object> row, int rowIndex) {
+  protected int extractColumnSize(List<String> row, int rowIndex) {
     return row.size();
   }
 

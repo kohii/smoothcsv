@@ -103,7 +103,8 @@ View
 
 Tools
 	Toggle Command Palette...	app:ToggleCommandPalette
-#	SQL Tools...	app:ShowSqlTools
+	-
+	SQL Tools...	app:ShowSqlTools
 
 Macro
 	Toggle Macro Tools	macro:ToggleMacroTools

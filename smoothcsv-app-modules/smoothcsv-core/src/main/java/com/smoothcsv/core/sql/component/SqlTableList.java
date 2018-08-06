@@ -16,287 +16,256 @@ package com.smoothcsv.core.sql.component;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.util.Enumeration;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.event.TreeExpansionEvent;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.event.TreeWillExpandListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.ExpandVetoException;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
-import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.core.constants.UIConstants;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
-import com.smoothcsv.core.sql.model.SqlColumnInfo;
-import com.smoothcsv.core.sql.model.SqlCsvFileTableInfo;
-import com.smoothcsv.core.sql.model.SqlCsvFileTables;
 import com.smoothcsv.core.sql.model.SqlCsvSheetTableInfo;
+import com.smoothcsv.core.sql.model.SqlTableDefinitions;
 import com.smoothcsv.core.sql.model.SqlTableInfo;
-import com.smoothcsv.framework.SCApplication;
-import com.smoothcsv.framework.component.SCToolBar;
 import com.smoothcsv.framework.component.support.SmoothComponent;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
-import com.smoothcsv.swing.icon.AwesomeIcon;
+import com.smoothcsv.swing.event.HoveredCellChangeEvent;
+import com.smoothcsv.swing.event.TableCellHoverListener;
+import com.smoothcsv.swing.table.ExTable;
+import com.smoothcsv.swing.table.ExTableCellValueExtracter;
+import com.smoothcsv.swing.table.ExTableColumn;
+import com.smoothcsv.swing.table.ExTableModel;
+import com.smoothcsv.swing.table.ReadOnlyExTableCellValueExtracter;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author kohii
  */
 @SuppressWarnings("serial")
-public class SqlTableList extends JPanel implements SmoothComponent, TreeWillExpandListener,
-    TreeSelectionListener {
+public class SqlTableList extends JPanel implements SmoothComponent, ListSelectionListener {
+
+  private static final int FILE_NAME_COLUMN_INDEX = 0;
+  private static final int INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX = 2;
 
   @Getter
   private final SmoothComponentSupport componentSupport = new SmoothComponentSupport(this,
       "sql-tablelist");
 
-  private final JTree tree;
-  private DefaultTreeModel model;
+  private final ExTable<CsvSheetView> csvSheetList;
 
-  private CategoryTreeNode categoryCsvSheetsNode;
-
-  private CategoryTreeNode categoryCsvFilesNode;
-
+  @Setter
   private BiConsumer<SqlTableInfo, SqlTableInfo> selectionChangeListener;
+
+  @Setter
+  private Consumer<String> tableNameInsertButtonListener;
+
+  private SqlTableInfo currentSqlTableInfo;
 
   public SqlTableList() {
     setLayout(new BorderLayout());
     setBorder(null);
 
-    model = createTreeModel();
-    tree = new JTree(model);
-    tree.setRootVisible(false);
-    tree.setShowsRootHandles(true);
-    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-    tree.setCellRenderer(new MyRenderer());
-    tree.addTreeWillExpandListener(this);
-    tree.getSelectionModel().addTreeSelectionListener(this);
+    ExTableModel<CsvSheetView> csvSheetListModel = new ExTableModel<>(new ArrayList<>(),
+        Arrays.asList(
+            new ExTableColumn("File", new ReadOnlyExTableCellValueExtracter<CsvSheetView>() {
+              @Override
+              public Object getValue(CsvSheetView rowData, ExTableColumn column, int rowIndex, int columnIndex) {
+                return rowData.getViewInfo().getShortTitle();
+              }
+            }),
+            new ExTableColumn("Table Name", new ExTableCellValueExtracter<CsvSheetView>() {
+              @Override
+              public void setValue(Object value, CsvSheetView rowData, ExTableColumn column, int rowIndex, int columnIndex) {
+                if (value == null || "".equals(value)) {
+                  return;
+                }
+                SqlTableDefinitions.getInstance().getTableInfoByViewId(rowData.getViewId()).setName(value.toString());
+              }
 
-    JScrollPane scrollPane = new JScrollPane(tree);
+              @Override
+              public Object getValue(CsvSheetView rowData, ExTableColumn column, int rowIndex, int columnIndex) {
+                return SqlTableDefinitions.getInstance().getTableInfoByViewId(rowData.getViewId()).getName();
+              }
+            }),
+            new ExTableColumn("", new ReadOnlyExTableCellValueExtracter<CsvSheetView>() {
+              @Override
+              public Object getValue(CsvSheetView rowData, ExTableColumn column, int rowIndex, int columnIndex) {
+                return "<html><font color=\"#4ebfa0\">&gt;&gt;</font><html>";
+              }
+            })
+        ));
+    csvSheetList = new ExTable<>(csvSheetListModel);
+    csvSheetList.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+    csvSheetList.sizeColumnsToFit(0);
+    csvSheetList.getTableHeader().setReorderingAllowed(false);
+    csvSheetList.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+    csvSheetList.setRowHeight(20);
+
+    csvSheetList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    csvSheetList.getSelectionModel().addListSelectionListener(this);
+
+    csvSheetList.getColumnModel().getColumn(1).setPreferredWidth(80);
+    csvSheetList.getColumnModel().getColumn(INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX).setPreferredWidth(22);
+    csvSheetList.getColumnModel().getColumn(INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX).setMaxWidth(22);
+
+    TableCellHoverListener hoverListener = new TableCellHoverListener() {
+      @Override
+      public void hoveredCellChanged(HoveredCellChangeEvent event) {
+        if (!event.isOutOfTableBounds()) {
+          if (event.getNewColumn() == INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX) {
+            csvSheetList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+          } else {
+            csvSheetList.setCursor(Cursor.getDefaultCursor());
+          }
+        }
+        csvSheetList.repaint();
+      }
+    };
+    hoverListener.installTo(csvSheetList);
+
+    csvSheetList.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+      @Override
+      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        DefaultTableCellRenderer r = (DefaultTableCellRenderer) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+        boolean isHovered = hoverListener.getHoveredRowIndex() == row;
+
+        Icon icon;
+        String tooltip;
+        int alignment;
+        if (column == INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX) {
+          alignment = JLabel.RIGHT;
+          tooltip = "Insert Table Name To SQL";
+          if (isHovered) {
+            if (isSelected) {
+              icon = SqlComponentConstants.SQL_INSERT_TEXT_ICON_SELECTED_HOVER;
+            } else {
+              icon = SqlComponentConstants.SQL_INSERT_TEXT_ICON_HOVER;
+            }
+          } else {
+            icon = SqlComponentConstants.SQL_INSERT_TEXT_ICON;
+          }
+        } else {
+          alignment = JLabel.LEFT;
+          if (column == FILE_NAME_COLUMN_INDEX) {
+            CsvSheetView csvSheet = csvSheetList.getModel().getRowDataAt(row);
+            tooltip = csvSheet.getViewInfo().getFullTitle();
+            icon = SqlComponentConstants.TABLE_ICON;
+          } else {
+            tooltip = null;
+            icon = null;
+          }
+        }
+        r.setIcon(icon);
+        r.setToolTipText(tooltip);
+        r.setHorizontalAlignment(alignment);
+
+        if (isSelected) {
+          r.setForeground(Color.WHITE);
+          r.setBackground(SqlComponentConstants.SELECTED_CELL_BACKGROUND);
+        } else if (isHovered) {
+          r.setForeground(Color.BLACK);
+          r.setBackground(SqlComponentConstants.HOVERED_CELL_BACKGROUND);
+        } else {
+          r.setForeground(Color.BLACK);
+          r.setBackground(Color.WHITE);
+        }
+
+        return r;
+      }
+    });
+
+    csvSheetList.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        int col = csvSheetList.columnAtPoint(e.getPoint());
+        if (col != INSERT_TABLE_NAME_BUTTON_COLUMN_INDEX) {
+          return;
+        }
+
+        int row = csvSheetList.rowAtPoint(e.getPoint());
+        if (row < 0) {
+          return;
+        }
+
+        CsvSheetView csvSheetView = csvSheetList.getModel().getRowDataAt(row);
+        String tableName = SqlTableDefinitions.getInstance().getTableInfoByViewId(csvSheetView.getViewId()).getName();
+        tableNameInsertButtonListener.accept(tableName);
+      }
+    });
+
+    JScrollPane scrollPane = new JScrollPane(csvSheetList);
     scrollPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,
         UIConstants.getDefaultBorderColor()));
     add(scrollPane, BorderLayout.CENTER);
 
-    SCToolBar toolBar = new SCToolBar();
-    add(toolBar, BorderLayout.NORTH);
-    toolBar.add("sql:AddTable", AwesomeIcon.FA_PLUS, "Add A New CSV File As Table");
-    toolBar.add("sql:RemoveTable", AwesomeIcon.FA_MINUS, "Remove The Selected CSV File As Table");
-
-    loadCsvSheetTables();
-
-    DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-    @SuppressWarnings("unchecked")
-    Enumeration<DefaultMutableTreeNode> children = root.children();
-    while (children.hasMoreElements()) {
-      DefaultMutableTreeNode node = children.nextElement();
-      tree.expandPath(new TreePath(node.getPath()));
-    }
+    JLabel label = new JLabel("Tables");
+    label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    add(label, BorderLayout.NORTH);
   }
 
   public SqlTableInfo getSelectedTableInfo() {
-    return getSqlTableInfoFromPath(tree.getSelectionPath());
-  }
-
-  public void reloadCsvFileTables() {
-    categoryCsvFilesNode.removeAllChildren();
-    for (SqlCsvFileTableInfo table : SqlCsvFileTables.getInstance().getTables()) {
-      categoryCsvFilesNode.add(new TableTreeNode(table));
-    }
-  }
-
-  private DefaultTreeModel createTreeModel() {
-    DefaultMutableTreeNode root = new DefaultMutableTreeNode("");
-    DefaultTreeModel model = new DefaultTreeModel(root);
-
-    categoryCsvSheetsNode = new CategoryTreeNode("SmoothCSV Sheets");
-    root.add(categoryCsvSheetsNode);
-    categoryCsvFilesNode = new CategoryTreeNode("CSV Files");
-    root.add(categoryCsvFilesNode);
-
-    return model;
-  }
-
-  private void loadCsvSheetTables() {
-    categoryCsvSheetsNode.removeAllChildren();
-    List<CsvSheetView> views =
-        SCApplication.components().getTabbedPane().getAllViews(CsvSheetView.class);
-    String[] names = new String[views.size()];
-    for (int i = 0; i < views.size(); i++) {
-      String originalName = views.get(i).getViewInfo().getShortTitle();
-      String name = originalName;
-      int j = 0;
-      while (ArrayUtils.contains(names, name)) {
-        name = originalName + " (" + ++j + ")";
-      }
-      names[i] = name;
-    }
-    for (int i = 0; i < views.size(); i++) {
-      SqlCsvSheetTableInfo tableInfo = new SqlCsvSheetTableInfo(views.get(i), names[i]);
-      TableTreeNode node = new TableTreeNode(tableInfo);
-      categoryCsvSheetsNode.add(node);
-    }
-  }
-
-  private static abstract class AbstractTreeNode extends DefaultMutableTreeNode {
-    public abstract Icon getIcon();
-
-    public abstract String getText();
-
-    public String getTooltip() {
+    int selectedRow = csvSheetList.getSelectedRow();
+    if (selectedRow < 0) {
       return null;
     }
+    CsvSheetView csvSheetView = csvSheetList.getModel().getData().get(selectedRow);
+    return SqlTableDefinitions.getInstance().getTableInfoByViewId(csvSheetView.getViewId());
+  }
 
-    public void beforeExpand() {}
+  public void loadCsvSheetTables() {
+    ExTableModel<CsvSheetView> csvSheetListModel = csvSheetList.getModel();
+    while (csvSheetListModel.getRowCount() > 0) {
+      csvSheetListModel.removeRow(0);
+    }
 
-    @Override
-    public boolean isLeaf() {
-      return false;
+    List<SqlCsvSheetTableInfo> tableInfoList = SqlTableDefinitions.getInstance().getTableInfoList();
+    for (SqlCsvSheetTableInfo tableInfo : tableInfoList) {
+      csvSheetListModel.addRow(tableInfo.getCsvSheet());
+    }
+
+    selectFirstRow();
+  }
+
+  public void stopEditiong() {
+    if (csvSheetList.isEditing()) {
+      csvSheetList.getCellEditor().stopCellEditing();
     }
   }
 
-  private static class CategoryTreeNode extends AbstractTreeNode {
-    private static final Icon ICON = AwesomeIcon.create(AwesomeIcon.FA_FOLDER, Color.GRAY);
-
-    public CategoryTreeNode(String categoryName) {
-      setUserObject(categoryName);
+  private void selectFirstRow() {
+    int rowCount = csvSheetList.getRowCount();
+    if (rowCount == 0) {
+      return;
     }
-
-    @Override
-    public Icon getIcon() {
-      return ICON;
-    }
-
-    @Override
-    public String getText() {
-      return getUserObject().toString();
-    }
-  }
-
-  private static class TableTreeNode extends AbstractTreeNode {
-    private static final Icon ICON = AwesomeIcon.create(AwesomeIcon.FA_TABLE, Color.GRAY);
-
-    private final SqlTableInfo tableInfo;
-    private boolean columnsLoaded = false;
-
-    public TableTreeNode(SqlTableInfo tableInfo) {
-      this.tableInfo = tableInfo;
-    }
-
-    @Override
-    public Icon getIcon() {
-      return ICON;
-    }
-
-    @Override
-    public String getText() {
-      return tableInfo.getName();
-    }
-
-    @Override
-    public void beforeExpand() {
-      if (!columnsLoaded) {
-        List<SqlColumnInfo> cols = tableInfo.getColumns();
-        for (SqlColumnInfo columnInfo : cols) {
-          add(new ColumnTreeNode(columnInfo));
-        }
-        columnsLoaded = true;
-      }
-    }
-  }
-
-  private static class ColumnTreeNode extends AbstractTreeNode {
-    private static final Icon ICON = AwesomeIcon.create(AwesomeIcon.FA_COLUMNS, Color.GRAY);
-
-    private final SqlColumnInfo columnInfo;
-
-    public ColumnTreeNode(SqlColumnInfo columnInfo) {
-      this.columnInfo = columnInfo;
-    }
-
-    @Override
-    public Icon getIcon() {
-      return ICON;
-    }
-
-    @Override
-    public String getText() {
-      String name = columnInfo.getName();
-      if (name == null) {
-        name = "c" + columnInfo.getColumnIndex();
-      }
-      return name + ": " + columnInfo.getType();
-    }
-
-    @Override
-    public boolean isLeaf() {
-      return true;
-    }
-  }
-
-  public void setSelectionChangeListener(
-      BiConsumer<SqlTableInfo, SqlTableInfo> selectionChangeListener) {
-    this.selectionChangeListener = selectionChangeListener;
-  }
-
-  private static class MyRenderer extends DefaultTreeCellRenderer {
-    @Override
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel,
-                                                  boolean expanded, boolean leaf, int row, boolean hasFocus) {
-      super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-      if (value instanceof AbstractTreeNode) {
-        AbstractTreeNode node = (AbstractTreeNode) value;
-        setIcon(node.getIcon());
-        setText(node.getText());
-        setToolTipText(node.getTooltip());
-      }
-      return this;
-    }
+    csvSheetList.selecteRowAt(0);
   }
 
   @Override
-  public void treeWillExpand(TreeExpansionEvent event) throws ExpandVetoException {
-    TreePath path = event.getPath();
-    Object obj = path.getLastPathComponent();
-    if (obj instanceof AbstractTreeNode) {
-      AbstractTreeNode node = (AbstractTreeNode) obj;
-      node.beforeExpand();
+  public void valueChanged(ListSelectionEvent e) {
+    if (e.getFirstIndex() <= e.getLastIndex()) {
+      SqlTableInfo oldSqlTableInfo = this.currentSqlTableInfo;
+      this.currentSqlTableInfo = getSelectedTableInfo();
+      selectionChangeListener.accept(oldSqlTableInfo, getSelectedTableInfo());
+    } else {
+      SqlTableInfo oldSqlTableInfo = this.currentSqlTableInfo;
+      this.currentSqlTableInfo = null;
+      selectionChangeListener.accept(oldSqlTableInfo, null);
     }
-  }
-
-  @Override
-  public void treeWillCollapse(TreeExpansionEvent event) throws ExpandVetoException {}
-
-  @Override
-  public void valueChanged(TreeSelectionEvent e) {
-    SqlTableInfo oldTableInfo = getSqlTableInfoFromPath(e.getOldLeadSelectionPath());
-    SqlTableInfo newTableInfo = getSqlTableInfoFromPath(e.getNewLeadSelectionPath());
-    if (oldTableInfo != newTableInfo) {
-      selectionChangeListener.accept(oldTableInfo, newTableInfo);
-    }
-  }
-
-  private SqlTableInfo getSqlTableInfoFromPath(TreePath path) {
-    if (path == null) {
-      return null;
-    }
-    if (path.getLastPathComponent() instanceof TableTreeNode) {
-      return ((TableTreeNode) path.getLastPathComponent()).tableInfo;
-    }
-    if (path.getLastPathComponent() instanceof ColumnTreeNode) {
-      return ((TableTreeNode) path.getParentPath().getLastPathComponent()).tableInfo;
-    }
-    return null;
   }
 }

@@ -21,21 +21,22 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 public class DeleteColumnsEdit implements GridSheetUndableEdit {
 
   private int index;
+  private long[] columnIds;
   private Object[][] data;
 
   /**
    * @param index
    * @param data
    */
-  public DeleteColumnsEdit(int index, Object[][] data) {
+  public DeleteColumnsEdit(int index, long[] columnIds, Object[][] data) {
     this.index = index;
+    this.columnIds = columnIds;
     this.data = data;
   }
 
   @Override
   public void undo(CsvGridSheetModel model) {
-    model.insertColumn(index, data);
-
+    model.insertColumn(index, columnIds, data);
   }
 
   @Override

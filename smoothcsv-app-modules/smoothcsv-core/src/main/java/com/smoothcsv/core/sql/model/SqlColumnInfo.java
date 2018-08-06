@@ -15,6 +15,8 @@ package com.smoothcsv.core.sql.model;
 
 import java.sql.JDBCType;
 
+import com.smoothcsv.commons.utils.StringUtils;
+import com.smoothcsv.core.csvsheet.CsvSheetView;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,30 +25,38 @@ import lombok.Setter;
  */
 public class SqlColumnInfo {
 
+  @Getter
+  private final long columnId;
+
   private String name;
 
   @Getter
   @Setter
   private int columnIndex;
 
+  private final CsvSheetView csvSheet;
+
   @Getter
   @Setter
   private JDBCType type = JDBCType.VARCHAR;
 
-  public SqlColumnInfo(int columnIndex) {
-    this(columnIndex, null);
-  }
-
-  public SqlColumnInfo(int columnIndex, String name) {
-    this.name = name;
+  public SqlColumnInfo(long columnId, int columnIndex, CsvSheetView csvSheet) {
+    this.columnId = columnId;
     this.columnIndex = columnIndex;
+    this.csvSheet = csvSheet;
   }
 
   /**
    * @return the name
    */
   public String getName() {
-    return name == null ? "c" + columnIndex : name;
+    if (StringUtils.isNotEmpty(name)) {
+      return name;
+    }
+    if (csvSheet.getGridSheetPane().getModel().usesFirstRowAsHeader()) {
+     return csvSheet.getGridSheetPane().getModel().getColumnName(columnIndex);
+    }
+    return "c" + columnIndex;
   }
 
   /**

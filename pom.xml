@@ -7,6 +7,8 @@
   <version>2.0.0-beta2</version>
   <packaging>pom</packaging>
   <modules>
+    <module>smoothcsv-commons</module>
+    <module>smoothcsv-swing</module>
     <module>smoothcsv-framework</module>
     <module>smoothcsv-app-modules</module>
     <module>smoothcsv-launcher-mac</module>
@@ -46,7 +48,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.5.1</version>
+          <version>3.8.0</version>
         </plugin>
       </plugins>
     </pluginManagement>

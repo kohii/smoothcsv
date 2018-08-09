@@ -27,6 +27,7 @@ import java.io.InputStream;
 import javax.swing.Icon;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * Create icon from Font-Awesome 4.7.0
@@ -37,10 +38,14 @@ import com.smoothcsv.commons.exception.UnexpectedException;
 public class AwesomeIcon implements Icon, AwesomeIconConstants {
 
   private static final String FONTAWESOME_TTF = "/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf";
+  private static final int INITIAL_DEFAULT_ICON_SIZE = 17;
+
+  private static final boolean isRetina = SwingUtils.isRetina();
+  private static final int scale = isRetina ? 2 : 1;
 
   private static final Font AWESOME;
 
-  private static int defaultIconSize = 16;
+  private static int defaultIconSize;
   private static Color defaultIconColor = new Color(80, 80, 80);
 
   private static Font defaultFont;
@@ -55,7 +60,7 @@ public class AwesomeIcon implements Icon, AwesomeIconConstants {
   static {
     try (InputStream stream = AwesomeIcon.class.getResourceAsStream(FONTAWESOME_TTF)) {
       AWESOME = Font.createFont(Font.TRUETYPE_FONT, stream);
-      defaultFont = AWESOME.deriveFont(Font.PLAIN, defaultIconSize);
+      setDefaultIconSize(INITIAL_DEFAULT_ICON_SIZE);
     } catch (FontFormatException | IOException ex) {
       throw new UnexpectedException(ex);
     }
@@ -66,7 +71,7 @@ public class AwesomeIcon implements Icon, AwesomeIconConstants {
    */
   public static void setDefaultIconSize(int defaultIconSize) {
     AwesomeIcon.defaultIconSize = defaultIconSize;
-    defaultFont = AWESOME.deriveFont(Font.PLAIN, defaultIconSize);
+    defaultFont = createFont(defaultIconSize);
   }
 
   /**
@@ -123,8 +128,12 @@ public class AwesomeIcon implements Icon, AwesomeIconConstants {
     if (size == defaultIconSize) {
       font = defaultFont;
     } else {
-      font = AWESOME.deriveFont(Font.PLAIN, size);
+      font = createFont(size);
     }
+  }
+
+  private static Font createFont(int size) {
+    return AWESOME.deriveFont(Font.PLAIN, (size - 1) * scale);
   }
 
   public AwesomeIcon create(Color color) {
@@ -135,7 +144,7 @@ public class AwesomeIcon implements Icon, AwesomeIconConstants {
   public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
 
     if (buffer == null) {
-      buffer = new BufferedImage(getIconWidth(), getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+      buffer = new BufferedImage(getIconWidth() * scale, getIconHeight() * scale, BufferedImage.TYPE_INT_ARGB);
 
       Graphics2D graphics = (Graphics2D) buffer.getGraphics();
       graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -143,13 +152,19 @@ public class AwesomeIcon implements Icon, AwesomeIconConstants {
       graphics.setFont(font);
       graphics.setColor(color);
 
-      int stringY = getIconHeight() - (getIconHeight() / 4) + 1;
-      graphics.drawString(String.valueOf(code), 0, stringY);
+      int stringY = (getIconHeight() - (getIconHeight() / 4) + 1) * scale + (scale / 2);
 
+      graphics.drawString(String.valueOf(code), 0, stringY);
       graphics.dispose();
     }
 
+    if (isRetina) {
+      ((Graphics2D) g).scale(1.0 / scale, 1.0 / scale);
+    }
     g.drawImage(buffer, x, y, null);
+    if (isRetina) {
+      ((Graphics2D) g).scale(scale, scale);
+    }
   }
 
   @Override

@@ -20,6 +20,7 @@ import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.KeyboardFocusManager;
@@ -78,6 +79,8 @@ import com.smoothcsv.swing.components.ExButtonGroup;
 public class SwingUtils {
 
   private static int actionSequence = 0;
+
+  private static Boolean isRetina;
 
   // private static final int defaultDismissDelay;
   // private static final int defaultInitialDelay;
@@ -639,5 +642,30 @@ public class SwingUtils {
       }
     }
     return null;
+  }
+
+  public static boolean isRetina() {
+    if (SwingUtils.isRetina != null) {
+      return SwingUtils.isRetina;
+    }
+
+    boolean isRetina = false;
+    GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+    try {
+      Field field = graphicsDevice.getClass().getDeclaredField("scale");
+      if (field != null) {
+        field.setAccessible(true);
+        Object scale = field.get(graphicsDevice);
+        if (scale instanceof Integer && (Integer) scale == 2) {
+          isRetina = true;
+        }
+      }
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new UnexpectedException(e);
+    }
+
+    SwingUtils.isRetina = isRetina;
+    return isRetina;
   }
 }

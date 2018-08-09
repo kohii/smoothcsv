@@ -21,6 +21,11 @@
         <configuration>
           <fork>true</fork>
           <compilerArgument>-XDignore.symbol.file</compilerArgument>
+          <compilerArgs>
+            <arg>-XDignore.symbol.file</arg>
+            <arg>--add-exports</arg>
+            <arg>java.desktop/com.apple.eawt=ALL-UNNAMED</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
     </plugins>

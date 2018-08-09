@@ -15,7 +15,7 @@ package com.smoothcsv.framework.modular;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.experimental.Builder;
+import lombok.Builder;
 
 /**
  * @author kohii

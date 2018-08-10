@@ -38,8 +38,6 @@ public class Csvsql {
     } catch (InterruptedException e) {
       throw e;
     } catch (Exception e) {
-      log.warn("", e);
-
       if (e instanceof SQLException) {
         throw new AppException("WSCA0015", StringUtils.omitLines(e.toString(), 10));
       } else if (e instanceof AppException) {

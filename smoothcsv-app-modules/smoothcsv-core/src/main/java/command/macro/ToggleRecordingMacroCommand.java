@@ -31,6 +31,7 @@ public class ToggleRecordingMacroCommand extends Command {
         (SmoothCsvComponentManager) SCApplication.components();
 
     if (!MacroRecorder.isRecording()) {
+      componentManager.getMacroTools(); // Make sure the macro tools panel is created
       String message = MessageBundles.getString("ISCA0008");
       componentManager.getStatusBar().setMessage(message);
       MacroRecorder.start();

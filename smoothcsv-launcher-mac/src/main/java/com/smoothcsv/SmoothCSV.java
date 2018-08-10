@@ -16,6 +16,7 @@ package com.smoothcsv;
 import com.smoothcsv.core.SmoothCsvApp;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
+import com.smoothcsv.framework.util.DirectoryResolver;
 
 /**
  * @author kohii
@@ -23,6 +24,11 @@ import com.smoothcsv.framework.SCApplication;
 public class SmoothCSV {
 
   public static void main(String[] args) {
+    DirectoryResolver directoryResolver = DirectoryResolver.instance();
+    System.setProperty(
+        "smoothcsv.logDir",
+        directoryResolver.getLogDirectory().getAbsolutePath());
+
     SCApplication application = new SmoothCsvApp(Env.OS_MAC, false);
     application.launch(args);
   }

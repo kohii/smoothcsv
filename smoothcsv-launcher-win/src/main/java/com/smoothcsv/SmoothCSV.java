@@ -17,6 +17,7 @@ import com.smoothcsv.core.SmoothCsvApp;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.event.SCListener;
+import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
@@ -25,6 +26,11 @@ import com.smoothcsv.swing.utils.SwingUtils;
 public class SmoothCSV {
 
   public static void main(String[] args) {
+    DirectoryResolver directoryResolver = DirectoryResolver.instance();
+    System.setProperty(
+        "smoothcsv.logDir",
+        directoryResolver.getLogDirectory().getAbsolutePath());
+
     SCApplication application = new SmoothCsvApp(Env.OS_WINDOWS, false);
     application.listeners().on(SCApplication.AfterCreateGuiEvent.class, new SCListener<SCApplication.AfterCreateGuiEvent>() {
       @Override

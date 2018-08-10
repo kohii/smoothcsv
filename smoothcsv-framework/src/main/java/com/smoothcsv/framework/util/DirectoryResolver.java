@@ -18,15 +18,11 @@ import java.io.File;
 import com.smoothcsv.commons.utils.FileUtils;
 import com.smoothcsv.framework.Env;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author kohii
  */
 public class DirectoryResolver {
-
-  private static final Logger LOG = LoggerFactory.getLogger(DirectoryResolver.class);
 
   private static final char FILE_SEPARATOR = File.separatorChar;
   private static final String SETTING_DIRECTORY_NAME = "setting";
@@ -35,6 +31,7 @@ public class DirectoryResolver {
   private static final String MODULE_DIRECTORY_NAME = "modules";
   private static final String MACRO_DIRECTORY_NAME = "macro";
   private static final String BACKUP_DIRECTORY_NAME = "backup";
+  private static final String LOG_DIRECTORY_NAME = "logs";
 
   private static DirectoryResolver instance;
 
@@ -44,15 +41,17 @@ public class DirectoryResolver {
         instance = new DirectoryResolver() {
           @Override
           protected String createAppDataDirectory() {
-            LOG.debug("user.home={}", System.getProperty("user.home"));
-            LOG.debug("user.dir={}", System.getProperty("user.dir"));
-            return System.getProperty("user.home") + FILE_SEPARATOR + "SmoothCSV 2 DEV"
+            System.out.println("user.home=" + System.getProperty("user.home"));
+            System.out.println("user.dir=" + System.getProperty("user.dir"));
+            return System.getProperty("user.home")
+                + FILE_SEPARATOR
+                + "SmoothCSV 2 DEV"
                 + FILE_SEPARATOR;
           }
         };
-        LOG.debug("setting directory: {}", instance.getSettingDirectory());
-        LOG.debug("session directory: {}", instance.getSessionDirectory());
-        LOG.debug("temporary directory: {}", instance.getTemporaryDirectory());
+        System.out.println("setting directory: " + instance.getSettingDirectory());
+        System.out.println("session directory: " + instance.getSessionDirectory());
+        System.out.println("temporary directory: " + instance.getTemporaryDirectory());
       } else {
         instance = new DirectoryResolver();
       }
@@ -75,6 +74,8 @@ public class DirectoryResolver {
   private File macroFileDirectory;
 
   private File backupDirectory;
+
+  private File logDirectory;
 
   public DirectoryResolver() {}
 
@@ -130,6 +131,14 @@ public class DirectoryResolver {
       FileUtils.ensureDirectoryExists(backupDirectory);
     }
     return backupDirectory;
+  }
+
+  public File getLogDirectory() {
+    if (logDirectory == null) {
+      logDirectory = new File(getAppDataDirectory(), LOG_DIRECTORY_NAME);
+      FileUtils.ensureDirectoryExists(logDirectory);
+    }
+    return logDirectory;
   }
 
   // protected File getUserDataDirectory() {

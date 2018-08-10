@@ -645,11 +645,13 @@ public class SwingUtils {
   }
 
   public static boolean isRetina() {
-    if (SwingUtils.isRetina != null) {
-      return SwingUtils.isRetina;
+    if (isRetina != null) {
+      return isRetina;
     }
+    return isRetina = isRetinaImpl();
+  }
 
-    boolean isRetina = false;
+  private static boolean isRetinaImpl() {
     GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
     try {
@@ -658,14 +660,11 @@ public class SwingUtils {
         field.setAccessible(true);
         Object scale = field.get(graphicsDevice);
         if (scale instanceof Integer && (Integer) scale == 2) {
-          isRetina = true;
+          return true;
         }
       }
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      throw new UnexpectedException(e);
+    } catch (Exception ignore) {
     }
-
-    SwingUtils.isRetina = isRetina;
-    return isRetina;
+    return false;
   }
 }

@@ -9,25 +9,25 @@ Download SmoothCSV
 ====
 
 
-<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothcsv-2.0.0-beta1-macos.dmg"
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta2/smoothcsv-2.0.0-beta2-macos.dmg"
     target="_blank"
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
     DOWNLOAD (macOS)
 </a>
-<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothscv-setup-2.0.0-beta1-windows-x64.exe"
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta2/smoothscv-setup-2.0.0-beta2-windows-x64.exe"
     target="_blank"
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
     DOWNLOAD (Windows 64bit)
 </a>
-<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta1/smoothscv-setup-2.0.0-beta1-windows-x86.exe"
+<a href="https://github.com/kohii/smoothcsv/releases/download/v2.0.0-beta2/smoothscv-setup-2.0.0-beta2-windows-x86.exe"
     target="_blank"
     style="background: #18a3fa; color: #fff; border: 0; outline: none; border-radius: 20px; font-size: 14px; padding: 10px 20px; display: inline-block; margin: 10px 0;">
     DOWNLOAD (Windows 32bit)
 </a>
 
-- Version: v2.0.0-beta1
-- Released: 2018/04/15
-- <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-beta1" target="_blank">Changelog</a>
+- Version: v2.0.0-beta2
+- Released: 2018/08/06
+- <a href="https://github.com/kohii/smoothcsv/releases/tag/v2.0.0-beta2" target="_blank">Changelog</a>
 
 <br>
 

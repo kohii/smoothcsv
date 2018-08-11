@@ -68,6 +68,7 @@ import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionModel;
 import com.smoothcsv.swing.gridsheet.renderer.DefaultGridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.renderer.GridSheetCellRenderer;
 import com.smoothcsv.swing.gridsheet.ui.GridSheetTableNoActionUI;
+import com.smoothcsv.swing.utils.SwingUtils;
 import lombok.Getter;
 import sun.swing.PrintingStatus;
 
@@ -88,6 +89,8 @@ public class GridSheetTable extends AbstractGridSheetComponent
 
     NORMAL, FIT_WIDTH
   }
+
+  private static final boolean isRetina = SwingUtils.isRetina();
 
   //
   // Instance Variables
@@ -2490,6 +2493,14 @@ public class GridSheetTable extends AbstractGridSheetComponent
     Rectangle firstRowRect = getOuterCellRect(firstRowIndex, firstColumnIndex);
     Rectangle lastRowRect = getOuterCellRect(lastRowIndex, lastColumnIndex);
     Rectangle dirtyRegion = firstRowRect.union(lastRowRect);
+
+    if (isRetina) {
+      dirtyRegion.x -= 1;
+      dirtyRegion.y -= 1;
+      dirtyRegion.width += 1;
+      dirtyRegion.height += 1;
+    }
+
     repaint(dirtyRegion);
   }
 

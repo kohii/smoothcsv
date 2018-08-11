@@ -1116,10 +1116,10 @@ public class GridSheetTableNoActionUI extends AbstractGridUI {
       cMax = gridSheetPane.getColumnCount() - 1;
     }
 
-    // Paint the grid.
-    paintRule(g, rMin, rMax, cMin, cMax, correctionX, correctionY);
     // Paint the cells.
     paintCells(g, rMin, rMax, cMin, cMax, correctionX, correctionY);
+    // Paint the grid.
+    paintRule(g, rMin, rMax, cMin, cMax, correctionX, correctionY);
 
     paintSelection(g, drawRect, correctionX, correctionY);
   }

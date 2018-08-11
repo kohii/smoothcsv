@@ -4,5 +4,8 @@ mvn versions:commit
 git add .
 git commit -m "Update version to ${version}"
 
+sed -i 's/${oldVersion}/${version}/g' smoothcsv-launcher-win/build-installer-x64.iss
+sed -i 's/${oldVersion}/${version}/g' smoothcsv-launcher-win/build-installer-x86.iss
+
 git tag v${version}
 git push origin --tags

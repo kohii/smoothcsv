@@ -5,13 +5,12 @@ permalink: /2/
  
 # SmoothCSV 2 (Beta)
 
-SmoothCSVは高機能・高性能なCSVファイルエディターです。
+SmoothCSVはMac/Windows用の高機能・高性能なCSVファイルエディターです。
 
 ## 注意事項
 
 - Beta版です
-- 旧バージョンのSmoothCSV（Windows版のみ）にあった機能でまだ実装していない機能も多くあります
-- まだ多少のバグが有ると思われます。注意して使用してください。
+- [旧バージョンのSmoothCSV（Windows版のみ）](//smoothcsv.com)にあった機能でまだ実装していない機能も多くあります
 
 
 ## 免責事項

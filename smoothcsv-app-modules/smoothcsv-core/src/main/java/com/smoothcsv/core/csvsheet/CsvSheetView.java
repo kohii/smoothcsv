@@ -153,6 +153,11 @@ public class CsvSheetView extends BaseTabView<CsvSheetViewInfo> {
     showCellValueOnValuePanel();
   }
 
+  @Override
+  protected void onTabDeactivated() {
+    getGridSheetPane().stopCellEditingIfEditing();
+  }
+
   public void showCellValueOnValuePanel() {
     DefaultGridSheetSelectionModel sm = gridSheetPane.getSelectionModel();
     int r = sm.getRowAnchorIndex();

@@ -91,7 +91,7 @@ public class SqlTableColumnsEditorPanel extends AbstractSqlTableDetailsPanel {
     columns.add(new ExTableColumn("Index", new ReadOnlyExTableCellValueExtracter<SqlColumnInfo>() {
       @Override
       public Object getValue(SqlColumnInfo rowData, ExTableColumn column, int rowIndex, int columnIndex) {
-        return rowData.getColumnId() + 1;
+        return rowData.getColumnIndex() + 1;
       }
     }));
     columns.add(new ExTableColumn("Name", "name"));

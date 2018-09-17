@@ -56,7 +56,7 @@ public class SqlColumnInfo {
     if (csvSheet.getGridSheetPane().getModel().usesFirstRowAsHeader()) {
      return csvSheet.getGridSheetPane().getModel().getColumnName(columnIndex);
     }
-    return "c" + columnIndex;
+    return "c" + (columnIndex + 1);
   }
 
   /**

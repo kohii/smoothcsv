@@ -118,7 +118,7 @@ public class SqlToolsDialog extends DialogBase {
       @Override
       public void componentShown(ComponentEvent componentEvent) {
 
-        tableListPanel.stopEditiong();
+        tableListPanel.stopEditing();
         tableListPanel.loadCsvSheetTables();
 
         if (!initialized) {
@@ -151,7 +151,7 @@ public class SqlToolsDialog extends DialogBase {
   }
 
   public void stopTableNameEdition() {
-    tableListPanel.stopEditiong();
+    tableListPanel.stopEditing();
     tableColumnsEditorPanel.stopEditiong();
   }
 

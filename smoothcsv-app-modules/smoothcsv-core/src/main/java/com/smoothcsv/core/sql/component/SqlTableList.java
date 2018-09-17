@@ -258,7 +258,7 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
     initSelection();
   }
 
-  public void stopEditiong() {
+  public void stopEditing() {
     if (csvSheetList.isEditing()) {
       csvSheetList.getCellEditor().stopCellEditing();
     }

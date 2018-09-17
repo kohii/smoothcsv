@@ -76,6 +76,10 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
 
   private SqlTableInfo currentSqlTableInfo;
 
+  private int lastSelectedTableId = -1;
+
+  private boolean ready = false;
+
   public SqlTableList() {
     setLayout(new BorderLayout());
     setBorder(null);
@@ -228,7 +232,18 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
     return SqlTableDefinitions.getInstance().getTableInfoByViewId(csvSheetView.getViewId());
   }
 
+  public int getSelectedTableId() {
+    int selectedRow = csvSheetList.getSelectedRow();
+    if (selectedRow < 0) {
+      return -1;
+    }
+    CsvSheetView csvSheetView = csvSheetList.getModel().getData().get(selectedRow);
+    return csvSheetView.getViewId();
+  }
+
   public void loadCsvSheetTables() {
+    ready = false;
+
     ExTableModel<CsvSheetView> csvSheetListModel = csvSheetList.getModel();
     while (csvSheetListModel.getRowCount() > 0) {
       csvSheetListModel.removeRow(0);
@@ -239,7 +254,8 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
       csvSheetListModel.addRow(tableInfo.getCsvSheet());
     }
 
-    selectFirstRow();
+    ready = true;
+    initSelection();
   }
 
   public void stopEditiong() {
@@ -248,16 +264,28 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
     }
   }
 
-  private void selectFirstRow() {
+  private void initSelection() {
     int rowCount = csvSheetList.getRowCount();
     if (rowCount == 0) {
       return;
+    }
+
+    List<CsvSheetView> data = csvSheetList.getModel().getData();
+    for (int i = 0; i < data.size(); i++) {
+      CsvSheetView csvSheetView = data.get(i);
+      if (csvSheetView.getViewId() == lastSelectedTableId) {
+        csvSheetList.selecteRowAt(i);
+        return;
+      }
     }
     csvSheetList.selecteRowAt(0);
   }
 
   @Override
   public void valueChanged(ListSelectionEvent e) {
+    if (!ready) {
+      return;
+    }
     if (e.getFirstIndex() <= e.getLastIndex()) {
       SqlTableInfo oldSqlTableInfo = this.currentSqlTableInfo;
       this.currentSqlTableInfo = getSelectedTableInfo();
@@ -267,5 +295,6 @@ public class SqlTableList extends JPanel implements SmoothComponent, ListSelecti
       this.currentSqlTableInfo = null;
       selectionChangeListener.accept(oldSqlTableInfo, null);
     }
+    lastSelectedTableId = getSelectedTableId();
   }
 }

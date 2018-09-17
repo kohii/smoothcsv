@@ -55,7 +55,7 @@ public class SCAppearanceManager {
   @Getter
   private static Color gridForeground = Color.BLACK;
   @Getter
-  private static Color gridLineColor = new Color(200, 200, 200);
+  private static Color gridLineColor = new Color(222, 222, 222);
   @Getter
   private static Color gridFrozenLineColor = Color.BLACK;
   @Getter

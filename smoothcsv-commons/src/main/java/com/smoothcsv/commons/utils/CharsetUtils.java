@@ -65,7 +65,7 @@ public class CharsetUtils {
 
     try {
       fis = new FileInputStream(file);
-      final int byteBufferSize = 2048;
+      final int byteBufferSize = 4096;
       byte[] buf = new byte[byteBufferSize];
 
       boolean isFirstLine = true;

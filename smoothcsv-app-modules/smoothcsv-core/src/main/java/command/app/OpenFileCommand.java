@@ -128,7 +128,7 @@ public class OpenFileCommand extends Command {
   static void determineCsvMetaContent(File file, CsvMeta properties) {
     if (properties.isCharsetNotDetermined()) {
       // detect charset
-      CharsetInfo ci = CharsetUtils.detect(file, 4000);
+      CharsetInfo ci = CharsetUtils.detect(file, 12000);
       String csName = CharsetUtils.convertSJIS(ci.charset);
       properties.setCharset(Charset.forName(csName));
       properties.setHasBom(ci.hasBom);
@@ -141,7 +141,7 @@ public class OpenFileCommand extends Command {
       // TODO Should I use BufferedReader?
       try (InputStreamReader r =
                new InputStreamReader(new FileInputStream(file), properties.getCharset())) {
-        char[] chars = new char[2048];
+        char[] chars = new char[8192];
         int nread;
         if ((nread = r.read(chars)) != -1) {
           String s = new String(chars, 0, nread);

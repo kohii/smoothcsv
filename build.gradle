@@ -1,0 +1,55 @@
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Paths
+
+allprojects {
+  apply plugin: 'maven'
+  apply plugin: 'idea'
+
+  group = 'com.smoothcsv'
+  version = '2.0.0-beta3'
+}
+
+subprojects {
+  apply plugin: 'java'
+
+  repositories {
+    mavenLocal()
+    jcenter()
+  }
+
+  dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-io:commons-io:2.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+  }
+
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+}
+
+task updateAppVersion {
+  doLast {
+    replaceFileContent("./build.gradle", '  version = \'.+\'\n', "  version = '${newVersion}'\n")
+    replaceFileContent("./smoothcsv-launcher-win/build-installer-x64.iss", '#define MyAppVersion ".+"', "#define MyAppVersion \"${newVersion}\"")
+    replaceFileContent("./smoothcsv-launcher-win/build-installer-x86.iss", '#define MyAppVersion ".+"', "#define MyAppVersion \"${newVersion}\"")
+  }
+}
+
+def replaceFileContent(String filepath,
+                       String regex,
+                       String replacement,
+                       Charset charset = StandardCharsets.UTF_8) {
+  def buildFile = Paths.get(filepath)
+  def content = new String(Files.readAllBytes(buildFile), charset)
+  content = content.replaceFirst(regex, replacement)
+  Files.write(buildFile, content.getBytes(charset))
+}

@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+
+dependencies {
+  compile project(':smoothcsv-framework')
+  compile project(':smoothcsv-app-modules:smoothcsv-core')
+}
+
+compileJava {
+  options.compilerArgs << "-XDignore.symbol.file=true"
+  options.fork = true
+  options.forkOptions.executable = 'javac'
+}

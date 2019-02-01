@@ -6,7 +6,7 @@
 #define MyAppName "SmoothCSV"
 #define MyAppVersion "2.0.0-beta3"
 #define MyAppPublisher "kohii"
-#define MyAppURL "http://smoothcsv.com/"
+#define MyAppURL "https://smoothcsv.com/"
 #define MyAppExeName "SmoothCSV.exe"
 #define LicenseFilePath "..\LICENSE.txt"
 

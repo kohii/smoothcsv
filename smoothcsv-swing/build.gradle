@@ -1,0 +1,6 @@
+apply plugin: 'java-library'
+
+dependencies {
+  compile project(':smoothcsv-commons')
+  testImplementation 'junit:junit:4.10'
+}

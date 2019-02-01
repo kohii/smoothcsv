@@ -1,20 +1,27 @@
+# Gradle
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+
+# Build output directies
+/target/
+/*/target/
+/*/*/target/
+/build/
+/*/build/
+/*/*/build/
+/out/
+/*/out/
+/*/*/out/
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+/*/out/
+
 # Eclipse
 .classpath
 .project
 .settings/
-
-# Intellij
-.idea/
-*.iml
-*.iws
-
-# Mac
-.DS_Store
-
-# Maven
-log/
-target/
-
-*.log
-
-/icon_work/

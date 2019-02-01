@@ -21,7 +21,7 @@ cp icons/* ../smoothcsv-app-modules/smoothcsv-core/src/main/resources/img/app/
 mkdir SmoothCSV.iconset
 cp icons/* SmoothCSV.iconset/
 iconutil -c icns SmoothCSV.iconset
-mv SmoothCSV.icns ../smoothcsv-launcher-mac/src/main/resources/
+mv SmoothCSV.icns ../smoothcsv-launcher-mac/
 
 # Windows
 convert icons/icon_512x512.png -define icon:auto-resize app.ico

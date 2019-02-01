@@ -1,0 +1,20 @@
+rootProject.name = 'smoothcsv'
+include(':smoothcsv-commons')
+include(':smoothcsv-swing')
+include(':smoothcsv-framework')
+include(':smoothcsv-app-modules:smoothcsv-core')
+include(':smoothcsv-app-modules:smoothcsv-debug')
+include(':smoothcsv-app-modules:smoothcsv-windows')
+include(':smoothcsv-app-modules:smoothcsv-ja')
+include(':smoothcsv-app-modules:smoothcsv-mac')
+include(':smoothcsv-app-modules')
+include(':smoothcsv-launcher-mac')
+include(':smoothcsv-debuglauncher-mac')
+include(':smoothcsv-launcher-win')
+project(':smoothcsv-app-modules:smoothcsv-core').projectDir = file('smoothcsv-app-modules/smoothcsv-core')
+project(':smoothcsv-app-modules:smoothcsv-debug').projectDir = file('smoothcsv-app-modules/smoothcsv-debug')
+project(':smoothcsv-app-modules:smoothcsv-windows').projectDir = file('smoothcsv-app-modules/smoothcsv-windows')
+project(':smoothcsv-app-modules:smoothcsv-ja').projectDir = file('smoothcsv-app-modules/smoothcsv-ja')
+project(':smoothcsv-app-modules:smoothcsv-mac').projectDir = file('smoothcsv-app-modules/smoothcsv-mac')
+
+includeBuild '../smoothcsv-rw'

@@ -1,0 +1,13 @@
+apply plugin: 'application'
+
+dependencies {
+  compile project(':smoothcsv-framework')
+  compile project(':smoothcsv-app-modules:smoothcsv-core')
+  compile project(':smoothcsv-app-modules:smoothcsv-debug')
+  compile project(':smoothcsv-app-modules:smoothcsv-mac')
+  compile project(':smoothcsv-app-modules:smoothcsv-ja')
+}
+
+application {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+}

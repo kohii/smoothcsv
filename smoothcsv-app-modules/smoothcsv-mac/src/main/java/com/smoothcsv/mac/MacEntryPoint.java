@@ -16,9 +16,9 @@ package com.smoothcsv.mac;
 import java.io.File;
 
 import com.apple.eawt.AboutHandler;
+import com.apple.eawt.AppEvent;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.OpenFilesEvent;
-import com.apple.eawt.AppEvent.PreferencesEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
 import com.apple.eawt.Application;
 import com.apple.eawt.OpenFilesHandler;
@@ -72,7 +72,7 @@ public class MacEntryPoint extends ModuleEntryPointBase {
 
     app.setPreferencesHandler(new PreferencesHandler() {
       @Override
-      public void handlePreferences(PreferencesEvent e) {
+      public void handlePreferences(AppEvent.PreferencesEvent e) {
         CommandRegistry.instance().runCommand("app:ShowSettings");
       }
     });

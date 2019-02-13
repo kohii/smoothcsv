@@ -1,0 +1,7 @@
+apply plugin: 'java-library'
+
+dependencies {
+  compile project(':smoothcsv-commons')
+  compile project(':smoothcsv-swing')
+  compile 'javax.xml.bind:jaxb-api:2.3.0'
+}

@@ -1,0 +1,7 @@
+apply plugin: 'java-library'
+
+dependencies {
+  compile project(':smoothcsv-framework')
+  compile project(':smoothcsv-app-modules:smoothcsv-core')
+  compile 'com.ibm.icu:icu4j:55.1'
+}

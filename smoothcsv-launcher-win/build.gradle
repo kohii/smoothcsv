@@ -1,0 +1,53 @@
+import java.time.LocalDate
+
+import edu.sc.seis.launch4j.tasks.Launch4jLibraryTask
+
+plugins {
+  id 'java'
+  id 'application'
+  id 'com.github.johnrengelman.shadow' version '4.0.4'
+  id 'edu.sc.seis.launch4j' version '2.4.4'
+}
+
+dependencies {
+  compile project(':smoothcsv-framework')
+  compile project(':smoothcsv-app-modules:smoothcsv-core')
+  compile project(':smoothcsv-app-modules:smoothcsv-windows')
+  compile project(':smoothcsv-app-modules:smoothcsv-ja')
+}
+
+application {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+}
+
+launch4j {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+  icon = "${projectDir}/src/main/resources/app.ico"
+
+  copyConfigurable = project.tasks.shadowJar.outputs.files
+  jar = "lib/${project.tasks.shadowJar.archiveName}"
+
+  bundledJrePath = 'jre'
+
+  fileDescription = 'A powerful CSV file editor'
+  def year = LocalDate.now().getYear()
+  copyright = "Copyright (C) ${year} kohii All Rights Reserved."
+  productName = 'SmoothCSV'
+  internalName = 'SmoothCSV'
+}
+
+task createExe32(type: Launch4jLibraryTask) {
+  outputDir = 'launch4j/32'
+  outfile = 'SmoothCSV.exe'
+
+  bundledJre64Bit = false
+  jreRuntimeBits = 32
+}
+
+task createExe64(type: Launch4jLibraryTask) {
+  outputDir = 'launch4j/64'
+  outfile = 'SmoothCSV.exe'
+
+  bundledJre64Bit = true
+  jreRuntimeBits = 64
+}

@@ -1,0 +1,32 @@
+plugins {
+  id 'application'
+  id "edu.sc.seis.macAppBundle" version "2.3.0"
+}
+
+dependencies {
+  compile project(':smoothcsv-framework')
+  compile project(':smoothcsv-app-modules:smoothcsv-core')
+  compile project(':smoothcsv-app-modules:smoothcsv-mac')
+  compile project(':smoothcsv-app-modules:smoothcsv-ja')
+}
+
+application {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+}
+
+macAppBundle {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+  appName = 'SmoothCSV'
+  dmgName = "smoothcsv-${project.version}-macos"
+  icon = 'SmoothCSV.icns'
+  bundleJRE = true
+  jreHome = System.getenv('JAVA_HOME')
+  bundleExtras.put('CFBundleDocumentTypes', [
+      [
+          CFBundleTypeExtensions: ['csv', 'CSV', 'tsv', 'TSV', 'txt', 'TXT', '*'],
+          CFBundleTypeName      : 'CSV Files',
+          CFBundleTypeRole      : 'Editor',
+          CFBundleTypeOSTypes   : ['????']
+      ]
+  ])
+}

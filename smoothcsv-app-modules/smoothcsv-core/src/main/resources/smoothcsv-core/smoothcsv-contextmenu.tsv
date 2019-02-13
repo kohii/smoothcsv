@@ -37,6 +37,7 @@ grid-columnheader
 	Delete Columns	grid:DeleteColumns
 	-
 	Toggle Use First Row As Header	grid:ToggleUseFirstRowAsHeader
+	Sort...	grid:Sort
 
 grid-cornerheader
 	Copy	grid:Copy

@@ -121,6 +121,8 @@ public class GridSheetUndoManager {
     gridSheetPane.getSelectionModel().importSelection(edit.getSelection());
 
     fireStateChange();
+
+    gridSheetPane.cellValueChanged(null);
   }
 
   public void redo() {
@@ -141,6 +143,8 @@ public class GridSheetUndoManager {
     gridSheetPane.getSelectionModel().importSelection(edit.getSelection());
 
     fireStateChange();
+
+    gridSheetPane.cellValueChanged(null);
   }
 
   public boolean canUndo() {
@@ -165,16 +169,25 @@ public class GridSheetUndoManager {
       throw new IllegalStateException("Has not started transaction.");
     }
     transactionStarted = false;
-    GridSheetSelectionSnapshot selection = gridSheetPane.getSelectionModel().exportSelection();
-    GridSheetEditContainer editContainer = new MultiGridSheetEditContainer(selection,
-        edits.toArray(new GridSheetUndableEdit[edits.size()]));
 
+    GridSheetSelectionSnapshot selection = gridSheetPane.getSelectionModel().exportSelection();
+
+    GridSheetEditContainer editContainer;
+    if (edits.size() == 1) {
+      editContainer = new SingleGridSheetEditContainer(selection, edits.get(0));
+    } else {
+      editContainer = new MultiGridSheetEditContainer(selection, edits.toArray(new GridSheetUndableEdit[0]));
+    }
     undoStack.addFirst(editContainer);
+
     redoStack.clear();
+
     limitStackSize();
     fireStateChange();
 
     edits = null;
+
+    gridSheetPane.cellValueChanged(null);
   }
 
   void stopTransactionWithoutCollecting() {

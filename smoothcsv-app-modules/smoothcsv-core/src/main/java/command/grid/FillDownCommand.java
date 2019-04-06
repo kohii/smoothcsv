@@ -33,7 +33,7 @@ public class FillDownCommand extends GridCommand {
 
     try (EditTransaction tran = gridSheetPane.transaction()) {
       gridSheetPane.getSelectionModel().forEachSelectedColumns((column) -> {
-        Object val = null;
+        String val = null;
         boolean first = true;
         for (int row = minR; row <= maxR; row++) {
           if (selectionModel.isCellSelected(row, column)) {

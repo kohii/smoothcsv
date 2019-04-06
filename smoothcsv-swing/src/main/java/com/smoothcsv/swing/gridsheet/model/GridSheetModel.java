@@ -34,12 +34,12 @@ public class GridSheetModel implements IGridSheetModel {
 
   @Getter
   @Setter
-  private Object defaultValue = "";
+  private String defaultValue = "";
 
   /**
-   * The <code>List</code> of <code>List</code> of <code>Object</code> values.
+   * The <code>List</code> of <code>List</code> of <code>String</code> values.
    */
-  protected List<List> dataList;
+  protected List<List<String>> dataList;
 
   private List<Consumer<GridSheetDataEvent>> dataUpdateListeners = new ArrayList<>();
 
@@ -56,22 +56,22 @@ public class GridSheetModel implements IGridSheetModel {
   /**
    * @param dataList
    */
-  public GridSheetModel(List<List> dataList) {
+  public GridSheetModel(List<List<String>> dataList) {
     setDataList(dataList, dataList.size(), getMaxColumnCount(dataList));
   }
 
   /**
    * @param dataList
    */
-  public GridSheetModel(List<List> dataList, int rowCount, int columnCount) {
+  public GridSheetModel(List<List<String>> dataList, int rowCount, int columnCount) {
     setDataList(dataList, rowCount, columnCount);
   }
 
-  public void setDataList(List<List> dataList) {
+  public void setDataList(List<List<String>> dataList) {
     setDataList(dataList, dataList.size(), getMaxColumnCount(dataList));
   }
 
-  public void setDataList(List<List> dataList, int rowCount, int columnCount) {
+  public void setDataList(List<List<String>> dataList, int rowCount, int columnCount) {
     if (dataList == null || dataList.isEmpty()) {
       throw new IllegalArgumentException();
     }
@@ -94,33 +94,6 @@ public class GridSheetModel implements IGridSheetModel {
     fireStructureChanged(GridSheetStructureEvent.CHANGE_DATALIST);
   }
 
-  private int getMaxColumnCount(List<List> dataList) {
-    int columnCount = -1;
-    for (int i = 0; i < dataList.size(); i++) {
-      columnCount = Math.max(dataList.get(i).size(), columnCount);
-    }
-    return columnCount;
-  }
-
-  /**
-   * Returns an attribute value for the cell at <code>row</code> and <code>column</code>.
-   *
-   * @param row    the row whose value is to be queried
-   * @param column the column whose value is to be queried
-   * @return the value Object at the specified cell
-   * @throws ArrayIndexOutOfBoundsException if an invalid row or column was given
-   */
-  public Object getValueAt(int row, int column) {
-    if (dataList.size() <= row) {
-      return null;
-    }
-    List rowData = dataList.get(row);
-    if (rowData.size() <= column) {
-      return null;
-    }
-    return rowData.get(column);
-  }
-
   /**
    * Sets the object value for the cell at <code>column</code> and <code>row</code>.
    * <code>aValue</code> is the new value. This method will generate a <code>tableChanged</code>
@@ -132,18 +105,76 @@ public class GridSheetModel implements IGridSheetModel {
    * @throws ArrayIndexOutOfBoundsException if an invalid row or column was given
    */
   @SuppressWarnings("unchecked")
-  public void setValueAt(Object aValue, int row, int column) {
-    List<Object> rowData = dataList.get(row);
+  @Override
+  public void setValueAt(String aValue, int row, int column) {
+    List<String> rowData = dataList.get(row);
     rowData.set(column, aValue);
     fireDataUpdated(row, column);
   }
 
-  public List getRowDataAt(int rowIndex) {
+  @SuppressWarnings("unchecked")
+  @Override
+  public void setValuesAt(List<List<String>> valuesList, int row, int column) {
+    int maxColumnCount = 0;
+    for (int i = 0; i < valuesList.size(); i++) {
+      int currentRow = i + row;
+      List<String> values = valuesList.get(i);
+      List<String> rowData = dataList.get(currentRow);
+      for (int j = 0; j < values.size(); j++) {
+        int currentColumn = j + column;
+        rowData.set(currentColumn, values.get(j));
+      }
+      maxColumnCount = Math.max(values.size(), maxColumnCount);
+    }
+    fireDataUpdated(row, column, row + valuesList.size() - 1, column + maxColumnCount - 1, false);
+  }
+
+  private int getMaxColumnCount(List<List<String>> dataList) {
+    int columnCount = -1;
+    for (int i = 0; i < dataList.size(); i++) {
+      columnCount = Math.max(dataList.get(i).size(), columnCount);
+    }
+    return columnCount;
+  }
+
+  @Override
+  public String getValueAt(int row, int column) {
+    if (dataList.size() <= row) {
+      return null;
+    }
+    List<String> rowData = dataList.get(row);
+    if (rowData.size() <= column) {
+      return null;
+    }
+    return rowData.get(column);
+  }
+
+  @Override
+  public List<List<String>> getValuesAt(int row, int column, int rowCount, int columnCount) {
+    List<List<String>> list = new ArrayList<>(rowCount);
+    for (int i = 0; i < rowCount; i++) {
+      if (dataList.size() <= i + column) {
+        break;
+      }
+      List<String> rowData = dataList.get(i + row);
+      List<String> l = new ArrayList<>(columnCount);
+      for (int j = 0; j < columnCount && j + column < rowData.size(); j++) {
+        if (rowData.size() <= j + column) {
+          break;
+        }
+        l.add(rowData.get(j + column));
+      }
+      list.add(l);
+    }
+    return list;
+  }
+
+  public List<String> getRowDataAt(int rowIndex) {
     return dataList.get(rowIndex);
   }
 
-  protected void setRowDataAt(int rowIndex, Object[] data) {
-    dataList.set(rowIndex, new ArrayList<Object>(Arrays.asList(data)));
+  protected void setRowDataAt(int rowIndex, String[] data) {
+    dataList.set(rowIndex, new ArrayList<String>(Arrays.asList(data)));
     fireDataUpdated(rowIndex, 0, rowIndex, getColumnCount(), false);
   }
 
@@ -236,7 +267,7 @@ public class GridSheetModel implements IGridSheetModel {
   protected void insertColumnData(int index, int numColumns) {
     int rowCount = getRowCount();
     for (int r = 0; r < rowCount; r++) {
-      Object[] elements = new Object[numColumns];
+      String[] elements = new String[numColumns];
       Arrays.fill(elements, defaultValue);
       dataList.get(r).addAll(index, Arrays.asList(elements));
     }
@@ -253,9 +284,9 @@ public class GridSheetModel implements IGridSheetModel {
 
   protected void insertRowData(int index, int numRows) {
     int columnCount = getColumnCount();
-    List[] newData = new List[numRows];
+    List<String>[] newData = new List[numRows];
     for (int i = 0; i < newData.length; i++) {
-      Object[] elements = new Object[columnCount];
+      String[] elements = new String[columnCount];
       Arrays.fill(elements, defaultValue);
       newData[i] = new ArrayList<>(Arrays.asList(elements));
     }
@@ -612,11 +643,11 @@ public class GridSheetModel implements IGridSheetModel {
       throw new IllegalArgumentException();
     }
 
-    List[] newData = new List[len];
+    List<String>[] newData = new List[len];
     for (int i = 0; i < order.length; i++) {
       newData[order[i]] = dataList.get(i);
     }
-    dataList = new ArrayList<List>(Arrays.asList(newData));
+    dataList = new ArrayList<List<String>>(Arrays.asList(newData));
 
     GridSheetRow[] newRows = new GridSheetRow[len];
     for (int i = 0; i < order.length; i++) {
@@ -636,12 +667,12 @@ public class GridSheetModel implements IGridSheetModel {
     }
 
     // TODO improve
-    List<List> targetDataList = new ArrayList<>();
+    List<List<String>> targetDataList = new ArrayList<>();
     for (int i = 0; i < targetRows.length; i++) {
       int r = targetRows[i];
       targetDataList.add(dataList.get(r));
     }
-    List[] newTargetData = new List[len];
+    List<String>[] newTargetData = new List[len];
     for (int i = 0; i < order.length; i++) {
       newTargetData[order[i]] = targetDataList.get(i);
     }
@@ -671,16 +702,16 @@ public class GridSheetModel implements IGridSheetModel {
   public void sort(int[] order, CellRect targetCells) {
     setAdjusting(true);
 
-    List<List> targetDataList = new ArrayList<>(targetCells.getNumRows());
+    List<List<String>> targetDataList = new ArrayList<>(targetCells.getNumRows());
     for (int r = targetCells.getRow(); r <= targetCells.getLastRow(); r++) {
-      List rowData = new ArrayList(targetCells.getNumColumns());
+      List<String> rowData = new ArrayList<>(targetCells.getNumColumns());
       for (int c = targetCells.getColumn(); c <= targetCells.getLastColumn(); c++) {
-        Object v = getValueAt(r, c);
+        String v = getValueAt(r, c);
         rowData.add(v);
       }
       targetDataList.add(rowData);
     }
-    List[] newTargetData = new List[targetCells.getNumRows()];
+    List<String>[] newTargetData = new List[targetCells.getNumRows()];
     for (int i = 0; i < order.length; i++) {
       newTargetData[order[i]] = targetDataList.get(i);
     }

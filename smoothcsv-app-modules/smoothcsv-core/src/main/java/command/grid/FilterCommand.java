@@ -82,7 +82,7 @@ public class FilterCommand extends GridCommand {
     } else {
       // Open in new tab
 
-      List<List> dataList = new ArrayList<>();
+      List<List<String>> dataList = new ArrayList<>();
       for (int i = rc - 1; i >= 0; i--) {
         @SuppressWarnings("unchecked")
         boolean match = cond.matches(model.getRowDataAt(i));

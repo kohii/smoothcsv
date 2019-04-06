@@ -100,8 +100,8 @@ public class CsvSheetSupport {
     try (SmoothCsvReader reader =
              new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getCharset()),
                  csvMeta.toCsvProperties(), options)) {
-      List<List> data = new ArrayList<>();
-      List r;
+      List<List<String>> data = new ArrayList<>();
+      List<String> r;
       while ((r = reader.readRow()) != null) {
         data.add(r);
       }
@@ -128,15 +128,14 @@ public class CsvSheetSupport {
 
   public static CsvGridSheetModel createModel(int rows, int columns, CsvMeta csvMeta) {
 
-    List<List> data = new ArrayList<>();
+    List<List<String>> data = new ArrayList<>();
     for (int r = 0; r < rows; r++) {
-      List rowData = new ArrayList(columns);
+      List<String> rowData = new ArrayList<>(columns);
       for (int i = 0; i < columns; i++) {
         rowData.add("");
       }
       data.add(rowData);
     }
-    CsvGridSheetModel gsm = new CsvGridSheetModel(data, data.size(), columns);
-    return gsm;
+    return new CsvGridSheetModel(data, data.size(), columns);
   }
 }

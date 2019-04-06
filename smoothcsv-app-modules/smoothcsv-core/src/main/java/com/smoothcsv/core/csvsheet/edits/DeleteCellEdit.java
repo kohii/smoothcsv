@@ -22,14 +22,14 @@ public class DeleteCellEdit implements GridSheetUndableEdit {
 
   private final int rowIndex;
   private final int columnIndex;
-  private final Object[] data;
+  private final String[] data;
 
   /**
    * @param rowIndex
    * @param columnIndex
    * @param data
    */
-  public DeleteCellEdit(int rowIndex, int columnIndex, Object[] data) {
+  public DeleteCellEdit(int rowIndex, int columnIndex, String[] data) {
     this.rowIndex = rowIndex;
     this.columnIndex = columnIndex;
     this.data = data;

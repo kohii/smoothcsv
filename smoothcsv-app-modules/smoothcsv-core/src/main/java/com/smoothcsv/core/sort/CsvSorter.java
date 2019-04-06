@@ -27,7 +27,7 @@ import lombok.Getter;
  */
 public class CsvSorter {
 
-  public static SortResult sort(List<SortCriteria> criterias, List<List> data,
+  public static SortResult sort(List<SortCriteria> criterias, List<List<String>> data,
                                 boolean exceptLastEmptyRow) {
     int rowSize = data.size();
     boolean exceptLastRow = exceptLastEmptyRow && data.get(rowSize - 1).size() == 0;
@@ -43,7 +43,7 @@ public class CsvSorter {
     Arrays.sort(rowWrappers, new CsvSortComparator(sortInfos));
 
     int[] order = new int[rowSize + (exceptLastRow ? 1 : 0)];
-    List<List> sorted = new ArrayList<>(rowSize + (exceptLastRow ? 1 : 0));
+    List<List<String>> sorted = new ArrayList<>(rowSize + (exceptLastRow ? 1 : 0));
     for (int i = 0; i < rowSize; i++) {
       order[i] = rowWrappers[i].num;
       sorted.add(rowWrappers[i].rowData);
@@ -110,9 +110,9 @@ public class CsvSorter {
 
   private static class RowWrapper {
     int num;
-    List rowData;
+    List<String> rowData;
 
-    public RowWrapper(int num, List rowData) {
+    public RowWrapper(int num, List<String> rowData) {
       this.num = num;
       this.rowData = rowData;
     }
@@ -174,8 +174,8 @@ public class CsvSorter {
 
     @Override
     public int compare(RowWrapper row1, RowWrapper row2) {
-      List list1 = row1.rowData;
-      List list2 = row2.rowData;
+      List<String> list1 = row1.rowData;
+      List<String> list2 = row2.rowData;
       for (SortInfo sortInfo : sortInfos) {
         int ret = 0;
         int index = sortInfo.index;
@@ -215,6 +215,6 @@ public class CsvSorter {
   @AllArgsConstructor
   public static class SortResult {
     private int[] order;
-    private List<List> sortedData;
+    private List<List<String>> sortedData;
   }
 }

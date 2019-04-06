@@ -17,6 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JLayer;
 import javax.swing.JPanel;
@@ -373,9 +374,9 @@ public class GridSheetPane extends JPanel implements IGridSheetStructure {
    *
    * @param row    the row whose value is to be queried
    * @param column the column whose value is to be queried
-   * @return the Object at the specified cell
+   * @return the String  at the specified cell
    */
-  public Object getValueAt(int row, int column) {
+  public String getValueAt(int row, int column) {
     return model.getValueAt(convertRowIndexToModel(row), convertColumnIndexToModel(column));
   }
 
@@ -394,8 +395,12 @@ public class GridSheetPane extends JPanel implements IGridSheetStructure {
    * @param column the column of the cell to be changed
    * @see #getValueAt
    */
-  public void setValueAt(Object aValue, int row, int column) {
+  public void setValueAt(String aValue, int row, int column) {
     model.setValueAt(aValue, convertRowIndexToModel(row), convertColumnIndexToModel(column));
+  }
+
+  public void setValuesAt(List<List<String>> valuesList, int row, int column) {
+    model.setValuesAt(valuesList, convertRowIndexToModel(row), convertColumnIndexToModel(column));
   }
 
   //
@@ -542,7 +547,7 @@ public class GridSheetPane extends JPanel implements IGridSheetStructure {
    * Note that as of 1.3, this method clears the selection, if any.
    */
   public void cellValueChanged(GridSheetDataEvent e) {
-    if (e.isStructureChanged()) {
+    if (e != null && e.isStructureChanged()) {
       // if structure was changed, #structureChanged() will repaint ui.
       return;
     }

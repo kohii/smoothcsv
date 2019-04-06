@@ -58,7 +58,7 @@ public class PasteCommand extends GridCommand {
 
   public static void paste(CsvGridSheetPane gridSheetPane, String text, CsvMeta csvMeta,
                            boolean doNotChangeSelection) {
-    List<List<?>> values = parse(text, csvMeta);
+    List<List<String>> values = parse(text, csvMeta);
     DefaultGridSheetSelectionModel sm = gridSheetPane.getSelectionModel();
     PasteRange range = new PasteRange() {
 
@@ -81,63 +81,59 @@ public class PasteCommand extends GridCommand {
     paste(gridSheetPane, range, values, doNotChangeSelection);
   }
 
-  public static void paste(CsvGridSheetPane gridSheetPane, PasteRange range, List<List<?>> values,
+  public static void paste(CsvGridSheetPane gridSheetPane, PasteRange range, List<List<String>> values,
                            boolean doNotChangeSelection) {
+    if (values.isEmpty()) {
+      return;
+    }
+
+    boolean isSingleValue = values.size() == 1 && values.get(0).size() == 1;
 
     try (EditTransaction tran = gridSheetPane.transaction()) {
 
       int leftTopRow = range.getRow();
       int leftTopColumn = range.getColumn();
-      int rowSize = gridSheetPane.getRowCount();
-      int columnSize = gridSheetPane.getColumnCount();
+      int valuesMaxColumnSize = values.stream().mapToInt(v -> v.size()).max().getAsInt();
 
-      if (leftTopRow + values.size() > rowSize) {
-        gridSheetPane.addRow(leftTopRow + values.size() - rowSize);
-      }
+      if (!isSingleValue) {
+        int rowSize = gridSheetPane.getRowCount();
+        int columnSize = gridSheetPane.getColumnCount();
 
-      int currentRow = leftTopRow;
-      int pastedRowCount = 0;
-      int pastedColumnCount = 0;
-      for (int i = 0; i < values.size(); i++) {
-        List<?> rowValues = values.get(i);
-        int len = rowValues.size();
-        if (columnSize < leftTopColumn + len) {
-          int appendCol = (leftTopColumn + len) - columnSize;
-          gridSheetPane.addColumn(appendCol);
-          columnSize += appendCol;
+        if (leftTopRow + values.size() > rowSize) {
+          gridSheetPane.addRow(leftTopRow + values.size() - rowSize);
+        }
+        if (leftTopColumn + valuesMaxColumnSize > columnSize) {
+          gridSheetPane.addColumn(leftTopColumn + valuesMaxColumnSize - columnSize);
         }
 
-        for (int j = 0; j < len; j++) {
-          Object v = rowValues.get(j);
-          gridSheetPane.setValueAt(v, currentRow, j + leftTopColumn);
-        }
-        currentRow++;
-        pastedRowCount++;
-        if (pastedColumnCount < len) {
-          pastedColumnCount = len;
+        gridSheetPane.setValuesAt(values, leftTopRow, leftTopColumn);
+      } else {
+        String dataToPaste = values.get(0).get(0);
+        if (!CoreSettings.getInstance().getBoolean(CoreSettings.PASTE_REPEATEDLY)) {
+          gridSheetPane.setValueAt(dataToPaste, leftTopRow, leftTopColumn);
+        } else {
+          range.forEach(new CellConsumer() {
+            @Override
+            public void accept(int row, int column) {
+              gridSheetPane.setValueAt(dataToPaste, row, column);
+            }
+          });
         }
       }
 
-      if (values.size() == 1 && values.get(0).size() == 1
-          && CoreSettings.getInstance().getBoolean(CoreSettings.PASTE_REPEATEDLY)) {
-        Object dataToPaste = values.get(0).get(0);
-        range.forEach(new CellConsumer() {
-          @Override
-          public void accept(int row, int column) {
-            gridSheetPane.setValueAt(dataToPaste, row, column);
-          }
-        });
-      } else if (!doNotChangeSelection) {
-        GridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
-        selectionModel.clearHeaderSelection();
-        selectionModel.setSelectionIntervalNoChangeAnchor(leftTopRow, leftTopColumn,
-            leftTopRow + +pastedRowCount - 1, leftTopColumn + pastedColumnCount - 1);
+      if (!isSingleValue || !CoreSettings.getInstance().getBoolean(CoreSettings.PASTE_REPEATEDLY)) {
+        if (!doNotChangeSelection) {
+          GridSheetSelectionModel selectionModel = gridSheetPane.getSelectionModel();
+          selectionModel.clearHeaderSelection();
+          selectionModel.setSelectionIntervalNoChangeAnchor(leftTopRow, leftTopColumn,
+              leftTopRow + values.size() - 1, leftTopColumn + valuesMaxColumnSize - 1);
+        }
       }
     }
   }
 
-  private static List<List<?>> parse(String text, CsvMeta csvMeta) {
-    List<List<?>> data = new ArrayList<>();
+  private static List<List<String>> parse(String text, CsvMeta csvMeta) {
+    List<List<String>> data = new ArrayList<>();
     try (SmoothCsvReader csvReader = new SmoothCsvReader(new StringReader(text), csvMeta.toCsvProperties())) {
       List<String> rowData;
       while ((rowData = csvReader.readRow()) != null) {
@@ -153,7 +149,7 @@ public class PasteCommand extends GridCommand {
     return data;
   }
 
-  public static interface PasteRange {
+  public interface PasteRange {
 
     int getRow();
 

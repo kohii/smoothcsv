@@ -83,7 +83,7 @@ public class SqlTablePreviewPanel extends AbstractSqlTableDetailsPanel {
     if (tableInfo instanceof SqlCsvSheetTableInfo) {
       CsvGridSheetModel model =
           ((SqlCsvSheetTableInfo) tableInfo).getCsvSheet().getGridSheetPane().getModel();
-      List<List> dataList = model.getDataList(0, 5);
+      List<List<String>> dataList = model.getDataList(0, 5);
       ((GridSheetModel) previewGrid.getModel()).setDataList(dataList);
     }
   }

@@ -16,7 +16,7 @@ body
 	ctrl+shift+tab	view:PreviousTab
 	ctrl+q	macro:ToggleRecordingMacro
 	ctrl+shift+q	macro:Run
-	shortcut+e	value_panel:Focus,valuePanel
+	shortcut+e	value_panel:Focus
 
 @mac body
 	alt+cmd+right	view:NextTab

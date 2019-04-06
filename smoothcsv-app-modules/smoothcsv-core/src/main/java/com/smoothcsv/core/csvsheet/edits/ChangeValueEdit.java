@@ -20,8 +20,8 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
  */
 public class ChangeValueEdit implements GridSheetUndableEdit {
 
-  private Object oldValue;
-  private Object newValue;
+  private String oldValue;
+  private String newValue;
   private int row;
   private int column;
 
@@ -31,7 +31,7 @@ public class ChangeValueEdit implements GridSheetUndableEdit {
    * @param row
    * @param column
    */
-  public ChangeValueEdit(Object oldValue, Object newValue, int row, int column) {
+  public ChangeValueEdit(String oldValue, String newValue, int row, int column) {
     this.oldValue = oldValue;
     this.newValue = newValue;
     this.row = row;

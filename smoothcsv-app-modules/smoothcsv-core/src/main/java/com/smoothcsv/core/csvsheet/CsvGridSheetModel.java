@@ -19,8 +19,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.smoothcsv.commons.utils.ObjectUtils;
+import com.smoothcsv.commons.utils.StringUtils;
 import com.smoothcsv.core.csvsheet.edits.ChangeValueEdit;
+import com.smoothcsv.core.csvsheet.edits.ChangeValuesEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteCellEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteColumnsEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteRowsEdit;
@@ -61,14 +62,14 @@ public class CsvGridSheetModel extends GridSheetModel {
    * @param rowCount
    * @param columnCount
    */
-  public CsvGridSheetModel(List<List> dataList, int rowCount, int columnCount) {
+  public CsvGridSheetModel(List<List<String>> dataList, int rowCount, int columnCount) {
     super(dataList, rowCount, columnCount);
   }
 
   /**
    * @param dataList
    */
-  public CsvGridSheetModel(List<List> dataList) {
+  public CsvGridSheetModel(List<List<String>> dataList) {
     super(dataList);
   }
 
@@ -77,15 +78,15 @@ public class CsvGridSheetModel extends GridSheetModel {
    * @param rowCount
    * @param columnCount
    */
-  public CsvGridSheetModel(List<List> dataList,
+  public CsvGridSheetModel(List<List<String>> dataList,
                            int rowCount,
                            int columnCount,
-                           List columnNames) {
+                           List<String> columnNames) {
     super(dataList, rowCount, columnCount);
     this.useFirstRowAsHeader = true;
     for (int i = 0; i < columnCount; i++) {
       GridSheetColumn col = getColumn(i);
-      col.setName(ObjectUtils.toString(columnNames.get(i)));
+      col.setName(columnNames.get(i));
     }
   }
 
@@ -94,7 +95,7 @@ public class CsvGridSheetModel extends GridSheetModel {
    * @param columnIds
    * @param data
    */
-  public void insertColumn(int index, long[] columnIds, Object[][] data) {
+  public void insertColumn(int index, long[] columnIds, String[][] data) {
     GridSheetColumn[] columns = new GridSheetColumn[columnIds.length];
     for (int i = 0; i < columns.length; i++) {
       columns[i] = createDefaultColumn(columnIds[i]);
@@ -102,10 +103,10 @@ public class CsvGridSheetModel extends GridSheetModel {
     insertColumn(index, columns);
 
     for (int i = 0; i < data.length; i++) {
-      Object[] columnData = data[i];
+      String[] columnData = data[i];
       for (int j = 0; j < columnData.length; j++) {
-        Object val = columnData[j];
-        List rowData = getRowDataAt(j);
+        String val = columnData[j];
+        List<String> rowData = getRowDataAt(j);
         if (val != null) {
           rowData.set(index + i, val);
           // } else {
@@ -119,18 +120,18 @@ public class CsvGridSheetModel extends GridSheetModel {
    * @param index
    * @param data
    */
-  public void insertRow(int index, Object[][] data) {
+  public void insertRow(int index, String[][] data) {
     insertRow(index, data.length);
     for (int i = 0; i < data.length; i++) {
-      Object[] rowData = data[i];
+      String[] rowData = data[i];
       setRowDataAt(index + i, rowData);
     }
   }
 
   public void setSizeAt(int rowIndex, int size) {
-    List rowData = getRowDataAt(rowIndex);
+    List<String> rowData = getRowDataAt(rowIndex);
     if (rowData.size() <= size) {
-      Object val = getDefaultValue();
+      String val = getDefaultValue();
       for (int i = size - rowData.size() - 1; i >= 0; i--) {
         rowData.add(val);
       }
@@ -140,16 +141,16 @@ public class CsvGridSheetModel extends GridSheetModel {
   }
 
   public void deleteCell(int rowIndex, int from, int to) {
-    List rowData = getRowDataAt(rowIndex);
-    List truncateRange = rowData.subList(from, to + 1);
-    Object[] truncatedData = truncateRange.toArray();
+    List<String> rowData = getRowDataAt(rowIndex);
+    List<String> truncateRange = rowData.subList(from, to + 1);
+    String[] truncatedData = truncateRange.toArray(new String[0]);
     truncateRange.clear();
     collectEdit(new DeleteCellEdit(rowIndex, from, truncatedData));
     fireDataUpdated(rowIndex, from, rowIndex, getColumnCount(), false);
   }
 
-  public void insertCell(int rowIndex, int columnIndex, Object[] data) {
-    List rowData = getRowDataAt(rowIndex);
+  public void insertCell(int rowIndex, int columnIndex, String[] data) {
+    List<String> rowData = getRowDataAt(rowIndex);
     int rowColumnSize = rowData.size();
     if (rowColumnSize + data.length > getColumnCount()) {
       GridSheetColumn[] columns = new GridSheetColumn[rowColumnSize + data.length - getColumnCount()];
@@ -165,12 +166,23 @@ public class CsvGridSheetModel extends GridSheetModel {
   }
 
   @Override
-  public void setValueAt(Object aValue, int row, int column) {
-    Object oldValue = getValueAt(row, column);
+  public void setValueAt(String aValue, int row, int column) {
+    String oldValue = getValueAt(row, column);
     if (!equals(aValue, oldValue)) {
       collectEdit(new ChangeValueEdit(oldValue, aValue, row, column));
     }
     super.setValueAt(aValue, row, column);
+  }
+
+  @Override
+  public void setValuesAt(List<List<String>> valuesList, int row, int column) {
+    if (valuesList.isEmpty()) {
+      return;
+    }
+    int maxColumnCont = valuesList.stream().mapToInt(v -> v.size()).max().getAsInt();
+    List<List<String>> oldValuesList = getValuesAt(row, column, valuesList.size(), maxColumnCont);
+    collectEdit(new ChangeValuesEdit(oldValuesList, valuesList, row, column));
+    super.setValuesAt(valuesList, row, column);
   }
 
   @Override
@@ -182,7 +194,7 @@ public class CsvGridSheetModel extends GridSheetModel {
   @Override
   protected void fireColumnsDeleted(int index, GridSheetColumn[] columnsRemoved) {
     long[] columnIds = new long[columnsRemoved.length];
-    Object[][] data = new Object[columnsRemoved.length][];
+    String[][] data = new String[columnsRemoved.length][];
     for (int i = 0; i < columnsRemoved.length; i++) {
       columnIds[i] = columnsRemoved[i].getId();
       data[i] = getColumnDataAt(index + i);
@@ -199,9 +211,9 @@ public class CsvGridSheetModel extends GridSheetModel {
 
   @Override
   protected void fireRowsDeleted(int index, GridSheetRow[] rowsRemoved) {
-    Object[][] data = new Object[rowsRemoved.length][];
+    String[][] data = new String[rowsRemoved.length][];
     for (int i = 0; i < rowsRemoved.length; i++) {
-      data[i] = getRowDataAt(index + i).toArray();
+      data[i] = getRowDataAt(index + i).toArray(new String[0]);
     }
     collectEdit(new DeleteRowsEdit(index, data));
     super.fireRowsDeleted(index, rowsRemoved);
@@ -211,7 +223,7 @@ public class CsvGridSheetModel extends GridSheetModel {
   protected void deleteColumnData(int index, int numColumns) {
     int rowCount = getRowCount();
     for (int r = 0; r < rowCount; r++) {
-      List rowData = getRowDataAt(r);
+      List<String> rowData = getRowDataAt(r);
       if (index < rowData.size()) {
         rowData.subList(index, Math.min(index + numColumns, rowData.size())).clear();
       }
@@ -223,20 +235,20 @@ public class CsvGridSheetModel extends GridSheetModel {
   protected void insertColumnData(int index, int numColumns) {
     int rowCount = getRowCount();
     for (int r = 0; r < rowCount; r++) {
-      List rowData = getRowDataAt(r);
+      List<String> rowData = getRowDataAt(r);
       if (index <= rowData.size()) {
-        Object[] elements = new Object[numColumns];
+        String[] elements = new String[numColumns];
         Arrays.fill(elements, getDefaultValue());
-        List<Object> newData = Arrays.asList(elements);
+        List<String> newData = Arrays.asList(elements);
         rowData.addAll(index, newData);
       }
     }
     fireDataUpdated(0, index, GridSheetDataEvent.TO_THE_END, GridSheetDataEvent.TO_THE_END, true);
   }
 
-  private Object[] getColumnDataAt(int columnIndex) {
+  private String[] getColumnDataAt(int columnIndex) {
     int rowCount = getRowCount();
-    Object[] columnData = new Object[rowCount];
+    String[] columnData = new String[rowCount];
     for (int j = 0; j < rowCount; j++) {
       columnData[j] = getValueAt(j, columnIndex);
     }
@@ -252,7 +264,7 @@ public class CsvGridSheetModel extends GridSheetModel {
   }
 
   public void sort(List<SortCriteria> criterias, int[] targetRows) {
-    List<List> targetDataList = new ArrayList<>();
+    List<List<String>> targetDataList = new ArrayList<>();
     for (int i = 0; i < targetRows.length; i++) {
       int r = targetRows[i];
       targetDataList.add(dataList.get(r));
@@ -269,11 +281,11 @@ public class CsvGridSheetModel extends GridSheetModel {
 
   public void sort(List<SortCriteria> criterias, CellRect targetCells) {
     setAdjusting(true);
-    List<List> targetDataList = new ArrayList<>(targetCells.getNumRows());
+    List<List<String>> targetDataList = new ArrayList<>(targetCells.getNumRows());
     for (int r = targetCells.getRow(); r <= targetCells.getLastRow(); r++) {
-      List rowData = new ArrayList(targetCells.getNumColumns());
+      List<String> rowData = new ArrayList(targetCells.getNumColumns());
       for (int c = targetCells.getColumn(); c <= targetCells.getLastColumn(); c++) {
-        Object v = getValueAt(r, c);
+        String v = getValueAt(r, c);
         if (v == null) {
           throw new AppException("WSCA0005");
         }
@@ -284,8 +296,8 @@ public class CsvGridSheetModel extends GridSheetModel {
     SortResult sortResult = CsvSorter.sort(criterias, targetDataList, false);
     collectEdit(new PartialSortEdit(criterias, sortResult.getOrder(), targetCells));
     for (int i = 0; i < targetCells.getNumRows(); i++) {
-      List rowData = getRowDataAt(i + targetCells.getRow());
-      List sortedRowData = sortResult.getSortedData().get(i);
+      List<String> rowData = getRowDataAt(i + targetCells.getRow());
+      List<String> sortedRowData = sortResult.getSortedData().get(i);
       for (int c = targetCells.getColumn(); c <= targetCells.getLastColumn(); c++) {
         rowData.set(c, sortedRowData.get(c - targetCells.getColumn()));
       }
@@ -295,8 +307,8 @@ public class CsvGridSheetModel extends GridSheetModel {
     setAdjusting(false);
   }
 
-  public List<List> getDataList(int rowFrom, int rowTo) {
-    List<List> ret = new ArrayList<List>();
+  public List<List<String>> getDataList(int rowFrom, int rowTo) {
+    List<List<String>> ret = new ArrayList<List<String>>();
     for (int r = rowFrom; r < rowTo; r++) {
       ret.add(Collections.unmodifiableList(dataList.get(r)));
     }
@@ -323,18 +335,18 @@ public class CsvGridSheetModel extends GridSheetModel {
     collectingEditDisabled = true;
     try {
       if (b) {
-        List firstRow = getRowDataAt(0);
+        List<String> firstRow = getRowDataAt(0);
         int columnCount = getColumnCount();
         for (int c = 0; c < columnCount; c++) {
           GridSheetColumn col = getColumn(c);
           if (c < firstRow.size()) {
-            col.setName(ObjectUtils.toString(firstRow.get(c)));
+            col.setName(firstRow.get(c));
           }
         }
         deleteRow(0);
       } else {
         int columnCount = getColumnCount();
-        List firstRow = new ArrayList<>(columnCount);
+        List<String> firstRow = new ArrayList<>(columnCount);
         for (int c = 0; c < columnCount; c++) {
           GridSheetColumn col = getColumn(c);
           String val = col.getName();
@@ -344,8 +356,8 @@ public class CsvGridSheetModel extends GridSheetModel {
           }
           firstRow.add(val);
         }
-        Object[] firstRowData = firstRow.toArray();
-        insertRow(0, new Object[][]{firstRowData});
+        String[] firstRowData = firstRow.toArray(new String[0]);
+        insertRow(0, new String[][]{firstRowData});
       }
     } finally {
       collectingEditDisabled = false;
@@ -362,11 +374,11 @@ public class CsvGridSheetModel extends GridSheetModel {
     undableEditListener.accept(undableEdit);
   }
 
-  private static final boolean equals(Object o0, Object o1) {
-    if (ObjectUtils.isEmpty(o0)) {
-      return ObjectUtils.isEmpty(o1);
+  private static final boolean equals(String o0, String o1) {
+    if (StringUtils.isEmpty(o0)) {
+      return StringUtils.isEmpty(o1);
     } else {
-      if (ObjectUtils.isEmpty(o1)) {
+      if (StringUtils.isEmpty(o1)) {
         return false;
       } else {
         return o0.toString().equals(o1.toString());

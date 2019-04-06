@@ -42,7 +42,7 @@ public class InsertCellCommand extends GridCommand {
                   return;
                 }
               }
-              Object[] data = new Object[toColumnIndex - fromColumnIndex + 1];
+              String[] data = new String[toColumnIndex - fromColumnIndex + 1];
               Arrays.fill(data, "");
               model.insertCell(rowIndex, fromColumnIndex, data);
             }, false);

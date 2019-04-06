@@ -23,14 +23,14 @@ public class InsertCellEdit implements GridSheetUndableEdit {
 
   private final int rowIndex;
   private final int columnIndex;
-  private final Object[] data;
+  private final String[] data;
 
   /**
    * @param rowIndex
    * @param columnIndex
    * @param data
    */
-  public InsertCellEdit(int rowIndex, int columnIndex, Object[] data) {
+  public InsertCellEdit(int rowIndex, int columnIndex, String[] data) {
     this.rowIndex = rowIndex;
     this.columnIndex = columnIndex;
     this.data = data;

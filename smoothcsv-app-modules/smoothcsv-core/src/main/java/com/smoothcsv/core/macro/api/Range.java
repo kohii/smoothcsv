@@ -95,7 +95,7 @@ public interface Range {
    *
    * @return the value in this cell
    */
-  Object getValue();
+  String getValue();
 
   /**
    * Returns the rectangular sheet of values for this range. Returns a two-dimensional array of
@@ -103,7 +103,7 @@ public interface Range {
    *
    * @return a two-dimensional array of values
    */
-  Object[][] getValues();
+  String[][] getValues();
 
   /**
    * Returns true if the range is totally empty.
@@ -183,7 +183,7 @@ public interface Range {
    * @param value the value for the range
    * @return the range for chaining
    */
-  Range setValue(Object value);
+  Range setValue(String value);
 
   /**
    * Sets a rectangular sheet of values (must match dimensions of this range).
@@ -191,7 +191,7 @@ public interface Range {
    * @param values a two-dimensional array of values
    * @return the range for chaining
    */
-  Range setValues(Object[][] values);
+  Range setValues(String[][] values);
 
   /**
    * Sorts the cells in a given range, by column and order specified.

@@ -34,7 +34,7 @@ public class FillUpCommand extends GridCommand {
 
     try (EditTransaction tran = gridSheetPane.transaction()) {
       gridSheetPane.getSelectionModel().forEachSelectedColumns((column) -> {
-        Object val = null;
+        String val = null;
         boolean first = true;
         for (int row = maxR; minR <= row; row--) {
           if (selectionModel.isCellSelected(row, column)) {

@@ -13,6 +13,7 @@
  */
 package com.smoothcsv.swing.gridsheet.model;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.smoothcsv.swing.gridsheet.event.GridSheetDataEvent;
@@ -22,9 +23,13 @@ import com.smoothcsv.swing.gridsheet.event.GridSheetDataEvent;
  */
 public interface IGridSheetData {
 
-  Object getValueAt(int row, int column);
+  String getValueAt(int row, int column);
 
-  void setValueAt(Object aValue, int row, int column);
+  List<List<String>> getValuesAt(int row, int column, int rowCount, int columnCount);
+
+  void setValueAt(String aValue, int row, int column);
+
+  void setValuesAt(List<List<String>> values, int row, int column);
 
   void addValueChangeListener(Consumer<GridSheetDataEvent> l);
 

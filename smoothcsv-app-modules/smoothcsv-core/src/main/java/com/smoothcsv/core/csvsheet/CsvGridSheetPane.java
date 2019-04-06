@@ -18,9 +18,9 @@ import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
-import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
@@ -227,19 +227,35 @@ public class CsvGridSheetPane extends GridSheetPane {
   }
 
   @Override
-  public void setValueAt(Object aValue, int row, int column) {
-    aValue = ObjectUtils.toString(aValue);
-    Object oldVal = getValueAt(row, column);
+  public void setValueAt(String aValue, int row, int column) {
+    String oldVal = getValueAt(row, column);
     if (oldVal != null) {
       super.setValueAt(aValue, row, column);
       return;
     }
-    CsvGridSheetModel model = (CsvGridSheetModel) getModel();
+    CsvGridSheetModel model = getModel();
     String[] data = new String[column - model.getColumnCountAt(row) + 1];
     Arrays.fill(data, "");
     try (EditTransaction tran = transaction()) {
       model.insertCell(row, model.getColumnCountAt(row), data);
       super.setValueAt(aValue, row, column);
+    }
+  }
+
+  @Override
+  public void setValuesAt(List<List<String>> valuesList, int row, int column) {
+    CsvGridSheetModel model = getModel();
+    try (EditTransaction tran = transaction()) {
+      for (int i = 0; i < valuesList.size(); i++) {
+        List<String> values = valuesList.get(i);
+        int columnCount = model.getColumnCountAt(row + i);
+        if (columnCount < column + values.size()) {
+          String[] data = new String[column + values.size() - columnCount];
+          Arrays.fill(data, "");
+          model.insertCell(row, columnCount, data);
+        }
+      }
+      model.setValuesAt(valuesList, row, column);
     }
   }
 
@@ -316,6 +332,9 @@ public class CsvGridSheetPane extends GridSheetPane {
 
   @Override
   public void cellValueChanged(GridSheetDataEvent e) {
+    if (getUndoManager().isTransactionStarted() || !getUndoManager().isCollecting()) {
+      return;
+    }
     // if (!e.isStructureChanged()) {
     // if (e.getFirstRow() == GridSheetDataEvent.ALL_CELLS) {
     // recalcRowHeights();

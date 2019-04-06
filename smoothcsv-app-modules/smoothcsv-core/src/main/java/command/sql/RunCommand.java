@@ -191,7 +191,7 @@ public class RunCommand extends SqlEditorCommandBase {
                       } else {
                         // Open in new tab
 
-                        List<List> rows = new ArrayList<>();
+                        List<List<String>> rows = new ArrayList<>();
 
                         while (rs.next()) {
                           String[] row = new String[columnCount];

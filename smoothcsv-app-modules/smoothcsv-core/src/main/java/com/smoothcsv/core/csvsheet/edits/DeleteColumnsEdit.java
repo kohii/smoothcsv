@@ -22,13 +22,13 @@ public class DeleteColumnsEdit implements GridSheetUndableEdit {
 
   private int index;
   private long[] columnIds;
-  private Object[][] data;
+  private String[][] data;
 
   /**
    * @param index
    * @param data
    */
-  public DeleteColumnsEdit(int index, long[] columnIds, Object[][] data) {
+  public DeleteColumnsEdit(int index, long[] columnIds, String[][] data) {
     this.index = index;
     this.columnIds = columnIds;
     this.data = data;

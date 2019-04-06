@@ -117,16 +117,16 @@ public class RangeImpl extends APIBase implements Range {
   }
 
   @Override
-  public Object getValue() {
+  public String getValue() {
     return getGridSheet().getValueAt(row - 1, column - 1);
   }
 
   @Override
-  public Object[][] getValues() {
+  public String[][] getValues() {
     CsvGridSheetPane gridSheet = getGridSheet();
-    Object[][] values = new Object[numRows][];
+    String[][] values = new String[numRows][];
     for (int r = row - 1, lastRow = getLastRow(); r < lastRow; r++) {
-      Object[] rowValues = new Object[numColumns];
+      String[] rowValues = new String[numColumns];
       for (int c = column - 1, lastColumn = getLastColumn(); c < lastColumn; c++) {
         rowValues[c] = gridSheet.getValueAt(r, c);
       }
@@ -142,7 +142,7 @@ public class RangeImpl extends APIBase implements Range {
     forEachCell(new ICellConsumer() {
       @Override
       public boolean accept(int r, int c) {
-        Object val = gridSheet.getValueAt(r, c);
+        String val = gridSheet.getValueAt(r, c);
         if (val != null && !val.toString().isEmpty()) {
           result.setFalse();
           return false;
@@ -159,11 +159,11 @@ public class RangeImpl extends APIBase implements Range {
   }
 
   private void copyTo(Range destination, boolean move) {
-    Object[][] values = getValues();
+    String[][] values = getValues();
     if (move) {
       clear();
     }
-    List<List<?>> valueList = new ArrayList<>(values.length);
+    List<List<String>> valueList = new ArrayList<>(values.length);
     for (int i = 0; i < values.length; i++) {
       valueList.add(Arrays.asList(values[i]));
     }
@@ -209,13 +209,13 @@ public class RangeImpl extends APIBase implements Range {
   }
 
   @Override
-  public Range setValue(Object value) {
+  public Range setValue(String value) {
     getGridSheet().setValueAt(value, row - 1, column - 1);
     return this;
   }
 
   @Override
-  public Range setValues(Object[][] values) {
+  public Range setValues(String[][] values) {
     CsvGridSheetPane gridSheet = getGridSheet();
     try (EditTransaction tran = gridSheet.transaction()) {
       forEachCell(new ICellConsumer() {
@@ -245,7 +245,7 @@ public class RangeImpl extends APIBase implements Range {
         cell.row = row;
         cell.column = column;
         Object retVal = callback.call(cell, ObjectUtils.toString(cell.getValue()), row, column);
-        return retVal != null && retVal == Boolean.FALSE ? false : true;
+        return retVal == null || retVal != Boolean.FALSE;
       }
     });
   }

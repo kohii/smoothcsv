@@ -33,7 +33,7 @@ public class FillLeftCommand extends GridCommand {
 
     try (EditTransaction tran = gridSheetPane.transaction()) {
       gridSheetPane.getSelectionModel().forEachSelectedRows((row) -> {
-        Object val = null;
+        String val = null;
         boolean first = true;
         for (int column = maxC; minC <= column; column--) {
           if (selectionModel.isCellSelected(row, column)) {

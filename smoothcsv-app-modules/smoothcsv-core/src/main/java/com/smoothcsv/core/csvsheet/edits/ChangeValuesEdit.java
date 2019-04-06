@@ -13,32 +13,35 @@
  */
 package com.smoothcsv.core.csvsheet.edits;
 
+import java.util.List;
+
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 
 /**
  * @author kohii
  */
-public class DeleteRowsEdit implements GridSheetUndableEdit {
+public class ChangeValuesEdit implements GridSheetUndableEdit {
 
-  private int index;
-  private String[][] data;
+  private List<List<String>> oldValue;
+  private List<List<String>> newValue;
+  private int row;
+  private int column;
 
-  /**
-   * @param index
-   * @param data
-   */
-  public DeleteRowsEdit(int index, String[][] data) {
-    this.index = index;
-    this.data = data;
+  public ChangeValuesEdit(List<List<String>> oldValue, List<List<String>> newValue, int row, int column) {
+    this.oldValue = oldValue;
+    this.newValue = newValue;
+    this.row = row;
+    this.column = column;
   }
 
   @Override
   public void undo(CsvGridSheetModel model) {
-    model.insertRow(index, data);
+    model.setValuesAt(oldValue, row, column);
   }
 
   @Override
   public void redo(CsvGridSheetModel model) {
-    model.deleteRow(index, data.length);
+    model.setValuesAt(newValue, row, column);
   }
+
 }

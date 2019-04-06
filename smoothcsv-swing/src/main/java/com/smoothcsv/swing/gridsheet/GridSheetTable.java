@@ -59,6 +59,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.UIResource;
 
 import com.smoothcsv.commons.constants.Direction;
+import com.smoothcsv.commons.utils.ObjectUtils;
 import com.smoothcsv.swing.gridsheet.event.GridSheetSelectionEvent;
 import com.smoothcsv.swing.gridsheet.event.GridSheetSelectionListener;
 import com.smoothcsv.swing.gridsheet.model.GridSheetCellRange;
@@ -1491,7 +1492,7 @@ public class GridSheetTable extends AbstractGridSheetComponent
     GridSheetCellEditor editor = getCellEditor();
     if (editor != null) {
       Object value = editor.getCellEditorValue();
-      gridSheetPane.setValueAt(value, editingRow, editingColumn);
+      gridSheetPane.setValueAt(ObjectUtils.toString(value), editingRow, editingColumn);
       removeEditor();
     }
   }

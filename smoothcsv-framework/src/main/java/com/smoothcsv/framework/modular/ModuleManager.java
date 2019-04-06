@@ -95,6 +95,9 @@ public class ModuleManager {
   private void loadModule(String name) {
 
     Module mod = modules.get(name);
+    if (mod == null) {
+      throw new RuntimeException("Module " + name + " not found in classpath.");
+    }
 
     if (mod.getStatus() != Module.NOT_YET) {
       return;

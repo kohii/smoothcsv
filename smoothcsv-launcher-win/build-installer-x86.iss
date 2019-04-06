@@ -24,7 +24,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\SmoothCSV 2
 DisableProgramGroupPage=yes
-OutputDir=target/
+OutputDir=build\distributions
 OutputBaseFilename=smoothscv-setup-{#MyAppVersion}-windows-{#OsType}
 Compression=lzma
 SolidCompression=yes
@@ -37,7 +37,7 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "target\SmoothCSV.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build\launch4j\64\SmoothCSV.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#JavaHome}\*"; DestDir: "{app}\jre"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

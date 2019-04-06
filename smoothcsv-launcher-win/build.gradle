@@ -5,7 +5,7 @@ import edu.sc.seis.launch4j.tasks.Launch4jLibraryTask
 plugins {
   id 'java'
   id 'application'
-  id 'com.github.johnrengelman.shadow' version '4.0.4'
+  id 'com.github.johnrengelman.shadow' version '5.0.0'
   id 'edu.sc.seis.launch4j' version '2.4.4'
 }
 
@@ -20,7 +20,12 @@ application {
   mainClassName = 'com.smoothcsv.SmoothCSV'
 }
 
-launch4j {
+shadowJar {
+  version = null
+  mergeServiceFiles()
+}
+
+task createExe32(type: Launch4jLibraryTask) {
   mainClassName = 'com.smoothcsv.SmoothCSV'
   icon = "${projectDir}/src/main/resources/app.ico"
 
@@ -34,9 +39,7 @@ launch4j {
   copyright = "Copyright (C) ${year} kohii All Rights Reserved."
   productName = 'SmoothCSV'
   internalName = 'SmoothCSV'
-}
 
-task createExe32(type: Launch4jLibraryTask) {
   outputDir = 'launch4j/32'
   outfile = 'SmoothCSV.exe'
 
@@ -45,9 +48,26 @@ task createExe32(type: Launch4jLibraryTask) {
 }
 
 task createExe64(type: Launch4jLibraryTask) {
+  mainClassName = 'com.smoothcsv.SmoothCSV'
+  icon = "${projectDir}/src/main/resources/app.ico"
+
+  copyConfigurable = project.tasks.shadowJar.outputs.files
+  jar = "lib/${project.tasks.shadowJar.archiveName}"
+
+  bundledJrePath = 'jre'
+
+  fileDescription = 'A powerful CSV file editor'
+  def year = LocalDate.now().getYear()
+  copyright = "Copyright (C) ${year} kohii All Rights Reserved."
+  productName = 'SmoothCSV'
+  internalName = 'SmoothCSV'
+
   outputDir = 'launch4j/64'
   outfile = 'SmoothCSV.exe'
 
   bundledJre64Bit = true
   jreRuntimeBits = 64
 }
+
+build.dependsOn createExe32
+build.dependsOn createExe64

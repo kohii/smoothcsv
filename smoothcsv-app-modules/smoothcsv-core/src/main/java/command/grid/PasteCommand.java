@@ -106,7 +106,21 @@ public class PasteCommand extends GridCommand {
           gridSheetPane.addColumn(leftTopColumn + valuesMaxColumnSize - columnSize);
         }
 
-        gridSheetPane.setValuesAt(values, leftTopRow, leftTopColumn);
+        int currentRow = leftTopRow;
+        for (List<String> rowValues : values) {
+          int len = rowValues.size();
+          if (columnSize < leftTopColumn + len) {
+            int appendCol = (leftTopColumn + len) - columnSize;
+            gridSheetPane.addColumn(appendCol);
+            columnSize += appendCol;
+          }
+
+          for (int j = 0; j < len; j++) {
+            String v = rowValues.get(j);
+            gridSheetPane.setValueAt(v, currentRow, j + leftTopColumn);
+          }
+          currentRow++;
+        }
       } else {
         String dataToPaste = values.get(0).get(0);
         if (!CoreSettings.getInstance().getBoolean(CoreSettings.PASTE_REPEATEDLY)) {

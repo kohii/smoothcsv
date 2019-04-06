@@ -13,10 +13,12 @@ dependencies {
 }
 
 processResources {
-  filter(
-      ReplaceTokens,
-      tokens: [
-          'project.version': project.version
-      ]
-  )
+  filesMatching('**/application.properties') {
+    filter(
+        ReplaceTokens,
+        tokens: [
+            'project.version': project.version
+        ]
+    )
+  }
 }

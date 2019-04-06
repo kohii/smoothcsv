@@ -1,8 +1,4 @@
-mvn versions:set -DnewVersion=${version}
-mvn versions:commit
-
-sed -i '' 's/${oldVersion}/${version}/g' smoothcsv-launcher-win/build-installer-x64.iss
-sed -i '' 's/${oldVersion}/${version}/g' smoothcsv-launcher-win/build-installer-x86.iss
+./gradlew updateAppVersion -PnewVersion=${version}
 
 git add .
 git commit -m "Update version to ${version}"

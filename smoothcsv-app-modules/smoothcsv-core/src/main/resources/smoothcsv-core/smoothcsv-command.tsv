@@ -107,8 +107,8 @@ cell_editor:InsertBreak	available(cell-editor)	command.cell_editor.ActionCommand
 cell_editor:InsertTab	available(cell-editor)	command.cell_editor.ActionCommand {"action":"insert-tab"}
 cell_editor:MoveLeft	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-backward"}
 cell_editor:MoveRight	available(cell-editor)	command.cell_editor.ActionCommand {"action":"caret-forward"}
-cell_editor:MoveUp	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
-cell_editor:MoveDown	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+cell_editor:MoveUp	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-up","action":"caret-up"}
+cell_editor:MoveDown	available(cell-editor)	command.cell_editor.ActionCommand {"mac_action":"aqua-move-down","action":"caret-down"}
 cell_editor:SelectLeft	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-backward"}
 cell_editor:SelectRight	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-forward"}
 cell_editor:SelectUp	available(cell-editor)	command.cell_editor.ActionCommand {"action":"selection-up"}
@@ -149,8 +149,8 @@ value_panel:InsertBreak	available(value-panel)	command.value_panel.ActionCommand
 value_panel:InsertTab	available(value-panel)	command.value_panel.ActionCommand {"action":"insert-tab"}
 value_panel:MoveLeft	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-backward"}
 value_panel:MoveRight	available(value-panel)	command.value_panel.ActionCommand {"action":"caret-forward"}
-value_panel:MoveUp	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-up","win_action":null}
-value_panel:MoveDown	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-down","win_action":null}
+value_panel:MoveUp	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-up","action":"caret-up"}
+value_panel:MoveDown	available(value-panel)	command.value_panel.ActionCommand {"mac_action":"aqua-move-down","action":"caret-down"}
 value_panel:SelectLeft	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-backward"}
 value_panel:SelectRight	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-forward"}
 value_panel:SelectUp	available(value-panel)	command.value_panel.ActionCommand {"action":"selection-up"}

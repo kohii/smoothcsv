@@ -72,7 +72,7 @@ public class CsvSheetSupport {
     csvMeta.setCharsetNotDetermined(true);
     csvMeta.setDelimiterNotDetermined(true);
     csvMeta.setQuoteNotDetermined(true);
-    csvMeta.setCharset(null);
+    csvMeta.setEncoding(null);
     csvMeta.setNewlineCharNotDetermined(true);
     return csvMeta;
   }
@@ -98,7 +98,7 @@ public class CsvSheetSupport {
     }
 
     try (SmoothCsvReader reader =
-             new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getCharset()),
+             new SmoothCsvReader(new InputStreamReader(new FileInputStream(file), csvMeta.getEncoding().getCharset()),
                  csvMeta.toCsvProperties(), options)) {
       List<List<String>> data = new ArrayList<>();
       List<String> r;

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import com.smoothcsv.commons.exception.UnexpectedException;
+import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.command.CsvSheetCommandBase;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csv.FileBackupService;
@@ -52,14 +53,19 @@ public class SaveCommand extends CsvSheetCommandBase {
       backuped = FileBackupService.getInstance().backup(file, false) != null;
     }
     CsvMeta csvMeta = vi.getCsvMeta();
-    try (SmoothCsvWriter writer =
-             new SmoothCsvWriter(
-                 new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()),
-                 csvMeta,
-                 CsvWriteOption.of(csvMeta.getQuoteOption()))) {
+    try (FileOutputStream fos = new FileOutputStream(file);
+         OutputStreamWriter osw = new OutputStreamWriter(fos, csvMeta.getEncoding().getCharset());
+         SmoothCsvWriter writer = new SmoothCsvWriter(osw, csvMeta, CsvWriteOption.of(csvMeta.getQuoteOption()))) {
+
+      if (csvMeta.getEncoding().hasUtf8BOM()) {
+        for (byte bomByte : CharsetUtils.UTF8_BYTE_ORDER_MARK_BYTES) {
+          fos.write(bomByte);
+        }
+      }
+
       GridSheetModel model = view.getGridSheetPane().getModel();
       if (((CsvGridSheetModel) model).usesFirstRowAsHeader()) {
-          writer.writeRow(model.getColumnNames());
+        writer.writeRow(model.getColumnNames());
       }
 
       int rowCount = model.getRowCount();

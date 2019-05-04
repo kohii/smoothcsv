@@ -15,13 +15,13 @@ package com.smoothcsv.core.macro;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.macro.api.CsvProperties;
-import com.smoothcsv.csv.prop.QuoteApplyRule;
 import com.smoothcsv.csv.prop.LineSeparator;
+import com.smoothcsv.csv.prop.QuoteApplyRule;
 
 /**
  * @author kohii
@@ -33,8 +33,7 @@ public class MacroUtils {
     csvMeta.setDelimiter(prop.getDelimiter().charAt(0));
     csvMeta.setQuote(prop.getQuote().charAt(0));
     csvMeta.setEscape(prop.getEscape().charAt(0));
-    csvMeta.setCharset(Charset.forName(prop.getCharset()));
-    csvMeta.setHasBom(prop.hasBOM());
+    csvMeta.setEncoding(FileEncoding.forName(prop.getEncoding()).get());
     csvMeta.setLineSeparator(LineSeparator.of(prop.getNewlineCharacter()));
     QuoteApplyRule quoteApplyRule;
     switch (prop.getQuoteOption()) {

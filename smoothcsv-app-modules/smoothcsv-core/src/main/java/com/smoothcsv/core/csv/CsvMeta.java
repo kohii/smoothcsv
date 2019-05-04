@@ -14,10 +14,9 @@
 package com.smoothcsv.core.csv;
 
 import java.io.Serializable;
-import java.nio.charset.Charset;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.commons.exception.UnexpectedException;
-import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.csv.prop.CsvProperties;
 import com.smoothcsv.csv.prop.LineSeparator;
 import com.smoothcsv.csv.prop.QuoteApplyRule;
@@ -45,9 +44,7 @@ public class CsvMeta implements Cloneable, Serializable {
 
   private transient boolean newlineCharNotDetermined = false;
 
-  private String charsetName = CharsetUtils.getDefaultCharset().name();
-
-  private boolean hasBom = false;
+  private FileEncoding encoding = FileEncoding.getDefault();
 
   private QuoteApplyRule quoteOption = QuoteApplyRule.QUOTES_ALL;
 
@@ -55,20 +52,8 @@ public class CsvMeta implements Cloneable, Serializable {
 
   private boolean appendsNewLineAtEOF;
 
-  public boolean hasBom() {
-    return hasBom;
-  }
-
   public boolean appendsNewLineAtEOF() {
     return appendsNewLineAtEOF;
-  }
-
-  public Charset getCharset() {
-    return Charset.forName(charsetName);
-  }
-
-  public void setCharset(Charset charset) {
-    this.charsetName = charset == null ? null : charset.name();
   }
 
   @Override
@@ -90,8 +75,7 @@ public class CsvMeta implements Cloneable, Serializable {
 
   public String toDisplayString() {
     StringBuilder sb = new StringBuilder();
-    appendKeyValue(sb, SCBundle.get("key.encoding"),
-        CharsetUtils.getDisplayName(getCharset(), hasBom()));
+    appendKeyValue(sb, SCBundle.get("key.encoding"), encoding.getName());
     appendKeyValue(sb, SCBundle.get("key.newlineCharacter"), this.getLineSeparator().toString());
     appendKeyValue(sb, SCBundle.get("key.delimiterChar"), getDelimiter());
     appendKeyValue(sb, SCBundle.get("key.quoteChar"), getQuote());

@@ -195,4 +195,16 @@ public class ArrayUtils {
     list.addAll(Arrays.asList(array));
     return list;
   }
+
+  public static boolean startsWith(byte[] bytes, byte[] prefix) {
+    if (prefix.length > bytes.length) {
+      return false;
+    }
+    for (int i = 0; i < prefix.length; i++) {
+      if (prefix[i] != bytes[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -167,7 +167,7 @@ public class RunCommand extends SqlEditorCommandBase {
 
                         try (SmoothCsvWriter writer =
                                  new SmoothCsvWriter(
-                                     new OutputStreamWriter(new FileOutputStream(file), csvMeta.getCharset()),
+                                     new OutputStreamWriter(new FileOutputStream(file), csvMeta.getEncoding().getCharset()),
                                      csvMeta,
                                      CsvWriteOption.of(csvMeta.getQuoteOption()))) {
                           if (outputOptionDialog.isUseHeader()) {

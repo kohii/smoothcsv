@@ -17,17 +17,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.swing.JFileChooser;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.commons.exception.CancellationException;
 import com.smoothcsv.commons.exception.IORuntimeException;
 import com.smoothcsv.commons.exception.UnexpectedException;
 import com.smoothcsv.commons.utils.CharsetUtils;
-import com.smoothcsv.commons.utils.CharsetUtils.CharsetInfo;
 import com.smoothcsv.commons.utils.FileUtils;
+import com.smoothcsv.core.SmoothCsvApp;
 import com.smoothcsv.core.component.ReadCsvPropertiesDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvFileChooser;
@@ -128,10 +128,8 @@ public class OpenFileCommand extends Command {
   static void determineCsvMetaContent(File file, CsvMeta properties) {
     if (properties.isCharsetNotDetermined()) {
       // detect charset
-      CharsetInfo ci = CharsetUtils.detect(file, 12000);
-      String csName = CharsetUtils.convertSJIS(ci.charset);
-      properties.setCharset(Charset.forName(csName));
-      properties.setHasBom(ci.hasBom);
+      FileEncoding encoding = CharsetUtils.detect(file, 12000);
+      properties.setEncoding(encoding);
       properties.setCharsetNotDetermined(false);
     }
 
@@ -140,7 +138,7 @@ public class OpenFileCommand extends Command {
 
       // TODO Should I use BufferedReader?
       try (InputStreamReader r =
-               new InputStreamReader(new FileInputStream(file), properties.getCharset())) {
+               new InputStreamReader(new FileInputStream(file), properties.getEncoding().getCharset())) {
         char[] chars = new char[8192];
         int nread;
         if ((nread = r.read(chars)) != -1) {
@@ -182,7 +180,7 @@ public class OpenFileCommand extends Command {
   }
 
   public static CsvMeta chooseProperties() {
-    ReadCsvPropertiesDialog dialog = new ReadCsvPropertiesDialog(null, "Open");
+    ReadCsvPropertiesDialog dialog = new ReadCsvPropertiesDialog(SmoothCsvApp.components().getFrame(), "Open");
     if (dialog.showDialog() != DialogOperation.OK) {
       throw new CancellationException();
     }

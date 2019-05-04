@@ -123,6 +123,8 @@ public class SCTabbedPane extends JTabbedPane implements SmoothComponent {
 
     setFocusable(true);
 
+    setTabLayoutPolicy(SCROLL_TAB_LAYOUT);
+
     setMinimumSize(new Dimension(50, 50));
 
     addChangeListener(new ChangeListener() {

@@ -19,23 +19,23 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.io.File;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.commons.utils.ArrayUtils;
-import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.commons.utils.CollectionUtils;
-import com.smoothcsv.core.csv.AvailableCharsetDialog;
+import com.smoothcsv.core.SmoothCsvApp;
+import com.smoothcsv.core.csv.AvailableEncodingDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.core.util.CsvPropertySettings;
@@ -130,7 +130,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     escapeCharLabel = new javax.swing.JLabel();
     newlineCharacterLabel = new javax.swing.JLabel();
     newlineCharacter = new javax.swing.JComboBox();
-    hasBOM = new javax.swing.JCheckBox();
     charsetLabel = new javax.swing.JLabel();
     separatorLabel = new javax.swing.JLabel();
     dummy = new javax.swing.JLabel();
@@ -338,20 +337,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     gridBagConstraints.insets = new Insets(10, 0, 0, 0);
     add(newlineCharacter, gridBagConstraints);
 
-    hasBOM.setText(CoreBundle.get("key.useBOM")); // NOI18N
-    hasBOM.setActionCommand(CoreBundle.get("key.useBOM")); // NOI18N
-    hasBOM.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        hasBOMActionPerformed(evt);
-      }
-    });
-    gridBagConstraints_11 = new java.awt.GridBagConstraints();
-    gridBagConstraints_11.insets = new Insets(0, 0, 5, 0);
-    gridBagConstraints_11.gridx = 4;
-    gridBagConstraints_11.gridy = 0;
-    gridBagConstraints_11.anchor = java.awt.GridBagConstraints.WEST;
-    add(hasBOM, gridBagConstraints_11);
-
     charsetLabel.setText(CoreBundle.get("key.encoding")); // NOI18N
     gridBagConstraints_12 = new java.awt.GridBagConstraints();
     gridBagConstraints_12.gridwidth = 2;
@@ -400,9 +385,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
         DefaultListCellRenderer rendererComponent =
             (DefaultListCellRenderer) super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
-        if (value instanceof Charset) {
-          Charset c = (Charset) value;
-          rendererComponent.setText(c.displayName());
+        if (value instanceof FileEncoding) {
+          rendererComponent.setText(((FileEncoding) value).getName());
         }
         return rendererComponent;
       }
@@ -455,16 +439,18 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       encodings.add(AUTO);
     }
     encodings.addAll(ENCODING_HISTORY.getAll().stream()
-        .filter(CharsetUtils::isAvailable)
-        .map(Charset::forName).collect(Collectors.toList()));
+        .map(name -> FileEncoding.forName(name).orElse(null))
+        .filter(enc -> enc != null)
+        .collect(Collectors.toList()));
     List<String> strItems = ArrayUtils.toArrayList(
         CsvPropertySettings.getInstance().get(CsvPropertySettings.ENCODING_OPTIONS).split(","));
     encodings.addAll(strItems.stream()
-        .filter(CharsetUtils::isAvailable)
-        .map(Charset::forName).collect(Collectors.toList()));
+        .map(name -> FileEncoding.forName(name).orElse(null))
+        .filter(enc -> enc != null)
+        .collect(Collectors.toList()));
     encodings.add(OTHERS);
 
-    CollectionUtils.unique(encodings);
+    encodings = CollectionUtils.unique(encodings);
 
     return encodings.toArray();
   }
@@ -518,17 +504,18 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       encoding.setSelectedIndex(0);
       return;
     }
-    if (!CharsetUtils.isAvailable(name)) {
+    Optional<FileEncoding> encodingOpt = FileEncoding.forName(name);
+    if (!encodingOpt.isPresent()) {
       MessageDialogs.alert("WSCA0001", name);
       return;
     }
-    Charset charset = Charset.forName(name);
-    DefaultComboBoxModel model = (DefaultComboBoxModel) encoding.getModel();
-    int index = model.getIndexOf(charset);
+    FileEncoding encoding = encodingOpt.get();
+    DefaultComboBoxModel model = (DefaultComboBoxModel) this.encoding.getModel();
+    int index = model.getIndexOf(encoding);
     if (index < 0) {
-      model.insertElementAt(charset, model.getSize() - 1);
+      model.insertElementAt(encoding, model.getSize() - 1);
     }
-    model.setSelectedItem(charset);
+    model.setSelectedItem(encoding);
   }
 
   public void load(CsvMeta csvMeta) {
@@ -536,8 +523,7 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (csvMeta.isCharsetNotDetermined()) {
       setEncoding(AUTO);
     } else {
-      setEncoding(csvMeta.getCharset().displayName());
-      hasBOM.setSelected(csvMeta.hasBom());
+      setEncoding(csvMeta.getEncoding().getName());
     }
 
     if (csvMeta.isDelimiterNotDetermined()) {
@@ -584,9 +570,9 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (AUTO.equals(encoding.getSelectedItem())) {
       csvMeta.setCharsetNotDetermined(true);
     } else {
-      csvMeta.setCharset((Charset) encoding.getSelectedItem());
-      csvMeta.setHasBom(hasBOM.isEnabled() && hasBOM.isSelected());
-      ENCODING_HISTORY.put(((Charset) encoding.getSelectedItem()).displayName());
+      FileEncoding encoding = (FileEncoding) this.encoding.getSelectedItem();
+      csvMeta.setEncoding(encoding);
+      ENCODING_HISTORY.put(encoding.getName());
     }
 
     // delimiter
@@ -644,7 +630,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   }
 
   private void updateFormEnabled() {
-    hasBOM.setEnabled(CharsetUtils.UTF8.equals(encoding.getSelectedItem()));
     boolean quoteEnabled = !Character.valueOf('\0').equals(quoteChar.getSelectedItem());
     quoteType.setEnabled(quoteEnabled);
     escapeType.setEnabled(quoteEnabled);
@@ -663,7 +648,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     escapeTypeDuplicate.setEnabled(enabled);
     escapeTypeEscapechar.setEnabled(enabled);
     escapeTypeLabel.setEnabled(enabled);
-    hasBOM.setEnabled(enabled);
     jPanel1.setEnabled(enabled);
     newlineCharacter.setEnabled(enabled);
     newlineCharacterLabel.setEnabled(enabled);
@@ -683,10 +667,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private void encodingActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_encodingActionPerformed
     // TODO add your handling code here:
   }// GEN-LAST:event_encodingActionPerformed
-
-  private void hasBOMActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_hasBOMActionPerformed
-    // TODO add your handling code here:
-  }// GEN-LAST:event_hasBOMActionPerformed
 
   private void escapeCharActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_escapeCharActionPerformed
     // TODO add your handling code here:
@@ -713,12 +693,11 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       Object item = evt.getItem();
       if (item.equals(OTHERS)) {
         encoding.setEnabled(false);
-        AvailableCharsetDialog charsetDialog = new AvailableCharsetDialog((JDialog) null);
-        if (charsetDialog.showDialog() == DialogOperation.OK) {
-          String charset = charsetDialog.getCharset();
-          if (charset != null) {
-            setEncoding(charset);
-          }
+        AvailableEncodingDialog encodingDialog = new AvailableEncodingDialog(SmoothCsvApp.components().getFrame());
+        if (encodingDialog.showDialog() == DialogOperation.OK
+            && encodingDialog.getEncoding() != null) {
+          FileEncoding encoding = encodingDialog.getEncoding();
+          setEncoding(encoding.getName());
         } else {
           if (oldEncoding == null) {
             encoding.setSelectedIndex(0);
@@ -864,7 +843,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private ExRadioButton escapeTypeDuplicate;
   private ExRadioButton escapeTypeEscapechar;
   private javax.swing.JLabel escapeTypeLabel;
-  private javax.swing.JCheckBox hasBOM;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JComboBox newlineCharacter;
   private javax.swing.JLabel newlineCharacterLabel;

@@ -13,7 +13,7 @@
  */
 package com.smoothcsv.core.macro.api;
 
-import com.smoothcsv.commons.utils.CharsetUtils;
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetSupport;
 import com.smoothcsv.core.macro.apiimpl.APIBase;
@@ -55,8 +55,7 @@ public class CsvProperties extends APIBase {
   private String delimiter;
   private String quote;
   private String escape;
-  private String charset;
-  private boolean hasBOM;
+  private String encoding;
   private String newlineCharacter;
   private int quoteOption;
   private boolean appendsNewLineAtEOF;
@@ -75,8 +74,7 @@ public class CsvProperties extends APIBase {
     this.delimiter = String.valueOf(csvMeta.getDelimiter());
     this.quote = String.valueOf(csvMeta.getQuote());
     this.escape = String.valueOf(csvMeta.getEscape());
-    this.charset = csvMeta.getCharset().toString();
-    this.hasBOM = csvMeta.hasBom();
+    this.encoding = csvMeta.getEncoding().getName();
     this.newlineCharacter = csvMeta.getLineSeparator().stringValue();
     switch (csvMeta.getQuoteOption()) {
       case NO_QUOTE:
@@ -160,44 +158,24 @@ public class CsvProperties extends APIBase {
   }
 
   /**
-   * Returns the charset that is used for saving file.
+   * Returns the encoding that is used for saving file.
    *
-   * @return the charset
+   * @return the encoding
    */
-  public String getCharset() {
-    return charset;
+  public String getEncoding() {
+    return encoding;
   }
 
   /**
-   * Sets the charset that is used for saving file.
+   * Sets the encoding that is used for saving file.
    *
-   * @param charset the charset to set
+   * @param encoding the encoding to set
    */
-  public void setCharset(String charset) {
-    if (!CharsetUtils.isAvailable(charset)) {
-      throw new IllegalArgumentException("charset:" + charset);
+  public void setEncoding(String encoding) {
+    if (!FileEncoding.forName(encoding).isPresent()) {
+      throw new IllegalArgumentException("encoding:" + encoding);
     }
-    this.charset = charset;
-  }
-
-  /**
-   * Sets if the BOM (Byte Order Mark) will be inserted. If hasBOM is true and a UTF codec is used,
-   * the BOM (Byte Order Mark) will be inserted before any data has been written to the file.
-   *
-   * @param hasBOM true if the BOM (Byte Order Mark) will be inserted
-   */
-  public void setHasBOM(boolean hasBOM) {
-    this.hasBOM = hasBOM;
-  }
-
-  /**
-   * Returns if the BOM (Byte Order Mark) will be inserted. If hasBOM is true and a UTF codec is
-   * used, the BOM (Byte Order Mark) will be inserted before any data has been written to the file.
-   *
-   * @return true if the BOM (Byte Order Mark) will be inserted
-   */
-  public boolean hasBOM() {
-    return hasBOM;
+    this.encoding = encoding;
   }
 
   /**

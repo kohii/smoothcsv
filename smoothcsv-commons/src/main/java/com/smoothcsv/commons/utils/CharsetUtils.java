@@ -15,32 +15,27 @@ package com.smoothcsv.commons.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.charset.Charset;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
+import lombok.extern.slf4j.Slf4j;
 import org.mozilla.universalchardet.UniversalDetector;
 
 /**
  * @author kohii
  */
+@Slf4j
 public class CharsetUtils {
 
-  public static final Charset UTF8 = Charset.forName("UTF-8");
-
-  private static final byte[] UTF8_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0xEF, (byte) 0xBB,
-      (byte) 0xBF};
+  public static final byte[] UTF8_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF};
+  private static final byte[] UTF16BE_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0xFE, (byte) 0xFF};
+  private static final byte[] UTF16LE_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0xFF, (byte) 0xFE};
+  private static final byte[] UTF32BE_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0x00, (byte) 0x00, (byte) 0xFE, (byte) 0xFF};
+  private static final byte[] UTF32LE_BYTE_ORDER_MARK_BYTES = new byte[]{(byte) 0xFF, (byte) 0xFE, (byte) 0x00, (byte) 0x00};
   private static final char UTF8_BYTE_ORDER_MARK_CHAR = 0xFEFF;
-
-  public static final Charset SYSTEM_DEFAULT_CHARSET = Charset.defaultCharset();
-
-  private static Charset defaultCharset = SYSTEM_DEFAULT_CHARSET;
 
   public static boolean isUtf8Bom(char c) {
     return c == UTF8_BYTE_ORDER_MARK_CHAR;
-  }
-
-  public static boolean startsWithUtf8Bom(String utf8text) {
-    return StringUtils.isNotEmpty(utf8text) && isUtf8Bom(utf8text.charAt(0));
   }
 
   public static boolean startsWithUtf8Bom(byte[] bytes) {
@@ -55,16 +50,16 @@ public class CharsetUtils {
     return false;
   }
 
-  public static CharsetInfo detect(File file) {
+  public static FileEncoding detect(File file) {
     return detect(file, Integer.MAX_VALUE);
   }
 
-  public static CharsetInfo detect(File file, int limitByteSize) {
-    CharsetInfo ret = new CharsetInfo();
-    FileInputStream fis = null;
+  public static FileEncoding detect(File file, int limitByteSize) {
 
-    try {
-      fis = new FileInputStream(file);
+    String charset = null;
+    byte[] first4Bytes = null;
+
+    try (FileInputStream fis = new FileInputStream(file)) {
       final int byteBufferSize = 4096;
       byte[] buf = new byte[byteBufferSize];
 
@@ -76,29 +71,39 @@ public class CharsetUtils {
         detector.handleData(buf, 0, nread);
         if (isFirstLine) {
           isFirstLine = false;
-          ret.hasBom = startsWithUtf8Bom(buf);
+
+          if (ArrayUtils.startsWith(buf, UTF8_BYTE_ORDER_MARK_BYTES)) {
+            return FileEncoding.UTF_8_WITH_BOM;
+          }
+          if (ArrayUtils.startsWith(buf, UTF16BE_BYTE_ORDER_MARK_BYTES)) {
+            return FileEncoding.UTF_16BE_WITH_BOM;
+          }
+          if (ArrayUtils.startsWith(buf, UTF16LE_BYTE_ORDER_MARK_BYTES)) {
+            return FileEncoding.UTF_16LE_WITH_BOM;
+          }
+          if (ArrayUtils.startsWith(buf, UTF32BE_BYTE_ORDER_MARK_BYTES)) {
+            return FileEncoding.UTF_32BE_WITH_BOM;
+          }
+          if (ArrayUtils.startsWith(buf, UTF32LE_BYTE_ORDER_MARK_BYTES)) {
+            return FileEncoding.UTF_32LE_WITH_BOM;
+          }
         }
         readSize += nread;
       }
       detector.dataEnd();
-      ret.charset = detector.getDetectedCharset();
-    } catch (Exception ignore) {
-    } finally {
-      if (fis != null) {
-        try {
-          fis.close();
-        } catch (IOException ignore) {
-        }
-      }
+      charset = detector.getDetectedCharset();
+    } catch (Exception e) {
+      log.error("Cannot detect file encoding", e);
     }
-    if (ret.charset == null) {
-      ret.charset = defaultCharset.name();
+
+    if (charset == null) {
+      return FileEncoding.getDefault();
     }
-    if (equals(ret.charset, "windows-31J")) {
-      ret.charset = "Shift_JIS";
+    if (equals(charset, "windows-31J")) {
+      charset = "Shift_JIS";
     }
-    ret.hasBom = ret.hasBom && equals(ret.charset, "UTF-8");
-    return ret;
+
+    return FileEncoding.of(Charset.forName(charset)).orElse(FileEncoding.getDefault());
   }
 
   public static boolean isAvailable(String name) {
@@ -138,19 +143,4 @@ public class CharsetUtils {
       return charset;
     }
   }
-
-  public static Charset getDefaultCharset() {
-    return defaultCharset;
-  }
-
-  public static void setDefaultCharset(Charset defaultCharset) {
-    CharsetUtils.defaultCharset = defaultCharset;
-  }
-
-  public static class CharsetInfo {
-
-    public String charset;
-    public boolean hasBom = false;
-  }
-
 }

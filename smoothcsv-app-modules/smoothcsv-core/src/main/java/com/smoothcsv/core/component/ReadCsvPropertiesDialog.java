@@ -13,8 +13,7 @@
  */
 package com.smoothcsv.core.component;
 
-import java.awt.Dialog;
-
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -30,7 +29,7 @@ public class ReadCsvPropertiesDialog extends CsvPropertiesDialog {
    * @param readMode
    * @param showSizeOption
    */
-  public ReadCsvPropertiesDialog(Dialog parent, String title) {
+  public ReadCsvPropertiesDialog(JFrame parent, String title) {
     super(parent, title, true, true, false);
   }
 

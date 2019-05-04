@@ -18,7 +18,6 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JLabel;
 
-import com.smoothcsv.commons.utils.CharsetUtils;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.SCApplication;
@@ -100,7 +99,7 @@ public class CsvSheetStatusLabel implements Runnable, PropertyChangeListener,
       propLabel.setText(" ");
       return;
     }
-    charsetLabel.setText(CharsetUtils.getDisplayName(csvMeta.getCharset(), csvMeta.hasBom()));
+    charsetLabel.setText(csvMeta.getEncoding().getName());
     lfLabel.setText(csvMeta.getLineSeparator().toString());
 
     StringBuilder sb = new StringBuilder();

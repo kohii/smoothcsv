@@ -104,6 +104,7 @@ grid:not(:editing)
 	enter	grid:StartEdit
 	shortcut+z	grid:Undo
 	shortcut+y	grid:Redo
+	shortcut+shift+z	grid:Redo
 	shortcut+c	grid:Copy
 	shortcut+alt+c	grid:CopyWithoutMetaChars
 	shortcut+x	grid:Cut
@@ -122,6 +123,7 @@ cell-editor
 	shift+enter	grid:MoveUpInActiveRange
 	shortcut+z	cell_editor:Undo
 	shortcut+y	cell_editor:Redo
+	shortcut+shift+z	cell_editor:Redo
 	alt+enter	cell_editor:InsertBreak
 	shift+enter	cell_editor:InsertBreak
 	alt+tab	cell_editor:InsertTab
@@ -198,6 +200,7 @@ value-panel
 	shortcut+leftbracket	value_panel:Compress
 	shortcut+z	value_panel:Undo
 	shortcut+y	value_panel:Redo
+	shortcut+shift+z	value_panel:Redo
 	alt+enter	value_panel:InsertBreak
 	shift+enter	value_panel:InsertBreak
 	alt+tab	value_panel:InsertTab
@@ -248,7 +251,6 @@ value-panel
 	alt+delete	value_panel:DeleteNextWord
 	cmd+backspace	value_panel:DeleteToBeginningOfLine
 	cmd+delete	value_panel:DeleteToEndOfLine
-	cmd+shift+z	value_panel:Redo
 
 @win value-panel
 	home	value_panel:MoveToBeginningOfLine

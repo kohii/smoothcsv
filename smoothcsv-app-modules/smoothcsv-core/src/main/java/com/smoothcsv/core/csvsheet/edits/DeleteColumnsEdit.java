@@ -18,7 +18,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class DeleteColumnsEdit implements GridSheetUndableEdit {
+public class DeleteColumnsEdit implements GridSheetModelUndoableEdit {
 
   private int index;
   private long[] columnIds;

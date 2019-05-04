@@ -13,7 +13,7 @@
  */
 package com.smoothcsv.core.csvsheet.edits;
 
-import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
+import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.swing.gridsheet.model.GridSheetSelectionSnapshot;
 
 /**
@@ -23,8 +23,8 @@ public interface GridSheetEditContainer {
 
   GridSheetSelectionSnapshot getSelection();
 
-  void undo(CsvGridSheetModel model);
+  void undo(CsvGridSheetPane gridSheetPane);
 
-  void redo(CsvGridSheetModel model);
+  void redo(CsvGridSheetPane gridSheetPane);
 
 }

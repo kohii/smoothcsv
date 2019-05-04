@@ -18,7 +18,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class InserRowsEdit implements GridSheetUndableEdit {
+public class InserRowsEdit implements GridSheetModelUndoableEdit {
 
   private int index;
   private int numRows;

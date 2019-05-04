@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.EditTransaction;
-import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
+import com.smoothcsv.core.csvsheet.edits.GridSheetUndoableEdit;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
 import com.smoothcsv.core.find.FindAndReplaceMatcher;
 import com.smoothcsv.core.find.FindAndReplaceParams;
@@ -99,9 +99,9 @@ public class CsvGridSheetPane extends GridSheetPane {
     scrollPane.getColumnHeader().setBackground(bg);
     scrollPane.getViewport().setBackground(bg);
 
-    gm.setUndableEditListener(new Consumer<GridSheetUndableEdit>() {
+    gm.setUndableEditListener(new Consumer<GridSheetUndoableEdit>() {
       @Override
-      public void accept(GridSheetUndableEdit edit) {
+      public void accept(GridSheetUndoableEdit edit) {
         undoManager.put(edit);
       }
     });

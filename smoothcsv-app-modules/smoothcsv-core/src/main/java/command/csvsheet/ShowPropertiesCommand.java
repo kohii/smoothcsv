@@ -14,8 +14,10 @@
 package command.csvsheet;
 
 import com.smoothcsv.core.component.CsvPropertiesDialog;
+import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.csvsheet.CsvSheetView;
 import com.smoothcsv.core.csvsheet.CsvSheetViewInfo;
+import com.smoothcsv.core.csvsheet.edits.ChangePropertyEdit;
 import com.smoothcsv.framework.SCApplication;
 import com.smoothcsv.framework.command.Command;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
@@ -38,7 +40,11 @@ public class ShowPropertiesCommand extends Command {
     propDialog.setCsvProperties(viewInfo.getCsvMeta());
     DialogOperation opt = propDialog.showDialog();
     if (opt == DialogOperation.OK) {
-      viewInfo.setCsvMeta(propDialog.getCsvMeta());
+      CsvMeta newCsvMeta = propDialog.getCsvMeta();
+      if (!viewInfo.getCsvMeta().equals(newCsvMeta)) {
+        view.getGridSheetPane().getUndoManager().put(new ChangePropertyEdit(viewInfo.getCsvMeta(), newCsvMeta));
+      }
+      viewInfo.setCsvMeta(newCsvMeta);
       view.repaint();
     } else if (opt == DialogOperation.CANCEL) {
       // do nothing

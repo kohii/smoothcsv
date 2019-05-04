@@ -21,7 +21,7 @@ import com.smoothcsv.core.sort.SortCriteria;
 /**
  * @author kohii
  */
-public class SpecifiedRowsSortEdit implements GridSheetUndableEdit {
+public class SpecifiedRowsSortEdit implements GridSheetModelUndoableEdit {
 
   private final List<SortCriteria> criterias;
   private final int[] order;

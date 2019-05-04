@@ -16,7 +16,6 @@ package com.smoothcsv.core.csvsheet.edits;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 import com.smoothcsv.framework.event.EventListenerSupport;
 import com.smoothcsv.framework.event.EventListenerSupportImpl;
@@ -32,17 +31,17 @@ public class GridSheetUndoManager {
 
   private static final GridSheetEditContainer START_POINT = new GridSheetEditContainer() {
     @Override
-    public void undo(CsvGridSheetModel model) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void redo(CsvGridSheetModel model) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
     public GridSheetSelectionSnapshot getSelection() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void undo(CsvGridSheetPane gridSheetPane) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void redo(CsvGridSheetPane gridSheetPane) {
       throw new UnsupportedOperationException();
     }
   };
@@ -65,7 +64,7 @@ public class GridSheetUndoManager {
   @Getter
   private boolean transactionStarted;
 
-  private ArrayList<GridSheetUndableEdit> edits;
+  private ArrayList<GridSheetUndoableEdit> edits;
 
   public GridSheetUndoManager(CsvGridSheetPane gridSheetPane, int capacity) {
     this.gridSheetPane = gridSheetPane;
@@ -77,7 +76,7 @@ public class GridSheetUndoManager {
     undoStack.add(savepoint);
   }
 
-  public void put(GridSheetUndableEdit edit) {
+  public void put(GridSheetUndoableEdit edit) {
 
     if (!collecting) {
       return;
@@ -114,7 +113,7 @@ public class GridSheetUndoManager {
     setCollecting(false);
     GridSheetEditContainer edit = undoStack.pollFirst();
     assert edit != null;
-    edit.undo(gridSheetPane.getModel());
+    edit.undo(gridSheetPane);
     redoStack.addFirst(edit);
     setCollecting(true);
 
@@ -136,7 +135,7 @@ public class GridSheetUndoManager {
     setCollecting(false);
     GridSheetEditContainer edit = redoStack.pollFirst();
     assert edit != null;
-    edit.redo(gridSheetPane.getModel());
+    edit.redo(gridSheetPane);
     undoStack.addFirst(edit);
     setCollecting(true);
 
@@ -176,7 +175,7 @@ public class GridSheetUndoManager {
     if (edits.size() == 1) {
       editContainer = new SingleGridSheetEditContainer(selection, edits.get(0));
     } else {
-      editContainer = new MultiGridSheetEditContainer(selection, edits.toArray(new GridSheetUndableEdit[0]));
+      editContainer = new MultiGridSheetEditContainer(selection, edits.toArray(new GridSheetUndoableEdit[0]));
     }
     undoStack.addFirst(editContainer);
 

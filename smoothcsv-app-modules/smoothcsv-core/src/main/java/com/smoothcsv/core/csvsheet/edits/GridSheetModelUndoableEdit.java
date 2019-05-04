@@ -14,11 +14,22 @@
 package com.smoothcsv.core.csvsheet.edits;
 
 import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
+import com.smoothcsv.core.csvsheet.CsvGridSheetPane;
 
 /**
  * @author kohii
  */
-public interface GridSheetUndableEdit {
+public interface GridSheetModelUndoableEdit extends GridSheetUndoableEdit {
+
+  @Override
+  default void undo(CsvGridSheetPane gridSheetPane) {
+    undo(gridSheetPane.getModel());
+  }
+
+  @Override
+  default void redo(CsvGridSheetPane gridSheetPane) {
+    redo(gridSheetPane.getModel());
+  }
 
   void undo(CsvGridSheetModel model);
 

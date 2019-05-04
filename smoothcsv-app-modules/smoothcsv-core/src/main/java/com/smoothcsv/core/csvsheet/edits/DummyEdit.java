@@ -18,7 +18,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class DummyEdit implements GridSheetUndableEdit {
+public class DummyEdit implements GridSheetModelUndoableEdit {
 
   @Override
   public void undo(CsvGridSheetModel model) {}

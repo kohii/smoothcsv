@@ -18,7 +18,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class ChangeValueEdit implements GridSheetUndableEdit {
+public class ChangeValueEdit implements GridSheetModelUndoableEdit {
 
   private String oldValue;
   private String newValue;

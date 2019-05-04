@@ -22,7 +22,7 @@ import com.smoothcsv.swing.gridsheet.model.CellRect;
 /**
  * @author kohii
  */
-public class PartialSortEdit implements GridSheetUndableEdit {
+public class PartialSortEdit implements GridSheetModelUndoableEdit {
 
   private final List<SortCriteria> criterias;
   private final int[] order;

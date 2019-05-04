@@ -18,7 +18,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class ToggleHeaderRowEdit implements GridSheetUndableEdit {
+public class ToggleHeaderRowEdit implements GridSheetModelUndoableEdit {
 
   @Override
   public void undo(CsvGridSheetModel model) {

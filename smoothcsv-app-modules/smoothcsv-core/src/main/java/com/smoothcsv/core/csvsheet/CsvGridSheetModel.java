@@ -25,7 +25,7 @@ import com.smoothcsv.core.csvsheet.edits.ChangeValuesEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteCellEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteColumnsEdit;
 import com.smoothcsv.core.csvsheet.edits.DeleteRowsEdit;
-import com.smoothcsv.core.csvsheet.edits.GridSheetUndableEdit;
+import com.smoothcsv.core.csvsheet.edits.GridSheetUndoableEdit;
 import com.smoothcsv.core.csvsheet.edits.InserColumnsEdit;
 import com.smoothcsv.core.csvsheet.edits.InserRowsEdit;
 import com.smoothcsv.core.csvsheet.edits.InsertCellEdit;
@@ -51,7 +51,7 @@ import lombok.Setter;
 public class CsvGridSheetModel extends GridSheetModel {
 
   @Setter
-  private Consumer<GridSheetUndableEdit> undableEditListener;
+  private Consumer<GridSheetUndoableEdit> undableEditListener;
 
   private boolean useFirstRowAsHeader = false;
 
@@ -367,7 +367,7 @@ public class CsvGridSheetModel extends GridSheetModel {
     useFirstRowAsHeader = b;
   }
 
-  private void collectEdit(GridSheetUndableEdit undableEdit) {
+  private void collectEdit(GridSheetUndoableEdit undableEdit) {
     if (collectingEditDisabled) {
       return;
     }

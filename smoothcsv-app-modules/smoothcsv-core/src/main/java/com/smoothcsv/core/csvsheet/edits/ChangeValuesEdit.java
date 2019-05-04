@@ -20,7 +20,7 @@ import com.smoothcsv.core.csvsheet.CsvGridSheetModel;
 /**
  * @author kohii
  */
-public class ChangeValuesEdit implements GridSheetUndableEdit {
+public class ChangeValuesEdit implements GridSheetModelUndoableEdit {
 
   private List<List<String>> oldValue;
   private List<List<String>> newValue;

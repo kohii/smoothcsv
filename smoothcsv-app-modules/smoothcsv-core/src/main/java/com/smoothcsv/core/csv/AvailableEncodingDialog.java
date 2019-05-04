@@ -14,13 +14,9 @@
 package com.smoothcsv.core.csv;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Frame;
 import java.awt.event.MouseEvent;
-import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -30,28 +26,25 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
+import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.component.dialog.DialogBase;
 import com.smoothcsv.framework.component.dialog.DialogOperation;
+import lombok.Getter;
 
 /**
  * @author kohii
  */
 @SuppressWarnings("serial")
-public class AvailableCharsetDialog extends DialogBase {
+public class AvailableEncodingDialog extends DialogBase {
 
   private JTable table;
 
-  private String charset = null;
+  @Getter
+  private FileEncoding encoding = null;
 
-  public String getCharset() {
-    return charset;
-  }
-
-  public AvailableCharsetDialog(Frame frame) {
+  public AvailableEncodingDialog(Frame frame) {
     super(frame, null);
     setUp();
   }
@@ -59,7 +52,7 @@ public class AvailableCharsetDialog extends DialogBase {
   /**
    * Create the dialog.
    */
-  public AvailableCharsetDialog(JDialog parent) {
+  public AvailableEncodingDialog(JDialog parent) {
     super(parent, null);
     setUp();
   }
@@ -69,12 +62,10 @@ public class AvailableCharsetDialog extends DialogBase {
     setBounds(100, 100, 600, 400);
     contentPanel.setLayout(new BorderLayout(0, 0));
     {
-      JLabel label = new JLabel(CoreBundle.get("key.availableCharsetDialog.description"));
+      JLabel label = new JLabel(CoreBundle.get("key.availableEncodingDialog.description"));
       contentPanel.add(label, BorderLayout.NORTH);
     }
     {
-      JScrollPane scrollPane = new JScrollPane();
-      contentPanel.add(scrollPane, BorderLayout.CENTER);
       {
         table = new JTable() {
           @Override
@@ -90,7 +81,7 @@ public class AvailableCharsetDialog extends DialogBase {
         };
         table.setFocusable(false);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         // table.getTableHeader().getDefaultRenderer().setHorizontalAlignment(SwingConstants.LEFT);
         table.getTableHeader().setReorderingAllowed(false);
         table.setModel(new DefaultTableModel(new Object[][]{},
@@ -100,27 +91,24 @@ public class AvailableCharsetDialog extends DialogBase {
             return false;
           }
         });
-        scrollPane.setViewportView(table);
       }
+      JScrollPane scrollPane = new JScrollPane(table);
+      contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     setTableItems();
-
   }
 
   private void setTableItems() {
-    SortedMap<String, Charset> csm = Charset.availableCharsets();
     DefaultTableModel model = (DefaultTableModel) table.getModel();
-    for (Map.Entry<String, Charset> cse : csm.entrySet()) {
-      Charset cs = cse.getValue();
-      model.addRow(new String[]{cs.name(), toStr(cs.aliases())});
+    for (FileEncoding encoding : FileEncoding.getAvailableEncodings()) {
+      model.addRow(new String[]{encoding.getName(), toStr(encoding.getAliases())});
     }
 
     table.getSelectionModel().setSelectionInterval(0, 0);
 
-    sizeWidthToFitData(0);
-    sizeWidthToFitData(1);
-
+    table.getColumnModel().getColumn(0).setMinWidth(180);
+    table.getColumnModel().getColumn(0).setMaxWidth(180);
   }
 
   private String toStr(Set<String> strSet) {
@@ -137,33 +125,13 @@ public class AvailableCharsetDialog extends DialogBase {
     return ret;
   }
 
-  public void sizeWidthToFitData(int vc) {
-    TableColumn tc = table.getColumnModel().getColumn(vc);
-
-    int max = table.getTableHeader().getDefaultRenderer()
-        .getTableCellRendererComponent(table, tc.getHeaderValue(), false, false, 0, vc)
-        .getPreferredSize().width;
-
-    int vrows = table.getRowCount();
-    for (int i = 0; i < vrows; i++) {
-      TableCellRenderer r = table.getCellRenderer(i, vc);
-      Object value = table.getValueAt(i, vc);
-      Component c = r.getTableCellRendererComponent(table, value, false, false, i, vc);
-      int w = c.getPreferredSize().width;
-      if (max < w) {
-        max = w;
-      }
-    }
-
-    tc.setPreferredWidth(max + 1);
-  }
-
   @Override
   protected boolean processOperation(DialogOperation selectedOperation) {
     if (selectedOperation == DialogOperation.OK) {
       int row = table.getSelectedRow();
       if (row >= 0) {
-        charset = (String) table.getValueAt(row, 0);
+        String name = (String) table.getValueAt(row, 0);
+        encoding = FileEncoding.forName(name).orElse(null);
       }
     }
     return super.processOperation(selectedOperation);

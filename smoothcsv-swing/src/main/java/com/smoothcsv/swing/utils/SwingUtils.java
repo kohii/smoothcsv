@@ -20,6 +20,7 @@ import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -666,5 +667,27 @@ public class SwingUtils {
     } catch (Exception ignore) {
     }
     return false;
+  }
+
+  public static Component getClosestDialogOrFrame(Component c,
+                                                  boolean visibleOnly) {
+    for (; c != null; c = c.getParent()) {
+      if ((c instanceof Dialog || c instanceof Frame)
+          && (!visibleOnly || c.isVisible())) {
+        return c;
+      }
+    }
+    return null;
+  }
+
+  public static Component getClosestDialog(Component c,
+                                           boolean visibleOnly) {
+    for (; c != null; c = c.getParent()) {
+      if ((c instanceof Dialog)
+          && (!visibleOnly || c.isVisible())) {
+        return c;
+      }
+    }
+    return null;
   }
 }

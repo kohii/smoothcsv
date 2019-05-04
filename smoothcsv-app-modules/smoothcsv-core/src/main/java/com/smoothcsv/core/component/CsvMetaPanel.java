@@ -14,6 +14,7 @@
 package com.smoothcsv.core.component;
 
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -34,20 +35,18 @@ import javax.swing.ListCellRenderer;
 import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.commons.utils.ArrayUtils;
 import com.smoothcsv.commons.utils.CollectionUtils;
-import com.smoothcsv.core.SmoothCsvApp;
-import com.smoothcsv.core.csv.AvailableEncodingDialog;
 import com.smoothcsv.core.csv.CsvMeta;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.core.util.CsvPropertySettings;
 import com.smoothcsv.csv.prop.LineSeparator;
 import com.smoothcsv.csv.prop.QuoteApplyRule;
-import com.smoothcsv.framework.component.dialog.DialogOperation;
 import com.smoothcsv.framework.component.dialog.MessageDialogs;
 import com.smoothcsv.framework.exception.AppException;
 import com.smoothcsv.framework.util.DirectoryResolver;
 import com.smoothcsv.swing.components.ExButtonGroup;
 import com.smoothcsv.swing.components.ExRadioButton;
 import com.smoothcsv.swing.components.History;
+import com.smoothcsv.swing.utils.SwingUtils;
 
 /**
  * @author kohii2
@@ -65,13 +64,13 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private static final String NONE;
 
   private static final History DELIMITER_HISTORY = new History(
-      new File(DirectoryResolver.instance().getSessionDirectory(), "delimiter.history"), true, 10, true);
+      new File(DirectoryResolver.instance().getSessionDirectory(), "delimiter.history"), true, 16, true);
 
   private static final History QUOTE_HISTORY = new History(
-      new File(DirectoryResolver.instance().getSessionDirectory(), "quote.history"), true, 10, true);
+      new File(DirectoryResolver.instance().getSessionDirectory(), "quote.history"), true, 16, true);
 
   private static final History ENCODING_HISTORY = new History(
-      new File(DirectoryResolver.instance().getSessionDirectory(), "encoding.history"), true, 10, true);
+      new File(DirectoryResolver.instance().getSessionDirectory(), "encoding.history"), true, 16, true);
 
   static {
     AUTO = CoreBundle.get("key.autoDetermined");
@@ -85,6 +84,8 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private Object oldEncoding = null;
   private Object oldQuoteChar;
   private Object oldDelimiterChar;
+
+  private AvailableEncodingDialog availableEncodingDialog;
 
   /**
    * Creates new form CsvMetaPanel
@@ -693,11 +694,14 @@ public class CsvMetaPanel extends javax.swing.JPanel {
       Object item = evt.getItem();
       if (item.equals(OTHERS)) {
         encoding.setEnabled(false);
-        AvailableEncodingDialog encodingDialog = new AvailableEncodingDialog(SmoothCsvApp.components().getFrame());
-        if (encodingDialog.showDialog() == DialogOperation.OK
-            && encodingDialog.getEncoding() != null) {
-          FileEncoding encoding = encodingDialog.getEncoding();
-          setEncoding(encoding.getName());
+        Component dialog = SwingUtils.getClosestDialog(this, false);
+        availableEncodingDialog = availableEncodingDialog == null
+            ? new AvailableEncodingDialog((Dialog) dialog)
+            : availableEncodingDialog;
+
+        availableEncodingDialog.setVisible(true);
+        if (availableEncodingDialog.getSelectedEncoding() != null) {
+          setEncoding(availableEncodingDialog.getSelectedEncoding().getName());
         } else {
           if (oldEncoding == null) {
             encoding.setSelectedIndex(0);

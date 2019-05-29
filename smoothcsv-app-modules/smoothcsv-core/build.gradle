@@ -4,10 +4,10 @@ apply plugin: 'java-library'
 
 dependencies {
   compile 'org.mozilla:rhino:1.7.9'
-  compile 'com.fifesoft:rsyntaxtextarea:2.6.0'
-  compile 'com.fifesoft:autocomplete:2.6.0'
-  compile 'com.fifesoft:languagesupport:2.6.0'
-  compile 'com.h2database:h2:1.4.197'
+  compile 'com.fifesoft:rsyntaxtextarea:3.0.2'
+  compile 'com.fifesoft:autocomplete:3.0.0'
+  compile 'com.fifesoft:languagesupport:3.0.0'
+  compile 'com.h2database:h2:1.4.199'
   compile 'com.github.jsqlparser:jsqlparser:1.2'
   compile project(':smoothcsv-framework')
 }

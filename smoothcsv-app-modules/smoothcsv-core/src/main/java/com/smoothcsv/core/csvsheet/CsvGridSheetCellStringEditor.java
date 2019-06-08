@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.smoothcsv.core.celleditor.SCTextArea;
 import com.smoothcsv.core.macro.MacroRecorder;
@@ -26,6 +28,7 @@ import com.smoothcsv.swing.gridsheet.GridSheetCellStringEditor;
 import com.smoothcsv.swing.gridsheet.GridSheetTable;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
  * @author kohii
@@ -46,7 +49,7 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
                          int column) {
     CsvGridSheetCellValuePanel.getInstance().getUndoManager().discardAllEdits();
     ((CsvGridEditorComponent) getEditorComponent()).setIgnoreNextKeyEvent(false);
-    return true;
+    return super.prepare(table, value, isSelected, row, column);
   }
 
   @Override
@@ -71,7 +74,48 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
 
     protected CsvGridEditorComponent(CsvGridSheetCellStringEditor editor) {
       super("cell-editor");
-      setDocument(CsvGridSheetCellValuePanel.getInstance().getTextArea().getDocument());
+      final MutableBoolean syncing = new MutableBoolean(false);
+      final CsvGridSheetCellValuePanel.ValuePanelTextArea textArea = CsvGridSheetCellValuePanel.getInstance().getTextArea();
+      getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+          changedUpdate(e);
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+          changedUpdate(e);
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+          if (!syncing.booleanValue() && editor.getTable().isEditing()) {
+            syncing.setValue(true);
+            textArea.setText(getText());
+            syncing.setValue(false);
+          }
+        }
+      });
+      textArea.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+          changedUpdate(e);
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+          changedUpdate(e);
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+          if (!syncing.booleanValue() && editor.getTable().isEditing()) {
+            syncing.setValue(true);
+            setText(textArea.getText());
+            syncing.setValue(false);
+          }
+        }
+      });
       setFont(SCAppearanceManager.getInlineCelleditorFont());
     }
 
@@ -132,17 +176,6 @@ public class CsvGridSheetCellStringEditor extends GridSheetCellStringEditor {
     @Override
     protected void processInputMethodEvent(InputMethodEvent e) {
       super.processInputMethodEvent(e);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.JComponent#requestFocus()
-     */
-    @Override
-    public void requestFocus() {
-      // TODO Auto-generated method stub
-      super.requestFocus();
     }
   }
 }

@@ -162,6 +162,11 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
         if (e.isAltDown() || e.isAltGraphDown() || e.isControlDown() || e.isMetaDown()) {
           return false;
         }
+
+        if (!isPrintableChar(e.getKeyChar()) || !getFont().canDisplay(e.getKeyChar())) {
+          return false;
+        }
+
         // Try to install the editor
         editorComponent = editQuickly();
         if (editorComponent == null) {
@@ -178,6 +183,14 @@ public class CsvGridSheetTable extends GridSheetTable implements SmoothComponent
       }
     }
     return false;
+  }
+
+  private boolean isPrintableChar(char c) {
+    Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+    return (!Character.isISOControl(c)) &&
+        c != KeyEvent.CHAR_UNDEFINED &&
+        block != null &&
+        block != Character.UnicodeBlock.SPECIALS;
   }
 
   @Override

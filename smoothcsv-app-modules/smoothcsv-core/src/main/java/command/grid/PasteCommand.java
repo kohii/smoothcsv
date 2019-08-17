@@ -109,12 +109,6 @@ public class PasteCommand extends GridCommand {
         int currentRow = leftTopRow;
         for (List<String> rowValues : values) {
           int len = rowValues.size();
-          if (columnSize < leftTopColumn + len) {
-            int appendCol = (leftTopColumn + len) - columnSize;
-            gridSheetPane.addColumn(appendCol);
-            columnSize += appendCol;
-          }
-
           for (int j = 0; j < len; j++) {
             String v = rowValues.get(j);
             gridSheetPane.setValueAt(v, currentRow, j + leftTopColumn);

@@ -99,8 +99,8 @@ public class CharsetUtils {
     if (charset == null) {
       return FileEncoding.getDefault();
     }
-    if (equals(charset, "windows-31J")) {
-      charset = "Shift_JIS";
+    if (equals(charset, "Shift_JIS")) {
+      charset = "MS932";
     }
 
     return FileEncoding.of(Charset.forName(charset)).orElse(FileEncoding.getDefault());
@@ -124,23 +124,5 @@ public class CharsetUtils {
 
   public static boolean equals(Charset charset0, Charset charset1) {
     return charset0.equals(charset1);
-  }
-
-  public static String getDisplayName(Charset charset, boolean hasBom) {
-    if (equals(charset, "MS932")) {
-      return "Shift_JIS";
-    } else if (equals(charset, "UTF-8") && hasBom) {
-      return charset.displayName() + "(with BOM)";
-    } else {
-      return charset.displayName();
-    }
-  }
-
-  public static String convertSJIS(String charset) {
-    if (equals(charset, "Shift_JIS") && isAvailable("MS932")) {
-      return "MS932";
-    } else {
-      return charset;
-    }
   }
 }

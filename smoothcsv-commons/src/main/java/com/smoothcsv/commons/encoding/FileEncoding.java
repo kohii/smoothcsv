@@ -2,6 +2,7 @@ package com.smoothcsv.commons.encoding;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -32,6 +33,9 @@ public class FileEncoding {
   public static final FileEncoding UTF_32BE_WITH_BOM;
   public static final FileEncoding UTF_32LE_WITH_BOM;
 
+  public static final FileEncoding MS932;
+  public static final FileEncoding SHIFT_JIS;
+
   private static final List<FileEncoding> ALL;
 
   static {
@@ -56,12 +60,22 @@ public class FileEncoding {
     UTF_32BE_WITH_BOM = new FileEncoding(utf32beBom, false, "UTF-32BE (with BOM)", add(utf32beBom.aliases(), utf32beBom.displayName()));
     UTF_32LE_WITH_BOM = new FileEncoding(utf32leBom, false, "UTF-32LE (with BOM)", add(utf32leBom.aliases(), utf32leBom.displayName()));
 
+    Charset ms932 = Charset.forName("MS932");
+    MS932 = new FileEncoding(ms932, false, "Shift_JIS (MS932)", new HashSet<>(Arrays.asList("MS932", "Windows-31J", "Windows-932")));
+
+    Charset shiftJis = Charset.forName("Shift_JIS");
+    Set<String> shiftJisAliases = new HashSet<>();
+    shiftJisAliases.add("Shift_JIS");
+    shiftJisAliases.addAll(shiftJis.aliases());
+    SHIFT_JIS = new FileEncoding(shiftJis, false, "Shift_JIS (Original)", shiftJisAliases);
+
     List<FileEncoding> list = Charset.availableCharsets().entrySet()
         .stream()
         .filter(entry -> {
           String key = entry.getKey().toLowerCase();
           return !key.startsWith("utf") && !key.startsWith("x-utf");
         })
+        .filter(entry -> !entry.getValue().equals(ms932) && !entry.getValue().equals(shiftJis))
         .map(entry -> {
           Charset c = entry.getValue();
           return new FileEncoding(c, false, c.displayName(), c.aliases());
@@ -77,6 +91,8 @@ public class FileEncoding {
     list.add(UTF_32LE);
     list.add(UTF_32BE_WITH_BOM);
     list.add(UTF_32LE_WITH_BOM);
+    list.add(MS932);
+    list.add(SHIFT_JIS);
 
     list.sort(Comparator.comparing(FileEncoding::getName));
     ALL = Collections.unmodifiableList(list);

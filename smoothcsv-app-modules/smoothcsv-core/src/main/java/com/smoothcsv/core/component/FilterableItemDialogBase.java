@@ -55,6 +55,7 @@ import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ExTableModel;
 import com.smoothcsv.swing.table.ExTableRowFilter;
 import com.smoothcsv.swing.utils.SwingUtils;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -77,6 +78,9 @@ public abstract class FilterableItemDialogBase<T> extends JDialog {
   boolean closeOnSelect = true;
 
   private Map<T, String> textsForSearch;
+
+  @Getter(AccessLevel.PROTECTED)
+  private boolean selectionConfirmed = false;
 
   public FilterableItemDialogBase(Frame parent) {
     super(parent, false);
@@ -213,6 +217,9 @@ public abstract class FilterableItemDialogBase<T> extends JDialog {
     }
     T item = itemListTable.getModel().getRowDataAt(itemListTable.getSelectedRow());
     if (item != null) {
+
+      selectionConfirmed = true;
+
       if (closeOnSelect) {
         FilterableItemDialogBase.this.setVisible(false);
       }
@@ -282,6 +289,8 @@ public abstract class FilterableItemDialogBase<T> extends JDialog {
   public void setVisible(boolean b) {
     if (b) {
       textfield.setText("");
+
+      selectionConfirmed = false;
 
       JFrame frame = SCApplication.components().getFrame();
       int width = (int) (frame.getWidth() * 0.8);

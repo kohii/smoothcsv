@@ -85,8 +85,6 @@ public class CsvMetaPanel extends javax.swing.JPanel {
   private Object oldQuoteChar;
   private Object oldDelimiterChar;
 
-  private AvailableEncodingDialog availableEncodingDialog;
-
   /**
    * Creates new form CsvMetaPanel
    *
@@ -693,23 +691,18 @@ public class CsvMetaPanel extends javax.swing.JPanel {
     if (evt.getStateChange() == ItemEvent.SELECTED) {
       Object item = evt.getItem();
       if (item.equals(OTHERS)) {
-        encoding.setEnabled(false);
         Component dialog = SwingUtils.getClosestDialog(this, false);
-        availableEncodingDialog = availableEncodingDialog == null
-            ? new AvailableEncodingDialog((Dialog) dialog)
-            : availableEncodingDialog;
-
-        availableEncodingDialog.setVisible(true);
-        if (availableEncodingDialog.getSelectedEncoding() != null) {
-          setEncoding(availableEncodingDialog.getSelectedEncoding().getName());
-        } else {
-          if (oldEncoding == null) {
-            encoding.setSelectedIndex(0);
-          } else {
-            encoding.setSelectedItem(oldEncoding);
-          }
-        }
-        encoding.setEnabled(true);
+        AvailableEncodingDialog.show((Dialog) dialog,
+            fileEncoding -> {
+              setEncoding(fileEncoding.getName());
+            },
+            () -> {
+              if (oldEncoding == null) {
+                encoding.setSelectedIndex(0);
+              } else {
+                encoding.setSelectedItem(oldEncoding);
+              }
+            });
       }
 
       updateFormEnabled();

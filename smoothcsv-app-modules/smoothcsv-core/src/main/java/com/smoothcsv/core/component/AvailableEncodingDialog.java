@@ -3,13 +3,13 @@ package com.smoothcsv.core.component;
 import java.awt.Dialog;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import com.smoothcsv.commons.encoding.FileEncoding;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.swing.table.ExTableColumn;
 import com.smoothcsv.swing.table.ReadOnlyExTableCellValueExtracter;
-import lombok.Getter;
 
 /**
  * @author kohii
@@ -18,11 +18,15 @@ public class AvailableEncodingDialog extends FilterableItemDialogBase<FileEncodi
 
   private static final Pattern CHARS_TO_REMOVE = Pattern.compile("[-_ ()]");
 
-  @Getter
-  private FileEncoding selectedEncoding;
+  private final Consumer<FileEncoding> onSelectHandler;
+  private final Runnable onCancelHandler;
 
-  public AvailableEncodingDialog(Dialog parent) {
+  private AvailableEncodingDialog(Dialog parent,
+                                  Consumer<FileEncoding> onSelectHandler,
+                                  Runnable onCancelHandler) {
     super(parent);
+    this.onSelectHandler = onSelectHandler;
+    this.onCancelHandler = onCancelHandler;
 
     List<ExTableColumn> columns = new ArrayList<>();
     ReadOnlyExTableCellValueExtracter<FileEncoding> nameExtractor =
@@ -49,9 +53,15 @@ public class AvailableEncodingDialog extends FilterableItemDialogBase<FileEncodi
     fitColumnSizeToFit(0);
   }
 
+  public static void show(Dialog parent,
+                          Consumer<FileEncoding> onSelectHandler,
+                          Runnable onCancelHandler) {
+    new AvailableEncodingDialog(parent, onSelectHandler, onCancelHandler).setVisible(true);
+  }
+
   @Override
   protected void onItemSelected(FileEncoding item) {
-    selectedEncoding = item;
+    onSelectHandler.accept(item);
   }
 
   @Override
@@ -77,8 +87,11 @@ public class AvailableEncodingDialog extends FilterableItemDialogBase<FileEncodi
   @Override
   public void setVisible(boolean b) {
     if (b) {
-      selectedEncoding = null;
       updateSearchKeyword("");
+    } else {
+      if (!isSelectionConfirmed()) {
+        onCancelHandler.run();
+      }
     }
     super.setVisible(b);
   }

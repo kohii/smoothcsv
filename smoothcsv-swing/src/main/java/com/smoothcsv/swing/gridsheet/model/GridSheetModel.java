@@ -620,15 +620,19 @@ public class GridSheetModel implements IGridSheetModel {
   }
 
   protected GridSheetColumn createDefaultColumn() {
-    return new GridSheetColumn(defaultColumnWidth, this);
+    return new GridSheetColumn(defaultColumnWidth, this, createDefaultHeaderValue());
   }
 
   protected GridSheetColumn createDefaultColumn(long id) {
-    return new GridSheetColumn(id, defaultColumnWidth, this);
+    return new GridSheetColumn(id, defaultColumnWidth, this, createDefaultHeaderValue());
   }
 
   protected GridSheetRow createDefaultRow() {
     return new GridSheetRow(this);
+  }
+
+  protected String createDefaultHeaderValue() {
+    return null;
   }
 
   // for SmoothCSV ////////////////////////////////////////

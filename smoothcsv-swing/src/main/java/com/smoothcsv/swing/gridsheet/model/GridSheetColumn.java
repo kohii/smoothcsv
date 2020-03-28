@@ -33,22 +33,15 @@ public class GridSheetColumn {
   @Getter
   private String name;
 
-  public GridSheetColumn(int width) {
-    this(width, null);
+  protected GridSheetColumn(int width, GridSheetModel model, String name) {
+    this(seq++, width, model, name);
   }
 
-  public GridSheetColumn() {
-    this(-1);
-  }
-
-  protected GridSheetColumn(int width, GridSheetModel model) {
-    this(seq++, width, model);
-  }
-
-  protected GridSheetColumn(long id, int width, GridSheetModel model) {
+  protected GridSheetColumn(long id, int width, GridSheetModel model, String name) {
     this.id = id;
     this.width = width;
     this.model = model;
+    this.name = name;
   }
 
   /**

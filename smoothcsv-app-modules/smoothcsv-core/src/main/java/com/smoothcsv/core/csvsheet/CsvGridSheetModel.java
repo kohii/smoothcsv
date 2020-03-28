@@ -385,4 +385,13 @@ public class CsvGridSheetModel extends GridSheetModel {
       }
     }
   }
+
+  @Override
+  protected String createDefaultHeaderValue() {
+    if (useFirstRowAsHeader) {
+      return "";
+    } else {
+      return null;
+    }
+  }
 }

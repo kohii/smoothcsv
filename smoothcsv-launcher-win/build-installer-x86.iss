@@ -4,7 +4,7 @@
 #define JavaHome "C:\Program Files (x86)\Java\jbrsdk-8u242-windows-i586-b1644.3\jre"
 #define OsType "x86"
 #define MyAppName "SmoothCSV"
-#define MyAppVersion "2.0.0-beta7"
+#define MyAppVersion "2.0.0-beta8"
 #define MyAppPublisher "kohii"
 #define MyAppURL "https://smoothcsv.com/"
 #define MyAppExeName "SmoothCSV.exe"

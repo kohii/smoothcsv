@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import com.smoothcsv.core.ApplicationStatus;
 import com.smoothcsv.core.csvsheet.edits.GridSheetUndoManager;
@@ -32,10 +33,12 @@ import com.smoothcsv.core.find.FindAndReplacePanel;
 import com.smoothcsv.core.util.CoreBundle;
 import com.smoothcsv.framework.Env;
 import com.smoothcsv.framework.component.BaseTabView;
+import com.smoothcsv.framework.component.support.SCFocusManager;
 import com.smoothcsv.framework.component.support.SmoothComponentSupport;
 import com.smoothcsv.swing.gridsheet.event.GridSheetFocusEvent;
 import com.smoothcsv.swing.gridsheet.event.GridSheetFocusListener;
 import com.smoothcsv.swing.gridsheet.model.DefaultGridSheetSelectionModel;
+import com.smoothcsv.swing.utils.SwingUtils;
 import command.app.CloseCommand;
 import lombok.Getter;
 
@@ -145,10 +148,22 @@ public class CsvSheetView extends BaseTabView<CsvSheetViewInfo> {
 
   @Override
   protected void onTabActivated() {
+    boolean findAndReplacePanelVisible = ApplicationStatus.getInstance().isFindAndReplacePanelVisible();
+    FindAndReplacePanel findAndReplacePanel = FindAndReplacePanel.getInstance();
+    Component nextFocusOwner = getGridSheetPane();
+    if (findAndReplacePanelVisible) {
+      Component focusOwner = SCFocusManager.getFocusOwner();
+      Component closestAncestor = SwingUtils.getClosestAncestor(focusOwner, FindAndReplacePanel.class, false);
+      if (closestAncestor != null) {
+        // FindAndReplacePanel had focus on the previous active tab
+        nextFocusOwner = focusOwner;
+      }
+    }
     super.onTabActivated();
-    if (ApplicationStatus.getInstance().isFindAndReplacePanelVisible()) {
-      FindAndReplacePanel findAndReplacePanel = FindAndReplacePanel.getInstance();
+    if (findAndReplacePanelVisible) {
       findAndReplacePanel.open();
+      Component focusOwner = nextFocusOwner;
+      SwingUtilities.invokeLater(() -> focusOwner.requestFocusInWindow());
     }
     showCellValueOnValuePanel();
   }

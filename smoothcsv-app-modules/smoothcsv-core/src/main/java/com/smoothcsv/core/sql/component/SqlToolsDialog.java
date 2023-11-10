@@ -119,7 +119,6 @@ public class SqlToolsDialog extends DialogBase {
       public void componentShown(ComponentEvent componentEvent) {
 
         tableListPanel.stopEditing();
-        tableListPanel.loadCsvSheetTables();
 
         if (!initialized) {
           splitPane.setResizeWeight(0);
@@ -153,6 +152,10 @@ public class SqlToolsDialog extends DialogBase {
   public void stopTableNameEdition() {
     tableListPanel.stopEditing();
     tableColumnsEditorPanel.stopEditiong();
+  }
+
+  public void loadCsvSheetTables() {
+    tableListPanel.loadCsvSheetTables();
   }
 
   @Override

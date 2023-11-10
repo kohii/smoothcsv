@@ -30,6 +30,10 @@ public class ShowSqlToolsCommand extends Command {
 
     if (dialog == null) {
       dialog = new SqlToolsDialog();
+    } else {
+      // Load here to avoid race condition on painting raising a
+      // java.lang.NullPointerException.
+      dialog.loadCsvSheetTables();
     }
     dialog.setVisible(true);
   }

@@ -2,10 +2,20 @@
 
 .v2-tease {
   display: block;
-  padding: 15px 20px;
+  padding: 12px 20px;
   font-weight: bold;
   font-size: 14px;
   color: #fff !important;
   text-align: center;
   background-color: rgb(119, 153, 51);
+}
+
+.v3-tease {
+  display: block;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff !important;
+  text-align: center;
+  background-color: rgb(0, 102, 204);
 }
